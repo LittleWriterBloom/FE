@@ -2,10 +2,11 @@ import { atom } from 'jotai';
 
 
 export const canvasImageDataAtom = atom<string | null>(null);
+export const characterNameAtom = atom<string | null>(null);
 
-/*
 export const accessTokenAtom = atom(localStorage.getItem('accessToken') || '');
 
+/*
 export const updateToken = (newToken) => {
   localStorage.setItem('accessToken', newToken);
   accessTokenAtom[1](newToken);

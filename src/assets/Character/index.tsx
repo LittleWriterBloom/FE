@@ -1,11 +1,17 @@
-import btnHome from './btn-home.png';
-import btnCheck from './btn-check.png';
 import btn from './btn.png';
-import ggummi from './Ggummi.png';
+import completeBg from './CompleteBG.png';
+import easel from './easel.png';
+import draw from './draw.png';
+import paint from './paint.png';
+import bring from './bring.png';
+import textName from './text-name.png';
 
 export {
-  btnHome,
-  btnCheck,
   btn,
-  ggummi,
+  completeBg,
+  easel,
+  draw,
+  paint,
+  bring,
+  textName,
 };

@@ -5,7 +5,15 @@ export const Container = styled.div`
   height: 100dvh;
   display: flex;
   flex-direction: column;
-  background-color: #FFFBD5;
+  background-color: #CAF2FF;
+`;
+
+export const Bg = styled.img`
+  position: absolute;
+  width: 100vw;
+  height: 100dvh;
+  object-fit: cover;
+
 `;
 
 export const Header = styled.div`
@@ -16,6 +24,8 @@ export const Header = styled.div`
   align-items: center;
   justify-content: space-between;
   margin-top: 3dvh;
+  position: absolute;
+  z-index: 3;
 `;
 
 export const Home = styled.img`
@@ -23,12 +33,6 @@ export const Home = styled.img`
   height: 75%;
   margin-left: 5vw;
   filter: drop-shadow(0 0 1rem rgba(0, 0, 0, 0.17));
-`;
-
-export const Logo = styled.div`
-  width: auto;
-  height: 100%;
-  opacity: 0;
 `;
 
 export const Check = styled.img`
@@ -39,34 +43,28 @@ export const Check = styled.img`
 `;
 
 export const Body = styled.div`
-  width: 100vw;
-  height: 85dvh;
+  width: 100%;
+  height: 100dvh;
   display: flex;
-  flex-direction: row;
+  justify-content: center;
   align-items: center;
-  justify-content: flex-end;
   position: relative;
 `;
 
-export const NameContainer = styled.div`
-  width: 28vw;
-  position: absolute;
-  left: 15%;
-  bottom: 50%;
-  z-index: 6;
+export const BGContainer = styled.div`
+  width: 30vw;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 2.5rem;
 `;
 
-export const NameText = styled.p`
-  font-size: 2.4rem;
-  font-family: "BMJUA";
+export const BGText = styled.img`
+  width: 30rem;
 `;
 
-export const NameInput = styled.input`
-  width: 100%;
+export const BGInput = styled.input`
+  width: 25vw;
   height: 5rem;
   background-color: #FFFFFF;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
@@ -78,33 +76,12 @@ export const NameInput = styled.input`
   color: #000;
 `;
 
-export const CharacterImage = styled.div`
-  width: 50dvh;
-  height: 78dvh;
-  position: absolute;
-  right: 15%;
-  bottom: 10%;
-  z-index: 6;
-  display: flex;
-  justify-content: center;
-`
-
 export const Character = styled.img`
-  position: absolute;
-  z-index: 9;
-  width: 90%;
+  width: 40vw;
   height: auto;
-  top: 14dvh;
 `
 
-export const Easel = styled.img`
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  z-index: 8;
-`;
-
-export const Ggummi = styled.img`
+export const Dong = styled.img`
   width: 20%;
   height: auto;
   position: absolute;
@@ -112,12 +89,3 @@ export const Ggummi = styled.img`
   left: 5%;
   z-index: 6;
 `;
-
-export const BottomBox = styled.div`
-  width: 100%;
-  height: 28.6dvh;
-  background-color: #E9E5C2;
-  position: absolute;
-  bottom: 0;
-`;
-

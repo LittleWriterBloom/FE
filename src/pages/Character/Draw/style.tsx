@@ -5,6 +5,7 @@ export const Container = styled.div`
   height: 100dvh;
   display: flex;
   flex-direction: column;
+  align-items: center;
   background-color: white;
 `;
 
@@ -16,6 +17,8 @@ export const Header = styled.div`
   align-items: center;
   justify-content: space-between;
   margin-top: 3dvh;
+  position: absolute;
+  z-index: 3;
 `;
 
 export const Home = styled.img`
@@ -38,13 +41,24 @@ export const Check = styled.img`
   filter: drop-shadow(0 0 1rem rgba(0, 0, 0, 0.17));
 `;
 
+export const DrawArea = styled.div`
+  position: absolute;
+  width: 70vw;
+  height: 100dvh;
+  position: absolute;
+  z-index: 4;
+`;
+
 export const Body = styled.div`
   width: 100vw;
-  height: 85dvh;
+  height: 88dvh;
+  margin-top: 12dvh;
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between;
+  position: absolute;
+  z-index: 2;
 `;
 
 export const ColorPalette = styled.div`
@@ -94,11 +108,6 @@ export const Color = styled.img`
 export const PaletteBtn = styled.img`
   width: 4.5rem;
   height: auto;
-`;
-
-export const DrawArea = styled.div`
-  width: 70vw;
-  height: 85dvh;
 `;
 
 export const PenCase = styled.div`
