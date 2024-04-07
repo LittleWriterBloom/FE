@@ -8,7 +8,7 @@ import { canvasImageDataAtom } from "../../store/jotaiAtoms";
 
 export const Story = () => {
   const navigate = useNavigate();
-  const [bg, setBg] = useState("");
+  const [, setBg] = useState("");
   const canvasImageData = useAtomValue(canvasImageDataAtom);
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
