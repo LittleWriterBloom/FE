@@ -19,7 +19,7 @@ const GlobalStyleComponent = createGlobalStyle`
     scrollbar-width: none; 
   }
   html {
-    font-family: 'SUIT Variable', sans-serif;
+    font-family: 'SUIT', sans-serif;
   }
   #root,
   html,
@@ -50,7 +50,7 @@ const GlobalStyleComponent = createGlobalStyle`
       font-size: 21px;
     }
   }
-  body, button {
+  body, button, html {
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
     font-family:
@@ -78,6 +78,9 @@ const GlobalStyleComponent = createGlobalStyle`
     border: none;
     background-color: transparent;
   }
+  button {
+    cursor: pointer;
+  }
   p,
   h1,
   h2,
@@ -98,46 +101,6 @@ const GlobalStyleComponent = createGlobalStyle`
     font-family: 'SUIT';
     font-weight: 100;
     src: local('SUIT Thin'), url('./font/suit/SUIT-Thin.woff2') format('woff2');
-  }
-  @font-face {
-    font-family: 'SUIT';
-    font-weight: 200;
-    src: local('SUIT ExtraLight'), url('./font/suit/SUIT-ExtraLight.woff2') format('woff2');
-  }
-  @font-face {
-    font-family: 'SUIT';
-    font-weight: 300;
-    src: local('SUIT Light'), url('./SUIT-Light.woff2') format('woff2');
-  }
-  @font-face {
-    font-family: 'SUIT';
-    font-weight: 400;
-    src: local('SUIT Regular'), url('./font/suit/SUIT-Regular.woff2') format('woff2');
-  }
-  @font-face {
-    font-family: 'SUIT';
-    font-weight: 500;
-    src: local('SUIT Medium'), url('./font/suit/SUIT-Medium.woff2') format('woff2');
-  }
-  @font-face {
-    font-family: 'SUIT';
-    font-weight: 600;
-    src: local('SUIT SemiBold'), url('./font/suit/SUIT-SemiBold.woff2') format('woff2');
-  }
-  @font-face {
-    font-family: 'SUIT';
-    font-weight: 700;
-    src: local('SUIT Bold'), url('./font/suit/SUIT-Bold.woff2') format('woff2');
-  }
-  @font-face {
-    font-family: 'SUIT';
-    font-weight: 800;
-    src: local('SUIT ExtraBold'), url('./font/suit/SUIT-ExtraBold.woff2') format('woff2');
-  }
-  @font-face {
-    font-family: 'SUIT';
-    font-weight: 900;
-    src: local('SUIT Heavy'), url('./font/suit/SUIT-Heavy.woff2') format('woff2');
   }
   @font-face {
     font-family: 'BMJUA';

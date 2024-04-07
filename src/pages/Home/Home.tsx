@@ -1,6 +1,8 @@
 import * as S from './style';
 import logo from '../../assets/logo.png';
 import { useNavigate } from "react-router-dom";
+import { useAtomValue, useAtomaValue } from "jotai";
+import { accessTokenAtom } from "../../store/jotaiAtoms";
 import {
   btnArrowL,
   btnArrowR,
@@ -8,17 +10,28 @@ import {
   btnSettings,
   btnStoryMake,
   bgStoryMake,
-} from '../../assets/Home/index';
+} from '../../assets/Home';
 
 export const Home = () => {
+  const [ accessToken, ] = useAtomValue(accessTokenAtom);
   const navigate = useNavigate();
 
   const onClickMakeBtn = () => {
-    navigate("/character");
+    if(accessToken) {
+      navigate("/guide");
+    }
+    else {
+      navigate("/login");
+    }
   };
 
   const onClickProfile = () => {
-    navigate("/login");
+    if (accessToken){
+      navigate("/logout");
+    }
+    else {
+      navigate("/login");
+    }
   };
 
   return (

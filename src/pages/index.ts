@@ -1,5 +1,11 @@
 export * from './Home/Home';
+export * from './Guide/Guide';
 export * from './Character/Character';
 export * from './Character/Draw/Draw';
 export * from './Character/Naming/Naming';
 export * from './Login/Login';
+export * from './Logout/Logout';
+export * from './Join/Join';
+export * from './Character/Complete/Complete';
+export * from './Story/Story';
+// export * from './Story/Create/Create';
