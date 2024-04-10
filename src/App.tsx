@@ -39,8 +39,8 @@ function App() {
         <Route path='/story' element={<Story />} />
         <Route path='/story/create' element={<Create />} />
         <Route path='/story/create/2' element={<Create2 />} />
-        <Route path='/*' element={<Home />} />
         <Route path='/canvas' element={<Canvas />} />
+        <Route path='/*' element={<Home />} />
       </Routes>
     </BrowserRouter>
   );
