@@ -1,11 +1,13 @@
 import * as S from "./style";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 // import { useAtom, useAtomValue } from "jotai";
 import { easel } from "../../../assets/Character";
 import { useAtom, useAtomValue } from "jotai";
 import { canvasImageDataAtom, characterNameAtom } from "../../../store/jotaiAtoms";
 import { btnMic, btnRecord } from '../../../assets';
+import { BubbleP } from "../../../components/Bubble/BubbleP";
+import { namingBG } from "../../../assets/Character";
 import {
   btnHome,
   btnCheck,
@@ -19,7 +21,18 @@ export const Naming = () => {
   const [, setNameAtom] = useAtom(characterNameAtom);
   const canvasImageData = useAtomValue(canvasImageDataAtom);
   const [rec, setRec] = useState(false);
+  const [showFirst, setShowFirst] = useState(false);
+  const [showSecond, setShowSecond] = useState(false);
 
+  useEffect(() => {
+    setTimeout(() => {
+      setShowFirst(true);
+      setTimeout(() => {
+        setShowSecond(true);
+      }, 2000); 
+    }, 2000); 
+  }, []);
+  
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
   };
@@ -47,6 +60,9 @@ export const Naming = () => {
 
   return (
     <S.Container>
+      <S.Bg src={namingBG} alt="배경이미지" />
+      {showFirst && <BubbleP text="우와~ 정말 잘 그렸다! 화가의 솜씨인데?!" length={41} />}
+      {showSecond && <BubbleP text="이 멋진 캐릭터에게 이름을 지어주자!" length={36} />}
       <S.Header>
         <S.Home src={btnHome} alt="홈" onClick={onClickHomeBtn} />
         <S.Logo>주인공 만들기</S.Logo>

@@ -5,7 +5,13 @@ export const Container = styled.div`
   height: 100dvh;
   display: flex;
   flex-direction: column;
-  background-color: #FFFBD5;
+`;
+
+export const Bg = styled.img`
+  position: absolute;
+  width: 100vw;
+  height: 100dvh;
+  object-fit: cover;
 `;
 
 export const Header = styled.div`
@@ -16,6 +22,9 @@ export const Header = styled.div`
   align-items: center;
   justify-content: space-between;
   margin-top: 3dvh;
+  position: absolute;
+  z-index: 2;
+  top: 0;
 `;
 
 export const Home = styled.img`
@@ -42,19 +51,20 @@ export const Check = styled.img`
 
 export const Body = styled.div`
   width: 100vw;
-  height: 85dvh;
+  height: 100dvh;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  position: relative;
+  position: absolute;
+  z-index: 1;
 `;
 
 export const NameContainer = styled.div`
   width: 28vw;
   position: absolute;
   left: 15%;
-  bottom: 50%;
+  bottom: 48%;
   z-index: 6;
   display: flex;
   flex-direction: column;
@@ -117,7 +127,7 @@ export const Ggummi = styled.img`
 
 export const BottomBox = styled.div`
   width: 100%;
-  height: 28.6dvh;
+  height: 27dvh;
   background-color: #E9E5C2;
   position: absolute;
   bottom: 0;

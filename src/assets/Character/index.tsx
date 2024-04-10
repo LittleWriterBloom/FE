@@ -5,6 +5,8 @@ import draw from './draw.png';
 import paint from './paint.png';
 import bring from './bring.png';
 import textName from './text-name.png';
+import namingBG from './namingBG.png';
+import book from './book.png';
 
 export {
   btn,
@@ -14,4 +16,6 @@ export {
   paint,
   bring,
   textName,
+  namingBG,
+  book,
 };

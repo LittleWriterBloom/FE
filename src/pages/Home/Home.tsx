@@ -18,7 +18,7 @@ export const Home = () => {
 
   const onClickMakeBtn = () => {
     if (accessToken) {
-      navigate("/guide-first");
+      navigate("/character");
     } else {
       navigate("/login");
     }

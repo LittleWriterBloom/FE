@@ -12,10 +12,13 @@ export const Header = styled.div`
   width: 100%;
   height: 12dvh;
   display: flex;
+  top: 0;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
   margin-top: 3dvh;
+  position: absolute;
+  z-index: 2;
 `;
 
 export const Home = styled.img`
@@ -41,15 +44,17 @@ export const Settings = styled.img`
 export const Body = styled.div`
   width: 100%;
   height: 85dvh;
+  bottom: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
+  position: absolute;
+  z-index: 1;
 `;
 
 export const BtnWrapper = styled.div`
   width: 70%;
-  height: 100%;
+  height: auto;
   display: flex;
   justify-content: center;
   align-items: center;

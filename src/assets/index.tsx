@@ -7,6 +7,8 @@ import btnHome from './btn-home.png';
 import btnCheck from './btn-check.png';
 import btnCheckG from './btn-greencheck.png';
 import btnX from './btn-x.png';
+import bubbleG from './speech-bubbleG.png';
+import bubbleP from './speech-bubbleP.png';
 
 export {
   ggummi,
@@ -18,4 +20,6 @@ export {
   btnCheck,
   btnCheckG,
   btnX,
+  bubbleG,
+  bubbleP
 }
