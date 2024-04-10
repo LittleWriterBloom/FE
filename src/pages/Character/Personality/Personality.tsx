@@ -1,10 +1,10 @@
 import * as S from "./style";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 // import { useAtom, useAtomValue } from "jotai";
-import { easel } from "../../../assets/Character";
+import { easel, namingBG } from "../../../assets/Character";
 import { useAtom, useAtomValue } from "jotai";
-import { canvasImageDataAtom, characterPersonalityAtom } from "../../../store/jotaiAtoms";
+import { canvasImageDataAtom, characterNameAtom, characterPersonalityAtom } from "../../../store/jotaiAtoms";
 import { btnMic, btnRecord } from '../../../assets';
 import {
   btnHome,
@@ -12,6 +12,7 @@ import {
   btnCheckG,
   ggummi,
 } from "../../../assets";
+import { BubbleP } from "../../../components/Bubble/BubbleP";
 
 export const Personality = () => {
   const navigate = useNavigate();
@@ -19,6 +20,22 @@ export const Personality = () => {
   const [, setPersonalityAtom] = useAtom(characterPersonalityAtom);
   const canvasImageData = useAtomValue(canvasImageDataAtom);
   const [rec, setRec] = useState(false);
+  const [name,] = useAtom(characterNameAtom)
+  const [showFirst, setShowFirst] = useState(false);
+  const [showSecond, setShowSecond] = useState(false);
+  const [showThird, setShowThird] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setShowFirst(true);
+      setTimeout(() => {
+        setShowSecond(true);
+        setTimeout(() => {
+          setShowThird(true);
+        }, 2000); 
+      }, 2000); 
+    }, 2000); 
+  }, []);
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPersonality(e.target.value);
@@ -47,6 +64,10 @@ export const Personality = () => {
 
   return (
     <S.Container>
+      <S.Bg src={namingBG} alt="배경이미지" />
+      {showFirst && <BubbleP text={`이 친구의 이름은 ${name}이구나~`} length={34} />}
+      {showSecond && <BubbleP text={`${name}(은/는) 어떤 친구야?`} length={28} />}
+      {showThird && <BubbleP text="활발해? 소심해? 무서움이 많아? 어떤 친구일까~?"length={49} />}
       <S.Header>
         <S.Home src={btnHome} alt="홈" onClick={onClickHomeBtn} />
         <S.Logo>주인공 만들기</S.Logo>
@@ -58,7 +79,7 @@ export const Personality = () => {
       </S.Header>
       <S.Body>
         <S.NameContainer>
-          <S.NameText>어떤 성격을 갖고 있나요?</S.NameText>
+          <S.NameText>{name}(는/은) 어떤 친구야?</S.NameText>
           <S.NameInput
             onChange={handleInput}
             type="name" 

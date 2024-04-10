@@ -5,7 +5,9 @@ export const Container = styled.div`
   height: 100dvh;
   display: flex;
   flex-direction: column;
-  overflow-x: scroll;
+  align-items: center;
+  overflow: hidden;
+  background-color: #96D9FF;
 `;
 
 export const Bg = styled.img`
@@ -14,8 +16,28 @@ export const Bg = styled.img`
   width: 100vw;
   height: 100dvh;
   object-fit: cover;
-
+  opacity: 0;
 `;
+
+export const Book = styled.img`
+  position: absolute;
+  z-index: 3;
+  width: 48vw;
+  height: auto;
+  object-fit: cover;
+  bottom: 6dvh;
+`;
+
+export const LottieWrapper = styled.div`
+  width: 100vw;
+  height: 100dvh;
+  position: absolute;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+`
 
 export const Header = styled.div`
   width: 100%;
@@ -56,7 +78,7 @@ export const Body = styled.div`
   justify-content: center;
   gap: 0.8rem;
   position: absolute;
-  z-index: 2;
+  z-index: 4;
   margin-top: 5.5dvh;
   cursor: pointer;
 `;

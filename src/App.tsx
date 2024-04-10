@@ -15,7 +15,8 @@ import {
   GuideFirst,
   GuideSecond,
   GuideThird,
-  Create2
+  Create2,
+  Stage
 } from './pages';
 import { Canvas } from './pages/Character/Draw/Canvas';
 
@@ -24,6 +25,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<Home />} />
+        <Route path='/canvas' element={<Canvas />} />
         <Route path='/login' element={<Login />} />
         <Route path='/logout' element={<Logout />} />
         <Route path='/join' element={<Join />} />
@@ -37,10 +39,10 @@ function App() {
         <Route path='/character/complete' element={<Complete />} />
         <Route path='/character/mycharacters' element={<MyCharacters />} />
         <Route path='/story' element={<Story />} />
+        <Route path='/story/stage' element={<Stage />} />
         <Route path='/story/create' element={<Create />} />
         <Route path='/story/create/2' element={<Create2 />} />
         <Route path='/*' element={<Home />} />
-        <Route path='/canvas' element={<Canvas />} />
       </Routes>
     </BrowserRouter>
   );

@@ -1,7 +1,7 @@
 import * as S from "./style";
 import { useNavigate } from "react-router-dom";
 // import { useAtom, useAtomValue } from "jotai";
-import { completeBg } from "../../../assets/Character";
+import { completeBg, book } from "../../../assets/Character";
 import { btnHome } from "../../../assets";
 import { useAtom, useAtomValue } from "jotai";
 import { 
@@ -11,6 +11,8 @@ import {
   accessTokenAtom
 } from "../../../store/jotaiAtoms";
 import axios from "axios";
+import complete from "../../../assets/Lottie/complete1.json";
+import Lottie from "react-lottie-player";
 
 export const Complete = () => {
   const navigate = useNavigate();
@@ -62,6 +64,10 @@ export const Complete = () => {
   return (
     <S.Container>
       <S.Bg src={completeBg} alt="배경" />
+      <S.Book src={book} alt="책" />
+      <S.LottieWrapper>
+        <Lottie loop animationData={complete} play style={{width: "115vw"}}/>
+      </S.LottieWrapper>
       <S.Header>
         <S.Home src={btnHome} alt="홈" onClick={onClickHomeBtn} />
       </S.Header>

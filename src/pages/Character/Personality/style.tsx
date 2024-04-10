@@ -5,7 +5,13 @@ export const Container = styled.div`
   height: 100dvh;
   display: flex;
   flex-direction: column;
-  background-color: #FFFBD5;
+`;
+
+export const Bg = styled.img`
+  position: absolute;
+  width: 100vw;
+  height: 100dvh;
+  object-fit: cover;
 `;
 
 export const Header = styled.div`
@@ -16,6 +22,9 @@ export const Header = styled.div`
   align-items: center;
   justify-content: space-between;
   margin-top: 3dvh;
+  position: absolute;
+  z-index: 2;
+  top: 0;
 `;
 
 export const Home = styled.img`
@@ -42,19 +51,21 @@ export const Check = styled.img`
 
 export const Body = styled.div`
   width: 100vw;
-  height: 85dvh;
+  height: 100dvh;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   position: relative;
+  position: absolute;
+  z-index: 1;
 `;
 
 export const NameContainer = styled.div`
-  width: 28vw;
+  width: 36vw;
   position: absolute;
-  left: 15%;
-  bottom: 50%;
+  left: 12%;
+  bottom: 48%;
   z-index: 6;
   display: flex;
   flex-direction: column;
@@ -68,7 +79,7 @@ export const NameText = styled.p`
 `;
 
 export const NameInput = styled.input`
-  width: 100%;
+  width: 32vw;
   height: 5rem;
   background-color: #FFFFFF;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;

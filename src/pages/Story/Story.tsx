@@ -1,72 +1,68 @@
 import * as S from "./style";
 import { useNavigate } from "react-router-dom";
-import { btnHome, btnCheck, btnCheckG, dong } from "../../assets/index";
-import { stageBG, textBG } from "../../assets/Story";
-import { btnMic, btnRecord } from '../../assets';
-import { useState } from "react";
-import { useAtom, useAtomValue } from "jotai";
-import { bookBGInit, canvasImageDataAtom } from "../../store/jotaiAtoms";
+import { btnHome, dong } from "../../assets/index";
+import { useAtom } from "jotai";
+import { bookLength } from "../../store/jotaiAtoms";
+import { BubbleG } from "../../components/Bubble/BubbleG";
+import { useEffect, useState } from "react";
 
 export const Story = () => {
   const navigate = useNavigate();
-  const [bg, setBg] = useState("");
-  const [, setBgInit] = useAtom(bookBGInit);
-  const canvasImageData = useAtomValue(canvasImageDataAtom);
-  const [rec, setRec] = useState(false);
+  const [, setBookL] = useAtom(bookLength);
+  const [showFirst, setShowFirst] = useState(false);
+  const [showSecond, setShowSecond] = useState(false);
 
-  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setBg(e.target.value);
-  };
+  useEffect(() => {
+    setTimeout(() => {
+      setShowFirst(true);
+      setTimeout(() => {
+        setShowSecond(true);
+      }, 2000); 
+    }, 2000); 
+  }, []);
 
   const onClickHomeBtn = () => {
     navigate("/");
   };
-  const onClickCheck = () => {
-    if(bg === ""){
-      alert("동화의 배경을 입력하세요.");
-    }
-    else {
-      setBgInit(bg);
-      navigate("/guide-third");
-    }
-  };
 
-  const onClickMic = () => {
-    setRec(true);
-  }
-  const onClickRec = () => {
-    setRec(false);
-  }
+  const onClickThree = () => {
+    setBookL(3);
+    navigate("/story/stage");
+  };
+  const onClickFive = () => {
+    setBookL(5);
+    navigate("/story/stage");
+  };
 
   return (
     <S.Container>
-      <S.Bg src={stageBG} alt="배경" />
+      {showFirst && <BubbleG text="동화의 길이를 정해보자!" length={26} />}
+      {showSecond && <BubbleG text="몇줄짜리 동화를 만들어볼까? 3줄? 5줄?" length={42} />}
       <S.Header>
         <S.Home src={btnHome} alt="홈" onClick={onClickHomeBtn} />
-        {bg === "" ? (
-          <S.Check src={btnCheck} alt="확인" onClick={onClickCheck} />
-        ) : (
-          <S.Check src={btnCheckG} alt="확인(활성화)" onClick={onClickCheck} />
-        )}
+        <S.Logo>동화 길이 정하기</S.Logo>
+        <S.Settings src={btnHome} alt="홈" />
       </S.Header>
       <S.Body>
-        <S.BGContainer>
-          <S.BGText src={textBG} alt="동화의 배경을 상상해볼까요?" />
-          <S.BGInput
-            onChange={handleInput}
-            type="name"
-            placeholder="이야기 배경"
-          />
-          {canvasImageData && (
-            <S.Character src={canvasImageData} alt="Saved Image" />
-          )}
-        </S.BGContainer>
-        <S.Dong src={dong} alt="동동이" />
-        {rec === false ? (
-          <S.Rec src={btnMic} alt="음성인식(비활성화)" onClick={onClickMic} />
-        ) : (
-          <S.Rec src={btnRecord} alt="인식중(활성화)" onClick={onClickRec} />
-        )}
+        <S.BtnWrapper>
+          <S.Btn onClick={onClickThree}>
+            <S.BtnImg />
+            <S.BtnContent>
+              3줄
+              <br />
+              동화
+            </S.BtnContent>
+          </S.Btn>
+          <S.Btn onClick={onClickFive}>
+            <S.BtnImg />
+            <S.BtnContent>
+              5줄
+              <br />
+              동화
+            </S.BtnContent>
+          </S.Btn>
+        </S.BtnWrapper>
+        <S.Dong src={dong} alt="꾸미" />
       </S.Body>
     </S.Container>
   );

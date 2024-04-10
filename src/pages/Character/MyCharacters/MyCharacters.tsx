@@ -68,7 +68,7 @@ export const MyCharacters = () => {
       setCharFeat(selectedChar.personality || ''); 
       setCharId(selectedChar.id);
     }
-    navigate("/guide-second")
+    navigate("/story/stage")
   }
 
   useEffect(() => {

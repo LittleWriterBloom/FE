@@ -7,6 +7,7 @@ export const characterNameAtom = atom<string | null>(null);
 export const characterPersonalityAtom = atom<string | null>(null);
 export const characterId = atom<number | null>(null);
 
+export const bookLength = atom<number | null>(null);
 export const bookBGInit = atom<string | null>(null);
 
 export const background1 = atom<string | null>(null);
