@@ -2,7 +2,7 @@ import btnHome from './btn-home.png';
 import btnCheck from './btn-check.png';
 import btnPalette from './btn-palette.png';
 import palette from './palette.png';
-import black from './red.png';
+import black from './black.png';
 import blue from './blue.png';
 import brown from './brown.png';
 import green from './green.png';

@@ -69,8 +69,8 @@ export const JoinBtn = styled.button`
   font-style: normal;
   font-weight: 700;
   margin-bottom: 1rem;
+  cursor: pointer;
 `;
-
 
 export const Liner = styled.hr`
   width: 20rem;

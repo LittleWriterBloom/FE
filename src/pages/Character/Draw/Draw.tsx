@@ -7,6 +7,9 @@ import { canvasImageDataAtom } from '../../../store/jotaiAtoms';
 import {
   btnHome,
   btnCheck,
+  btnCheckG,
+} from "../../../assets";
+import {
   btnPalette,
   blue,
   brown,
@@ -24,6 +27,14 @@ import {
   pencilBase,
   penCase,
   palette,
+  black,
+  white,
+  lightOrange,
+  mint,
+  lightOrangePink,
+  lightPink,
+  lightPurple,
+  grey,
 } from "../../../assets/Character/Draw";
 
 export const Draw = () => {
@@ -31,7 +42,10 @@ export const Draw = () => {
 	const canvasContainerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef(null);
   const [canvas, setCanvas] = useState<fabric.Canvas | null>();
+  const [isCanvasEmpty, setIsCanvasEmpty] = useState<boolean>(true); // 캔버스가 비어있는지 여부 상태 추가
   const [, setCanvasImageData] = useAtom(canvasImageDataAtom);
+  const [isPalette, setIsPalette] = useState(true);
+  const [brushColor, setBrushColor] = useState<string>('black');
 
   useEffect(() => {
     const canvasContainer = canvasContainerRef.current;
@@ -56,13 +70,19 @@ export const Draw = () => {
     if (canvas) {
       canvas.isDrawingMode = true;
       canvas.freeDrawingBrush.width = 10;
+      canvas.freeDrawingBrush.color = brushColor;
       canvas.renderAll();
+      
+      // 캔버스 이벤트 리스너 등록
+      canvas.on('path:created', () => {
+        setIsCanvasEmpty(canvas.isEmpty());
+      });
     }
-  }, [canvas]);
+  }, [canvas, brushColor]);
 
 	// 이미지 저장 함수
 	const saveAsImage = () => {
-		if (canvas) {
+		if (canvas && (isCanvasEmpty === false)) {
 			// 캔버스의 이미지 데이터 가져오기
 			const imageData = canvas.toDataURL({
 				format: "png", // 이미지 포맷 지정 (png, jpeg 등)
@@ -82,6 +102,9 @@ export const Draw = () => {
 			document.body.removeChild(link);
       */
 		}
+    else {
+      alert("캐릭터를 그려주세요.")
+    }
 	};
 
   const palette01 = [
@@ -96,7 +119,7 @@ export const Draw = () => {
     pink,
     brown,
   ];
-  /*
+
   const palette02 = [
     pink,
     brown,
@@ -109,11 +132,25 @@ export const Draw = () => {
     lightPurple,
     grey,
   ];
-  */
+  
   const penType = [pencilBase, brushBase, crayonBase, eraser];
 
   const onClickMakeBtn = () => {
     navigate("/");
+  };
+
+  const onClcickPalette = () => {
+    setIsPalette(false)
+  }
+  ;
+  const onClcickPaletteT = () => {
+    setIsPalette(true)
+  };
+
+  const onColorClick = (color: string) => { 
+    const colosrS = color.split("/")[5].split(".")[0];
+    console.log(colosrS);
+    setBrushColor(colosrS);
   };
 
   return (
@@ -121,7 +158,11 @@ export const Draw = () => {
       <S.Header>
         <S.Home src={btnHome} alt="홈" onClick={onClickMakeBtn} />
         <S.Logo>주인공 만들기</S.Logo>
-        <S.Check src={btnCheck} alt="확인" onClick={saveAsImage} />
+        {isCanvasEmpty ? (
+          <S.Check src={btnCheck} alt="확인" onClick={saveAsImage} />
+        ) : (
+          <S.Check src={btnCheckG} alt="확인(활성화)" onClick={saveAsImage} />
+        )}
       </S.Header>
         <S.DrawArea ref={canvasContainerRef}>
           <canvas ref={canvasRef} />
@@ -129,14 +170,44 @@ export const Draw = () => {
       <S.Body>
         <S.ColorPalette>
           <S.PaletteBG src={palette} alt="palette" />
-          <S.PaletteContents>
-            <S.ColorWrapper>
-              {palette01.map((color, index) => (
-                <S.Color key={index} src={color} alt={color} />
-              ))}
-            </S.ColorWrapper>
-            <S.PaletteBtn src={btnPalette} alt="다음 팔레트" />
-          </S.PaletteContents>
+          {isPalette === true ? (
+            <S.PaletteContents>
+              <S.ColorWrapper>
+                {palette01.map((color, index) => (
+                  <S.Color
+                    key={index} 
+                    src={color} 
+                    alt={color} 
+                    onClick={() => onColorClick(color)}
+                  />
+                ))}
+              </S.ColorWrapper>
+              <S.PaletteBtn 
+                src={btnPalette} 
+                alt="다음 팔레트" 
+                onClick={onClcickPalette} 
+              />
+            </S.PaletteContents>
+          ) : (
+            <S.PaletteContents>
+              <S.PaletteBtn 
+                src={btnPalette} 
+                alt=" 팔레트" 
+                onClick={onClcickPaletteT}
+                isPalette
+              />
+              <S.ColorWrapper>
+                {palette02.map((color, index) => (
+                  <S.Color 
+                  key={index} 
+                  src={color} 
+                  alt={color} 
+                  onClick={() => onColorClick(color)}
+                />
+                ))}
+              </S.ColorWrapper>
+            </S.PaletteContents>
+          )}
         </S.ColorPalette>
         <S.PenCase>
           <S.PenCaseImg src={penCase} alt="penCase" />

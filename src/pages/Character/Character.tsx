@@ -20,6 +20,11 @@ export const Character = () => {
   const onClickDrawBtn = () => {
     navigate("/character/draw");
   };
+  
+  const onClickBringBtn = () => {
+    navigate("/character/mycharacters");
+  };
+
   return (
     <S.Container>
       <S.Header>
@@ -29,7 +34,7 @@ export const Character = () => {
       </S.Header>
       <S.Body>
         <S.BtnWrapper>
-          <S.Btn>
+          <S.Btn onClick={onClickBringBtn}>
             <S.BtnImg src={bring} alt='버튼' />
             <S.BtnContent>캐릭터 불러오기</S.BtnContent>
           </S.Btn>

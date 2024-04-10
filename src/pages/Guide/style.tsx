@@ -68,13 +68,36 @@ export const Menu= styled.img`
   width: 20vw;
   height: auto;
   padding-top: 32dvh;
-  cursor: pointer;
 `;
 
 export const MenuCenter= styled.img`
   width: 20vw;
   height: auto;
   padding-bottom: 28dvh;
-  cursor: pointer;
 `;
 
+// LoadingComp
+
+export const LoadingContainer = styled.div`
+  position: absolute;
+  z-index: 10;
+  width: 100vw;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #FFF 50%;
+`;
+
+export const LottieWrapper = styled.div`
+  width: 30vw;
+  height: auto;
+`;
+
+export const LoadingText = styled.p`
+  font-family: "BMJUA";
+  font-size: 2rem;
+  margin-top: -2rem;
+  margin-bottom: 2rem;
+`

@@ -1,10 +1,28 @@
 import { atom } from 'jotai';
 
+export const accessTokenAtom = atom(localStorage.getItem('accessToken') || '');
 
 export const canvasImageDataAtom = atom<string | null>(null);
 export const characterNameAtom = atom<string | null>(null);
+export const characterPersonalityAtom = atom<string | null>(null);
+export const characterId = atom<number | null>(null);
 
-export const accessTokenAtom = atom(localStorage.getItem('accessToken') || '');
+export const bookBGInit = atom<string | null>(null);
+
+export const background1 = atom<string | null>(null);
+export const background2 = atom<string | null>(null);
+export const background3 = atom<string | null>(null);
+
+export const context1 = atom<string | null>(null);
+export const context2 = atom<string | null>(null);
+export const context3 = atom<string | null>(null);
+
+export const question2 = atom<string[]>([]);
+export const question3 = atom<string[]>([]);
+
+export const bookId1 = atom<string | null>(null);
+export const bookId2 = atom<string | null>(null);
+export const bookId3 = atom<string | null>(null);
 
 /*
 export const updateToken = (newToken) => {

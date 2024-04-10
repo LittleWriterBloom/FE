@@ -27,7 +27,7 @@ export const Login = () => {
     if (act) {
       router("/"); // act가 업데이트 되면 라우팅
     }
-  }, [act]); // act가 변경될 때마다 useEffect 실행
+  }, [act, router]); // act가 변경될 때마다 useEffect 실행
 
   const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     setId(event.target.value);
