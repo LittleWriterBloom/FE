@@ -16,10 +16,10 @@ export const Login = () => {
   const router = useNavigate();
   const [act, setAct] = useAtom(accessTokenAtom);
   
-  const REST_API_KEY = import.meta.env.VITE_REST_API_KEY;
-  const REDIRECT_URI = import.meta.env.VITE_REDIRECT_URI;
+  // const REST_API_KEY = import.meta.env.VITE_REST_API_KEY;
+  // const REDIRECT_URI = import.meta.env.VITE_REDIRECT_URI;
 
-  const kakaoOAuthLink = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
+  const kakaoOAuthLink = `https://kauth.kakao.com/oauth/authorize?client_id={REST_API_KEY}&redirect_uri={REDIRECT_URI}&response_type=code`;
 
   useEffect(() => {
     // act 상태가 업데이트될 때마다 콘솔에 출력

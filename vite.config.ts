@@ -10,7 +10,6 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      '/foo': 'http://localhost:5173',
       '/api': {
         target: 'http://3.34.45.2', // 프록시할 대상 URL
         changeOrigin: true,
