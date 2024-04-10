@@ -30,6 +30,7 @@ export const Home = styled.img`
   height: 75%;
   margin-left: 5vw;
   filter: drop-shadow(0 0 1rem rgba(178, 53, 53, 0.17));
+  cursor: pointer;
 `;
 
 export const Logo = styled.div`
@@ -43,6 +44,7 @@ export const Check = styled.img`
   height: 75%;
   margin-right: 5vw;
   filter: drop-shadow(0 0 1rem rgba(0, 0, 0, 0.17));
+  cursor: pointer;
 `;
 
 export const Body = styled.div`
@@ -52,15 +54,22 @@ export const Body = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 2rem;
+  gap: 0.8rem;
   position: absolute;
   z-index: 2;
-  margin-top: 5dvh;
+  margin-top: 5.5dvh;
+  cursor: pointer;
+`;
+
+export const Personality = styled.p`
+  font-family: 'BMJUA';
+  font-size: 2rem;
 `;
 
 export const Name = styled.p`
   font-family: 'BMJUA';
   font-size: 3rem;
+  margin-bottom: 0.5rem;
 `;
 
 export const Character = styled.img`

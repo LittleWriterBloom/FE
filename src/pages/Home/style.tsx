@@ -23,6 +23,7 @@ export const Profile = styled.img`
   height: 75%;
   margin-left: 5vw;
   filter: drop-shadow(0 0 1rem rgba(0, 0, 0, 0.17));
+  cursor: pointer;
 `;
 
 export const Logo = styled.img`
@@ -35,6 +36,7 @@ export const Settings = styled.img`
   height: 75%;
   margin-right: 5vw;
   filter: drop-shadow(0 0 1rem rgba(0, 0, 0, 0.17));
+  cursor: pointer;
 `;
 
 export const Body = styled.div`

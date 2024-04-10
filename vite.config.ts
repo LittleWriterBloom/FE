@@ -10,7 +10,7 @@ export default defineConfig({
       '/api': {
         target: 'http://3.34.45.2', // 프록시할 대상 URL
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ''), // 요청 경로 재작성 (옵션)
+        rewrite: (path) => path.replace(/^\/api/, ''), // 요청 경로 재작성
       },
     },
   },

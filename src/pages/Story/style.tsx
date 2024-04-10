@@ -33,6 +33,7 @@ export const Home = styled.img`
   height: 75%;
   margin-left: 5vw;
   filter: drop-shadow(0 0 1rem rgba(0, 0, 0, 0.17));
+  cursor: pointer;
 `;
 
 export const Check = styled.img`
@@ -40,6 +41,7 @@ export const Check = styled.img`
   height: 75%;
   margin-right: 5vw;
   filter: drop-shadow(0 0 1rem rgba(0, 0, 0, 0.17));
+  cursor: pointer;
 `;
 
 export const Body = styled.div`
@@ -88,4 +90,14 @@ export const Dong = styled.img`
   bottom: 0;
   left: 5%;
   z-index: 6;
+`;
+
+export const Rec = styled.img`
+  position: absolute;
+  z-index: 3;
+  bottom: 5dvh;
+  width: 5.5rem;
+  height: auto;
+  padding-top: 2rem;
+  cursor: pointer;
 `;

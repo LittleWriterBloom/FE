@@ -64,6 +64,7 @@ export const LoginBtn = styled.button`
   font-style: normal;
   font-weight: 600;
   margin-bottom: 1rem;
+  cursor: pointer;
 `;
 
 export const KakaoButton = styled.button`
@@ -78,6 +79,7 @@ export const KakaoButton = styled.button`
   gap: 0.6rem;
   color: #181600;
   position: relative;
+  cursor: pointer;
 `;
 
 export const KakaoLogo = styled.img`
@@ -118,6 +120,7 @@ export const Terms = styled.p`
   text-align: center;
   font-weight: 600;
   text-decoration: none;
+  cursor: pointer;
 `;
 
 export const Join = styled.p`
@@ -127,5 +130,6 @@ export const Join = styled.p`
   text-align: center;
   font-weight: 600;
   text-decoration: underline;
+  cursor: pointer;
 `;
 
