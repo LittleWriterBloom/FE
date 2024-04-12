@@ -9,14 +9,14 @@ import {
   characterId, 
   characterNameAtom, 
   characterPersonalityAtom 
-} from "../../../store/jotaiAtoms";
-import { bg, title } from "../../../assets/Character/MyCharacters";
+} from "../../store/jotaiAtoms";
+import { title } from "../../assets/Character/MyCharacters";
 import {
   btnHome,
   btnCheck,
+  ggummi,
   btnX,
-  ggummi2,
-} from "../../../assets";
+} from "../../assets";
 
 interface Character {
   id: number;
@@ -25,7 +25,7 @@ interface Character {
   imageUrl: string;
 }
 
-export const MyCharacters = () => {
+export const MyStories = () => {
   const navigate = useNavigate();
   const [act] = useAtom(accessTokenAtom);
   const [charactersData, setCharactersData] = useState<Character[]>([]);
@@ -83,14 +83,12 @@ export const MyCharacters = () => {
 
   return (
     <S.Container>
-      <S.Bg src={bg} alt="배경" />
-      <S.BottomBox />
       <S.Header>
         <S.Home src={btnHome} alt="홈" onClick={onClickHomeBtn} />
+        <S.Logo src={title} alt="홈"/>
         <S.Check src={btnCheck} alt="확인" />
       </S.Header>
       <S.Body>
-        <S.Logo src={title} alt="홈"/>
         {card === false ? (
           <>
             {charactersData.length === 0 ? (
@@ -127,7 +125,7 @@ export const MyCharacters = () => {
             </S.CardContainer>
           </S.BodyContainerT>
         )}
-        <S.Ggummi src={ggummi2} alt='꾸미' />
+        <S.Ggummi src={ggummi} alt='꾸미' />
       </S.Body>
     </S.Container>
   );

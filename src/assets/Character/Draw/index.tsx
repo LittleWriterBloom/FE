@@ -25,6 +25,7 @@ import crayonBase from './crayon-base.png';
 import eraser from './eraser.png';
 import pencilBase from './pencil-base.png';
 import penCase from './pencase.png';
+import paper from './paper.png';
 
 export {
   btnHome,
@@ -54,4 +55,5 @@ export {
   eraser,
   pencilBase,
   penCase,
+  paper,
 };

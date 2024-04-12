@@ -7,7 +7,7 @@ import {
   accessTokenAtom,
   background1,
   bookBGInit,
-  bookId1,
+  bookId,
   characterId,
 } from "../../store/jotaiAtoms";
 import Lottie from "react-lottie-player";
@@ -28,7 +28,7 @@ export const GuideThird = () => {
   const [charId] = useAtom(characterId);
   const [bgInit] = useAtom(bookBGInit);
   const [, setInitImgUrl] = useAtom(background1);
-  const [, setBookId1] = useAtom(bookId1);
+  const [, setBookId1] = useAtom(bookId);
   const [initImgLoaded, setInitImgLoaded] = useState(false);
 
   interface BookInitDataTypes {
