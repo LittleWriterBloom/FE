@@ -19,7 +19,7 @@ const GlobalStyleComponent = createGlobalStyle`
     scrollbar-width: none; 
   }
   html {
-    font-family: 'SUIT', sans-serif;
+    font-family: "BMUJA", 'SUIT', sans-serif;
   }
   #root,
   html,

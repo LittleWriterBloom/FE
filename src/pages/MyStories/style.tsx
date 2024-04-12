@@ -8,22 +8,6 @@ export const Container = styled.div`
   background-color: #FFDAF5;
 `;
 
-export const Bg = styled.img`
-  width: 100vw;
-  height: 100dvh;
-  position: absolute;
-  z-index: 1;
-`;
-
-export const BottomBox = styled.div`
-  width: 100vw;
-  height: 24dvh;
-  position: absolute;
-  z-index: 2;
-  bottom: 0;
-  background-color: #FFF5BD;
-`;
-
 export const Header = styled.div`
   width: 100%;
   height: 12dvh;
@@ -32,8 +16,7 @@ export const Header = styled.div`
   align-items: center;
   justify-content: space-between;
   margin-top: 3dvh;
-  position: absolute;
-  z-index: 10;
+  position: fixed;
 `;
 
 export const Home = styled.img`
@@ -42,6 +25,11 @@ export const Home = styled.img`
   margin-left: 5vw;
   filter: drop-shadow(0 0 1rem rgba(0, 0, 0, 0.17));
   cursor: pointer;
+`;
+
+export const Logo = styled.img`
+  width: auto;
+  height: 50%;
 `;
 
 export const Check = styled.img`
@@ -56,20 +44,8 @@ export const Body = styled.div`
   width: 100vw;
   min-height: 100dvh;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  position: absolute;
-  z-index: 3;
-`;
-
-export const Logo = styled.img`
-  width: 18rem;
-  height: auto;
-  margin-top: 5dvh;
-  position: absolute;
-  z-index: 4;
-  top: 2dvh;
 `;
 
 export const BodyContainer = styled.div`
@@ -77,12 +53,11 @@ export const BodyContainer = styled.div`
   height: auto;
   box-sizing: border-box;
   padding: 5rem;
-  margin-top: 11dvh;
-  margin-bottom: 9dvh;
+  margin-top: 20dvh;
+  margin-bottom: 14dvh;
+  background-color: #FFFBE5;
   border-radius: 2.5rem;
-  border: 30px solid #E7BD6C;
-  background: #FFF9C7;
-  box-shadow: 0 0 0.5rem 0.5rem rgba(0, 0, 0, 0.13) inset, 0 0.25rem 1.4rem 0 rgba(0, 0, 0, 0.25);
+  box-shadow: 0 0.2rem 0.75rem 0 rgba(0, 0, 0, 0.25);
   display: grid;
   grid-template-columns: repeat(3,1fr);
   grid-template-rows: repeat(1fr);
@@ -92,10 +67,9 @@ export const BodyContainer = styled.div`
 export const BodyContainerN = styled.div`
   width: 80vw;
   height: 66dvh;
+  background-color: #FFFBE5;
   border-radius: 2.5rem;
-  border: 30px solid #E7BD6C;
-  background: #FFF9C7;
-  box-shadow: 0 0 0.5rem 0.5rem rgba(0, 0, 0, 0.13) inset, 0 0.25rem 1.4rem 0 rgba(0, 0, 0, 0.25);
+  box-shadow: 0 0.2rem 0.75rem 0 rgba(0, 0, 0, 0.25);
   margin-top: 20dvh;
   margin-bottom: 14dvh;
   display: flex;
@@ -132,11 +106,10 @@ export const Character = styled.div`
   width: 100%;
   height: 18rem;
   background-color: white;
-  border-radius: 1rem;
+  border-radius: 2rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0px 4px 15px 0px rgba(190, 179, 118, 0.80);
 `;
 
 export const CharacterImg = styled.img`
@@ -156,8 +129,8 @@ export const Ggummi = styled.img`
   width: 20%;
   height: auto;
   position: absolute;
-  bottom: 4dvh;
-  right: 5%;
+  bottom: 0;
+  left: 5%;
   z-index: 6;
 `;
 
