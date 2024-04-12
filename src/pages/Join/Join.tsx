@@ -33,7 +33,7 @@ export const Join = () => {
     };
   
     try {
-      const res = await axios.post("/api/auth/signup", data);
+      const res = await axios.post("https://littlewriter-api.com/auth/signup", data);
       if (res.status === 200) {
         alert("회원가입이 완료되었습니다.")
         router("/login");
