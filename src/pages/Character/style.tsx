@@ -8,6 +8,23 @@ export const Container = styled.div`
   background-color: #CAF2FF;
 `;
 
+export const Bg = styled.img`
+  position: absolute;
+  z-index: 1;
+  width: 100vw;
+  height: auto;
+  object-fit: cover;
+`;
+
+export const BgBottom = styled.img`
+  position: absolute;
+  z-index: 2;
+  width: 100vw;
+  height: auto;
+  object-fit: cover;
+  bottom: 0;
+`;
+
 export const Header = styled.div`
   width: 100%;
   height: 12dvh;
@@ -18,7 +35,7 @@ export const Header = styled.div`
   justify-content: space-between;
   margin-top: 3dvh;
   position: absolute;
-  z-index: 2;
+  z-index: 5;
 `;
 
 export const Home = styled.img`
@@ -49,7 +66,7 @@ export const Body = styled.div`
   justify-content: center;
   align-items: center;
   position: absolute;
-  z-index: 1;
+  z-index: 4;
 `;
 
 export const BtnWrapper = styled.div`
@@ -94,5 +111,5 @@ export const Ggummi = styled.img`
   position: absolute;
   bottom: 0;
   left: 5%;
-  z-index: 1;
+  z-index: 6;
 `;

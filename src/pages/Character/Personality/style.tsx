@@ -89,6 +89,24 @@ export const NameInput = styled.input`
   font-size: 1.8rem;
   text-align: center;
   color: #000;
+  font-family: "BMJUA";
+`;
+
+export const NameStt = styled.div`
+  width: 100%;
+  height: 5rem;
+  background-color: #FFFFFF;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
+  border-radius: 10rem;
+  box-sizing: border-box;
+  padding: 0 2rem;
+  font-size: 1.8rem;
+  text-align: center;
+  color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "BMJUA";
 `;
 
 export const CharacterImage = styled.div`
@@ -132,6 +150,15 @@ export const BottomBox = styled.div`
   background-color: #E9E5C2;
   position: absolute;
   bottom: 0;
+`;
+
+export const BottomPaints = styled.img`
+  width: 30vw;
+  height: auto;
+  bottom: 1dvh;
+  position: absolute;
+  z-index: 2;
+  right: 3vw;
 `;
 
 export const Rec = styled.img`

@@ -1,5 +1,4 @@
 import * as S from "./style";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { check } from "../../../assets/Story";
 import { useEffect, useState } from "react";
@@ -17,6 +16,7 @@ import {
 } from "../../../store/jotaiAtoms";
 import { createBG, createBook, createBookS } from "../../../assets/Story/Create";
 import { btnHome, readEnd } from "../../../assets";
+import apis from "../../../apis/apis";
 
 export const Read = () => {
   const navigate = useNavigate();
@@ -65,8 +65,8 @@ export const Read = () => {
 
     if (act) {
       try {
-        const res = await axios.get(
-          `{/api/books/board/${bookid}}`,
+        const res = await apis.get(
+          `{/books/board/${bookid}}`,
           config
         );
         setText1(res.data.data[0].pages[0].context);

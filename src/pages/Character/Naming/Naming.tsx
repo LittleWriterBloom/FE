@@ -2,7 +2,7 @@ import * as S from "./style";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 // import { useAtom, useAtomValue } from "jotai";
-import { easel } from "../../../assets/Character";
+import { easel, paints } from "../../../assets/Character";
 import { useAtom, useAtomValue } from "jotai";
 import { canvasImageDataAtom, characterNameAtom } from "../../../store/jotaiAtoms";
 import { btnMic, btnRecord } from '../../../assets';
@@ -89,6 +89,7 @@ export const Naming = () => {
         </S.CharacterImage>
         <S.Ggummi src={ggummi} alt='꾸미' />
         <S.BottomBox />
+        <S.BottomPaints src={paints} alt="페인트" />
         {rec === false ? (
           <S.Rec src={btnMic} alt="다음으로(비활성화)" onClick={onClickMic} />
         ) : (

@@ -1,5 +1,4 @@
 import * as S from "../style";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { btnHome, dong } from "../../../../assets/index";
 import { check, checkG } from "../../../../assets/Story";
@@ -23,6 +22,7 @@ import {
 } from "../../../../store/jotaiAtoms";
 import { BubbleG } from "../../../../components/Bubble/BubbleG";
 import { btnEnd, createBG, createBook, createBookS } from "../../../../assets/Story/Create";
+import apis from "../../../../apis/apis";
 
 interface PreviousPage {
   context: string | null;
@@ -141,8 +141,8 @@ export const CreateThree2 = () => {
 
     if (act) {
       try {
-        const res = await axios.post(
-          `/api/books/builder/${bookid}/insight`,
+        const res = await apis.post(
+          `/books/builder/${bookid}/insight`,
           pageData,
           config
         );

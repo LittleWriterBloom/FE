@@ -2,7 +2,7 @@ import * as S from "./style";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 // import { useAtom, useAtomValue } from "jotai";
-import { easel, namingBG } from "../../../assets/Character";
+import { easel, namingBG, paints } from "../../../assets/Character";
 import { useAtom, useAtomValue } from "jotai";
 import { canvasImageDataAtom, characterNameAtom, characterPersonalityAtom } from "../../../store/jotaiAtoms";
 import { btnMic, btnRecord } from '../../../assets';
@@ -19,11 +19,11 @@ export const Personality = () => {
   const [personality, setPersonality] = useState("");
   const [, setPersonalityAtom] = useAtom(characterPersonalityAtom);
   const canvasImageData = useAtomValue(canvasImageDataAtom);
-  const [rec, setRec] = useState(false);
   const [name,] = useAtom(characterNameAtom)
   const [showFirst, setShowFirst] = useState(false);
   const [showSecond, setShowSecond] = useState(false);
   const [showThird, setShowThird] = useState(false);
+  const [rec, setRec] = useState(false);
 
   useEffect(() => {
     setTimeout(() => {
@@ -94,6 +94,7 @@ export const Personality = () => {
         </S.CharacterImage>
         <S.Ggummi src={ggummi} alt='꾸미' />
         <S.BottomBox />
+        <S.BottomPaints src={paints} alt="페인트" />
         {rec === false ? (
           <S.Rec src={btnMic} alt="다음으로(비활성화)" onClick={onClickMic} />
         ) : (

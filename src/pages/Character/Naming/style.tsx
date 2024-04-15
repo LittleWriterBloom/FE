@@ -133,6 +133,15 @@ export const BottomBox = styled.div`
   bottom: 0;
 `;
 
+export const BottomPaints = styled.img`
+  width: 30vw;
+  height: auto;
+  bottom: 1dvh;
+  position: absolute;
+  z-index: 2;
+  right: 3vw;
+`;
+
 export const Rec = styled.img`
   position: absolute;
   z-index: 3;

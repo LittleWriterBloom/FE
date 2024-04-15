@@ -10,10 +10,19 @@ export const Container = styled.div`
 
 export const Bg = styled.img`
   position: absolute;
+  z-index: 1;
   width: 100vw;
-  height: 100dvh;
+  height: auto;
   object-fit: cover;
+`;
 
+export const BgBottom = styled.img`
+  position: absolute;
+  z-index: 2;
+  width: 100vw;
+  height: auto;
+  object-fit: cover;
+  bottom: 0;
 `;
 
 export const Header = styled.div`
@@ -86,16 +95,14 @@ export const Btn = styled.div`
   position: relative;
   cursor: pointer;
   gap: 1rem;
+  margin-bottom: 2rem;
 `;
 
-export const BtnImg = styled.div`
+export const BtnImg = styled.img`
   position: absolute;
   z-index: 10;
   width: 100%;
   height: 100%;
-  border-radius: 2.8rem;
-  border: 0.5rem solid #FFF;
-  background-color: #D6D6D6;
 `;
 
 export const BtnContent = styled.div`
@@ -103,7 +110,8 @@ export const BtnContent = styled.div`
   z-index: 11;
   text-align: center;
   font-family: 'BMJUA';
-  font-size: 3.5rem;
+  font-size: 2rem;
+  bottom: -18%;
 `;
 
 export const Dong = styled.img`

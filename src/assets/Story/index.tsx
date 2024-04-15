@@ -6,6 +6,8 @@ import iconTouch from './icon-touch.png';
 import stageBG from './stageBG.png';
 import textBG from './text-bg.png';
 import questModal from './questModal.png';
+import storyFive from './storyFive.png';
+import storyThree from './storyThree.png';
 
 export {
   btnActionOff,
@@ -16,4 +18,6 @@ export {
   stageBG,
   textBG,
   questModal,
+  storyFive,
+  storyThree
 };

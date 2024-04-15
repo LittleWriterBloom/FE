@@ -40,7 +40,7 @@ export const Home = () => {
         <S.Settings src={btnSettings} alt="설정" />
       </S.Header>
       <S.Body>
-        <S.Arrows src={btnArrowL} alt="btnArrowL" />
+        <S.Arrows src={btnArrowL} alt="btnArrowL" style={{opacity: "0"}} />
         <S.StoryMake>
           <S.StoryMakeBG src={bgStoryMake} alt="배경" />
           <S.StoryMakeBtn
@@ -49,7 +49,7 @@ export const Home = () => {
             onClick={onClickMakeBtn}
           />
         </S.StoryMake>
-        <S.Arrows src={btnArrowR} alt="btnArrowR" />
+        <S.Arrows src={btnArrowR} alt="btnArrowR" style={{opacity: "0"}} />
       </S.Body>
     </S.Container>
   );

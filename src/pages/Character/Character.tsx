@@ -8,6 +8,8 @@ import {
   paint
 } from '../../assets/Character';
 import {
+  bgCloudB,
+  bgCloudP,
   btnHome,
   ggummi,
 } from '../../assets';
@@ -52,6 +54,8 @@ export const Character = () => {
       {showSecond && <BubbleP text="만들어 놓은 캐릭터를 불러와도 되구," length={36} />}
       {showThird && <BubbleP text="직접 캐릭터를 그려봐도 좋아!" length={30} />}
       {showFourth && <BubbleP text="그리는 게 어렵다면 색칠만 해보는 건 어때?" length={42} />}
+      <S.Bg src={bgCloudP} alt="배경 패턴" />
+      <S.BgBottom src={bgCloudB} alt="구름하단" />
       <S.Header>
         <S.Home src={btnHome} alt='홈' onClick={onClickHomeBtn} />
         <S.Logo>주인공 만들기</S.Logo>

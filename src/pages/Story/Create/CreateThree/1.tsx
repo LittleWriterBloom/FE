@@ -20,10 +20,9 @@ import {
   context1,
   question1,
 } from "../../../../store/jotaiAtoms";
-import axios from "axios";
 import { BubbleG } from "../../../../components/Bubble/BubbleG";
 import { btnEnd, createBG, createBook, createBookS } from "../../../../assets/Story/Create";
-
+import apis from "../../../../apis/apis";
 interface BookInitDataTypes {
   characterId: number | null;
   backgroundInfo: string | null;
@@ -117,8 +116,8 @@ export const CreateThree = () => {
 
     if (act) {
       try {
-        const res = await axios.post(
-          "/api/books/builder/init",
+        const res = await apis.post(
+          "/books/builder/init",
           bookInitData,
           config
         );
@@ -192,11 +191,11 @@ export const CreateThree = () => {
               {isCreated ? (
                 <S.StoryCreated>{text1}</S.StoryCreated>
               ) : (
-                <S.StoryInput
-                  onChange={handleInput}
-                  type="name"
-                  placeholder="동화의 첫 문장을 지어주세요."
-                />
+                      <S.StoryInput
+                        onChange={handleInput}
+                        type="name"
+                        placeholder="동화의 첫 문장을 지어주세요."
+                      />
               )}
               {canvasImageData && (
                 <S.Character src={canvasImageData} alt="Saved Image" />
@@ -217,17 +216,9 @@ export const CreateThree = () => {
             )}
             <S.Dong src={dong} alt="동동이" onClick={onClickDong} />
             {rec === false ? (
-              <S.Rec
-                src={btnMic}
-                alt="음성인식(비활성화)"
-                onClick={onClickMic}
-              />
+              <S.Rec src={btnMic} alt="다음으로(비활성화)" onClick={onClickMic} />
             ) : (
-              <S.Rec
-                src={btnRecord}
-                alt="인식중(활성화)"
-                onClick={onClickRec}
-              />
+              <S.Rec src={btnRecord} alt="다음으로(활성화)" onClick={onClickRec} />
             )}
           </S.Body>
         </>
