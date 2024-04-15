@@ -10,9 +10,10 @@ import {
   characterPersonalityAtom,
   accessTokenAtom
 } from "../../../store/jotaiAtoms";
-import axios from "axios";
 import complete from "../../../assets/Lottie/complete1.json";
 import Lottie from "react-lottie-player";
+import { useEffect } from "react";
+import apis from "../../../apis/apis";
 
 export const Complete = () => {
   const navigate = useNavigate();
@@ -22,6 +23,11 @@ export const Complete = () => {
   const [act] = useAtom(accessTokenAtom);
   const ImageData = canvasImageData?.split(",")[1];
 
+  useEffect(() => {
+    setTimeout(() => {
+      postCharacterData(characterData);
+    }, 4000); 
+  }, [])
   interface CharacterData {
     name: string | null;
     personality: string | null;
@@ -43,9 +49,8 @@ export const Complete = () => {
 
     if (act) {
       try {
-        const res = await axios.post("/api/character", characterData, config);
+        const res = await apis.post("/character", characterData, config);
         console.log(res.data);
-        alert("캐릭터를 저장하시겠습니까?")
         navigate("/character/mycharacters")
       } catch (err) {
         console.error(err);

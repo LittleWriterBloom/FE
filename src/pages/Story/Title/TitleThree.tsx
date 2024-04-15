@@ -28,7 +28,7 @@ import {
   blueBook,
   bookShadow,
 } from "../../../assets/Story/Title";
-import axios from "axios";
+import apis from "../../../apis/apis";
 
 interface Pages {
   context: string | null;
@@ -105,8 +105,8 @@ export const TitleThree = () => {
 
     if (act) {
       try {
-        const res = await axios.post(
-          `/api/books/builder/${bookid}/save`,
+        const res = await apis.post(
+          `/books/builder/${bookid}/save`,
           bookData,
           config
         );

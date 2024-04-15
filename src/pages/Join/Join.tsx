@@ -5,7 +5,7 @@ import logo from '../../assets/logo.png';
 //import { useAtom } from "jotai";
 //import { userIdAtom } from "@src/lib/stateJotai";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import apis from "../../apis/apis";
 
 export const Join = () => {
   const [id, setId] = useState("");
@@ -33,7 +33,7 @@ export const Join = () => {
     };
   
     try {
-      const res = await axios.post("/api/auth/signup", data);
+      const res = await apis.post("/auth/signup", data);
       if (res.status === 200) {
         alert("회원가입이 완료되었습니다.")
         router("/login");

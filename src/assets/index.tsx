@@ -11,6 +11,8 @@ import btnX from './btn-x.png';
 import bubbleG from './speech-bubbleG.png';
 import bubbleP from './speech-bubbleP.png';
 import readEnd from './readEnd.png';
+import bgCloudP from './bgCloudPattern.png';
+import bgCloudB from './bgCloudBottom.png';
 
 export {
   ggummi,
@@ -25,5 +27,7 @@ export {
   btnX,
   bubbleG,
   bubbleP,
-  readEnd
+  readEnd,
+  bgCloudP,
+  bgCloudB
 }

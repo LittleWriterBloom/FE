@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import * as S from "./style";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import { useAtom } from "jotai";
 import { 
   accessTokenAtom, 
@@ -17,6 +16,7 @@ import {
   ggummi,
   btnX,
 } from "../../assets";
+import apis from "../../apis/apis";
 
 interface Character {
   id: number;
@@ -52,7 +52,7 @@ export const MyStories = () => {
             Authorization: `Bearer ${act}`,
           },
         };
-        const res = await axios.get("/api/character", config);
+        const res = await apis.get("/character", config);
         console.log(res.data);
         setCharactersData(res.data.data);
       } catch (err) {

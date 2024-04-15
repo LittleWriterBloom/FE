@@ -2,15 +2,16 @@ import { styled } from "styled-components";
 
 export const Container = styled.div`
   width: 100%;
-  min-height: 100dvh;
+  height: auto;
   display: flex;
   flex-direction: column;
   background-color: #FFDAF5;
+  overflow: hidden;
 `;
 
 export const Bg = styled.img`
   width: 100vw;
-  height: 100dvh;
+  height: auto;
   position: absolute;
   z-index: 1;
 `;
@@ -22,6 +23,7 @@ export const BottomBox = styled.div`
   z-index: 2;
   bottom: 0;
   background-color: #FFF5BD;
+  opacity: 0;
 `;
 
 export const Header = styled.div`
@@ -77,8 +79,7 @@ export const BodyContainer = styled.div`
   height: auto;
   box-sizing: border-box;
   padding: 5rem;
-  margin-top: 11dvh;
-  margin-bottom: 9dvh;
+  margin-top: 1.5dvh;
   border-radius: 2.5rem;
   border: 30px solid #E7BD6C;
   background: #FFF9C7;
@@ -91,14 +92,13 @@ export const BodyContainer = styled.div`
 
 export const BodyContainerN = styled.div`
   width: 80vw;
-  height: 66dvh;
+  height: 79dvh;
   border-radius: 2.5rem;
   border: 30px solid #E7BD6C;
   background: #FFF9C7;
   box-shadow: 0 0 0.5rem 0.5rem rgba(0, 0, 0, 0.13) inset, 0 0.25rem 1.4rem 0 rgba(0, 0, 0, 0.25);
-  margin-top: 20dvh;
-  margin-bottom: 14dvh;
   display: flex;
+  margin-top: 1.5dvh;
   flex-direction: column;
   align-items: center;
   justify-content: center;

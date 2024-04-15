@@ -1,8 +1,9 @@
 import * as S from "./style";
 import { useNavigate } from "react-router-dom";
-import { btnHome, dong } from "../../assets/index";
+import { bgCloudB, bgCloudP, btnHome, dong } from "../../assets/index";
 import { BubbleG } from "../../components/Bubble/BubbleG";
 import { useEffect, useState } from "react";
+import { storyFive, storyThree } from "../../assets/Story";
 
 export const Story = () => {
   const navigate = useNavigate();
@@ -33,6 +34,8 @@ export const Story = () => {
     <S.Container>
       {showFirst && <BubbleG text="동화의 길이를 정해보자!" length={23.5} />}
       {showSecond && <BubbleG text="몇줄짜리 동화를 만들어볼까? 3줄? 5줄?" length={37} />}
+      <S.Bg src={bgCloudP} alt="배경 패턴" />
+      <S.BgBottom src={bgCloudB} alt="구름하단" />
       <S.Header>
         <S.Home src={btnHome} alt="홈" onClick={onClickHomeBtn} />
         <S.Logo>동화 길이 정하기</S.Logo>
@@ -41,19 +44,15 @@ export const Story = () => {
       <S.Body>
         <S.BtnWrapper>
           <S.Btn onClick={onClickThree}>
-            <S.BtnImg />
+            <S.BtnImg src={storyThree} alt="3줄 동화" />
             <S.BtnContent>
-              3줄
-              <br />
-              동화
+              3줄 동화
             </S.BtnContent>
           </S.Btn>
           <S.Btn onClick={onClickFive}>
-            <S.BtnImg />
+            <S.BtnImg src={storyFive} alt="5줄 동화" />
             <S.BtnContent>
-              5줄
-              <br />
-              동화
+              5줄 동화
             </S.BtnContent>
           </S.Btn>
         </S.BtnWrapper>

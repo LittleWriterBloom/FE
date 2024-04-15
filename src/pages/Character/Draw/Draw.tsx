@@ -35,6 +35,7 @@ import {
   lightPink,
   lightPurple,
   grey,
+  paper,
 } from "../../../assets/Character/Draw";
 
 export const Draw = () => {
@@ -164,9 +165,12 @@ export const Draw = () => {
           <S.Check src={btnCheckG} alt="확인(활성화)" onClick={saveAsImage} />
         )}
       </S.Header>
+      <S.DrawAreaContainer>
+        <S.Paper src={paper} alt="종이" />
         <S.DrawArea ref={canvasContainerRef}>
           <canvas ref={canvasRef} />
         </S.DrawArea>
+      </S.DrawAreaContainer>
       <S.Body>
         <S.ColorPalette>
           <S.PaletteBG src={palette} alt="palette" />

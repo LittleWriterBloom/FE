@@ -6,9 +6,9 @@ import logo from '../../assets/logo.png';
 //import { userIdAtom } from "@src/lib/stateJotai";
 import kakaoLogo from '../../assets/kakaoLogo.png';
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
 import { useAtom } from "jotai";
 import { accessTokenAtom } from "../../store/jotaiAtoms";
+import apis from "../../apis/apis";
 
 export const Login = () => {
   const [id, setId] = useState("");
@@ -50,7 +50,7 @@ export const Login = () => {
     };
   
     try {
-      const res = await axios.post("/api/auth/signin", data);
+      const res = await apis.post("/auth/signin", data);
       const accessToken = res.data.data[0].token;
       setAct(accessToken); // 액세스 토큰을 Jotai 상태에 업데이트
       localStorage.setItem("accessToken", accessToken);
