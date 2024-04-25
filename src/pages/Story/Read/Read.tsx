@@ -5,37 +5,38 @@ import { useEffect, useState } from "react";
 import { useAtom, useAtomValue } from "jotai";
 import {
   accessTokenAtom,
-  background1,
-  background2,
-  background3,
-  bookId,
+  bgAtom1,
+  bgAtom2,
+  bgAtom3,
+  bookIdAtom,
   canvasImageDataAtom,
-  context1,
-  context2,
-  context3,
+  contextAtom1,
+  contextAtom2,
+  contextAtom3,
 } from "../../../store/jotaiAtoms";
 import { createBG, createBook, createBookS } from "../../../assets/Story/Create";
 import { btnHome, readEnd } from "../../../assets";
-import apis from "../../../apis/apis";
+// import apis from "../../../apis/apis";
+import axios from "axios";
 
 export const Read = () => {
   const navigate = useNavigate();
   const [act] = useAtom(accessTokenAtom);
   const canvasImageData = useAtomValue(canvasImageDataAtom);
-  const [bookid] = useAtom(bookId);
+  const [bookid] = useAtom(bookIdAtom);
 
-  const [text1, setText1] = useAtom(context1);
-  const [bg1, setBg1] = useAtom(background1);
-  const [text2, setText2] = useAtom(context2);
-  const [bg2, setBg2] = useAtom(background2);
-  const [text3, setText3] = useAtom(context3);
-  const [bg3, setBg3] = useAtom(background3);
+  const [text1, setText1] = useAtom(contextAtom1);
+  const [bg1, setBg1] = useAtom(bgAtom1);
+  const [text2, setText2] = useAtom(contextAtom2);
+  const [bg2, setBg2] = useAtom(bgAtom2);
+  const [text3, setText3] = useAtom(contextAtom3);
+  const [bg3, setBg3] = useAtom(bgAtom3);
 
   const [clickCount, setClickCount] = useState(0);
 
   useEffect(() => {
     getBookTotalData();
-  }, []);
+  });
 
   const onClickHomeBtn = () => {
     navigate("/");
@@ -65,8 +66,8 @@ export const Read = () => {
 
     if (act) {
       try {
-        const res = await apis.get(
-          `{/books/board/${bookid}}`,
+        const res = await axios.get(
+          `{https://littlewriter-api.com/books/board/${bookid}}`,
           config
         );
         setText1(res.data.data[0].pages[0].context);

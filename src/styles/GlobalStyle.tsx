@@ -25,7 +25,7 @@ const GlobalStyleComponent = createGlobalStyle`
   html,
   body {
     width: 100%;
-    height: 100dvh;
+    // height: 100dvh;
     overflow-x: hidden;
     /* 미디어 쿼리에 따른 폰트 크기 설정 */
     @media (max-width: 400px) {

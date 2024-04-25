@@ -6,17 +6,19 @@ import { bgSave, other, reread } from "../../../assets/Story/Save";
 import { useAtom, useAtomValue } from "jotai";
 import {
   canvasImageDataAtom,
-  background1,
+  bgAtom1,
   bookColorAtom,
   bookTitleAtom,
+  bookAuthorAtom,
 } from "../../../store/jotaiAtoms";
 
 export const Save = () => {
   const navigate = useNavigate();
   const canvasImageData = useAtomValue(canvasImageDataAtom);
   const [bookColAtom] = useAtom(bookColorAtom);
-  const [bg1] = useAtom(background1);
+  const [bg1] = useAtom(bgAtom1);
   const [bookTitle] = useAtom(bookTitleAtom);
+  const [author ,] = useAtom(bookAuthorAtom);
 
   const onClickHomeBtn = () => {
     navigate("/");
@@ -40,6 +42,7 @@ export const Save = () => {
         <S.BookContainer>
           <S.BookImg src={bookColAtom} alt="동화책 종류" />
           <S.BookTitle>{bookTitle}</S.BookTitle>
+          <S.BookAuthor>{author} 지음</S.BookAuthor>
           {bg1 && <S.BookBg src={bg1} />}
           {canvasImageData && (
             <S.Character src={canvasImageData} alt="Saved Image" />

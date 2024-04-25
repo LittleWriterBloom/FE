@@ -14,7 +14,6 @@ export const Bg = styled.img`
   position: absolute;
   width: 100vw;
   height: 100dvh;
-  object-fit: cover;
   z-index: 1;
 `;
 
@@ -107,6 +106,54 @@ export const BookInput = styled.input`
   font-size: 1.8rem;
   text-align: center;
   color: #000;
+`;
+
+export const BookTitle = styled.p`
+  width: 38vw;
+  height: 4.8rem;
+  position: absolute;
+  z-index: 16;
+  top: 15dvh;
+  box-sizing: border-box;
+  padding: 0 2rem;
+  font-family: "BMJUA";
+  font-size: 2.6rem;
+  text-align: center;
+  color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const BookAuthor = styled.div`
+  max-width: 40vw;
+  height: 4.8rem;
+  position: absolute;
+  z-index: 16;
+  top: 26dvh;
+  box-sizing: border-box;
+  padding: 0 2rem;
+  font-family: "BMJUA";
+  font-size: 2.1rem;
+  text-align: center;
+  color: #000;
+  gap: 1rem;
+  display: flex;
+  align-items: flex-end;
+`;
+
+export const BookAuthorInput = styled.input`
+  max-width: 24vw;
+  height: 4.8rem;
+  padding: 0 2rem;
+  font-family: "BMJUA";
+  font-size: 1.8rem;
+  text-align: center;
+  color: #000;
+  border-bottom: solid 0.3rem black;
+  &:focus {
+    outline: none;
+  }
 `;
 
 export const ColorContainer = styled.div`

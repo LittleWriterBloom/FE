@@ -77,7 +77,7 @@ export const Body = styled.div`
 
 export const BookContainer = styled.div`
   width: 30vw;
-  height: 60dvh;
+  height: 64dvh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -87,7 +87,7 @@ export const BookContainer = styled.div`
 
 export const BookImg = styled.img`
   width: 30vw;
-  height: 60dvh;
+  height: 64dvh;
   position: absolute;
   z-index: 25;
 `;
@@ -100,16 +100,31 @@ export const BookTitle = styled.div`
   justify-content: center;
   position: absolute;
   z-index: 26;
-  top: 8dvh;
+  top: 7dvh;
   font-family: "BMJUA";
   font-size: 1.8rem;
   text-align: center;
   color: #000;
 `;
 
+export const BookAuthor = styled.div`
+  width: 26vw;
+  height: 12dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  z-index: 26;
+  top: 13dvh;
+  font-family: "BMJUA";
+  font-size: 1.5rem;
+  text-align: center;
+  color: #000;
+`;
+
 export const BookBg = styled.img`
   width: 30vw;
-  height: 35dvh;
+  height: 39dvh;
   position: absolute;
   z-index: 26;
   bottom: 0;

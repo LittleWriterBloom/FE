@@ -4,21 +4,11 @@ import { useNavigate } from "react-router-dom";
 // import { useAtom, useAtomValue } from "jotai";
 import { useAtom } from "jotai";
 import {
-  accessTokenAtom,
-  background1,
-  background2,
-  background3,
   bookColorAtom,
-  bookId,
   bookTitleAtom,
-  characterId,
-  context1,
-  context2,
-  context3,
 } from "../../../store/jotaiAtoms";
 import { btnMic, btnRecord } from "../../../assets";
 import { BubbleP } from "../../../components/Bubble/BubbleP";
-import { namingBG } from "../../../assets/Character";
 import { btnHome, btnCheck, btnCheckG, ggummi } from "../../../assets";
 import {
   pinkBook,
@@ -28,38 +18,16 @@ import {
   blueBook,
   bookShadow,
 } from "../../../assets/Story/Title";
-import apis from "../../../apis/apis";
+import { createBG } from "../../../assets/Story/Create";
 
-interface Pages {
-  context: string | null;
-  backgroundImageUrl: string | null;
-  characterActionInfo: string;
-}
-
-interface bookDataTypes {
-  title: string | null;
-  pages: Pages[];
-  characterId: number | null;
-}
-
-export const TitleThree = () => {
+export const Title = () => {
   const navigate = useNavigate();
-  const [act] = useAtom(accessTokenAtom);
   const [title, setTitle] = useState("");
   const [, setBookTitle] = useAtom(bookTitleAtom);
-  const [charId] = useAtom(characterId);
-  const [bookid] = useAtom(bookId);
-
-  const [text1] = useAtom(context1);
-  const [bg1] = useAtom(background1);
-  const [text2] = useAtom(context2);
-  const [bg2] = useAtom(background2);
-  const [text3] = useAtom(context3);
-  const [bg3] = useAtom(background3);
 
   const [rec, setRec] = useState(false);
   const [bookColor, setBookColor] = useState(0);
-  const [, setBookColAtom] = useAtom(bookColorAtom)
+  const [, setBookColAtom] = useAtom(bookColorAtom);
 
   const [showFirst, setShowFirst] = useState(false);
 
@@ -71,52 +39,6 @@ export const TitleThree = () => {
 
   const colors = ["#FF88DB", "#FFA52E", "#FFFA2E", "#25EF3C", "#43C0FF"];
   const books = [pinkBook, orangeBook, yellowBook, greenBook, blueBook];
-
-  const bookData = {
-    title: title,
-    pages: [
-      {
-        context: text1,
-        backgroundImageUrl: bg1,
-        characterActionInfo: "characterActionInfo",
-      },
-      {
-        context: text2,
-        backgroundImageUrl: bg2,
-        characterActionInfo: "characterActionInfo",
-      },
-      {
-        context: text3,
-        backgroundImageUrl: bg3,
-        characterActionInfo: "characterActionInfo",
-      },
-    ],
-    characterId: charId,
-  };
-
-  console.log(bookData)
-
-  const saveBookData = async (bookData: bookDataTypes) => {
-    const config = {
-      headers: {
-        Authorization: `Bearer ${act}`,
-      },
-    };
-
-    if (act) {
-      try {
-        const res = await apis.post(
-          `/books/builder/${bookid}/save`,
-          bookData,
-          config
-        );
-        console.log(res.data.data[0]);
-        navigate("/story/completion");
-      } catch (err) {
-        console.error(err);
-      }
-    }
-  };
 
   const onClickColor = (index: number) => {
     setBookColor(index);
@@ -136,7 +58,7 @@ export const TitleThree = () => {
     } else {
       setBookTitle(title);
       setBookColAtom(books[bookColor]);
-      saveBookData(bookData);
+      navigate("/story/author");
     }
   };
 
@@ -149,7 +71,7 @@ export const TitleThree = () => {
 
   return (
     <S.Container>
-      <S.Bg src={namingBG} alt="배경이미지" style={{ opacity: "0" }} />
+      <S.Bg src={createBG} alt="배경" />
       {showFirst && (
         <BubbleP text="동화책의 제목을 지어볼까~?" length={41} />
       )}

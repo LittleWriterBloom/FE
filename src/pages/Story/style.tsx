@@ -12,7 +12,7 @@ export const Bg = styled.img`
   position: absolute;
   z-index: 1;
   width: 100vw;
-  height: auto;
+  height: 100dvh;
   object-fit: cover;
 `;
 
@@ -103,15 +103,6 @@ export const BtnImg = styled.img`
   z-index: 10;
   width: 100%;
   height: 100%;
-`;
-
-export const BtnContent = styled.div`
-  position: absolute;
-  z-index: 11;
-  text-align: center;
-  font-family: 'BMJUA';
-  font-size: 2rem;
-  bottom: -18%;
 `;
 
 export const Dong = styled.img`

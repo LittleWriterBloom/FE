@@ -62,6 +62,26 @@ export const Home = styled.img`
   cursor: pointer;
 `;
 
+export const CircleWrapper = styled.div`
+  width: auto;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  position: absolute;
+  z-index: 13;
+  top: 2.2rem;
+`;
+
+export const Circle = styled.div`
+  width: 1.05rem;
+  height: 1.05rem;
+  border-radius: 10rem;
+  background-color: #BDBDBD;
+  box-shadow: 0.15rem 0.15rem 0.3rem 0 rgba(0, 0, 0, 0.20) inset;
+`;
+
 export const EndBtn = styled.img`
   width: auto;
   height: 75%;
@@ -191,6 +211,7 @@ export const LoadingText = styled.p`
   font-size: 2rem;
   margin-top: -2rem;
   margin-bottom: 2rem;
+  text-align: center;
 `;
 
 // Modal

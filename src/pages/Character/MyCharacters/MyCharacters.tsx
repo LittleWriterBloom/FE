@@ -5,7 +5,7 @@ import { useAtom } from "jotai";
 import { 
   accessTokenAtom, 
   canvasImageDataAtom, 
-  characterId, 
+  characterIdAtom, 
   characterNameAtom, 
   characterPersonalityAtom 
 } from "../../../store/jotaiAtoms";
@@ -34,7 +34,7 @@ export const MyCharacters = () => {
   const [, setCharImg] = useAtom(canvasImageDataAtom);
   const [, setCharName] = useAtom(characterNameAtom);
   const [, setCharFeat] = useAtom(characterPersonalityAtom);
-  const [, setCharId] = useAtom(characterId);
+  const [, setCharId] = useAtom(characterIdAtom);
 
   const onClickHomeBtn = () => {
     navigate("/");

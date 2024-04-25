@@ -4,11 +4,14 @@ import { bgCloudB, bgCloudP, btnHome, dong } from "../../assets/index";
 import { BubbleG } from "../../components/Bubble/BubbleG";
 import { useEffect, useState } from "react";
 import { storyFive, storyThree } from "../../assets/Story";
+import { useAtom } from "jotai";
+import { bookLengthAtom } from "../../store/jotaiAtoms";
 
 export const Story = () => {
   const navigate = useNavigate();
   const [showFirst, setShowFirst] = useState(false);
   const [showSecond, setShowSecond] = useState(false);
+  const [, setBookLength] = useAtom(bookLengthAtom);
 
   useEffect(() => {
     setTimeout(() => {
@@ -24,10 +27,12 @@ export const Story = () => {
   };
 
   const onClickThree = () => {
-    navigate("/story/create-three");
+    setBookLength(3);
+    navigate("/story/create");
   };
   const onClickFive = () => {
-    navigate("/story/create-five");
+    setBookLength(5);
+    navigate("/story/create");
   };
 
   return (
@@ -45,15 +50,9 @@ export const Story = () => {
         <S.BtnWrapper>
           <S.Btn onClick={onClickThree}>
             <S.BtnImg src={storyThree} alt="3줄 동화" />
-            <S.BtnContent>
-              3줄 동화
-            </S.BtnContent>
           </S.Btn>
           <S.Btn onClick={onClickFive}>
             <S.BtnImg src={storyFive} alt="5줄 동화" />
-            <S.BtnContent>
-              5줄 동화
-            </S.BtnContent>
           </S.Btn>
         </S.BtnWrapper>
         <S.Dong src={dong} alt="꾸미" />

@@ -12,7 +12,7 @@ export const Bg = styled.img`
   position: absolute;
   z-index: 1;
   width: 100vw;
-  height: auto;
+  height: 100dvh; 
   object-fit: cover;
 `;
 
@@ -58,6 +58,16 @@ export const Settings = styled.img`
   opacity: 0;
 `;
 
+export const Bring = styled.img`
+  width: auto;
+  height: 115%;
+  position: absolute;
+  z-index: 10;
+  right: 5vw;
+  top: 1.3dvh;
+  cursor: pointer;
+`;
+
 export const Body = styled.div`
   width: 100%;
   height: 85dvh;
@@ -95,14 +105,6 @@ export const Btn = styled.div`
 export const BtnImg = styled.img`
   width: 100%;
   height: 100%;
-  border-radius: 2.8rem;
-  border: 0.5rem solid #FFF;
-`;
-
-export const BtnContent = styled.div`
-  font-family: 'BMJUA';
-  font-size: 2rem;
-  top: 2rem;
 `;
 
 export const Ggummi = styled.img`
