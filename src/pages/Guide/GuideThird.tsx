@@ -5,10 +5,10 @@ import axios from "axios";
 import { useAtom } from "jotai";
 import {
   accessTokenAtom,
-  background1,
+  bgAtom1,
   bookBGInit,
-  bookId,
-  characterId,
+  bookIdAtom,
+  characterIdAtom,
 } from "../../store/jotaiAtoms";
 import Lottie from "react-lottie-player";
 import loadAnim from "../../assets/Lottie/loading.json";
@@ -25,10 +25,10 @@ import {
 export const GuideThird = () => {
   const navigate = useNavigate();
   const [act] = useAtom(accessTokenAtom);
-  const [charId] = useAtom(characterId);
+  const [charId] = useAtom(characterIdAtom);
   const [bgInit] = useAtom(bookBGInit);
-  const [, setInitImgUrl] = useAtom(background1);
-  const [, setBookId1] = useAtom(bookId);
+  const [, setInitImgUrl] = useAtom(bgAtom1);
+  const [, setBookId1] = useAtom(bookIdAtom);
   const [initImgLoaded, setInitImgLoaded] = useState(false);
 
   interface BookInitDataTypes {

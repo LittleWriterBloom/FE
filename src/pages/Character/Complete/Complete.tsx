@@ -62,10 +62,6 @@ export const Complete = () => {
     navigate("/");
   };
 
-  const onClickBtn = () => {
-    postCharacterData(characterData);
-  };
-
   return (
     <S.Container>
       <S.Bg src={completeBg} alt="배경" />
@@ -76,7 +72,7 @@ export const Complete = () => {
       <S.Header>
         <S.Home src={btnHome} alt="홈" onClick={onClickHomeBtn} />
       </S.Header>
-      <S.Body onClick={onClickBtn}>
+      <S.Body>
         <S.Personality>{characterPersonality}</S.Personality>
         <S.Name>{characterName}</S.Name>
         {canvasImageData && (

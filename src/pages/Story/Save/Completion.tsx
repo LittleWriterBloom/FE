@@ -6,8 +6,9 @@ import { useAtom, useAtomValue } from "jotai";
 import {
   canvasImageDataAtom,
   bookColorAtom,
-  background1,
   bookTitleAtom,
+  bgAtom1,
+  bookAuthorAtom,
 } from "../../../store/jotaiAtoms";
 import sparkle1 from "../../../assets/Lottie/sparkle1.json";
 import Lottie from "react-lottie-player";
@@ -18,8 +19,9 @@ export const Completion = () => {
   const navigate = useNavigate();
   const canvasImageData = useAtomValue(canvasImageDataAtom);
   const [bookColAtom, ] = useAtom(bookColorAtom);
-  const [bookBg1] = useAtom(background1);
+  const [bookBg1] = useAtom(bgAtom1);
   const [bookTitle] = useAtom(bookTitleAtom);
+  const [author ,] = useAtom(bookAuthorAtom);
 
   const [showFirst, setShowFirst] = useState(false);
   const [showSecond, setShowSecond] = useState(false);
@@ -93,6 +95,7 @@ export const Completion = () => {
         <BookContainer>
           <BookImg src={bookColAtom} alt="동화책 종류" />
           <BookTitle>{bookTitle}</BookTitle>
+          <BookAuthor>{author} 지음</BookAuthor>
           {bookBg1 && <BookBg src={bookBg1} />}
           {canvasImageData && (
             <Character src={canvasImageData} alt="Saved Image" />
@@ -176,7 +179,7 @@ const TextComplete = styled.img`
 
 const BookContainer = styled.div`
   width: 30vw;
-  height: 60dvh;
+  height: 64dvh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -186,7 +189,7 @@ const BookContainer = styled.div`
 
 const BookImg = styled.img`
   width: 30vw;
-  height: 60dvh;
+  height: 64dvh;
   position: absolute;
   z-index: 25;
 `;
@@ -199,16 +202,31 @@ const BookTitle = styled.div`
   justify-content: center;
   position: absolute;
   z-index: 26;
-  top: 8dvh;
+  top: 7dvh;
   font-family: "BMJUA";
   font-size: 1.8rem;
   text-align: center;
   color: #000;
 `;
 
+export const BookAuthor = styled.div`
+  width: 26vw;
+  height: 12dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  z-index: 26;
+  top: 13dvh;
+  font-family: "BMJUA";
+  font-size: 1.5rem;
+  text-align: center;
+  color: #000;
+`;
+
 const BookBg = styled.img`
   width: 30vw;
-  height: 35dvh;
+  height: 39dvh;
   position: absolute;
   z-index: 26;
   bottom: 0;

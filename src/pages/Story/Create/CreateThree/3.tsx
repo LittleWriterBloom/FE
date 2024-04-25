@@ -9,18 +9,18 @@ import Lottie from "react-lottie-player";
 import loadAnim from "../../../../assets/Lottie/loading.json";
 import {
   accessTokenAtom,
-  background1,
-  background2,
-  background3,
+  bgAtom1,
+  bgAtom2,
+  bgAtom3,
   bookBGInit,
-  bookId,
+  bookIdAtom,
   canvasImageDataAtom,
-  characterId,
-  context1,
-  context2,
-  context3,
-  question2,
-  question3,
+  characterIdAtom,
+  contextAtom1,
+  contextAtom2,
+  contextAtom3,
+  questAtom2,
+  questAtom3,
 } from "../../../../store/jotaiAtoms";
 import { BubbleG } from "../../../../components/Bubble/BubbleG";
 import { btnEnd, createBG, createBook, createBookS } from "../../../../assets/Story/Create";
@@ -46,20 +46,20 @@ export const CreateThree3 = () => {
   const canvasImageData = useAtomValue(canvasImageDataAtom);
   const [rec, setRec] = useState(false);
   const [bgInit] = useAtom(bookBGInit);
-  const [charId] = useAtom(characterId);
-  const [bookid] = useAtom(bookId);
+  const [charId] = useAtom(characterIdAtom);
+  const [bookid] = useAtom(bookIdAtom);
 
-  const [quest2] = useAtom(question2);
+  const [quest2] = useAtom(questAtom2);
 
-  const [text1] = useAtom(context1);
-  const [bg1] = useAtom(background1);
-  const [text2] = useAtom(context2);
-  const [bg2] = useAtom(background2);
+  const [text1] = useAtom(contextAtom1);
+  const [bg1] = useAtom(bgAtom1);
+  const [text2] = useAtom(contextAtom2);
+  const [bg2] = useAtom(bgAtom2);
   const [story, setStory] = useState("");
 
-  const [, setQuest3] = useAtom(question3);
-  const [text3, setText3] = useAtom(context3);
-  const [bg3, setBg3] = useAtom(background3);
+  const [, setQuest3] = useAtom(questAtom3);
+  const [text3, setText3] = useAtom(contextAtom3);
+  const [bg3, setBg3] = useAtom(bgAtom3);
 
   const [isCreated, setIsCreated] = useState(false);
   const [isLoading, setIsLoading] = useState(false);

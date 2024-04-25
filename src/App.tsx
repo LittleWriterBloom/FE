@@ -9,22 +9,24 @@ import {
   Complete, 
   Story,
   Logout,
-  CreateThree,
+  CreateParams,
   MyCharacters,
   Personality,
   GuideFirst,
   GuideSecond,
   GuideThird,
-  CreateThree2,
   Stage,
-  CreateThree3,
-  TitleThree,
   Save,
   Completion,
   MyStories,
-  Read
+  Read,
+  Create,
+  Title,
+  Author,
 } from './pages';
 import { Canvas } from './pages/Character/Draw/Canvas';
+import { Test } from './pages/Test/Test';
+import { TestParams } from './pages/Test/TestParams';
 
 function App() {
   return (
@@ -46,14 +48,16 @@ function App() {
         <Route path='/character/mycharacters' element={<MyCharacters />} />
         <Route path='/story' element={<Story />} />
         <Route path='/story/stage' element={<Stage />} />
-        <Route path='/story/create-three' element={<CreateThree />} />
-        <Route path='/story/create-three/2' element={<CreateThree2 />} />
-        <Route path='/story/create-three/3' element={<CreateThree3 />} />
-        <Route path='/story/title-three' element={<TitleThree />} />
+        <Route path='/story/create' element={<Create />} />
+        <Route path='/story/create/:pageId' element={<CreateParams />} />
+        <Route path='/story/title' element={<Title />} />
+        <Route path='/story/author' element={<Author />} />
         <Route path='/story/save' element={<Save />} />
         <Route path='/story/completion' element={<Completion />} />
         <Route path='/story/read' element={<Read />} />
-        <Route path='/story/mystories' element={<MyStories />} />
+        <Route path='/mystories' element={<MyStories />} />
+        <Route path='/story/test' element={<Test />} />
+        <Route path='/story/test/:testId' element={<TestParams />} />
         <Route path='/*' element={<Home />} />
       </Routes>
     </BrowserRouter>

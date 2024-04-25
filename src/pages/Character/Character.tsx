@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { BubbleP } from '../../components/Bubble/BubbleP'
 import {
   bring,
+  ai,
   draw,
   paint
 } from '../../assets/Character';
@@ -59,21 +60,19 @@ export const Character = () => {
       <S.Header>
         <S.Home src={btnHome} alt='홈' onClick={onClickHomeBtn} />
         <S.Logo>주인공 만들기</S.Logo>
-        <S.Settings src={btnHome} alt='홈' />
+        <S.Settings src={bring} alt='캐릭터 불러오기' />
+        <S.Bring src={bring} alt='캐릭터 불러오기' onClick={onClickBringBtn} />
       </S.Header>
       <S.Body>
         <S.BtnWrapper>
-          <S.Btn onClick={onClickBringBtn}>
-            <S.BtnImg src={bring} alt='버튼' />
-            <S.BtnContent>캐릭터 불러오기</S.BtnContent>
-          </S.Btn>
           <S.Btn onClick={onClickDrawBtn}>
             <S.BtnImg src={draw} alt='버튼' />
-            <S.BtnContent>내가 직접 그리기</S.BtnContent>
+          </S.Btn>
+          <S.Btn onClick={onClickDrawBtn}>
+            <S.BtnImg src={ai} alt='버튼' />
           </S.Btn>
           <S.Btn>
             <S.BtnImg src={paint} alt='버튼' />
-            <S.BtnContent>색칠하기</S.BtnContent>
           </S.Btn>
         </S.BtnWrapper>
         <S.Ggummi src={ggummi} alt='꾸미' />

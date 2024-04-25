@@ -1,11 +1,30 @@
 import { styled } from "styled-components";
 
 export const Container = styled.div`
-  width: 100%;
-  min-height: 100dvh;
+  width: 100vw;
+  height: 103.6vw;
   display: flex;
   flex-direction: column;
-  background-color: #FFDAF5;
+  align-items: center;
+  background-color: #CFFF8A;
+`;
+
+export const Bg = styled.img`
+  width: 94vw;
+  height: auto;
+  position: absolute;
+  z-index: 1;
+  top: 3rem;
+`;
+
+export const BottomBox = styled.div`
+  width: 100vw;
+  height: 24dvh;
+  position: absolute;
+  z-index: 2;
+  bottom: 0;
+  background-color: #FFF5BD;
+  opacity: 0;
 `;
 
 export const Header = styled.div`
@@ -16,7 +35,8 @@ export const Header = styled.div`
   align-items: center;
   justify-content: space-between;
   margin-top: 3dvh;
-  position: fixed;
+  position: absolute;
+  z-index: 10;
 `;
 
 export const Home = styled.img`
@@ -27,11 +47,6 @@ export const Home = styled.img`
   cursor: pointer;
 `;
 
-export const Logo = styled.img`
-  width: auto;
-  height: 50%;
-`;
-
 export const Check = styled.img`
   width: auto;
   height: 75%;
@@ -40,44 +55,118 @@ export const Check = styled.img`
   opacity: 0;
 `;
 
-export const Body = styled.div`
-  width: 100vw;
-  min-height: 100dvh;
+export const Logo = styled.img`
+  width: 20rem;
+  height: auto;
+  position: absolute;
+  z-index: 4;
+  top: 0;
+`;
+
+export const BookContainer = styled.div`
+  width: 18vw;
+  height: 40dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+`;
+
+export const BookImg = styled.img`
+  width: 18vw;
+  height: 40dvh;
+  position: absolute;
+  z-index: 25;
+`;
+
+export const BookTitle = styled.div`
+  width: 16vw;
+  height: 12dvh;
   display: flex;
   align-items: center;
   justify-content: center;
+  position: absolute;
+  z-index: 26;
+  top: 7dvh;
+  font-family: "BMJUA";
+  font-size: 1.7rem;
+  text-align: center;
+  color: #000;
+`;
+
+export const BookAuthor = styled.div`
+  width: 26vw;
+  height: 12dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  z-index: 26;
+  top: 13dvh;
+  font-family: "BMJUA";
+  font-size: 1.4rem;
+  text-align: center;
+  color: #000;
+`;
+
+export const BookBg = styled.img`
+  width: 18vw;
+  height: 16dvh;
+  position: absolute;
+  z-index: 26;
+  bottom: 0;
+  border-radius: 0 0 1rem 1rem;
+`;
+
+export const Character = styled.img`
+  width: 30vw;
+  height: auto;
+  position: absolute;
+  z-index: 26;
+  bottom: 0;
+`;
+
+export const Body = styled.div`
+  width: 75vw;
+  height: 84vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  z-index: 3;
+  top: 10rem;
 `;
 
 export const BodyContainer = styled.div`
-  width: 80vw;
-  height: auto;
+  width: 100%;
+  height: 100%;
+  border-radius: 2.5rem;  
+  box-shadow: 0 0 0.5rem 0.5rem rgba(0, 0, 0, 0.13) inset, 0 0.25rem 1.4rem 0 rgba(0, 0, 0, 0.25);
+  display: flex;
   box-sizing: border-box;
   padding: 5rem;
-  margin-top: 20dvh;
-  margin-bottom: 14dvh;
-  background-color: #FFFBE5;
-  border-radius: 2.5rem;
-  box-shadow: 0 0.2rem 0.75rem 0 rgba(0, 0, 0, 0.25);
+  margin-top: 1.5dvh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.6rem;
+  font-family: "BMJUA";
+  position: relative;
+  box-shadow: 0 0 0.5rem 0.5rem rgba(0, 0, 0, 0.13) inset, 0 0.25rem 1.4rem 0 rgba(0, 0, 0, 0.25);
   display: grid;
   grid-template-columns: repeat(3,1fr);
   grid-template-rows: repeat(1fr);
   grid-gap: 3rem;
 `;
 
-export const BodyContainerN = styled.div`
-  width: 80vw;
-  height: 66dvh;
-  background-color: #FFFBE5;
-  border-radius: 2.5rem;
-  box-shadow: 0 0.2rem 0.75rem 0 rgba(0, 0, 0, 0.25);
-  margin-top: 20dvh;
-  margin-bottom: 14dvh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: 2.6rem;
-  font-family: "BMJUA";
+export const BodyBG = styled.img`
+  position: absolute;
+  z-index: 3;
+  width: 100%;
+  height: 100%;
+  top: 0;
 `;
 
 export const MakeBtn = styled.button`
@@ -94,22 +183,11 @@ export const MakeBtn = styled.button`
   margin-top: 1.5rem;
   cursor: pointer;
 `;
-
 export const CharacterContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   cursor: pointer;
-`;
-
-export const Character = styled.div`
-  width: 100%;
-  height: 18rem;
-  background-color: white;
-  border-radius: 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 `;
 
 export const CharacterImg = styled.img`
@@ -126,11 +204,11 @@ export const CharacterName = styled.div`
 `;
 
 export const Ggummi = styled.img`
-  width: 20%;
+  width: 12rem;
   height: auto;
-  position: absolute;
+  position: fixed;
   bottom: 0;
-  left: 5%;
+  right: 4%;
   z-index: 6;
 `;
 
@@ -178,20 +256,60 @@ export const CardContainer = styled.div`
   z-index: 2;
 `;
 
-export const CardCharacter = styled.div`
-  width: 50%;
-  height: 100%;
-  background-color: #FFF;
-  border-radius: 2rem;
+export const CardBookContainer = styled.div`
+  width: 30vw;
+  height: 64dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+`;
+
+export const CardBookImg = styled.img`
+  width: 30vw;
+  height: 64dvh;
+  position: absolute;
+  z-index: 25;
+`;
+
+export const CardBookTitle = styled.div`
+  width: 26vw;
+  height: 12dvh;
   display: flex;
   align-items: center;
   justify-content: center;
+  position: absolute;
+  z-index: 26;
+  top: 7dvh;
+  font-family: "BMJUA";
+  font-size: 1.8rem;
+  text-align: center;
+  color: #000;
 `;
 
-export const CardCharacterImg = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
+export const CardBookAuthor = styled.div`
+  width: 26vw;
+  height: 12dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  z-index: 26;
+  top: 13dvh;
+  font-family: "BMJUA";
+  font-size: 1.5rem;
+  text-align: center;
+  color: #000;
+`;
+
+export const CardBookBg = styled.img`
+  width: 30vw;
+  height: 39dvh;
+  position: absolute;
+  z-index: 26;
+  bottom: 0;
+  border-radius: 0 0 1rem 1rem;
 `;
 
 export const CardDataContainer = styled.div`
@@ -247,3 +365,4 @@ export const ExitBtn = styled.img`
   filter: drop-shadow(0 0 0.6rem rgba(0, 0, 0, 0.17));
   cursor: pointer;
 `;
+

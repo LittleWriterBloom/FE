@@ -1,7 +1,7 @@
 import * as S from "./style";
 import logo from "../../assets/logo.png";
 import { useNavigate } from "react-router-dom";
-import { useAtomValue } from "jotai";
+import { useAtom } from "jotai";
 import { accessTokenAtom } from "../../store/jotaiAtoms";
 import {
   btnArrowL,
@@ -13,7 +13,7 @@ import {
 } from "../../assets/Home";
 
 export const Home = () => {
-  const [accessToken] = useAtomValue(accessTokenAtom);
+  const [accessToken] = useAtom(accessTokenAtom);
   const navigate = useNavigate();
 
   const onClickMakeBtn = () => {
