@@ -38,16 +38,16 @@ const GlobalStyleComponent = createGlobalStyle`
       font-size: 12px;
     }
     @media (min-width: 769px) and (max-width: 1023px) {
-      font-size: 14px;
+      font-size: 13px;
     }
     @media (min-width: 1024px) and (max-width: 1439px) {
-      font-size: 16px;
+      font-size: 14px;
     }
     @media (min-width: 1440px) and (max-width: 1919px) {
-      font-size: 18px;
+      font-size: 17px;
     }
     @media (min-width: 1920px) {
-      font-size: 21px;
+      font-size: 20.5px;
     }
   }
   body, button, html {

@@ -2,20 +2,22 @@ import { useEffect, useState } from "react";
 import * as S from "./style";
 import { useNavigate } from "react-router-dom";
 import { useAtom } from "jotai";
-import { 
-  accessTokenAtom, 
-  bookAuthorAtom, 
-  bookColorAtom, 
-  bookCreateDate, 
-  bookIdAtom, 
-  bookTitleAtom, 
-  characterIdAtom} from "../../store/jotaiAtoms";
-import { bgTangled, bodyBG, bookChaek, title } from "../../assets/MyStories";
 import {
-  btnHome,
-  btnCheck,
-  btnX,
-} from "../../assets";
+  accessTokenAtom,
+  bookAuthorAtom,
+  bookIdAtom,
+  bookTitleAtom,
+  characterImgAtom,
+} from "../../store/jotaiAtoms";
+import {
+  bgTangled,
+  bodyBG,
+  bookChaek,
+  btnRead,
+  cardBG,
+  title,
+} from "../../assets/MyStories";
+import { btnHome, btnCheck, btnBack } from "../../assets";
 import {
   pinkBook,
   orangeBook,
@@ -26,9 +28,10 @@ import {
 import apis from "../../apis/apis";
 
 interface AllData {
+  firstPageImageUrl: string;
   author: string;
   bookColor: number;
-  characterId: number;
+  characterImg: string;
   createDate: string;
   id: string;
   title: string;
@@ -39,16 +42,17 @@ export const MyStories = () => {
   const [act] = useAtom(accessTokenAtom);
   const [allData, setAllData] = useState<AllData[]>([]);
   const [card, setCard] = useState(false);
-  const [selectedBook, setSelectedBook] = useState<AllData | null>(null);
+  const [, setSelectedBook] = useState<AllData | null>(null);
   const [author, setAuthor] = useAtom(bookAuthorAtom);
-  const [, setCreateDate] = useAtom(bookCreateDate);
+  const [createDate, setCreateDate] = useState("");
   const [, setBookId] = useAtom(bookIdAtom);
-  const [bookTitle, ] = useAtom(bookTitleAtom);
-  const [, setCharId] = useAtom(characterIdAtom);
-  const [bookColAtom, setBookColAtom] = useAtom(bookColorAtom);
+  const [bookTitle, setBookTitle] = useAtom(bookTitleAtom);
+  const [, setCharImg] = useAtom(characterImgAtom);
+  const [bookColor, setBookColor] = useState(pinkBook);
+  const [bookFirstImg, setBookFirstImg] = useState("");
 
   const books = [pinkBook, orangeBook, yellowBook, greenBook, blueBook];
-  
+
   const onClickHomeBtn = () => {
     navigate("/");
   };
@@ -71,68 +75,87 @@ export const MyStories = () => {
   };
 
   const onClickStoryBtn = () => {
-    if (selectedBook) {
-      setAuthor(selectedBook.author); 
-      setCreateDate(selectedBook.createDate); 
-      setBookId(selectedBook.id); 
-      setCharId(selectedBook.characterId);
-      setBookColAtom(books[selectedBook.bookColor]);
-    }
-    navigate("/story/stage")
-  }
+    navigate("/story/read");
+  };
 
   useEffect(() => {
     getAllBooks();
   }, [act]);
 
-  const onClickCharacter = (index: number) => {
+  const onClickBook = (index: number) => {
     const selected = allData[index];
     setSelectedBook(selected);
+    setBookFirstImg(selected.firstPageImageUrl);
+    setAuthor(selected.author);
+    setCreateDate(selected.createDate);
+    setBookId(selected.id);
+    setCharImg(selected.characterImg);
+    setBookColor(books[selected.bookColor]);
+    setBookTitle(selected.title);
     setCard(true);
+  };
+
+  const onClickBackBtn = () => {
+    setCard(false);
+    setSelectedBook(null);
   };
 
   return (
     <S.Container>
-      <S.Bg src={bgTangled} alt="배경" />
-      <S.BottomBox />
-      <S.Logo src={title} alt="홈"/>
       <S.Header>
         <S.Home src={btnHome} alt="홈" onClick={onClickHomeBtn} />
+        {card === true && (
+          <S.ExitBtn src={btnBack} alt="나가기" onClick={onClickBackBtn} />
+        )}
         <S.Check src={btnCheck} alt="확인" />
       </S.Header>
-      <S.Body>
-        {card === false ? (
+      <S.Logo src={title} alt="홈" />
+      {card === false ? (
+        <S.Body>
+          <S.Bg src={bgTangled} alt="배경" />
           <S.BodyContainer>
             <S.BodyBG src={bodyBG} alt="배경" />
             {allData.map((item, index) => (
-              <S.BookContainer key={index} onClick={() => onClickCharacter(index)}>
+              <S.BookContainer key={index} onClick={() => onClickBook(index)}>
                 <S.BookImg src={books[item.bookColor]} alt="동화책 종류" />
-                <S.BookTitle>{item.title}</S.BookTitle>
-                <S.BookAuthor>{item.author} 지음</S.BookAuthor>
-                <S.BookBg alt="책 메인 이미지" />
+                <S.BookData>
+                  <S.BookTitle>{item.title}</S.BookTitle>
+                  <S.BookAuthor>{item.author} 지음</S.BookAuthor>
+                  <S.BookBg src={item.firstPageImageUrl} alt="책 메인 이미지" />
+                </S.BookData>
               </S.BookContainer>
             ))}
           </S.BodyContainer>
-        ) : (
-          <S.BodyContainerT>
-            <S.CardBG />
-            <S.CardContainer>
-              <S.CardBookContainer>
-                <S.CardBookImg src={bookColAtom} alt="동화책 종류" />
-                <S.CardBookTitle>{bookTitle}</S.CardBookTitle>
-                <S.CardBookAuthor>{author} 지음</S.CardBookAuthor>
-                <S.CardBookBg alt="책 메인 이미지" />
-              </S.CardBookContainer>
-              <S.CardDataContainer>
-                <S.MakeStoryBtn onClick={onClickStoryBtn}>동화 읽기</S.MakeStoryBtn>
-                <S.CardCharFeat>{selectedBook?.createDate}</S.CardCharFeat>
-                <S.ExitBtn src={btnX} alt="나가기" onClick={() => setCard(false)}/>
-              </S.CardDataContainer>
-            </S.CardContainer>
-          </S.BodyContainerT>
-        )}
-      </S.Body>
-      <S.Ggummi src={bookChaek} alt='꾸미' />
+          <S.Ggummi src={bookChaek} alt="꾸미" />
+        </S.Body>
+      ) : (
+        <S.BodyContainerT>
+          <S.BgT src={bgTangled} alt="배경" />
+          <S.CardBG src={cardBG} alt="책 배경" />
+          <S.CardContainer>
+            <S.CardBookContainer>
+              <S.BookImg src={bookColor} alt="동화책 종류" />
+              <S.BookData>
+                <S.BookTitle style={{ fontSize: "1.7rem" }}>
+                  {bookTitle}
+                </S.BookTitle>
+                <S.BookAuthor>{author} 지음</S.BookAuthor>
+                <S.BookBg src={bookFirstImg} alt="책 메인 이미지" />
+              </S.BookData>
+            </S.CardBookContainer>
+            <S.CardDataContainer>
+              <S.MakeStoryBtn
+                src={btnRead}
+                alt="동화읽기 버튼"
+                onClick={onClickStoryBtn}
+              />
+              <S.CardCreateDate>
+                만든 날짜: {createDate.split("T")[0]}
+              </S.CardCreateDate>
+            </S.CardDataContainer>
+          </S.CardContainer>
+        </S.BodyContainerT>
+      )}
     </S.Container>
   );
 };

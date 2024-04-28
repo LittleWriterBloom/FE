@@ -3,39 +3,48 @@ import { pinkBook } from '../assets/Story/Title';
 
 export const accessTokenAtom = atom(localStorage.getItem('accessToken') || '');
 
-export const canvasImageDataAtom = atom<string | null>(null);
-export const characterNameAtom = atom<string | null>(null);
-export const characterPersonalityAtom = atom<string | null>(null);
+export const canvasImageDataAtom = atom<string>("");
+export const aiImageDataAtom = atom<string>("");
+export const characterDescriptAtom = atom<string>("");
+export const characterNameAtom = atom<string>("");
+export const characterPersonalityAtom = atom<string>("");
 export const characterIdAtom = atom<number | null>(null);
+export const characterImgAtom = atom<string>("");
 
 export const bookLengthAtom = atom<number | null>(null);
-export const bookBGInit = atom<string | null>(null);
+export const bookBGInit = atom<string>("");
 
-export const bgAtom1 = atom<string | null>(null);
-export const bgAtom2 = atom<string | null>(null);
-export const bgAtom3 = atom<string | null>(null);
-export const bgAtom4 = atom<string | null>(null);
-export const bgAtom5 = atom<string | null>(null);
+export const bgAtom1 = atom<string>("");
+export const bgAtom2 = atom<string>("");
+export const bgAtom3 = atom<string>("");
+export const bgAtom4 = atom<string>("");
+export const bgAtom5 = atom<string>("");
+export const bgAtom6 = atom<string>("");
+export const bgAtom7 = atom<string>("");
 
-export const contextAtom1 = atom<string | null>(null);
-export const contextAtom2 = atom<string | null>(null);
-export const contextAtom3 = atom<string | null>(null);
-export const contextAtom4 = atom<string | null>(null);
-export const contextAtom5 = atom<string | null>(null);
+export const contextAtom1 = atom<string>("");
+export const contextAtom2 = atom<string>("");
+export const contextAtom3 = atom<string>("");
+export const contextAtom4 = atom<string>("");
+export const contextAtom5 = atom<string>("");
+export const contextAtom6 = atom<string>("");
+export const contextAtom7 = atom<string>("");
 
 export const questAtom1 = atom<string[]>([]);
 export const questAtom2 = atom<string[]>([]);
 export const questAtom3 = atom<string[]>([]);
 export const questAtom4 = atom<string[]>([]);
 export const questAtom5 = atom<string[]>([]);
+export const questAtom6 = atom<string[]>([]);
+export const questAtom7 = atom<string[]>([]);
 
-export const bookTitleAtom = atom<string | null>(null);
-export const bookAuthorAtom = atom<string | null>(null);
-export const bookIdAtom = atom<string | null>(null);
-export const bookCreateDate = atom<string | null>(null);
+export const bookTitleAtom = atom<string>("");
+export const bookAuthorAtom = atom<string>("");
+export const bookIdAtom = atom<string>("");
+export const bookCreateDate = atom<string>("");
 export const bookColorAtom = atom(pinkBook);
 
-
+export const isAIModeAtom = atom(false);
 
 /*
 export const updateToken = (newToken) => {

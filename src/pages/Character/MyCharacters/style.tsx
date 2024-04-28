@@ -1,29 +1,10 @@
 import { styled } from "styled-components";
 
 export const Container = styled.div`
-  width: 100%;
-  height: auto;
+  width: 100vw;
   display: flex;
   flex-direction: column;
-  background-color: #FFDAF5;
-  overflow: hidden;
-`;
-
-export const Bg = styled.img`
-  width: 100vw;
-  height: auto;
-  position: absolute;
-  z-index: 1;
-`;
-
-export const BottomBox = styled.div`
-  width: 100vw;
-  height: 24dvh;
-  position: absolute;
-  z-index: 2;
-  bottom: 0;
-  background-color: #FFF5BD;
-  opacity: 0;
+  align-items: center;
 `;
 
 export const Header = styled.div`
@@ -56,7 +37,7 @@ export const Check = styled.img`
 
 export const Body = styled.div`
   width: 100vw;
-  min-height: 100dvh;
+  min-height: 115rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -65,58 +46,62 @@ export const Body = styled.div`
   z-index: 3;
 `;
 
-export const Logo = styled.img`
-  width: 18rem;
-  height: auto;
-  margin-top: 5dvh;
+export const Bg = styled.img`
+  width: 100%;
+  height: 115rem;
   position: absolute;
-  z-index: 4;
-  top: 2dvh;
+  z-index: 1;
+`;
+
+export const Logo = styled.img`
+  width: 20rem;
+  height: auto;
+  position: absolute;
+  z-index: 5;
+  top: 0;
 `;
 
 export const BodyContainer = styled.div`
   width: 80vw;
-  height: auto;
+  height: 96rem;
   box-sizing: border-box;
-  padding: 5rem;
-  margin-top: 1.5dvh;
-  border-radius: 2.5rem;
-  border: 30px solid #E7BD6C;
-  background: #FFF9C7;
-  box-shadow: 0 0 0.5rem 0.5rem rgba(0, 0, 0, 0.13) inset, 0 0.25rem 1.4rem 0 rgba(0, 0, 0, 0.25);
+  padding: 6rem 5rem;
   display: grid;
   grid-template-columns: repeat(3,1fr);
-  grid-template-rows: repeat(1fr);
-  grid-gap: 3rem;
+  grid-template-rows: repeat(3,1fr);
+  grid-gap: 3rem 1rem;
+  position: absolute;
+  z-index: 2;
+  top: 15dvh;
+`;
+
+export const BoardBG = styled.img`
+  width: 80vw;
+  height: 96rem;
+  filter: drop-shadow(0 0 1rem rgba(0, 0, 0, 0.17));
+  position: absolute;
+  z-index: 1;
+  top: 15dvh;
 `;
 
 export const BodyContainerN = styled.div`
   width: 80vw;
-  height: 79dvh;
-  border-radius: 2.5rem;
-  border: 30px solid #E7BD6C;
-  background: #FFF9C7;
-  box-shadow: 0 0 0.5rem 0.5rem rgba(0, 0, 0, 0.13) inset, 0 0.25rem 1.4rem 0 rgba(0, 0, 0, 0.25);
+  height: 78dvh;
   display: flex;
-  margin-top: 1.5dvh;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: 2.6rem;
   font-family: "BMJUA";
+  position: absolute;
+  z-index: 3;
+  top: 15dvh;
+  color: #ABA357;
 `;
 
-export const MakeBtn = styled.button`
+export const MakeBtn = styled.img`
   width: 20rem;
-  height: 5.4rem;
-  background-color: #F7B22C;
-  border-radius: 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #FFF;
-  font-size: 2.2rem;
-  font-family: "BMJUA";
+  height: auto;
   margin-top: 1.5rem;
   cursor: pointer;
 `;
@@ -126,23 +111,33 @@ export const CharacterContainer = styled.div`
   flex-direction: column;
   align-items: center;
   cursor: pointer;
+  position: relative;
+`;
+
+export const CharacterMemoBG = styled.img`
+  width: 100%;
+  height: 88%;
+  filter: drop-shadow(0 0 1rem rgba(0, 0, 0, 0.17));
+  position: absolute;
+  z-index: 3;
 `;
 
 export const Character = styled.div`
   width: 100%;
-  height: 18rem;
-  background-color: white;
-  border-radius: 1rem;
+  height: 20rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0px 4px 15px 0px rgba(190, 179, 118, 0.80);
+  position: absolute;
+  z-index: 3;
+  top: 2rem;
 `;
 
 export const CharacterImg = styled.img`
-  width: 100%;
+  width: 90%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
+  border-radius: 1.1rem;
 `;
 
 export const CharacterName = styled.div`
@@ -150,13 +145,16 @@ export const CharacterName = styled.div`
   font-family: "BMJUA";
   object-fit: cover;
   margin-top: 1rem;
+  position: absolute;
+  z-index: 3;
+  bottom: 0;
 `;
 
 export const Ggummi = styled.img`
   width: 20%;
   height: auto;
-  position: absolute;
-  bottom: 4dvh;
+  position: fixed;
+  bottom: 4rem;
   right: 5%;
   z-index: 6;
 `;
@@ -170,62 +168,68 @@ export const ModalContainer = styled.div`
 
 export const BodyContainerT = styled.div`
   width: 100vw;
-  height: 80dvh;
-  margin-top: 20dvh;
+  height: 100dvh;
   position: relative;
   display: flex;
   align-items: flex-start;
   justify-content: center;
 `;
 
-export const CardBG = styled.div`
-  width: 77vw;
-  height: 68dvh;
-  margin-top: 20dvh;
-  margin-bottom: 12dvh;
-  background-color: #FFFBE5;
-  border-radius: 2.5rem;
-  box-shadow: 0 0.2rem 0.75rem 0 rgba(0, 0, 0, 0.25);
-  transform: rotate(-6.597deg);
+export const BgT = styled.img`
+  width: 100vw;
+  height: 100dvh;
   position: absolute;
   z-index: 1;
-  top: -20dvh;
+`;
+
+export const CardBG = styled.img`
+  width: 80vw;
+  height: 78dvh;
+  position: absolute;
+  z-index: 1;
+  top: 15dvh;
 `;
 
 export const CardContainer = styled.div`
-  width: 77vw;
-  height: 68dvh;
+  width: 80vw;
+  height: 78dvh;
   box-sizing: border-box;
-  padding: 5rem 3rem 5rem 5rem;
-  background-color: #FFFBE5;
-  border-radius: 2.5rem;
-  box-shadow: 0 0.2rem 0.75rem 0 rgba(0, 0, 0, 0.25);
+  padding: 5rem;
   display: flex;
   position: relative;
   z-index: 2;
+  top: 15dvh;
 `;
 
 export const CardCharacter = styled.div`
-  width: 50%;
+  width: 48%;
   height: 100%;
-  background-color: #FFF;
-  border-radius: 2rem;
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
+`;
+
+export const CardCharacterBG = styled.img`
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 3;
 `;
 
 export const CardCharacterImg = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
+  width: 80%;
+  height: 80%;
+  object-fit: cover;
+  position: absolute;
+  z-index: 4;
 `;
 
 export const CardDataContainer = styled.div`
   width: 50%;
   height: 100%;
   box-sizing: border-box;
-  padding: 2rem;
+  padding: 3rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -234,10 +238,10 @@ export const CardDataContainer = styled.div`
 `;
 
 export const CardCharName = styled.div`
-  width: 16rem;
+  width: 18rem;
   height: 5.5rem;
-  background-color: #FFF3DC;
-  border: 0.2rem solid #FFF;
+  background-color: #FFFAF1;
+  border: 0.4rem solid #FFF;
   border-radius: 2.5rem;
   display: flex;
   align-items: center;
@@ -250,27 +254,21 @@ export const CardCharFeat = styled.div`
   height: auto;
   font-size: 1.8rem;
   text-align: center;
+  color: #ABA357;
 `;
 
-export const MakeStoryBtn = styled.button`
-  width: 16rem;
-  height: 5.5rem;
-  color: #FFF;
-  background-color: #F7B22C;
-  border-radius: 2.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 2.2rem;
+export const MakeStoryBtn = styled.img`
+  width: 15rem;
+  height: auto;
+  cursor: pointer;
 `;
 
 export const ExitBtn = styled.img`
-  width: 4rem;
-  height: 4rem;
-  position: absolute;
-  z-index: 3;
-  top: -1.1rem;
-  right: -1.1rem;
-  filter: drop-shadow(0 0 0.6rem rgba(0, 0, 0, 0.17));
+  width: auto;
+  height: 75%;
+  margin-left: 11.5vw;
+  filter: drop-shadow(0 0 1rem rgba(0, 0, 0, 0.17));
   cursor: pointer;
+  position: absolute;
+  z-index: 11;
 `;

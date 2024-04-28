@@ -80,7 +80,6 @@ export const Body = styled.div`
   position: absolute;
   z-index: 4;
   margin-top: 5.5dvh;
-  cursor: pointer;
 `;
 
 export const Personality = styled.p`

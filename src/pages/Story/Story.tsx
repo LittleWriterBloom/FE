@@ -3,15 +3,16 @@ import { useNavigate } from "react-router-dom";
 import { bgCloudB, bgCloudP, btnHome, dong } from "../../assets/index";
 import { BubbleG } from "../../components/Bubble/BubbleG";
 import { useEffect, useState } from "react";
-import { storyFive, storyThree } from "../../assets/Story";
+import { storyFive, storySeven, storyThree } from "../../assets/Story";
 import { useAtom } from "jotai";
-import { bookLengthAtom } from "../../store/jotaiAtoms";
+import { bookLengthAtom, isAIModeAtom } from "../../store/jotaiAtoms";
 
 export const Story = () => {
   const navigate = useNavigate();
   const [showFirst, setShowFirst] = useState(false);
   const [showSecond, setShowSecond] = useState(false);
   const [, setBookLength] = useAtom(bookLengthAtom);
+  const [isAIAtom, ] = useAtom(isAIModeAtom);
 
   useEffect(() => {
     setTimeout(() => {
@@ -19,7 +20,7 @@ export const Story = () => {
       setTimeout(() => {
         setShowSecond(true);
       }, 2000); 
-    }, 2000); 
+    }, 500); 
   }, []);
 
   const onClickHomeBtn = () => {
@@ -27,12 +28,33 @@ export const Story = () => {
   };
 
   const onClickThree = () => {
-    setBookLength(3);
-    navigate("/story/create");
+    if(isAIAtom) {
+      setBookLength(3);
+      navigate("/story/createai");
+    } else {
+      setBookLength(3);
+      navigate("/story/create");
+    }
   };
+
   const onClickFive = () => {
-    setBookLength(5);
-    navigate("/story/create");
+    if(isAIAtom) {
+      setBookLength(5);
+      navigate("/story/createai");
+    } else {
+      setBookLength(5);
+      navigate("/story/create");
+    }
+  };
+
+  const onClickSeven = () => {
+    if(isAIAtom) {
+      setBookLength(7);
+      navigate("/story/createai");
+    } else {
+      setBookLength(7);
+      navigate("/story/create");
+    }
   };
 
   return (
@@ -53,6 +75,9 @@ export const Story = () => {
           </S.Btn>
           <S.Btn onClick={onClickFive}>
             <S.BtnImg src={storyFive} alt="5줄 동화" />
+          </S.Btn>
+          <S.Btn onClick={onClickSeven}>
+            <S.BtnImg src={storySeven} alt="7줄 동화" />
           </S.Btn>
         </S.BtnWrapper>
         <S.Dong src={dong} alt="꾸미" />

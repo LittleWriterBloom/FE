@@ -58,16 +58,16 @@ export const Create = () => {
   const [isClicked, setIsClicked] = useState(false);
 
   useEffect(() => {
-    setBookId(null);
-    setBg1(null);
-    setBg2(null);
-    setBg3(null);
+    setBookId("");
+    setBg1("");
+    setBg2("");
+    setBg3("");
     setTimeout(() => {
       setShowFirst(true);
       setTimeout(() => {
         setShowSecond(true);
       }, 2000);
-    }, 2000);
+    }, 500);
   }, []);
 
   const bookInitData = {

@@ -3,8 +3,8 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 // import { useAtom, useAtomValue } from "jotai";
 import { easel, namingBG, paints } from "../../../assets/Character";
-import { useAtom, useAtomValue } from "jotai";
-import { canvasImageDataAtom, characterNameAtom, characterPersonalityAtom } from "../../../store/jotaiAtoms";
+import { useAtom } from "jotai";
+import { aiImageDataAtom, canvasImageDataAtom, characterNameAtom, characterPersonalityAtom } from "../../../store/jotaiAtoms";
 import { btnMic, btnRecord } from '../../../assets';
 import {
   btnHome,
@@ -18,7 +18,8 @@ export const Personality = () => {
   const navigate = useNavigate();
   const [personality, setPersonality] = useState("");
   const [, setPersonalityAtom] = useAtom(characterPersonalityAtom);
-  const canvasImageData = useAtomValue(canvasImageDataAtom);
+  const [canvasImageData, ] = useAtom(canvasImageDataAtom);
+  const [aiImg, ] = useAtom(aiImageDataAtom);
   const [name,] = useAtom(characterNameAtom)
   const [showFirst, setShowFirst] = useState(false);
   const [showSecond, setShowSecond] = useState(false);
@@ -34,7 +35,7 @@ export const Personality = () => {
           setShowThird(true);
         }, 2000); 
       }, 2000); 
-    }, 2000); 
+    }, 500); 
   }, []);
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -89,6 +90,9 @@ export const Personality = () => {
         <S.CharacterImage>
           {canvasImageData && (
             <S.Character src={canvasImageData} alt="Saved Image" />
+          )}
+          {aiImg && (
+            <S.Character src={aiImg} alt="Saved Image" />
           )}
           <S.Easel src={easel} alt='이젤' />
         </S.CharacterImage>

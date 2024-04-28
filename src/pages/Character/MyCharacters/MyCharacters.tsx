@@ -2,20 +2,25 @@ import { useEffect, useState } from "react";
 import * as S from "./style";
 import { useNavigate } from "react-router-dom";
 import { useAtom } from "jotai";
-import { 
-  accessTokenAtom, 
-  canvasImageDataAtom, 
-  characterIdAtom, 
-  characterNameAtom, 
-  characterPersonalityAtom 
-} from "../../../store/jotaiAtoms";
-import { bg, title } from "../../../assets/Character/MyCharacters";
 import {
-  btnHome,
-  btnCheck,
-  btnX,
-  ggummi2,
-} from "../../../assets";
+  accessTokenAtom,
+  canvasImageDataAtom,
+  characterIdAtom,
+  characterNameAtom,
+  characterPersonalityAtom,
+  isAIModeAtom,
+} from "../../../store/jotaiAtoms";
+import {
+  bg,
+  boardBG,
+  btnAI,
+  btnMakeChar,
+  btnStoryMake,
+  cardBG,
+  memoBlue,
+  title,
+} from "../../../assets/Character/MyCharacters";
+import { btnHome, btnCheck, ggummi2, btnBack } from "../../../assets";
 import apis from "../../../apis/apis";
 
 interface Character {
@@ -35,13 +40,14 @@ export const MyCharacters = () => {
   const [, setCharName] = useAtom(characterNameAtom);
   const [, setCharFeat] = useAtom(characterPersonalityAtom);
   const [, setCharId] = useAtom(characterIdAtom);
+  const [, setIsAIAtom] = useAtom(isAIModeAtom);
 
   const onClickHomeBtn = () => {
     navigate("/");
   };
 
   const onClickCharBtn = () => {
-    navigate("/character/draw");
+    navigate("/character");
   };
 
   const getCharactersData = async () => {
@@ -63,13 +69,25 @@ export const MyCharacters = () => {
 
   const onClickStoryBtn = () => {
     if (selectedChar) {
-      setCharImg(selectedChar.imageUrl || ''); 
-      setCharName(selectedChar.name || ''); 
-      setCharFeat(selectedChar.personality || ''); 
+      setCharImg(selectedChar.imageUrl || "");
+      setCharName(selectedChar.name || "");
+      setCharFeat(selectedChar.personality || "");
       setCharId(selectedChar.id);
+      setIsAIAtom(false);
     }
-    navigate("/story/stage")
-  }
+    navigate("/story/stage");
+  };
+
+  const onClickAIStoryBtn = () => {
+    if (selectedChar) {
+      setCharImg(selectedChar.imageUrl || "");
+      setCharName(selectedChar.name || "");
+      setCharFeat(selectedChar.personality || "");
+      setCharId(selectedChar.id);
+      setIsAIAtom(true);
+    }
+    navigate("/story/stage");
+  };
 
   useEffect(() => {
     getCharactersData();
@@ -81,27 +99,47 @@ export const MyCharacters = () => {
     setCard(true);
   };
 
+  const onClickBackBtn = () => {
+    setCard(false);
+  };
+
   return (
     <S.Container>
-      <S.Bg src={bg} alt="배경" />
-      <S.BottomBox />
       <S.Header>
         <S.Home src={btnHome} alt="홈" onClick={onClickHomeBtn} />
+        {card === true && (
+          <S.ExitBtn src={btnBack} alt="나가기" onClick={onClickBackBtn} />
+        )}
         <S.Check src={btnCheck} alt="확인" />
       </S.Header>
-      <S.Body>
-        <S.Logo src={title} alt="홈"/>
-        {card === false ? (
-          <>
-            {charactersData.length === 0 ? (
+      <S.Ggummi src={ggummi2} alt="꾸미" />
+      <S.Logo src={title} alt="홈" />
+      {card === false ? (
+        <>
+          {charactersData.length === 0 ? (
+            <>
+              <S.BgT src={bg} alt="배경" />
+              <S.CardBG src={cardBG} alt="배경" />
               <S.BodyContainerN>
                 <p>아직 캐릭터가 없어요</p>
-                <S.MakeBtn onClick={onClickCharBtn}>캐릭터 만들러 가기</S.MakeBtn>
+                <S.MakeBtn
+                  src={btnMakeChar}
+                  alt="캐릭터 만들러가기"
+                  onClick={onClickCharBtn}
+                />
               </S.BodyContainerN>
-            ) : (
+            </>
+          ) : (
+            <S.Body>
+              <S.Bg src={bg} alt="배경" />
+              <S.BoardBG src={boardBG} alt="확인" />
               <S.BodyContainer>
                 {charactersData.map((item, index) => (
-                  <S.CharacterContainer key={index} onClick={() => onClickCharacter(index)}>
+                  <S.CharacterContainer
+                    key={index}
+                    onClick={() => onClickCharacter(index)}
+                  >
+                    <S.CharacterMemoBG src={memoBlue} alt="메모 배경" />
                     <S.Character>
                       <S.CharacterImg src={item.imageUrl} alt="이미지" />
                     </S.Character>
@@ -109,26 +147,29 @@ export const MyCharacters = () => {
                   </S.CharacterContainer>
                 ))}
               </S.BodyContainer>
-            )}
-          </>
-        ) : (
+            </S.Body>
+          )}
+        </>
+      ) : (
+        <>
+          <S.BgT src={bg} alt="배경" />
           <S.BodyContainerT>
-            <S.CardBG />
+            <S.CardBG src={cardBG} alt="배경" />
             <S.CardContainer>
               <S.CardCharacter>
+                <S.CardCharacterBG src={memoBlue} alt="메모 배경" />
                 <S.CardCharacterImg src={selectedChar?.imageUrl} alt="이미지" />
               </S.CardCharacter>
               <S.CardDataContainer>
                 <S.CardCharName>{selectedChar?.name}</S.CardCharName>
                 <S.CardCharFeat>{selectedChar?.personality}</S.CardCharFeat>
-                <S.MakeStoryBtn onClick={onClickStoryBtn}>동화 만들기</S.MakeStoryBtn>
-                <S.ExitBtn src={btnX} alt="나가기" onClick={() => setCard(false)}/>
+                <S.MakeStoryBtn src={btnStoryMake} onClick={onClickStoryBtn} />
+                <S.MakeStoryBtn src={btnAI} onClick={onClickAIStoryBtn} />
               </S.CardDataContainer>
             </S.CardContainer>
           </S.BodyContainerT>
-        )}
-        <S.Ggummi src={ggummi2} alt='꾸미' />
-      </S.Body>
+        </>
+      )}
     </S.Container>
   );
 };
