@@ -2,36 +2,16 @@ import { styled } from "styled-components";
 
 export const Container = styled.div`
   width: 100vw;
-  height: 103.6vw;
   display: flex;
   flex-direction: column;
   align-items: center;
   background-color: #CFFF8A;
 `;
 
-export const Bg = styled.img`
-  width: 94vw;
-  height: auto;
-  position: absolute;
-  z-index: 1;
-  top: 3rem;
-`;
-
-export const BottomBox = styled.div`
-  width: 100vw;
-  height: 24dvh;
-  position: absolute;
-  z-index: 2;
-  bottom: 0;
-  background-color: #FFF5BD;
-  opacity: 0;
-`;
-
 export const Header = styled.div`
   width: 100%;
   height: 12dvh;
   display: flex;
-  flex-direction: row;
   align-items: center;
   justify-content: space-between;
   margin-top: 3dvh;
@@ -45,6 +25,16 @@ export const Home = styled.img`
   margin-left: 5vw;
   filter: drop-shadow(0 0 1rem rgba(0, 0, 0, 0.17));
   cursor: pointer;
+`;
+
+export const ExitBtn = styled.img`
+  width: auto;
+  height: 75%;
+  margin-left: 11.5vw;
+  filter: drop-shadow(0 0 1rem rgba(0, 0, 0, 0.17));
+  cursor: pointer;
+  position: absolute;
+  z-index: 11;
 `;
 
 export const Check = styled.img`
@@ -63,91 +53,43 @@ export const Logo = styled.img`
   top: 0;
 `;
 
-export const BookContainer = styled.div`
-  width: 18vw;
-  height: 40dvh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  overflow: hidden;
-  position: relative;
+export const Bg = styled.img`
+  width: 94vw;
+  height: 103rem;
+  position: absolute;
+  z-index: 1;
+  top: 2rem;
 `;
 
-export const BookImg = styled.img`
-  width: 18vw;
-  height: 40dvh;
+export const BgT = styled.img`
+  width: 94vw;
+  height: 97dvh;
   position: absolute;
-  z-index: 25;
-`;
-
-export const BookTitle = styled.div`
-  width: 16vw;
-  height: 12dvh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  z-index: 26;
-  top: 7dvh;
-  font-family: "BMJUA";
-  font-size: 1.7rem;
-  text-align: center;
-  color: #000;
-`;
-
-export const BookAuthor = styled.div`
-  width: 26vw;
-  height: 12dvh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  z-index: 26;
-  top: 13dvh;
-  font-family: "BMJUA";
-  font-size: 1.4rem;
-  text-align: center;
-  color: #000;
-`;
-
-export const BookBg = styled.img`
-  width: 18vw;
-  height: 16dvh;
-  position: absolute;
-  z-index: 26;
-  bottom: 0;
-  border-radius: 0 0 1rem 1rem;
-`;
-
-export const Character = styled.img`
-  width: 30vw;
-  height: auto;
-  position: absolute;
-  z-index: 26;
-  bottom: 0;
+  z-index: 1;
+  top: 4dvh;
+  object-fit: cover;
+  object-position: top;
 `;
 
 export const Body = styled.div`
-  width: 75vw;
-  height: 84vw;
+  width: 100vw;
+  height: 105rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  position: absolute;
+  position: relative;
   z-index: 3;
-  top: 10rem;
 `;
 
 export const BodyContainer = styled.div`
-  width: 100%;
-  height: 100%;
+  width: 75vw;
+  height: 88rem;
   border-radius: 2.5rem;  
-  box-shadow: 0 0 0.5rem 0.5rem rgba(0, 0, 0, 0.13) inset, 0 0.25rem 1.4rem 0 rgba(0, 0, 0, 0.25);
   display: flex;
   box-sizing: border-box;
-  padding: 5rem;
-  margin-top: 1.5dvh;
+  padding: 5rem 6rem 2.4rem 6rem;
+  margin-top: 4rem;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -157,8 +99,8 @@ export const BodyContainer = styled.div`
   box-shadow: 0 0 0.5rem 0.5rem rgba(0, 0, 0, 0.13) inset, 0 0.25rem 1.4rem 0 rgba(0, 0, 0, 0.25);
   display: grid;
   grid-template-columns: repeat(3,1fr);
-  grid-template-rows: repeat(1fr);
-  grid-gap: 3rem;
+  grid-template-rows: repeat(3,1fr);
+  grid-gap: 5rem;
 `;
 
 export const BodyBG = styled.img`
@@ -212,53 +154,95 @@ export const Ggummi = styled.img`
   z-index: 6;
 `;
 
-export const ModalContainer = styled.div`
-  width: 100vw;
-  height: 100dvh;
-  position: absolute;
-  z-index: 10;
+/* book style */
+export const BookContainer = styled.div`
+  width: 16rem;
+  height: 21rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
 `;
 
+export const BookImg = styled.img`
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 25;
+`;
+
+export const BookData = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  position: absolute;
+  z-index: 26;
+  font-family: "BMJUA";
+  font-size: 1.5rem;
+  text-align: center;
+  color: #000;
+`;
+
+export const BookTitle = styled.div`
+  width: 90%;
+  margin-top: 20%;
+  height: 12%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1.65rem;
+`;
+
+export const BookAuthor = styled.div`
+  width: 90%;
+  height: 10%;
+  font-size: 1.1rem;
+`;
+
+export const BookBg = styled.img`
+  width: 100%;
+  height: 55%;
+  object-fit: cover;
+  border-radius: 0 0 0.8rem 0.8rem;
+`;
+
+/* card style */
 export const BodyContainerT = styled.div`
   width: 100vw;
-  height: 80dvh;
-  margin-top: 20dvh;
+  height: 100dvh;
   position: relative;
   display: flex;
   align-items: flex-start;
   justify-content: center;
 `;
 
-export const CardBG = styled.div`
-  width: 77vw;
-  height: 68dvh;
-  margin-top: 20dvh;
-  margin-bottom: 12dvh;
-  background-color: #FFFBE5;
-  border-radius: 2.5rem;
-  box-shadow: 0 0.2rem 0.75rem 0 rgba(0, 0, 0, 0.25);
-  transform: rotate(-6.597deg);
+export const CardBG = styled.img`
+  width: 62rem;
+  height: auto;
   position: absolute;
   z-index: 1;
-  top: -20dvh;
+  bottom: 0rem;
 `;
 
 export const CardContainer = styled.div`
-  width: 77vw;
-  height: 68dvh;
-  box-sizing: border-box;
-  padding: 5rem 3rem 5rem 5rem;
-  background-color: #FFFBE5;
-  border-radius: 2.5rem;
-  box-shadow: 0 0.2rem 0.75rem 0 rgba(0, 0, 0, 0.25);
+  width: 45rem;
+  height: 60dvh;
   display: flex;
+  align-items: center;
+  justify-content: space-between;
   position: relative;
   z-index: 2;
+  top: 25dvh;
 `;
 
 export const CardBookContainer = styled.div`
-  width: 30vw;
-  height: 64dvh;
+  width: 20rem;
+  height: 25rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -266,57 +250,9 @@ export const CardBookContainer = styled.div`
   position: relative;
 `;
 
-export const CardBookImg = styled.img`
-  width: 30vw;
-  height: 64dvh;
-  position: absolute;
-  z-index: 25;
-`;
-
-export const CardBookTitle = styled.div`
-  width: 26vw;
-  height: 12dvh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  z-index: 26;
-  top: 7dvh;
-  font-family: "BMJUA";
-  font-size: 1.8rem;
-  text-align: center;
-  color: #000;
-`;
-
-export const CardBookAuthor = styled.div`
-  width: 26vw;
-  height: 12dvh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  z-index: 26;
-  top: 13dvh;
-  font-family: "BMJUA";
-  font-size: 1.5rem;
-  text-align: center;
-  color: #000;
-`;
-
-export const CardBookBg = styled.img`
-  width: 30vw;
-  height: 39dvh;
-  position: absolute;
-  z-index: 26;
-  bottom: 0;
-  border-radius: 0 0 1rem 1rem;
-`;
-
 export const CardDataContainer = styled.div`
-  width: 50%;
-  height: 100%;
-  box-sizing: border-box;
-  padding: 2rem;
+  width: 40%;
+  height: 13rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -324,45 +260,17 @@ export const CardDataContainer = styled.div`
   font-family: "BMJUA";
 `;
 
-export const CardCharName = styled.div`
-  width: 16rem;
-  height: 5.5rem;
-  background-color: #FFF3DC;
-  border: 0.2rem solid #FFF;
-  border-radius: 2.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 2rem;
-`;
-
-export const CardCharFeat = styled.div`
+export const CardCreateDate = styled.div`
   width: 90%;
   height: auto;
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   text-align: center;
+  color: #819F54;
 `;
 
-export const MakeStoryBtn = styled.button`
-  width: 16rem;
-  height: 5.5rem;
-  color: #FFF;
-  background-color: #F7B22C;
-  border-radius: 2.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 2.2rem;
-`;
-
-export const ExitBtn = styled.img`
-  width: 4rem;
-  height: 4rem;
-  position: absolute;
-  z-index: 3;
-  top: -1.1rem;
-  right: -1.1rem;
-  filter: drop-shadow(0 0 0.6rem rgba(0, 0, 0, 0.17));
+export const MakeStoryBtn = styled.img`
+  width: 15rem;
+  height: auto;
   cursor: pointer;
 `;
 

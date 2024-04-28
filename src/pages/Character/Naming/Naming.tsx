@@ -3,8 +3,8 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 // import { useAtom, useAtomValue } from "jotai";
 import { easel, paints } from "../../../assets/Character";
-import { useAtom, useAtomValue } from "jotai";
-import { canvasImageDataAtom, characterNameAtom } from "../../../store/jotaiAtoms";
+import { useAtom } from "jotai";
+import { aiImageDataAtom, canvasImageDataAtom, characterNameAtom } from "../../../store/jotaiAtoms";
 import { btnMic, btnRecord } from '../../../assets';
 import { BubbleP } from "../../../components/Bubble/BubbleP";
 import { namingBG } from "../../../assets/Character";
@@ -19,7 +19,8 @@ export const Naming = () => {
   const navigate = useNavigate();
   const [name, setName] = useState("");
   const [, setNameAtom] = useAtom(characterNameAtom);
-  const canvasImageData = useAtomValue(canvasImageDataAtom);
+  const [canvasImageData, ] = useAtom(canvasImageDataAtom);
+  const [aiImg, ] = useAtom(aiImageDataAtom);
   const [rec, setRec] = useState(false);
   const [showFirst, setShowFirst] = useState(false);
   const [showSecond, setShowSecond] = useState(false);
@@ -30,7 +31,7 @@ export const Naming = () => {
       setTimeout(() => {
         setShowSecond(true);
       }, 2000); 
-    }, 2000); 
+    }, 500); 
   }, []);
   
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -84,6 +85,9 @@ export const Naming = () => {
         <S.CharacterImage>
           {canvasImageData && (
             <S.Character src={canvasImageData} alt="Saved Image" />
+          )}
+          {aiImg && (
+            <S.Character src={aiImg} alt="Saved Image" />
           )}
           <S.Easel src={easel} alt='이젤' />
         </S.CharacterImage>

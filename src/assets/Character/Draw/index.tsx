@@ -26,6 +26,8 @@ import eraser from './eraser.png';
 import pencilBase from './pencil-base.png';
 import penCase from './pencase.png';
 import paper from './paper.png';
+import aiCircleBtn from './aiCircleBtn.png';
+
 
 export {
   btnHome,
@@ -56,4 +58,5 @@ export {
   pencilBase,
   penCase,
   paper,
+  aiCircleBtn,
 };

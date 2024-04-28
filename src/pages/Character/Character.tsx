@@ -14,6 +14,8 @@ import {
   btnHome,
   ggummi,
 } from '../../assets';
+import { aiImageDataAtom, canvasImageDataAtom } from '../../store/jotaiAtoms';
+import { useAtom } from 'jotai';
 
 export const Character = () => {
   const navigate = useNavigate();
@@ -21,8 +23,13 @@ export const Character = () => {
   const [showSecond, setShowSecond] = useState(false);
   const [showThird, setShowThird] = useState(false);
   const [showFourth, setShowFourth] = useState(false);
+  const [, setCanvasImg] = useAtom(canvasImageDataAtom);
+  const [, setAiImg] = useAtom(aiImageDataAtom);
 
   useEffect(() => {
+    setCanvasImg("");
+    setAiImg("");
+    
     setTimeout(() => {
       setShowFirst(true);
       setTimeout(() => {
@@ -34,7 +41,7 @@ export const Character = () => {
           }, 2000); 
         }, 2000); 
       }, 2000); 
-    }, 2000); 
+    }, 500); 
   }, []);
 
   const onClickHomeBtn = () => {
@@ -43,6 +50,10 @@ export const Character = () => {
 
   const onClickDrawBtn = () => {
     navigate("/character/draw");
+  };
+
+  const onClickDrawAiBtn = () => {
+    navigate("/character/drawai");
   };
   
   const onClickBringBtn = () => {
@@ -68,7 +79,7 @@ export const Character = () => {
           <S.Btn onClick={onClickDrawBtn}>
             <S.BtnImg src={draw} alt='버튼' />
           </S.Btn>
-          <S.Btn onClick={onClickDrawBtn}>
+          <S.Btn onClick={onClickDrawAiBtn}>
             <S.BtnImg src={ai} alt='버튼' />
           </S.Btn>
           <S.Btn>

@@ -40,14 +40,19 @@ export const Author = () => {
 
   const [rec, setRec] = useState(false);
   const [bookColor, setBookColor] = useState(0);
-  const [, setBookColAtom] = useAtom(bookColorAtom)
+  const [bookColAtom, setBookColAtom] = useAtom(bookColorAtom)
   
   const [showFirst, setShowFirst] = useState(false);
 
   useEffect(() => {
+    const index = books.findIndex((book) => book === bookColAtom);
+    if (index !== -1) {
+      setBookColor(index);
+    }
+
     setTimeout(() => {
       setShowFirst(true);
-    }, 2000);
+    }, 500);
   }, []);
 
   const colors = ["#FF88DB", "#FFA52E", "#FFFA2E", "#25EF3C", "#43C0FF"];

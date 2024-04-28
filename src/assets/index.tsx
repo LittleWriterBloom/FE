@@ -1,6 +1,7 @@
 import ggummi from './Ggummi.png';
 import ggummi2 from './Ggummi2.png';
 import dong from './DongDong.png';
+import dongEnd from './DongDongEnd.png';
 import chaek from './ChaekChaek.png';
 import btnMic from './btn-mic.png';
 import btnRecord from './btn-record.png';
@@ -13,11 +14,19 @@ import bubbleP from './speech-bubbleP.png';
 import readEnd from './readEnd.png';
 import bgCloudP from './bgCloudPattern.png';
 import bgCloudB from './bgCloudBottom.png';
+import modalBtnNo from './modal-btnNo.png';
+import modalBtnYes from './modal-btnYes.png';
+import btnContinue from './compareAi-btn-continue.png';
+import aiBrush from './ai-brush.png';
+import arrow from './compareAi-arrow.png';
+import compareAi from './compareAi.png';
+import btnBack from './btn-back.png';
 
 export {
   ggummi,
   ggummi2,
   dong,
+  dongEnd,
   chaek,
   btnMic,
   btnRecord,
@@ -29,5 +38,12 @@ export {
   bubbleP,
   readEnd,
   bgCloudP,
-  bgCloudB
+  bgCloudB,
+  modalBtnNo,
+  modalBtnYes,
+  btnContinue,
+  aiBrush,
+  arrow,
+  compareAi,
+  btnBack,
 }

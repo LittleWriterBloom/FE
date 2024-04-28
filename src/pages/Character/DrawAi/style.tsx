@@ -180,3 +180,47 @@ export const PenType = styled.img`
   cursor: pointer;
 `;
 
+export const CharacterDataInput = styled.input`
+  width: 32vw;
+  height: 5rem;
+  background-color: #ffffff;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) ;
+  border-radius: 1rem;
+  box-sizing: border-box;
+  padding: 0 2rem;
+  font-size: 1.8rem;
+  text-align: center;
+  color: #000;
+  font-family: "BMJUA";
+  position: absolute;
+  z-index: 10;
+  top: 3rem;
+`;
+
+
+// LoadingComp
+
+export const LoadingContainer = styled.div`
+  position: absolute;
+  z-index: 20;
+  width: 100vw;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff 50%;
+`;
+
+export const LottieWrapper = styled.div`
+  width: 30vw;
+  height: auto;
+`;
+
+export const LoadingText = styled.p`
+  font-family: "BMJUA";
+  font-size: 2rem;
+  margin-top: -2rem;
+  margin-bottom: 2rem;
+  text-align: center;
+`;

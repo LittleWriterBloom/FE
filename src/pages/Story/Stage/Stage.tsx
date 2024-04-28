@@ -35,7 +35,7 @@ export const Stage = () => {
           }, 2000); 
         }, 2000); 
       }, 2000); 
-    }, 2000); 
+    }, 500); 
   }, []);
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {

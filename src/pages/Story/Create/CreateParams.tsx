@@ -13,17 +13,23 @@ import {
   bgAtom3,
   bgAtom4,
   bgAtom5,
+  bgAtom6,
+  bgAtom7,
   bookLengthAtom,
   canvasImageDataAtom,
   contextAtom2,
   contextAtom3,
   contextAtom4,
   contextAtom5,
+  contextAtom6,
+  contextAtom7,
   questAtom1,
   questAtom2,
   questAtom3,
   questAtom4,
   questAtom5,
+  questAtom6,
+  questAtom7,
 } from "../../../store/jotaiAtoms";
 import { BubbleG } from "../../../components/Bubble/BubbleG";
 import {
@@ -61,9 +67,17 @@ export const CreateParams = () => {
   const [text4, setText4] = useAtom(contextAtom4);
   const [bg4, setBg4] = useAtom(bgAtom4);
 
-  const [, setQuest5] = useAtom(questAtom5);
+  const [quest5, setQuest5] = useAtom(questAtom5);
   const [text5, setText5] = useAtom(contextAtom5);
   const [bg5, setBg5] = useAtom(bgAtom5);
+
+  const [quest6, setQuest6] = useAtom(questAtom6);
+  const [text6, setText6] = useAtom(contextAtom6);
+  const [bg6, setBg6] = useAtom(bgAtom6);
+
+  const [, setQuest7] = useAtom(questAtom7);
+  const [text7, setText7] = useAtom(contextAtom7);
+  const [bg7, setBg7] = useAtom(bgAtom7);
 
   const [isCreated, setIsCreated] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -76,7 +90,7 @@ export const CreateParams = () => {
   useEffect(() => {
     setTimeout(() => {
       setShowFirst(true);
-    }, 2000);
+    }, 500);
   }, []);
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -163,6 +177,14 @@ export const CreateParams = () => {
           setQuest5(res.data.data[0].bookInsight.generatedQuestions);
           setBg5(res.data.data[0].bookInsight.temporaryGeneratedImageUrl);
           setText5(res.data.data[0].bookInsight.refinedContext);
+        } else if (pageNum === 6) {
+          setQuest6(res.data.data[0].bookInsight.generatedQuestions);
+          setBg6(res.data.data[0].bookInsight.temporaryGeneratedImageUrl);
+          setText6(res.data.data[0].bookInsight.refinedContext);
+        } else if (pageNum === 7) {
+          setQuest7(res.data.data[0].bookInsight.generatedQuestions);
+          setBg7(res.data.data[0].bookInsight.temporaryGeneratedImageUrl);
+          setText7(res.data.data[0].bookInsight.refinedContext);
         }
         setIsLoading(false);
         setIsCreated(true);
@@ -237,6 +259,12 @@ export const CreateParams = () => {
                   {pageNum === 5 && (
                     <BubbleG text={`${quest4[0]}`} length={50} />
                   )}
+                  {pageNum === 6 && (
+                    <BubbleG text={`${quest5[0]}`} length={50} />
+                  )}
+                  {pageNum === 7 && (
+                    <BubbleG text={`${quest6[0]}`} length={50} />
+                  )}
                 </>
               )}
               {clickCount === 2 && (
@@ -253,6 +281,12 @@ export const CreateParams = () => {
                   {pageNum === 5 && (
                     <BubbleG text={`${quest4[1]}`} length={50} />
                   )}
+                  {pageNum === 6 && (
+                    <BubbleG text={`${quest5[1]}`} length={50} />
+                  )}
+                  {pageNum === 7 && (
+                    <BubbleG text={`${quest6[1]}`} length={50} />
+                  )}
                 </>
               )}
               {clickCount === 3 && (
@@ -268,6 +302,12 @@ export const CreateParams = () => {
                   )}
                   {pageNum === 5 && (
                     <BubbleG text={`${quest4[2]}`} length={50} />
+                  )}
+                  {pageNum === 6 && (
+                    <BubbleG text={`${quest5[2]}`} length={50} />
+                  )}
+                  {pageNum === 7 && (
+                    <BubbleG text={`${quest6[2]}`} length={50} />
                   )}
                 </>
               )}
@@ -293,6 +333,12 @@ export const CreateParams = () => {
           {pageNum === 5 && bg5 && (
             <S.CreateBg src={bg5} alt="생성된 스토리 배경" />
           )}
+          {pageNum === 6 && bg6 && (
+            <S.CreateBg src={bg6} alt="생성된 스토리 배경" />
+          )}
+          {pageNum === 7 && bg7 && (
+            <S.CreateBg src={bg7} alt="생성된 스토리 배경" />
+          )}
           <S.BookFrame src={createBookS} alt="책 프레임" />
           <S.CircleWrapper>{circles}</S.CircleWrapper>
           <S.Header>
@@ -314,6 +360,8 @@ export const CreateParams = () => {
                   {pageNum === 3 && <S.StoryCreated>{text3}</S.StoryCreated>}
                   {pageNum === 4 && <S.StoryCreated>{text4}</S.StoryCreated>}
                   {pageNum === 5 && <S.StoryCreated>{text5}</S.StoryCreated>}
+                  {pageNum === 6 && <S.StoryCreated>{text6}</S.StoryCreated>}
+                  {pageNum === 7 && <S.StoryCreated>{text7}</S.StoryCreated>}
                 </>
               ) : (
                 <S.StoryInput

@@ -34,7 +34,7 @@ export const Title = () => {
   useEffect(() => {
     setTimeout(() => {
       setShowFirst(true);
-    }, 2000);
+    }, 500);
   }, []);
 
   const colors = ["#FF88DB", "#FFA52E", "#FFFA2E", "#25EF3C", "#43C0FF"];
