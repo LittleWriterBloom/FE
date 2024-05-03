@@ -23,6 +23,7 @@ export const Test = () => {
       <button onClick={stop}>Stop</button>
       {listening && <div>Listening...</div>}
       <p>{text}</p>
+      <p>tts테스트하러가기</p>
       <button onClick={clickTest03}>Test03</button>
     </div>
   );
