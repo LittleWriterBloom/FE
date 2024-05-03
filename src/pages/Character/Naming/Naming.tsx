@@ -14,6 +14,7 @@ import { BubbleP } from "../../../components/Bubble/BubbleP";
 import { namingBG } from "../../../assets/Character";
 import { btnHome, btnCheck, btnCheckG } from "../../../assets";
 import { GgummiAnimClap } from "../../../components/CharacterAnim/GgummiAnimClap";
+import { TTS } from "../../../components/TTS/TTS";
 
 export const Naming = () => {
   const navigate = useNavigate();
@@ -33,8 +34,8 @@ export const Naming = () => {
         setShowSecond(true);
         setTimeout(() => {
           setShowThird(true);
-        }, 2000);
-      }, 2000);
+        }, 2200);
+      }, 2200);
     }, 500);
   }, []);
 
@@ -67,13 +68,22 @@ export const Naming = () => {
       <GgummiAnimClap talkCount={1} />
       <S.Bg src={namingBG} alt="배경이미지" />
       {showFirst && (
-        <BubbleP text="우와~ 정말 잘 그렸다!" length={22} />
+        <>
+          <TTS text="우와~ 정말 잘 그렸다~!!" speaker="nmeow"/>
+          <BubbleP text="우와~ 정말 잘 그렸다!" length={24} />
+        </>
       )}
       {showSecond && (
-        <BubbleP text="화가의 솜씨인데?!" length={19} />
+        <>
+          <TTS text="화가의 솜씨인데?!" speaker="nmeow" />
+          <BubbleP text="화가의 솜씨인데?!" length={19} />
+        </>
       )}
       {showThird && (
-        <BubbleP text="이 멋진 캐릭터에게 이름을 지어주자!" length={34} />
+        <>
+          <TTS text="이 멋진 캐릭터에게 이름을 지어주자!" speaker="nmeow" />
+          <BubbleP text="이 멋진 캐릭터에게 이름을 지어주자!" length={34} />
+        </>
       )}
       <S.Header>
         <S.Home src={btnHome} alt="홈" onClick={onClickHomeBtn} />

@@ -45,6 +45,7 @@ export const DongAnim: React.FC<DongAnimProps> = ({ talkCount }) => {
           style={{
             width: "30rem",
             marginBottom: "-0.41rem",
+            cursor: "pointer",
             display:
               index === currentAnimationIndex && !isLastAnimationPlayed
                 ? "block"

@@ -10,6 +10,7 @@ import {
   bookColorAtom,
   bookTitleAtom,
   bookAuthorAtom,
+  isSDModeAtom,
 } from "../../../store/jotaiAtoms";
 
 export const Save = () => {
@@ -19,13 +20,14 @@ export const Save = () => {
   const [bg1] = useAtom(bgAtom1);
   const [bookTitle] = useAtom(bookTitleAtom);
   const [author] = useAtom(bookAuthorAtom);
+  const [isSDAtom] = useAtom(isSDModeAtom);
 
   const onClickHomeBtn = () => {
     navigate("/");
   };
 
   const onClickRead = () => {
-    navigate("/story/read");
+    navigate("/story/readai");
   };
 
   const onClickOther = () => {
@@ -44,7 +46,7 @@ export const Save = () => {
           <S.BookTitle>{bookTitle}</S.BookTitle>
           <S.BookAuthor>{author} 지음</S.BookAuthor>
           {bg1 && <S.BookBg src={bg1} />}
-          {canvasImageData && (
+          {canvasImageData && !isSDAtom && (
             <S.Character src={canvasImageData} alt="Saved Image" />
           )}
         </S.BookContainer>

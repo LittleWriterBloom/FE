@@ -16,6 +16,7 @@ import {
   bookShadow,
 } from "../../../assets/Story/Title";
 import { createBG } from "../../../assets/Story/Create";
+import { TTS } from "../../../components/TTS/TTS";
 
 export const Title = () => {
   const navigate = useNavigate();
@@ -69,7 +70,12 @@ export const Title = () => {
   return (
     <S.Container>
       <S.Bg src={createBG} alt="배경" />
-      {showFirst && <BubbleP text="동화책의 제목을 지어볼까~?" length={41} />}
+      {showFirst && (
+        <>
+          <TTS text="동화책의 제목을 지어볼까~?" speaker="nwoof" />
+          <BubbleP text="동화책의 제목을 지어볼까~?" length={41} />
+        </>
+      )}
       <S.Header>
         <S.Home src={btnHome} alt="홈" onClick={onClickHomeBtn} />
         <S.Logo>책 제목 짓기</S.Logo>

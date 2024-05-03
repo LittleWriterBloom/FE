@@ -19,6 +19,7 @@ import {
   btnRecord,
 } from "../../../assets";
 import { GgummiAnim } from "../../../components/CharacterAnim/GgummiAnim";
+import { TTS } from "../../../components/TTS/TTS";
 
 export const Personality = () => {
   const navigate = useNavigate();
@@ -39,8 +40,8 @@ export const Personality = () => {
         setShowSecond(true);
         setTimeout(() => {
           setShowThird(true);
-        }, 2000);
-      }, 2000);
+        }, 2200);
+      }, 2400);
     }, 500);
   }, []);
 
@@ -73,16 +74,25 @@ export const Personality = () => {
       <GgummiAnim talkCount={3} />
       <S.Bg src={namingBG} alt="배경이미지" />
       {showFirst && (
-        <BubbleP text={`이 친구의 이름은 ${name}이구나~`} length={34} />
+        <>
+          <TTS text={`이 친구의 이름은 ${name}이구나~`} speaker="nmeow" />
+          <BubbleP text={`이 친구의 이름은 ${name}이구나~`} length={34} />
+        </>
       )}
       {showSecond && (
-        <BubbleP text={`${name}(은/는) 어떤 친구야?`} length={28} />
+        <>
+          <TTS text={`${name}은 어떤 친구야?`} speaker="nmeow" />
+          <BubbleP text={`${name}(은/는) 어떤 친구야?`} length={28} />
+        </>
       )}
       {showThird && (
-        <BubbleP
-          text="활발해? 소심해? 무서움이 많아? 어떤 친구일까~?"
-          length={47}
-        />
+        <>
+          <TTS text="활발해? 소심해? 무서움이 많아? 어떤 친구일까~?" speaker="nmeow" />
+          <BubbleP
+            text="활발해? 소심해? 무서움이 많아? 어떤 친구일까~?"
+            length={47}
+          />
+        </>
       )}
       <S.Header>
         <S.Home src={btnHome} alt="홈" onClick={onClickHomeBtn} />

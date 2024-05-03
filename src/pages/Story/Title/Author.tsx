@@ -25,6 +25,7 @@ import {
 import apis from "../../../apis/apis";
 import { createBG } from "../../../assets/Story/Create";
 import { BookMaking } from "../../../components/StoryLoading/BookMaking";
+import { TTS } from "../../../components/TTS/TTS";
 
 interface bookDataTypes {
   title: string | null;
@@ -81,7 +82,7 @@ export const Author = () => {
       try {
         const res = await apis.post(`/books/builder/save`, bookData, config);
         console.log(res.data.data[0]);
-        setBookId(res.data.data[0].id);
+        setBookId(res.data.data[0].book.id);
         navigate("/story/completion");
       } catch (err) {
         console.error(err);
@@ -91,7 +92,7 @@ export const Author = () => {
       try {
         const res = await apis.post(`/books/builder/save2`, bookData, config);
         console.log(res.data.data[0]);
-        setBookId(res.data.data[0].id);
+        setBookId(res.data.data[0].book.id);
         navigate("/story/completion");
       } catch (err) {
         console.error(err);
@@ -140,7 +141,12 @@ export const Author = () => {
       ) : (
         <>
           <S.Bg src={createBG} alt="배경" />
-          {showFirst && <BubbleP text="동화책의 작가는 누구야~?" length={41} />}
+          {showFirst && (
+            <>
+              <TTS text="동화책의 작가는 누구야~?" speaker="nwoof" />
+              <BubbleP text="동화책의 작가는 누구야~?" length={41} />
+            </>
+          )}
           <S.Header>
             <S.Home src={btnHome} alt="홈" onClick={onClickHomeBtn} />
             <S.Logo>책 제목 짓기</S.Logo>

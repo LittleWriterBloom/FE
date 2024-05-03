@@ -7,6 +7,7 @@ import { useAtom } from "jotai";
 import { bookLengthAtom, isSDModeAtom } from "../../store/jotaiAtoms";
 import { ChaeckAnim } from "../../components/CharacterAnim/ChaeckAnim";
 import { BubbleY } from "../../components/Bubble/BubbleY";
+import { TTS } from "../../components/TTS/TTS";
 
 export const Story = () => {
   const navigate = useNavigate();
@@ -20,7 +21,7 @@ export const Story = () => {
       setShowFirst(true);
       setTimeout(() => {
         setShowSecond(true);
-      }, 2000);
+      }, 2500);
     }, 500);
   }, []);
 
@@ -61,9 +62,17 @@ export const Story = () => {
   return (
     <S.Container>
       <ChaeckAnim talkCount={1} />
-      {showFirst && <BubbleY text="동화의 길이를 정해보자!" length={23.5} />}
+      {showFirst && (
+        <>
+          <TTS text="동화의 길이를 정해보자!" speaker="ngaram" />
+          <BubbleY text="동화의 길이를 정해보자!" length={23.5} />
+        </>
+      )}
       {showSecond && (
-        <BubbleY text="몇줄짜리 동화를 만들어볼까? 3줄? 5줄? 7줄?" length={42} />
+        <>
+          <TTS text="몇줄짜리 동화를 만들어볼까?" speaker="ngaram" />
+          <BubbleY text="몇줄짜리 동화를 만들어볼까?" length={27} />
+        </>
       )}
       <S.Bg src={bgCloudP} alt="배경 패턴" />
       <S.BgBottom src={bgCloudB} alt="구름하단" />
