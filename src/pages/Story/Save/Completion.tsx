@@ -9,6 +9,7 @@ import {
   bookTitleAtom,
   bgAtom1,
   bookAuthorAtom,
+  isSDModeAtom,
 } from "../../../store/jotaiAtoms";
 import bookCompletion from "../../../assets/Lottie/bookcompletion.json";
 import Lottie from "react-lottie-player";
@@ -22,6 +23,7 @@ export const Completion = () => {
   const [bookBg1] = useAtom(bgAtom1);
   const [bookTitle] = useAtom(bookTitleAtom);
   const [author] = useAtom(bookAuthorAtom);
+  const [isSDAtom] = useAtom(isSDModeAtom);
 
   useEffect(() => {
     setTimeout(() => {
@@ -50,7 +52,7 @@ export const Completion = () => {
           <BookTitle>{bookTitle}</BookTitle>
           <BookAuthor>{author} 지음</BookAuthor>
           {bookBg1 && <BookBg src={bookBg1} />}
-          {canvasImageData && (
+          {canvasImageData && !isSDAtom && (
             <Character src={canvasImageData} alt="Saved Image" />
           )}
         </BookContainer>

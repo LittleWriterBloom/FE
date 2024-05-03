@@ -30,6 +30,7 @@ import {
 } from "../../../assets/Story/Create";
 import apis from "../../../apis/apis";
 import { DongAnim } from "../../../components/CharacterAnim/DongAnim";
+import { TTS } from "../../../components/TTS/TTS";
 interface BookInitDataTypes {
   characterId: number | null;
   backgroundInfo: string | null;
@@ -178,16 +179,25 @@ export const Create = () => {
           ) : (
             <>
               {showFirst && (
-                <BubbleG text="이제 이야기를 만들어보자!" length={25} />
+                <>
+                  <TTS text="이제 이야기를 만들어보자!" speaker="nwoof" />
+                  <BubbleG text="이제 이야기를 만들어보자!" length={25} />
+                </>
               )}
               {showSecond && (
-                <BubbleG text="도움이 필요하다면 날 클릭해줘~!" length={31} />
+                <>
+                  <TTS text="도움이 필요하다면 날 클릭해줘~!" speaker="nwoof" />
+                  <BubbleG text="도움이 필요하다면 날 클릭해줘~!" length={31} />
+                </>
               )}
               {isClicked && (
-                <BubbleG
-                  text={`${nameAtomValue}(은/는) ${bgInit}에서 무엇을 하고 있어?`}
-                  length={52}
-                />
+                <>
+                  <TTS text={`${nameAtomValue}이는 ${bgInit}에서 무엇을 하고 있어?`} speaker="nwoof" />
+                  <BubbleG
+                    text={`${nameAtomValue}(은/는) ${bgInit}에서 무엇을 하고 있어?`}
+                    length={52}
+                  />
+                </>
               )}
             </>
           )}
@@ -208,7 +218,10 @@ export const Create = () => {
           <S.Body>
             <S.BodyContainer>
               {isCreated ? (
-                <S.StoryCreated>{text1}</S.StoryCreated>
+                <>
+                  <TTS text={text1} speaker="ndain" />
+                  <S.StoryCreated>{text1}</S.StoryCreated>
+                </>
               ) : (
                 <S.StoryInput
                   onChange={handleInput}
@@ -234,7 +247,7 @@ export const Create = () => {
               />
             )}
             {!isCreated && (
-              <div onClick = {onClickDong}>
+              <div onClick={onClickDong}>
                 <DongAnim talkCount={1} />
               </div>
             )}

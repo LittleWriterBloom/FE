@@ -35,7 +35,7 @@ export const BookMaking = () => {
 
   return (
     <S.LoadingContainer>
-      <S.LottieWrapper>
+      <S.LottieWrapper style={{display: "flex", justifyContent: "center"}}>
         <img src={bookMaking} />
       </S.LottieWrapper>
       <S.LoadingText>

@@ -40,7 +40,7 @@ import {
 import apis from "../../../apis/apis";
 import { WritingLoading } from "../../../components/StoryLoading/\bWritingLoading";
 import { DongAnim } from "../../../components/CharacterAnim/DongAnim";
-import { DongAnimHelp } from "../../../components/CharacterAnim/DongAnimHelp";
+import { TTS } from "../../../components/TTS/TTS";
 
 interface pageDataTypes {
   userContext: string | null;
@@ -206,6 +206,9 @@ export const CreateAIParams = () => {
       style={index === pageNum - 1 ? { backgroundColor: "#FF90F4" } : {}}
     />
   ));
+  
+  const texts = [text2, text3, text4, text5, text6, text7];
+  const quests = [quest1, quest2, quest3, quest4, quest5, quest6];
 
   return (
     <S.Container>
@@ -239,71 +242,47 @@ export const CreateAIParams = () => {
               )}
               {clickCount === 1 && (
                 <>
-                  <DongAnimHelp talkCount={1} />
-                  {pageNum === 2 && (
-                    <BubbleG text={`${quest1[0]}`} length={50} />
-                  )}
-                  {pageNum === 3 && (
-                    <BubbleG text={`${quest2[0]}`} length={50} />
-                  )}
-                  {pageNum === 4 && (
-                    <BubbleG text={`${quest3[0]}`} length={50} />
-                  )}
-                  {pageNum === 5 && (
-                    <BubbleG text={`${quest4[0]}`} length={50} />
-                  )}
-                  {pageNum === 6 && (
-                    <BubbleG text={`${quest5[0]}`} length={50} />
-                  )}
-                  {pageNum === 7 && (
-                    <BubbleG text={`${quest6[0]}`} length={50} />
-                  )}
+                  {/* <DongAnimHelp talkCount={1} /> */}
+                  {[2, 3, 4, 5, 6].map((page, index) => (
+                    <div key={index}>
+                      {pageNum === page && (
+                        <>
+                          <TTS text={quests[index][0]} speaker="nwoof" />
+                          <BubbleG text={quests[index][0]} length={50} />
+                        </>
+                      )}
+                    </div>
+                  ))}
                 </>
               )}
               {clickCount === 2 && (
                 <>
-                  <DongAnimHelp talkCount={1} />
-                  {pageNum === 2 && (
-                    <BubbleG text={`${quest1[1]}`} length={50} />
-                  )}
-                  {pageNum === 3 && (
-                    <BubbleG text={`${quest2[1]}`} length={50} />
-                  )}
-                  {pageNum === 4 && (
-                    <BubbleG text={`${quest3[1]}`} length={50} />
-                  )}
-                  {pageNum === 5 && (
-                    <BubbleG text={`${quest4[1]}`} length={50} />
-                  )}
-                  {pageNum === 6 && (
-                    <BubbleG text={`${quest5[1]}`} length={50} />
-                  )}
-                  {pageNum === 7 && (
-                    <BubbleG text={`${quest6[1]}`} length={50} />
-                  )}
+                  {/* <DongAnimHelp talkCount={1} /> */}
+                  {[2, 3, 4, 5, 6].map((page, index) => (
+                    <div key={index}>
+                      {pageNum === page && (
+                        <>
+                          <TTS text={quests[index][1]} speaker="nwoof" />
+                          <BubbleG text={quests[index][1]} length={50} />
+                        </>
+                      )}
+                    </div>
+                  ))}
                 </>
               )}
               {clickCount === 3 && (
                 <>
-                  <DongAnimHelp talkCount={1} />
-                  {pageNum === 2 && (
-                    <BubbleG text={`${quest1[2]}`} length={50} />
-                  )}
-                  {pageNum === 3 && (
-                    <BubbleG text={`${quest2[2]}`} length={50} />
-                  )}
-                  {pageNum === 4 && (
-                    <BubbleG text={`${quest3[2]}`} length={50} />
-                  )}
-                  {pageNum === 5 && (
-                    <BubbleG text={`${quest4[2]}`} length={50} />
-                  )}
-                  {pageNum === 6 && (
-                    <BubbleG text={`${quest5[2]}`} length={50} />
-                  )}
-                  {pageNum === 7 && (
-                    <BubbleG text={`${quest6[2]}`} length={50} />
-                  )}
+                  {/* <DongAnimHelp talkCount={1} /> */}
+                  {[2, 3, 4, 5, 6].map((page, index) => (
+                    <div key={index}>
+                      {pageNum === page && (
+                        <>
+                          <TTS text={quests[index][2]} speaker="nwoof" />
+                          <BubbleG text={quests[index][2]} length={50} />
+                        </>
+                      )}
+                    </div>
+                  ))}
                 </>
               )}
               {isClicked && (
@@ -351,12 +330,16 @@ export const CreateAIParams = () => {
             <S.BodyContainer>
               {isCreated ? (
                 <>
-                  {pageNum === 2 && <S.StoryCreated>{text2}</S.StoryCreated>}
-                  {pageNum === 3 && <S.StoryCreated>{text3}</S.StoryCreated>}
-                  {pageNum === 4 && <S.StoryCreated>{text4}</S.StoryCreated>}
-                  {pageNum === 5 && <S.StoryCreated>{text5}</S.StoryCreated>}
-                  {pageNum === 6 && <S.StoryCreated>{text6}</S.StoryCreated>}
-                  {pageNum === 7 && <S.StoryCreated>{text7}</S.StoryCreated>}
+                  {[2, 3, 4, 5, 6, 7].map((page, index) => (
+                    <div key={index}>
+                      {pageNum === page && (
+                        <>
+                          <TTS text={texts[page - 2]} speaker="ndain" />
+                          <S.StoryCreated>{texts[page - 2]}</S.StoryCreated>
+                        </>
+                      )}
+                    </div>
+                  ))}
                 </>
               ) : (
                 <>

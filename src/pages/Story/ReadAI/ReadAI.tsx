@@ -26,6 +26,7 @@ import { bookBG, createBG, createBookNew } from "../../../assets/Story/Create";
 import { btnHome, readEnd } from "../../../assets";
 // import apis from "../../../apis/apis";
 import apis from "../../../apis/apis";
+import { TTS } from "../../../components/TTS/TTS";
 
 export const ReadAI = () => {
   const navigate = useNavigate();
@@ -139,20 +140,23 @@ export const ReadAI = () => {
             (text, index) =>
               clickCount === index &&
               text && (
-                <S.StoryCreated key={index}>
-                  {text.split(".").map((sentence, index, array) => (
-                    <div key={index}>
-                      {sentence.trim()}
-                      {index < array.length - 1 && "."}
-                      {index < array.length - 2 && (
-                        <>
-                          <br style={{ fontSize: "0.1rem" }} />
-                          <div style={{ width: "1rem", height: "1rem" }} />
-                        </>
-                      )}
-                    </div>
-                  ))}
-                </S.StoryCreated>
+                <>
+                  <TTS text={text} speaker="ndain" />
+                  <S.StoryCreated key={index}>
+                    {text.split(".").map((sentence, index, array) => (
+                      <div key={index}>
+                        {sentence.trim()}
+                        {index < array.length - 1 && "."}
+                        {index < array.length - 2 && (
+                          <>
+                            <br style={{ fontSize: "0.1rem" }} />
+                            <div style={{ width: "1rem", height: "1rem" }} />
+                          </>
+                        )}
+                      </div>
+                    ))}
+                  </S.StoryCreated>
+                </>
               )
           )}
           {/* {canvasImageData && (

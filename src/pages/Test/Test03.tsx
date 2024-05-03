@@ -1,29 +1,35 @@
-import React, { useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 export const Test03 = () => {
-  const [text, setText] = useState('');
   const [audioUrl, setAudioUrl] = useState('');
 
-  const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setText(e.target.value);
-  };
+  useEffect(() => {
+    handleSpeak();
+  }, []);
 
   const handleSpeak = async () => {
     try {
       const response = await axios.post(
-        'https://naveropenapi.apigw.ntruss.com/tts-premium/v1/tts',
-        text,
+        '/api/tts-premium/v1/tts',
+        {
+          speaker: "nmeow",
+          text: "안녕 나는 꾸미야. 만나서 반가워. 앞으로 사이좋게 지내자.",
+          volume: 0,
+          speed: 0,
+          pitch: 0,
+          format: 'mp3',
+        },
         {
           headers: {
+            'X-NCP-APIGW-API-KEY-ID': '1hn7bnzmda',
+            'X-NCP-APIGW-API-KEY': 'U4FlTsaV5abhlLU0nos97o3fzOvCfR0CIkC5bmdr',
             'Content-Type': 'application/x-www-form-urlencoded',
-            'X-Naver-Client-Id': '1hn7bnzmda',
-            'X-Naver-Client-Secret': 'U4FlTsaV5abhlLU0nos97o3fzOvCfR0CIkC5bmdr',
           },
-          responseType: 'blob',
+          responseType: 'blob', // 음성 파일을 Blob 형태로 받아야 합니다.
         }
       );
-
+      console.log(response);
       const audioUrl = URL.createObjectURL(response.data);
       setAudioUrl(audioUrl);
     } catch (error) {
@@ -33,9 +39,7 @@ export const Test03 = () => {
 
   return (
     <div>
-      <textarea value={text} onChange={handleTextChange} />
-      <button onClick={handleSpeak}>Speak</button>
-      {audioUrl && <audio src={audioUrl} controls />}
+      {audioUrl && <audio src={audioUrl} controls autoPlay />}
     </div>
   );
 }

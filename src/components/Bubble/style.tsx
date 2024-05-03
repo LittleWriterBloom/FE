@@ -24,7 +24,7 @@ export const BubbleContainer = styled.div`
   bottom: 15dvh;
   display: flex;
   align-items: flex-start;
-  animation: ${fadeInOut} 2s linear forwards;
+  animation: ${fadeInOut} 2.2s linear forwards;
 `;
 
 export const BubbleWrapper = styled.div`

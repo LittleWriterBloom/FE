@@ -7,13 +7,13 @@ import { bgCloudB, bgCloudP, btnHome } from "../../assets";
 import { aiImageDataAtom, canvasImageDataAtom } from "../../store/jotaiAtoms";
 import { useAtom } from "jotai";
 import { GgummiAnim } from "../../components/CharacterAnim/GgummiAnim";
+import { TTS } from "../../components/TTS/TTS";
 
 export const Character = () => {
   const navigate = useNavigate();
   const [showFirst, setShowFirst] = useState(false);
   const [showSecond, setShowSecond] = useState(false);
   const [showThird, setShowThird] = useState(false);
-  const [showFourth, setShowFourth] = useState(false);
   const [, setCanvasImg] = useAtom(canvasImageDataAtom);
   const [, setAiImg] = useAtom(aiImageDataAtom);
 
@@ -27,11 +27,8 @@ export const Character = () => {
         setShowSecond(true);
         setTimeout(() => {
           setShowThird(true);
-          setTimeout(() => {
-            setShowFourth(true);
-          }, 2000);
-        }, 2000);
-      }, 2000);
+        }, 5500);
+      }, 3000);
     }, 1000);
   }, []);
 
@@ -53,16 +50,24 @@ export const Character = () => {
 
   return (
     <S.Container>
-      <GgummiAnim talkCount={4}/>
+      <GgummiAnim talkCount={6}/>
       {showFirst && (
-        <BubbleP text="동화를 만드려면 주인공이 있어야겠지?" length={36} />
+        <>
+          <TTS text="동화를 만드려면 주인공이 있어야겠지?" speaker="nmeow" />
+          <BubbleP text="동화를 만드려면 주인공이 있어야겠지?" length={36} />
+        </>
       )}
       {showSecond && (
-        <BubbleP text="만들어 놓은 캐릭터를 불러와도 되구," length={34} />
+        <>
+          <TTS text="만들어 놓은 캐릭터를 불러와도 되구, 직접 캐릭터를 그려봐도 좋아!" speaker="nmeow" />
+          <BubbleP text="만들어 놓은 캐릭터를 불러와도 되구, 직접 캐릭터를 그려봐도 좋아!" length={58} />
+        </>
       )}
-      {showThird && <BubbleP text="직접 캐릭터를 그려봐도 좋아! " length={28} />}
-      {showFourth && (
-        <BubbleP text="AI와 함께 캐릭터를 그려보는 건 어때?" length={36} />
+      {showThird && (
+        <>
+          <TTS text="AI와 함께 캐릭터를 그려보는 건 어때?" speaker="nmeow" />
+          <BubbleP text="AI와 함께 캐릭터를 그려보는 건 어때?" length={36} />
+        </>
       )}
       <S.Bg src={bgCloudP} alt="배경 패턴" />
       <S.BgBottom src={bgCloudB} alt="구름하단" />
