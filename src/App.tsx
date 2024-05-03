@@ -31,6 +31,8 @@ import {
 import { Canvas } from './pages/Character/Draw/Canvas';
 import { Test } from './pages/Test/Test';
 import { TestParams } from './pages/Test/TestParams';
+import { Test02 } from './pages/Test/Test02';
+import { Test03 } from './pages/Test/Test03';
 
 function App() {
   return (
@@ -65,6 +67,8 @@ function App() {
         <Route path='/story/readai' element={<ReadAI />} />
         <Route path='/mystories' element={<MyStories />} />
         <Route path='/test' element={<Test />} />
+        <Route path='/test02' element={<Test02 />} />
+        <Route path='/test03' element={<Test03 />} />
         <Route path='/test/:testId' element={<TestParams />} />
         <Route path='/*' element={<Home />} />
       </Routes>
