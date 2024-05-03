@@ -19,6 +19,10 @@ export const Home = () => {
   const [accessToken] = useAtom(accessTokenAtom);
   const navigate = useNavigate();
 
+  const onClickSettings = () => {
+    navigate("/test");
+  };
+
   const onClickStoryMake = () => {
     if (accessToken) {
       navigate("/character");
@@ -74,7 +78,7 @@ export const Home = () => {
       <S.Header>
         <S.Profile src={btnProfile} alt="내 프로필" onClick={onClickProfile} />
         <S.Logo src={logo} alt="꼬마작가" />
-        <S.Settings src={btnSettings} alt="설정" />
+        <S.Settings src={btnSettings} alt="설정" onClick={onClickSettings} />
       </S.Header>
       <S.Body>
         <S.SlickWrapper>

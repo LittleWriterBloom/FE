@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { useSpeechRecognition, Result } from "react-speech-kit";
 
-export const Test = () => {
+export const Stt = () => {
   const [text, setText] = useState("");
   const { listen, listening, stop } = useSpeechRecognition({
     onResult: (result: Result) => {
