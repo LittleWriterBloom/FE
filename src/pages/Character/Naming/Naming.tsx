@@ -12,7 +12,8 @@ import {
 import { btnMic, btnRecord } from "../../../assets";
 import { BubbleP } from "../../../components/Bubble/BubbleP";
 import { namingBG } from "../../../assets/Character";
-import { btnHome, btnCheck, btnCheckG, ggummi } from "../../../assets";
+import { btnHome, btnCheck, btnCheckG } from "../../../assets";
+import { GgummiAnimClap } from "../../../components/CharacterAnim/GgummiAnimClap";
 
 export const Naming = () => {
   const navigate = useNavigate();
@@ -23,12 +24,16 @@ export const Naming = () => {
   const [rec, setRec] = useState(false);
   const [showFirst, setShowFirst] = useState(false);
   const [showSecond, setShowSecond] = useState(false);
+  const [showThird, setShowThird] = useState(false);
 
   useEffect(() => {
     setTimeout(() => {
       setShowFirst(true);
       setTimeout(() => {
         setShowSecond(true);
+        setTimeout(() => {
+          setShowThird(true);
+        }, 2000);
       }, 2000);
     }, 500);
   }, []);
@@ -59,12 +64,16 @@ export const Naming = () => {
 
   return (
     <S.Container>
+      <GgummiAnimClap talkCount={1} />
       <S.Bg src={namingBG} alt="배경이미지" />
       {showFirst && (
-        <BubbleP text="우와~ 정말 잘 그렸다! 화가의 솜씨인데?!" length={41} />
+        <BubbleP text="우와~ 정말 잘 그렸다!" length={22} />
       )}
       {showSecond && (
-        <BubbleP text="이 멋진 캐릭터에게 이름을 지어주자!" length={36} />
+        <BubbleP text="화가의 솜씨인데?!" length={19} />
+      )}
+      {showThird && (
+        <BubbleP text="이 멋진 캐릭터에게 이름을 지어주자!" length={34} />
       )}
       <S.Header>
         <S.Home src={btnHome} alt="홈" onClick={onClickHomeBtn} />
@@ -91,7 +100,6 @@ export const Naming = () => {
           {aiImg && <S.Character src={aiImg} alt="Saved Image" />}
           <S.Easel src={easel} alt="이젤" />
         </S.CharacterImage>
-        <S.Ggummi src={ggummi} alt="꾸미" />
         <S.BottomBox />
         <S.BottomPaints src={paints} alt="페인트" />
         {rec === false ? (

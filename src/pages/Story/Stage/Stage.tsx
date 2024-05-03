@@ -1,12 +1,13 @@
 import * as S from "./style";
 import { useNavigate } from "react-router-dom";
-import { btnHome, btnCheck, btnCheckG, dong } from "../../../assets/index";
+import { btnHome, btnCheck, btnCheckG } from "../../../assets/index";
 import { stageBG, textBG } from "../../../assets/Story";
 import { btnMic, btnRecord } from "../../../assets";
 import { useEffect, useState } from "react";
 import { useAtom, useAtomValue } from "jotai";
 import { bookBGInit, canvasImageDataAtom } from "../../../store/jotaiAtoms";
 import { BubbleG } from "../../../components/Bubble/BubbleG";
+import { DongAnim } from "../../../components/CharacterAnim/DongAnim";
 
 export const Stage = () => {
   const navigate = useNavigate();
@@ -63,6 +64,7 @@ export const Stage = () => {
 
   return (
     <S.Container>
+      <DongAnim talkCount={5} />
       {showFirst && (
         <BubbleG text="어떤 배경으로 동화를 만들어볼까?" length={32} />
       )}
@@ -98,7 +100,6 @@ export const Stage = () => {
             <S.Character src={canvasImageData} alt="Saved Image" />
           )}
         </S.BGContainer>
-        <S.Dong src={dong} alt="동동이" />
         {rec === false ? (
           <S.Rec src={btnMic} alt="음성인식(비활성화)" onClick={onClickMic} />
         ) : (

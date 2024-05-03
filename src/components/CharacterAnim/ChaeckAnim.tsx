@@ -1,27 +1,27 @@
 import { useState } from "react";
 import {
-  ggummiAppear,
-  ggummiBase,
-  ggummiFront,
-  ggummiRight,
-  ggummiTalk,
-} from "../../assets/Lottie/Ggummi";
+  chaeckBase,
+  chaeckAppear,
+  chaeckTalk,
+  chaeckRight,
+  chaeckFront,
+} from "../../assets/Lottie/ChackChack";
 import * as S from "./style";
 import Lottie from "react-lottie-player";
 
-interface GgummiAnimProps {
+interface ChaeckAnimProps {
   talkCount: number;
 }
 
-export const GgummiAnim: React.FC<GgummiAnimProps> = ({ talkCount }) => {
+export const ChaeckAnim: React.FC<ChaeckAnimProps> = ({ talkCount }) => {
   const [currentAnimationIndex, setCurrentAnimationIndex] = useState(0);
   const [isLastAnimationPlayed, setIsLastAnimationPlayed] = useState(false);
   const animations = [
-    ggummiAppear,
-    ggummiRight,
-    ...Array(talkCount).fill(ggummiTalk),
-    ggummiFront,
-    ggummiBase,
+    chaeckAppear,
+    chaeckRight,
+    ...Array(talkCount).fill(chaeckTalk),
+    chaeckFront,
+    chaeckBase,
   ];
 
   const handleAnimationEnd = () => {

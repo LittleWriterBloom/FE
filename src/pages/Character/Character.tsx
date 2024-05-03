@@ -53,7 +53,7 @@ export const Character = () => {
 
   return (
     <S.Container>
-      <GgummiAnim />
+      <GgummiAnim talkCount={4}/>
       {showFirst && (
         <BubbleP text="동화를 만드려면 주인공이 있어야겠지?" length={36} />
       )}

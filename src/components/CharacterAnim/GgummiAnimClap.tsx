@@ -2,8 +2,8 @@ import { useState } from "react";
 import {
   ggummiAppear,
   ggummiBase,
+  ggummiClap,
   ggummiFront,
-  ggummiRight,
   ggummiTalk,
 } from "../../assets/Lottie/Ggummi";
 import * as S from "./style";
@@ -13,12 +13,12 @@ interface GgummiAnimProps {
   talkCount: number;
 }
 
-export const GgummiAnim: React.FC<GgummiAnimProps> = ({ talkCount }) => {
+export const GgummiAnimClap: React.FC<GgummiAnimProps> = ({ talkCount }) => {
   const [currentAnimationIndex, setCurrentAnimationIndex] = useState(0);
   const [isLastAnimationPlayed, setIsLastAnimationPlayed] = useState(false);
   const animations = [
     ggummiAppear,
-    ggummiRight,
+    ggummiClap,
     ...Array(talkCount).fill(ggummiTalk),
     ggummiFront,
     ggummiBase,

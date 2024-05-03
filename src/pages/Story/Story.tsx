@@ -1,11 +1,12 @@
 import * as S from "./style";
 import { useNavigate } from "react-router-dom";
-import { bgCloudB, bgCloudP, btnHome, dong } from "../../assets/index";
-import { BubbleG } from "../../components/Bubble/BubbleG";
+import { bgCloudB, bgCloudP, btnHome } from "../../assets/index";
 import { useEffect, useState } from "react";
 import { storyFive, storySeven, storyThree } from "../../assets/Story";
 import { useAtom } from "jotai";
 import { bookLengthAtom, isSDModeAtom } from "../../store/jotaiAtoms";
+import { ChaeckAnim } from "../../components/CharacterAnim/ChaeckAnim";
+import { BubbleY } from "../../components/Bubble/BubbleY";
 
 export const Story = () => {
   const navigate = useNavigate();
@@ -59,9 +60,10 @@ export const Story = () => {
 
   return (
     <S.Container>
-      {showFirst && <BubbleG text="동화의 길이를 정해보자!" length={23.5} />}
+      <ChaeckAnim talkCount={1} />
+      {showFirst && <BubbleY text="동화의 길이를 정해보자!" length={23.5} />}
       {showSecond && (
-        <BubbleG text="몇줄짜리 동화를 만들어볼까? 3줄? 5줄?" length={37} />
+        <BubbleY text="몇줄짜리 동화를 만들어볼까? 3줄? 5줄? 7줄?" length={42} />
       )}
       <S.Bg src={bgCloudP} alt="배경 패턴" />
       <S.BgBottom src={bgCloudB} alt="구름하단" />
@@ -82,7 +84,6 @@ export const Story = () => {
             <S.BtnImg src={storySeven} alt="7줄 동화" />
           </S.Btn>
         </S.BtnWrapper>
-        <S.Dong src={dong} alt="꾸미" />
       </S.Body>
     </S.Container>
   );

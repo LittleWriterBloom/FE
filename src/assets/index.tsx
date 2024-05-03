@@ -11,6 +11,7 @@ import btnCheckG from "./btn-greencheck.png";
 import btnX from "./btn-x.png";
 import bubbleG from "./speech-bubbleG.png";
 import bubbleP from "./speech-bubbleP.png";
+import bubbleY from "./speech-bubbleY.png"
 import readEnd from "./readEnd.png";
 import bgCloudP from "./bgCloudPattern.png";
 import bgCloudB from "./bgCloudBottom.png";
@@ -37,6 +38,7 @@ export {
   btnX,
   bubbleG,
   bubbleP,
+  bubbleY,
   readEnd,
   bgCloudP,
   bgCloudB,

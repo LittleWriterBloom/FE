@@ -1,33 +1,29 @@
 import { useState } from "react";
 import {
-  ggummiAppear,
-  ggummiBase,
-  ggummiFront,
-  ggummiRight,
-  ggummiTalk,
-} from "../../assets/Lottie/Ggummi";
+  dongHelp,
+  dongHelpStart,
+  dongHelpEnd,
+} from "../../assets/Lottie/DongDong";
 import * as S from "./style";
 import Lottie from "react-lottie-player";
 
-interface GgummiAnimProps {
+interface DongAnimProps {
   talkCount: number;
 }
 
-export const GgummiAnim: React.FC<GgummiAnimProps> = ({ talkCount }) => {
+export const DongAnimHelp: React.FC<DongAnimProps> = ({ talkCount }) => {
   const [currentAnimationIndex, setCurrentAnimationIndex] = useState(0);
   const [isLastAnimationPlayed, setIsLastAnimationPlayed] = useState(false);
   const animations = [
-    ggummiAppear,
-    ggummiRight,
-    ...Array(talkCount).fill(ggummiTalk),
-    ggummiFront,
-    ggummiBase,
+    dongHelpStart,
+    ...Array(talkCount).fill(dongHelp),
+    dongHelpEnd,
   ];
 
   const handleAnimationEnd = () => {
     if (currentAnimationIndex === animations.length - 1) {
       // 마지막 로티가 재생된 후에 처리할 로직
-      setIsLastAnimationPlayed(false);
+      setIsLastAnimationPlayed(true);
     } else {
       // 다음 로티 애니메이션을 표시
       setCurrentAnimationIndex((prevIndex) => prevIndex + 1);
@@ -39,7 +35,7 @@ export const GgummiAnim: React.FC<GgummiAnimProps> = ({ talkCount }) => {
       {animations.map((animation, index) => (
         <Lottie
           key={index}
-          loop={index === animations.length - 1 ? true : false}
+          loop={false}
           animationData={animation}
           play={index === currentAnimationIndex}
           style={{
