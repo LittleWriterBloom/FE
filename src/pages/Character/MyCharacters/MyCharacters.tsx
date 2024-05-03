@@ -8,7 +8,7 @@ import {
   characterIdAtom,
   characterNameAtom,
   characterPersonalityAtom,
-  isAIModeAtom,
+  isSDModeAtom,
 } from "../../../store/jotaiAtoms";
 import {
   bg,
@@ -40,7 +40,7 @@ export const MyCharacters = () => {
   const [, setCharName] = useAtom(characterNameAtom);
   const [, setCharFeat] = useAtom(characterPersonalityAtom);
   const [, setCharId] = useAtom(characterIdAtom);
-  const [, setIsAIAtom] = useAtom(isAIModeAtom);
+  const [, setIsSDAtom] = useAtom(isSDModeAtom);
 
   const onClickHomeBtn = () => {
     navigate("/");
@@ -73,7 +73,7 @@ export const MyCharacters = () => {
       setCharName(selectedChar.name || "");
       setCharFeat(selectedChar.personality || "");
       setCharId(selectedChar.id);
-      setIsAIAtom(false);
+      setIsSDAtom(false);
     }
     navigate("/story/stage");
   };
@@ -84,7 +84,7 @@ export const MyCharacters = () => {
       setCharName(selectedChar.name || "");
       setCharFeat(selectedChar.personality || "");
       setCharId(selectedChar.id);
-      setIsAIAtom(true);
+      setIsSDAtom(true);
     }
     navigate("/story/stage");
   };

@@ -5,7 +5,7 @@ export const Container = styled.div`
   height: 100dvh;
   display: flex;
   flex-direction: column;
-  background-color: #CAF2FF;
+  background-color: #caf2ff;
 `;
 
 export const Bg = styled.img`
@@ -70,7 +70,7 @@ export const BGText = styled.img`
 export const BGInput = styled.input`
   width: 35vw;
   height: 5rem;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
   border-radius: 10rem;
   box-sizing: border-box;

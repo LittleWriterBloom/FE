@@ -14,7 +14,7 @@ export const TestParams = () => {
 
   const onClickRoute = () => {
     setPageNum(prevPageNum => prevPageNum + 1);
-    navigate(`/story/test/${pageNum + 1}`);
+    navigate(`/test/${pageNum + 1}`);
   };
 
   const onCount = () => {

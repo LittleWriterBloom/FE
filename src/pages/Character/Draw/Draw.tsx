@@ -2,13 +2,9 @@ import * as S from "./style";
 import { useNavigate } from "react-router-dom";
 import { fabric } from "fabric";
 import { useEffect, useRef, useState } from "react";
-import { useAtom } from 'jotai';
-import { canvasImageDataAtom } from '../../../store/jotaiAtoms';
-import {
-  btnHome,
-  btnCheck,
-  btnCheckG,
-} from "../../../assets";
+import { useAtom } from "jotai";
+import { canvasImageDataAtom } from "../../../store/jotaiAtoms";
+import { btnHome, btnCheck, btnCheckG } from "../../../assets";
 import {
   btnPalette,
   blue,
@@ -37,21 +33,22 @@ import {
   grey,
   paper,
 } from "../../../assets/Character/Draw";
+import { GgummiAnim } from "../../../components/CharacterAnim/GgummiAnim";
 
 export const Draw = () => {
   const navigate = useNavigate();
-	const canvasContainerRef = useRef<HTMLDivElement>(null);
+  const canvasContainerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef(null);
   const [canvas, setCanvas] = useState<fabric.Canvas | null>();
   const [isCanvasEmpty, setIsCanvasEmpty] = useState<boolean>(true); // 캔버스가 비어있는지 여부 상태 추가
   const [, setCanvasImageData] = useAtom(canvasImageDataAtom);
   const [isPalette, setIsPalette] = useState(true);
-  const [brushColor, setBrushColor] = useState<string>('black');
+  const [brushColor, setBrushColor] = useState<string>("black");
 
   useEffect(() => {
     const canvasContainer = canvasContainerRef.current;
     const canvasElement = canvasRef.current;
-    
+
     if (canvasContainer && canvasElement) {
       // 캔버스 생성
       const newCanvas = new fabric.Canvas(canvasElement, {
@@ -59,7 +56,7 @@ export const Draw = () => {
         height: canvasContainer.offsetHeight,
       });
       setCanvas(newCanvas);
-      
+
       // 언마운트 시 캔버스 정리
       return () => {
         newCanvas.dispose();
@@ -73,22 +70,22 @@ export const Draw = () => {
       canvas.freeDrawingBrush.width = 10;
       canvas.freeDrawingBrush.color = brushColor;
       canvas.renderAll();
-      
+
       // 캔버스 이벤트 리스너 등록
-      canvas.on('path:created', () => {
+      canvas.on("path:created", () => {
         setIsCanvasEmpty(canvas.isEmpty());
       });
     }
   }, [canvas, brushColor]);
 
-	// 이미지 저장 함수
-	const saveAsImage = () => {
-		if (canvas && (isCanvasEmpty === false)) {
-			// 캔버스의 이미지 데이터 가져오기
-			const imageData = canvas.toDataURL({
-				format: "png", // 이미지 포맷 지정 (png, jpeg 등)
-				quality: 1, // 이미지 품질 (0 ~ 1)
-			});
+  // 이미지 저장 함수
+  const saveAsImage = () => {
+    if (canvas && isCanvasEmpty === false) {
+      // 캔버스의 이미지 데이터 가져오기
+      const imageData = canvas.toDataURL({
+        format: "png", // 이미지 포맷 지정 (png, jpeg 등)
+        quality: 1, // 이미지 품질 (0 ~ 1)
+      });
 
       setCanvasImageData(imageData); // jotai 상태 업데이트
       navigate("/character/naming");
@@ -102,11 +99,10 @@ export const Draw = () => {
 			link.click();
 			document.body.removeChild(link);
       */
-		}
-    else {
-      alert("캐릭터를 그려주세요.")
+    } else {
+      alert("캐릭터를 그려주세요.");
     }
-	};
+  };
 
   const palette01 = [
     red,
@@ -133,7 +129,7 @@ export const Draw = () => {
     lightPurple,
     grey,
   ];
-  
+
   const penType = [pencilBase, brushBase, crayonBase, eraser];
 
   const onClickMakeBtn = () => {
@@ -141,14 +137,13 @@ export const Draw = () => {
   };
 
   const onClcickPalette = () => {
-    setIsPalette(false)
-  }
-  ;
+    setIsPalette(false);
+  };
   const onClcickPaletteT = () => {
-    setIsPalette(true)
+    setIsPalette(true);
   };
 
-  const onColorClick = (color: string) => { 
+  const onColorClick = (color: string) => {
     const colosrS = color.split("/")[5].split(".")[0];
     console.log(colosrS);
     setBrushColor(colosrS);
@@ -156,6 +151,7 @@ export const Draw = () => {
 
   return (
     <S.Container>
+      <GgummiAnim />
       <S.Header>
         <S.Home src={btnHome} alt="홈" onClick={onClickMakeBtn} />
         <S.Logo>주인공 만들기</S.Logo>
@@ -179,35 +175,35 @@ export const Draw = () => {
               <S.ColorWrapper>
                 {palette01.map((color, index) => (
                   <S.Color
-                    key={index} 
-                    src={color} 
-                    alt={color} 
+                    key={index}
+                    src={color}
+                    alt={color}
                     onClick={() => onColorClick(color)}
                   />
                 ))}
               </S.ColorWrapper>
-              <S.PaletteBtn 
-                src={btnPalette} 
-                alt="다음 팔레트" 
-                onClick={onClcickPalette} 
+              <S.PaletteBtn
+                src={btnPalette}
+                alt="다음 팔레트"
+                onClick={onClcickPalette}
               />
             </S.PaletteContents>
           ) : (
             <S.PaletteContents>
-              <S.PaletteBtn 
-                src={btnPalette} 
-                alt=" 팔레트" 
+              <S.PaletteBtn
+                src={btnPalette}
+                alt=" 팔레트"
                 onClick={onClcickPaletteT}
                 isPalette
               />
               <S.ColorWrapper>
                 {palette02.map((color, index) => (
-                  <S.Color 
-                  key={index} 
-                  src={color} 
-                  alt={color} 
-                  onClick={() => onColorClick(color)}
-                />
+                  <S.Color
+                    key={index}
+                    src={color}
+                    alt={color}
+                    onClick={() => onColorClick(color)}
+                  />
                 ))}
               </S.ColorWrapper>
             </S.PaletteContents>

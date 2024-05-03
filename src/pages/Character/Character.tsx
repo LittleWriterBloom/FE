@@ -1,21 +1,12 @@
-import * as S from './style';
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { BubbleP } from '../../components/Bubble/BubbleP'
-import {
-  bring,
-  ai,
-  draw,
-  paint
-} from '../../assets/Character';
-import {
-  bgCloudB,
-  bgCloudP,
-  btnHome,
-  ggummi,
-} from '../../assets';
-import { aiImageDataAtom, canvasImageDataAtom } from '../../store/jotaiAtoms';
-import { useAtom } from 'jotai';
+import * as S from "./style";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { BubbleP } from "../../components/Bubble/BubbleP";
+import { bring, ai, draw } from "../../assets/Character";
+import { bgCloudB, bgCloudP, btnHome } from "../../assets";
+import { aiImageDataAtom, canvasImageDataAtom } from "../../store/jotaiAtoms";
+import { useAtom } from "jotai";
+import { GgummiAnim } from "../../components/CharacterAnim/GgummiAnim";
 
 export const Character = () => {
   const navigate = useNavigate();
@@ -29,7 +20,7 @@ export const Character = () => {
   useEffect(() => {
     setCanvasImg("");
     setAiImg("");
-    
+
     setTimeout(() => {
       setShowFirst(true);
       setTimeout(() => {
@@ -38,10 +29,10 @@ export const Character = () => {
           setShowThird(true);
           setTimeout(() => {
             setShowFourth(true);
-          }, 2000); 
-        }, 2000); 
-      }, 2000); 
-    }, 500); 
+          }, 2000);
+        }, 2000);
+      }, 2000);
+    }, 1000);
   }, []);
 
   const onClickHomeBtn = () => {
@@ -55,39 +46,45 @@ export const Character = () => {
   const onClickDrawAiBtn = () => {
     navigate("/character/drawai");
   };
-  
+
   const onClickBringBtn = () => {
     navigate("/character/mycharacters");
   };
 
   return (
     <S.Container>
-      {showFirst && <BubbleP text="동화를 만드려면 주인공이 있어야겠지?" length={38} />}
-      {showSecond && <BubbleP text="만들어 놓은 캐릭터를 불러와도 되구," length={36} />}
-      {showThird && <BubbleP text="직접 캐릭터를 그려봐도 좋아!" length={30} />}
-      {showFourth && <BubbleP text="그리는 게 어렵다면 색칠만 해보는 건 어때?" length={42} />}
+      <GgummiAnim />
+      {showFirst && (
+        <BubbleP text="동화를 만드려면 주인공이 있어야겠지?" length={36} />
+      )}
+      {showSecond && (
+        <BubbleP text="만들어 놓은 캐릭터를 불러와도 되구," length={34} />
+      )}
+      {showThird && <BubbleP text="직접 캐릭터를 그려봐도 좋아! " length={28} />}
+      {showFourth && (
+        <BubbleP text="AI와 함께 캐릭터를 그려보는 건 어때?" length={36} />
+      )}
       <S.Bg src={bgCloudP} alt="배경 패턴" />
       <S.BgBottom src={bgCloudB} alt="구름하단" />
       <S.Header>
-        <S.Home src={btnHome} alt='홈' onClick={onClickHomeBtn} />
+        <S.Home src={btnHome} alt="홈" onClick={onClickHomeBtn} />
         <S.Logo>주인공 만들기</S.Logo>
-        <S.Settings src={bring} alt='캐릭터 불러오기' />
-        <S.Bring src={bring} alt='캐릭터 불러오기' onClick={onClickBringBtn} />
+        <S.Settings src={bring} alt="캐릭터 불러오기" />
+        <S.Bring src={bring} alt="캐릭터 불러오기" onClick={onClickBringBtn} />
       </S.Header>
       <S.Body>
         <S.BtnWrapper>
           <S.Btn onClick={onClickDrawBtn}>
-            <S.BtnImg src={draw} alt='버튼' />
+            <S.BtnImg src={draw} alt="버튼" />
           </S.Btn>
           <S.Btn onClick={onClickDrawAiBtn}>
-            <S.BtnImg src={ai} alt='버튼' />
+            <S.BtnImg src={ai} alt="버튼" />
           </S.Btn>
-          <S.Btn>
-            <S.BtnImg src={paint} alt='버튼' />
-          </S.Btn>
+          {/* <S.Btn>
+            <S.BtnImg src={paint} alt="버튼" />
+          </S.Btn> */}
         </S.BtnWrapper>
-        <S.Ggummi src={ggummi} alt='꾸미' />
       </S.Body>
     </S.Container>
-  )
-}
+  );
+};

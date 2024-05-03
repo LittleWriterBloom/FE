@@ -10,36 +10,23 @@ import {
   bgAtom1,
   bookAuthorAtom,
 } from "../../../store/jotaiAtoms";
-import sparkle1 from "../../../assets/Lottie/sparkle1.json";
+import bookCompletion from "../../../assets/Lottie/bookcompletion.json";
 import Lottie from "react-lottie-player";
-import { bg1, bookShadow, textComplete } from "../../../assets/Story/Save/Completion";
-import { useEffect, useState } from "react";
+import { bookShadow } from "../../../assets/Story/Save/Completion";
+import { useEffect } from "react";
 
 export const Completion = () => {
   const navigate = useNavigate();
   const canvasImageData = useAtomValue(canvasImageDataAtom);
-  const [bookColAtom, ] = useAtom(bookColorAtom);
+  const [bookColAtom] = useAtom(bookColorAtom);
   const [bookBg1] = useAtom(bgAtom1);
   const [bookTitle] = useAtom(bookTitleAtom);
-  const [author ,] = useAtom(bookAuthorAtom);
-
-  const [showFirst, setShowFirst] = useState(false);
-  const [showSecond, setShowSecond] = useState(false);
-  const [showThird, setShowThird] = useState(false);
+  const [author] = useAtom(bookAuthorAtom);
 
   useEffect(() => {
     setTimeout(() => {
-      setShowFirst(true);
-      setTimeout(() => {
-        setShowSecond(true);
-        setTimeout(() => {
-          setShowThird(true);
-        }, 400); 
-      }, 400); 
-    }, 400); 
-    setTimeout(() => {
       navigate("/story/save");
-    }, 4000); 
+    }, 3000);
   }, []);
 
   const onClickHomeBtn = () => {
@@ -48,50 +35,16 @@ export const Completion = () => {
 
   return (
     <Container>
-      <Bg src={bg1} alt="배경" />
-      <LottieWrapper>
-        {showFirst && <Lottie
-          loop
-          animationData={sparkle1}
-          play
-          style={{ width: "18rem", position: "absolute", left: "14rem", top: "0rem" }}
-        />}
-        {showSecond && <Lottie
-          loop
-          animationData={sparkle1}
-          play
-          style={{ width: "10rem", position: "absolute", left: "4rem", top: "11rem" }}
-        />}
-        {showThird && <Lottie
-          loop
-          animationData={sparkle1}
-          play
-          style={{ width: "25rem", position: "absolute", left: "6rem", top: "10rem" }}
-        />}
-        {showThird && <Lottie
-          loop
-          animationData={sparkle1}
-          play
-          style={{ width: "18rem", position: "absolute", right: "16rem", top: "-rem" }}
-        />}
-        {showFirst && <Lottie
-          loop
-          animationData={sparkle1}
-          play
-          style={{ width: "10rem", position: "absolute", right: "6rem", top: "4rem" }}
-        />}
-        {showSecond && <Lottie
-          loop
-          animationData={sparkle1}
-          play
-          style={{ width: "25rem", position: "absolute", right: "1rem", top: "10rem" }}
-        />}
-      </LottieWrapper>
+      <Lottie
+        loop
+        animationData={bookCompletion}
+        play
+        style={{ width: "100vw" }}
+      />
       <Header>
         <Home src={btnHome} alt="홈" onClick={onClickHomeBtn} />
       </Header>
       <Body>
-        <TextComplete src={textComplete} alt="동화책 완성"/>
         <BookContainer>
           <BookImg src={bookColAtom} alt="동화책 종류" />
           <BookTitle>{bookTitle}</BookTitle>
@@ -114,15 +67,7 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   overflow: hidden;
-  background-color: #96D9FF;
-`;
-
-const Bg = styled.img`
-  position: absolute;
-  z-index: 1;
-  width: 100vw;
-  height: 100dvh;
-  object-fit: cover;
+  background-color: #96d9ff;
 `;
 
 const BookShadow = styled.img`
@@ -133,15 +78,6 @@ const BookShadow = styled.img`
   object-fit: cover;
   bottom: 6dvh;
 `;
-
-const LottieWrapper = styled.div`
-  width: 100vw;
-  height: 100dvh;
-  position: absolute;
-  z-index: 2;
-  display: flex;
-  overflow: hidden;
-`
 
 const Header = styled.div`
   width: 100%;
@@ -172,37 +108,33 @@ const Body = styled.div`
   cursor: pointer;
 `;
 
-const TextComplete = styled.img`
-  width: 24vw;
-  height: auto;
-`;
-
 const BookContainer = styled.div`
-  width: 30vw;
-  height: 64dvh;
+  width: 28vw;
+  height: 60dvh;
   display: flex;
   flex-direction: column;
   align-items: center;
   overflow: hidden;
   position: relative;
+  margin-top: 8rem;
 `;
 
 const BookImg = styled.img`
-  width: 30vw;
-  height: 64dvh;
+  width: 28vw;
+  height: 60dvh;
   position: absolute;
   z-index: 25;
 `;
 
 const BookTitle = styled.div`
   width: 26vw;
-  height: 12dvh;
+  height: 10dvh;
   display: flex;
   align-items: center;
   justify-content: center;
   position: absolute;
   z-index: 26;
-  top: 7dvh;
+  top: 5dvh;
   font-family: "BMJUA";
   font-size: 1.8rem;
   text-align: center;
@@ -211,7 +143,7 @@ const BookTitle = styled.div`
 
 export const BookAuthor = styled.div`
   width: 26vw;
-  height: 12dvh;
+  height: 10dvh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -226,7 +158,7 @@ export const BookAuthor = styled.div`
 
 const BookBg = styled.img`
   width: 30vw;
-  height: 39dvh;
+  height: 37dvh;
   position: absolute;
   z-index: 26;
   bottom: 0;

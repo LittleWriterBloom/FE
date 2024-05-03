@@ -21,7 +21,11 @@ export const ModalYN = () => {
         <ModalContainer>
           <ModalWrapper>
             <ModalImg src={dongEnd} alt="말풍선" />
-            <ModalText>동화 만들기를 끝낼까요?<br/>만든 내용은 저장되지 않아요!</ModalText>
+            <ModalText>
+              동화 만들기를 끝낼까요?
+              <br />
+              만든 내용은 저장되지 않아요!
+            </ModalText>
             <ModalBtnWrapper>
               <ModalBtnNo onClick={closeModal}>아니오</ModalBtnNo>
               <ModalBtnYes onClick={naviToHome}>네</ModalBtnYes>
@@ -66,7 +70,7 @@ const ModalWrapper = styled.div`
   align-items: center;
   justify-content: center;
   gap: 1rem;
-  background-color: #FFF;
+  background-color: #fff;
 `;
 
 const ModalImg = styled.img`
@@ -100,7 +104,7 @@ const ModalBtnNo = styled.button`
   background-image: url(${modalBtnNo});
   background-size: cover;
   font-family: "BMJUA";
-  color: #FFF;
+  color: #fff;
   font-size: 1.5rem;
   padding-bottom: 0.6rem;
 `;
@@ -114,7 +118,7 @@ const ModalBtnYes = styled.button`
   background-image: url(${modalBtnYes});
   background-size: cover;
   font-family: "BMJUA";
-  color: #FFF;
+  color: #fff;
   font-size: 1.5rem;
   padding-bottom: 0.6rem;
 `;

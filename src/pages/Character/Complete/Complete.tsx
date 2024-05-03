@@ -1,7 +1,7 @@
 import * as S from "./style";
 import { useNavigate } from "react-router-dom";
 // import { useAtom, useAtomValue } from "jotai";
-import { completeBg, book } from "../../../assets/Character";
+import { completeBg } from "../../../assets/Character";
 import { btnHome } from "../../../assets";
 import { useAtom } from "jotai";
 import {
@@ -12,24 +12,24 @@ import {
   aiImageDataAtom,
   characterDescriptAtom,
 } from "../../../store/jotaiAtoms";
-import complete from "../../../assets/Lottie/complete1.json";
 import Lottie from "react-lottie-player";
+import characterCompletion from "../../../assets/Lottie/characterCompletion.json";
 import { useEffect } from "react";
 import apis from "../../../apis/apis";
 
 export const Complete = () => {
   const navigate = useNavigate();
-  const [canvasImageData, ] = useAtom(canvasImageDataAtom);
-  const [aiImg, ] = useAtom(aiImageDataAtom);
-  const [descript, ] = useAtom(characterDescriptAtom);
-  const [characterName, ] = useAtom(characterNameAtom);
-  const [characterPersonality, ] = useAtom(characterPersonalityAtom);
+  const [canvasImageData] = useAtom(canvasImageDataAtom);
+  const [aiImg] = useAtom(aiImageDataAtom);
+  const [descript] = useAtom(characterDescriptAtom);
+  const [characterName] = useAtom(characterNameAtom);
+  const [characterPersonality] = useAtom(characterPersonalityAtom);
   const [act] = useAtom(accessTokenAtom);
 
   useEffect(() => {
     setTimeout(() => {
       postCharacterData(characterData, characterAIData);
-    }, 3000);
+    }, 500);
   }, []);
 
   interface CharacterData {
@@ -54,7 +54,10 @@ export const Complete = () => {
     imageUrl: aiImg,
   };
 
-  const postCharacterData = async (characterData: CharacterData, characterAIData: CharacterData) => {
+  const postCharacterData = async (
+    characterData: CharacterData,
+    characterAIData: CharacterData
+  ) => {
     const config = {
       headers: {
         Authorization: `Bearer ${act}`,
@@ -90,10 +93,18 @@ export const Complete = () => {
   return (
     <S.Container>
       <S.Bg src={completeBg} alt="배경" />
-      <S.Book src={book} alt="책" />
       <S.LottieWrapper>
-        <Lottie loop animationData={complete} play style={{ width: "115vw" }} />
+        <Lottie
+          loop
+          animationData={characterCompletion}
+          play
+          style={{
+            width: "105vw",
+            paddingLeft: "2.3vw",
+          }}
+        />
       </S.LottieWrapper>
+      {/* <S.Book src={book} alt="책" /> */}
       <S.Header>
         <S.Home src={btnHome} alt="홈" onClick={onClickHomeBtn} />
       </S.Header>
@@ -103,9 +114,7 @@ export const Complete = () => {
         {canvasImageData && (
           <S.Character src={canvasImageData} alt="Saved Image" />
         )}
-        {aiImg && (
-          <S.Character src={aiImg} alt="Saved Image" />
-        )}
+        {aiImg && <S.Character src={aiImg} alt="Saved Image" />}
       </S.Body>
     </S.Container>
   );

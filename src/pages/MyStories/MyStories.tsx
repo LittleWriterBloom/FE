@@ -33,7 +33,7 @@ interface AllData {
   bookColor: number;
   characterImg: string;
   createDate: string;
-  id: string;
+  bookId: string;
   title: string;
 }
 
@@ -45,7 +45,7 @@ export const MyStories = () => {
   const [, setSelectedBook] = useState<AllData | null>(null);
   const [author, setAuthor] = useAtom(bookAuthorAtom);
   const [createDate, setCreateDate] = useState("");
-  const [, setBookId] = useAtom(bookIdAtom);
+  const [bookId, setBookId] = useAtom(bookIdAtom);
   const [bookTitle, setBookTitle] = useAtom(bookTitleAtom);
   const [, setCharImg] = useAtom(characterImgAtom);
   const [bookColor, setBookColor] = useState(pinkBook);
@@ -75,10 +75,11 @@ export const MyStories = () => {
   };
 
   const onClickStoryBtn = () => {
-    navigate("/story/read");
+    navigate("/story/readai");
   };
 
   useEffect(() => {
+    setBookId("");
     getAllBooks();
   }, [act]);
 
@@ -88,14 +89,16 @@ export const MyStories = () => {
     setBookFirstImg(selected.firstPageImageUrl);
     setAuthor(selected.author);
     setCreateDate(selected.createDate);
-    setBookId(selected.id);
+    setBookId(selected.bookId);
     setCharImg(selected.characterImg);
     setBookColor(books[selected.bookColor]);
     setBookTitle(selected.title);
     setCard(true);
   };
 
+  console.log(bookId);
   const onClickBackBtn = () => {
+    setBookId("");
     setCard(false);
     setSelectedBook(null);
   };

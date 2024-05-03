@@ -7,16 +7,15 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   overflow: hidden;
-  background-color: #96D9FF;
 `;
 
 export const Bg = styled.img`
   position: absolute;
-  z-index: 1;
+  z-index: 2;
   width: 100vw;
   height: 100dvh;
   object-fit: cover;
-  opacity: 0;
+  margin: 0;
 `;
 
 export const Book = styled.img`
@@ -37,6 +36,7 @@ export const LottieWrapper = styled.div`
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  padding: 0;
 `
 
 export const Header = styled.div`

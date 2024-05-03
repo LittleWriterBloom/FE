@@ -4,23 +4,22 @@ import { useNavigate } from "react-router-dom";
 // import { useAtom, useAtomValue } from "jotai";
 import { easel, paints } from "../../../assets/Character";
 import { useAtom } from "jotai";
-import { aiImageDataAtom, canvasImageDataAtom, characterNameAtom } from "../../../store/jotaiAtoms";
-import { btnMic, btnRecord } from '../../../assets';
+import {
+  aiImageDataAtom,
+  canvasImageDataAtom,
+  characterNameAtom,
+} from "../../../store/jotaiAtoms";
+import { btnMic, btnRecord } from "../../../assets";
 import { BubbleP } from "../../../components/Bubble/BubbleP";
 import { namingBG } from "../../../assets/Character";
-import {
-  btnHome,
-  btnCheck,
-  btnCheckG,
-  ggummi,
-} from "../../../assets";
+import { btnHome, btnCheck, btnCheckG, ggummi } from "../../../assets";
 
 export const Naming = () => {
   const navigate = useNavigate();
   const [name, setName] = useState("");
   const [, setNameAtom] = useAtom(characterNameAtom);
-  const [canvasImageData, ] = useAtom(canvasImageDataAtom);
-  const [aiImg, ] = useAtom(aiImageDataAtom);
+  const [canvasImageData] = useAtom(canvasImageDataAtom);
+  const [aiImg] = useAtom(aiImageDataAtom);
   const [rec, setRec] = useState(false);
   const [showFirst, setShowFirst] = useState(false);
   const [showSecond, setShowSecond] = useState(false);
@@ -30,10 +29,10 @@ export const Naming = () => {
       setShowFirst(true);
       setTimeout(() => {
         setShowSecond(true);
-      }, 2000); 
-    }, 500); 
+      }, 2000);
+    }, 500);
   }, []);
-  
+
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
   };
@@ -43,10 +42,9 @@ export const Naming = () => {
   };
 
   const onClickCheck = () => {
-    if(name === "") {
+    if (name === "") {
       alert("캐릭터 이름을 입력해주세요.");
-    }
-    else {
+    } else {
       setNameAtom(name);
       navigate("/character/personality");
     }
@@ -54,16 +52,20 @@ export const Naming = () => {
 
   const onClickMic = () => {
     setRec(true);
-  }
+  };
   const onClickRec = () => {
     setRec(false);
-  }
+  };
 
   return (
     <S.Container>
       <S.Bg src={namingBG} alt="배경이미지" />
-      {showFirst && <BubbleP text="우와~ 정말 잘 그렸다! 화가의 솜씨인데?!" length={41} />}
-      {showSecond && <BubbleP text="이 멋진 캐릭터에게 이름을 지어주자!" length={36} />}
+      {showFirst && (
+        <BubbleP text="우와~ 정말 잘 그렸다! 화가의 솜씨인데?!" length={41} />
+      )}
+      {showSecond && (
+        <BubbleP text="이 멋진 캐릭터에게 이름을 지어주자!" length={36} />
+      )}
       <S.Header>
         <S.Home src={btnHome} alt="홈" onClick={onClickHomeBtn} />
         <S.Logo>주인공 만들기</S.Logo>
@@ -78,7 +80,7 @@ export const Naming = () => {
           <S.NameText>이름을 지어주세요!</S.NameText>
           <S.NameInput
             onChange={handleInput}
-            type="name" 
+            type="name"
             placeholder="캐릭터 이름"
           />
         </S.NameContainer>
@@ -86,12 +88,10 @@ export const Naming = () => {
           {canvasImageData && (
             <S.Character src={canvasImageData} alt="Saved Image" />
           )}
-          {aiImg && (
-            <S.Character src={aiImg} alt="Saved Image" />
-          )}
-          <S.Easel src={easel} alt='이젤' />
+          {aiImg && <S.Character src={aiImg} alt="Saved Image" />}
+          <S.Easel src={easel} alt="이젤" />
         </S.CharacterImage>
-        <S.Ggummi src={ggummi} alt='꾸미' />
+        <S.Ggummi src={ggummi} alt="꾸미" />
         <S.BottomBox />
         <S.BottomPaints src={paints} alt="페인트" />
         {rec === false ? (

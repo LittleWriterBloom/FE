@@ -196,31 +196,3 @@ export const CharacterDataInput = styled.input`
   z-index: 10;
   top: 3rem;
 `;
-
-
-// LoadingComp
-
-export const LoadingContainer = styled.div`
-  position: absolute;
-  z-index: 20;
-  width: 100vw;
-  height: 100dvh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-color: #fff 50%;
-`;
-
-export const LottieWrapper = styled.div`
-  width: 30vw;
-  height: auto;
-`;
-
-export const LoadingText = styled.p`
-  font-family: "BMJUA";
-  font-size: 2rem;
-  margin-top: -2rem;
-  margin-bottom: 2rem;
-  text-align: center;
-`;

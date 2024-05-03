@@ -5,22 +5,22 @@ import { BubbleG } from "../../components/Bubble/BubbleG";
 import { useEffect, useState } from "react";
 import { storyFive, storySeven, storyThree } from "../../assets/Story";
 import { useAtom } from "jotai";
-import { bookLengthAtom, isAIModeAtom } from "../../store/jotaiAtoms";
+import { bookLengthAtom, isSDModeAtom } from "../../store/jotaiAtoms";
 
 export const Story = () => {
   const navigate = useNavigate();
   const [showFirst, setShowFirst] = useState(false);
   const [showSecond, setShowSecond] = useState(false);
   const [, setBookLength] = useAtom(bookLengthAtom);
-  const [isAIAtom, ] = useAtom(isAIModeAtom);
+  const [isSDAtom] = useAtom(isSDModeAtom);
 
   useEffect(() => {
     setTimeout(() => {
       setShowFirst(true);
       setTimeout(() => {
         setShowSecond(true);
-      }, 2000); 
-    }, 500); 
+      }, 2000);
+    }, 500);
   }, []);
 
   const onClickHomeBtn = () => {
@@ -28,7 +28,7 @@ export const Story = () => {
   };
 
   const onClickThree = () => {
-    if(isAIAtom) {
+    if (isSDAtom) {
       setBookLength(3);
       navigate("/story/createai");
     } else {
@@ -38,7 +38,7 @@ export const Story = () => {
   };
 
   const onClickFive = () => {
-    if(isAIAtom) {
+    if (isSDAtom) {
       setBookLength(5);
       navigate("/story/createai");
     } else {
@@ -48,7 +48,7 @@ export const Story = () => {
   };
 
   const onClickSeven = () => {
-    if(isAIAtom) {
+    if (isSDAtom) {
       setBookLength(7);
       navigate("/story/createai");
     } else {
@@ -60,7 +60,9 @@ export const Story = () => {
   return (
     <S.Container>
       {showFirst && <BubbleG text="동화의 길이를 정해보자!" length={23.5} />}
-      {showSecond && <BubbleG text="몇줄짜리 동화를 만들어볼까? 3줄? 5줄?" length={37} />}
+      {showSecond && (
+        <BubbleG text="몇줄짜리 동화를 만들어볼까? 3줄? 5줄?" length={37} />
+      )}
       <S.Bg src={bgCloudP} alt="배경 패턴" />
       <S.BgBottom src={bgCloudB} alt="구름하단" />
       <S.Header>

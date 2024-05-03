@@ -37,7 +37,7 @@ interface BookInitDataTypes {
 
 export const Create = () => {
   const navigate = useNavigate();
-  const [bookLength, ] = useAtom(bookLengthAtom);
+  const [bookLength] = useAtom(bookLengthAtom);
   const [story, setStory] = useState("");
   const [nameAtomValue] = useAtom(characterNameAtom);
   const [, setQuest1] = useAtom(questAtom1);
@@ -147,13 +147,19 @@ export const Create = () => {
         <S.LottieWrapper>
           <Lottie loop animationData={loadAnim} play />
         </S.LottieWrapper>
-        <S.LoadingText>그림 그리는 중 ...<br />약 10~15초 정도 걸려요.</S.LoadingText>
+        <S.LoadingText>
+          그림 그리는 중 ...
+          <br />약 10~15초 정도 걸려요.
+        </S.LoadingText>
       </S.LoadingContainer>
     );
   };
 
   const circles = [...Array(bookLength)].map((_, index) => (
-    <S.Circle key={index} style={index === 0 ? { backgroundColor: "#FF90F4" } : {}} />
+    <S.Circle
+      key={index}
+      style={index === 0 ? { backgroundColor: "#FF90F4" } : {}}
+    />
   ));
 
   return (
@@ -188,9 +194,7 @@ export const Create = () => {
           <S.Book src={createBook} alt="기본 책" />
           {bg1 && <S.CreateBg src={bg1} alt="생성된 스토리 배경" />}
           <S.BookFrame src={createBookS} alt="책 프레임" />
-          <S.CircleWrapper>
-            {circles}
-          </S.CircleWrapper>
+          <S.CircleWrapper>{circles}</S.CircleWrapper>
           <S.Header>
             <S.Home src={btnHome} alt="홈" onClick={onClickHomeBtn} />
             <S.EndBtn
