@@ -1,8 +1,10 @@
 // import styled from "styled-components";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useSpeechRecognition, Result } from "react-speech-kit";
 
 export const Test = () => {
+  const navigate = useNavigate();
   const [text, setText] = useState("");
   const { listen, listening, stop } = useSpeechRecognition({
     onResult: (result: Result) => {
@@ -10,6 +12,10 @@ export const Test = () => {
       setText(result.transcript); 
     },
   });
+  
+  const clickTest03 = () => {
+    navigate("/test03");
+  };
 
   return (
     <div>
@@ -17,6 +23,7 @@ export const Test = () => {
       <button onClick={stop}>Stop</button>
       {listening && <div>Listening...</div>}
       <p>{text}</p>
+      <button onClick={clickTest03}>Test03</button>
     </div>
   );
 };
