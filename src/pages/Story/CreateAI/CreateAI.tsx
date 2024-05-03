@@ -1,6 +1,6 @@
 import * as S from "./style";
 import { useNavigate } from "react-router-dom";
-import { btnHome, dong } from "../../../assets/index";
+import { btnHome } from "../../../assets/index";
 import { check, checkG, checkW } from "../../../assets/Story";
 import { btnMic, btnRecord } from "../../../assets";
 import { useEffect, useState } from "react";
@@ -31,6 +31,7 @@ import {
 } from "../../../assets/Story/Create";
 import apis from "../../../apis/apis";
 import { WritingLoading } from "../../../components/StoryLoading/\bWritingLoading";
+import { DongAnim } from "../../../components/CharacterAnim/DongAnim";
 interface BookInitDataTypes {
   characterId: number | null;
   backgroundInfo: string | null;
@@ -232,7 +233,9 @@ export const CreateAI = () => {
               </>
             )}
             {!isCreated && (
-              <S.Dong src={dong} alt="동동이" onClick={onClickDong} />
+              <div onClick = {onClickDong}>
+                <DongAnim talkCount={1} />
+              </div>
             )}
             {rec === false ? (
               <S.Rec

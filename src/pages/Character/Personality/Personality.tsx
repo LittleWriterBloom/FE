@@ -17,8 +17,8 @@ import {
   btnHome,
   btnMic,
   btnRecord,
-  ggummi,
 } from "../../../assets";
+import { GgummiAnim } from "../../../components/CharacterAnim/GgummiAnim";
 
 export const Personality = () => {
   const navigate = useNavigate();
@@ -70,6 +70,7 @@ export const Personality = () => {
 
   return (
     <S.Container>
+      <GgummiAnim talkCount={3} />
       <S.Bg src={namingBG} alt="배경이미지" />
       {showFirst && (
         <BubbleP text={`이 친구의 이름은 ${name}이구나~`} length={34} />
@@ -80,7 +81,7 @@ export const Personality = () => {
       {showThird && (
         <BubbleP
           text="활발해? 소심해? 무서움이 많아? 어떤 친구일까~?"
-          length={49}
+          length={47}
         />
       )}
       <S.Header>
@@ -108,7 +109,6 @@ export const Personality = () => {
           {aiImg && <S.Character src={aiImg} alt="Saved Image" />}
           <S.Easel src={easel} alt="이젤" />
         </S.CharacterImage>
-        <S.Ggummi src={ggummi} alt="꾸미" />
         <S.BottomBox />
         <S.BottomPaints src={paints} alt="페인트" />
         {rec === false ? (

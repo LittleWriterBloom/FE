@@ -1,6 +1,6 @@
 import * as S from "./style";
 import { useNavigate } from "react-router-dom";
-import { btnHome, dong } from "../../../assets/index";
+import { btnHome } from "../../../assets/index";
 import { check, checkG } from "../../../assets/Story";
 import { btnMic, btnRecord } from "../../../assets";
 import { useEffect, useState } from "react";
@@ -39,6 +39,8 @@ import {
   createBookS,
 } from "../../../assets/Story/Create";
 import apis from "../../../apis/apis";
+import { DongAnim } from "../../../components/CharacterAnim/DongAnim";
+import { DongAnimHelp } from "../../../components/CharacterAnim/DongAnimHelp";
 
 interface pageDataTypes {
   userContext: string | null;
@@ -247,6 +249,7 @@ export const CreateParams = () => {
               )}
               {clickCount === 1 && (
                 <>
+                  <DongAnimHelp talkCount={1} />
                   {pageNum === 2 && (
                     <BubbleG text={`${quest1[0]}`} length={50} />
                   )}
@@ -269,6 +272,7 @@ export const CreateParams = () => {
               )}
               {clickCount === 2 && (
                 <>
+                  <DongAnimHelp talkCount={1} />
                   {pageNum === 2 && (
                     <BubbleG text={`${quest1[1]}`} length={50} />
                   )}
@@ -291,6 +295,7 @@ export const CreateParams = () => {
               )}
               {clickCount === 3 && (
                 <>
+                  <DongAnimHelp talkCount={1} />
                   {pageNum === 2 && (
                     <BubbleG text={`${quest1[2]}`} length={50} />
                   )}
@@ -389,7 +394,9 @@ export const CreateParams = () => {
               />
             )}
             {!isCreated && (
-              <S.Dong src={dong} alt="동동이" onClick={handleClickDong} />
+              <div onClick = {handleClickDong}>
+                <DongAnim talkCount={1} />
+              </div>
             )}
             {rec === false ? (
               <S.Rec

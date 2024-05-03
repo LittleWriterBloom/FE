@@ -4,7 +4,7 @@ import styled, { keyframes } from "styled-components";
 export const LoadingContainer = styled.div`
   position: absolute;
   z-index: 20;
-  width: 30rem;
+  width: 28rem;
   left: 0;
   bottom: 0;
   height: 20rem;

@@ -33,7 +33,6 @@ import {
   grey,
   paper,
 } from "../../../assets/Character/Draw";
-import { GgummiAnim } from "../../../components/CharacterAnim/GgummiAnim";
 
 export const Draw = () => {
   const navigate = useNavigate();
@@ -151,7 +150,6 @@ export const Draw = () => {
 
   return (
     <S.Container>
-      <GgummiAnim />
       <S.Header>
         <S.Home src={btnHome} alt="홈" onClick={onClickMakeBtn} />
         <S.Logo>주인공 만들기</S.Logo>
