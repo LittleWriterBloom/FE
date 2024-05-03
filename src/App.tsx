@@ -26,6 +26,7 @@ import {
   DrawAi,
   CreateAI,
   CreateAIParams,
+  ReadAI,
 } from './pages';
 import { Canvas } from './pages/Character/Draw/Canvas';
 import { Test } from './pages/Test/Test';
@@ -61,9 +62,10 @@ function App() {
         <Route path='/story/save' element={<Save />} />
         <Route path='/story/completion' element={<Completion />} />
         <Route path='/story/read' element={<Read />} />
+        <Route path='/story/readai' element={<ReadAI />} />
         <Route path='/mystories' element={<MyStories />} />
-        <Route path='/story/test' element={<Test />} />
-        <Route path='/story/test/:testId' element={<TestParams />} />
+        <Route path='/test' element={<Test />} />
+        <Route path='/test/:testId' element={<TestParams />} />
         <Route path='/*' element={<Home />} />
       </Routes>
     </BrowserRouter>

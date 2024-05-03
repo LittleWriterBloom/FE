@@ -18,14 +18,14 @@ export const Save = () => {
   const [bookColAtom] = useAtom(bookColorAtom);
   const [bg1] = useAtom(bgAtom1);
   const [bookTitle] = useAtom(bookTitleAtom);
-  const [author ,] = useAtom(bookAuthorAtom);
+  const [author] = useAtom(bookAuthorAtom);
 
   const onClickHomeBtn = () => {
     navigate("/");
   };
 
   const onClickRead = () => {
-    navigate("/story/read")
+    navigate("/story/read");
   };
 
   const onClickOther = () => {

@@ -9,6 +9,7 @@ import {
   bookColorAtom,
   bookIdAtom,
   bookTitleAtom,
+  isSDModeAtom,
 } from "../../../store/jotaiAtoms";
 import { btnMic, btnRecord } from "../../../assets";
 import { BubbleP } from "../../../components/Bubble/BubbleP";
@@ -23,6 +24,7 @@ import {
 } from "../../../assets/Story/Title";
 import apis from "../../../apis/apis";
 import { createBG } from "../../../assets/Story/Create";
+import { BookMaking } from "../../../components/StoryLoading/BookMaking";
 
 interface bookDataTypes {
   title: string | null;
@@ -34,15 +36,17 @@ export const Author = () => {
   const navigate = useNavigate();
   const [act] = useAtom(accessTokenAtom);
   const [author, setAuthor] = useState("");
-  const [bookTitle, ] = useAtom(bookTitleAtom);
+  const [bookTitle] = useAtom(bookTitleAtom);
   const [, setBookAuthor] = useAtom(bookAuthorAtom);
   const [, setBookId] = useAtom(bookIdAtom);
+  const [isSDAtom] = useAtom(isSDModeAtom);
 
   const [rec, setRec] = useState(false);
   const [bookColor, setBookColor] = useState(0);
-  const [bookColAtom, setBookColAtom] = useAtom(bookColorAtom)
-  
+  const [bookColAtom, setBookColAtom] = useAtom(bookColorAtom);
+
   const [showFirst, setShowFirst] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const index = books.findIndex((book) => book === bookColAtom);
@@ -73,13 +77,19 @@ export const Author = () => {
       },
     };
 
-    if (act) {
+    if (act && !isSDAtom) {
       try {
-        const res = await apis.post(
-          `/books/builder/save`,
-          bookData,
-          config
-        );
+        const res = await apis.post(`/books/builder/save`, bookData, config);
+        console.log(res.data.data[0]);
+        setBookId(res.data.data[0].id);
+        navigate("/story/completion");
+      } catch (err) {
+        console.error(err);
+      }
+    }
+    if (act && isSDAtom) {
+      try {
+        const res = await apis.post(`/books/builder/save2`, bookData, config);
         console.log(res.data.data[0]);
         setBookId(res.data.data[0].id);
         navigate("/story/completion");
@@ -107,7 +117,12 @@ export const Author = () => {
     } else {
       setBookAuthor(author);
       setBookColAtom(books[bookColor]);
-      saveBookData(bookData);
+      if (isSDAtom) {
+        setIsLoading(true);
+        saveBookData(bookData);
+      } else {
+        saveBookData(bookData);
+      }
     }
   };
 
@@ -120,54 +135,71 @@ export const Author = () => {
 
   return (
     <S.Container>
-      <S.Bg src={createBG} alt="배경" />
-      {showFirst && (
-        <BubbleP text="동화책의 작가는 누구야~?" length={41} />
+      {isLoading ? (
+        <BookMaking />
+      ) : (
+        <>
+          <S.Bg src={createBG} alt="배경" />
+          {showFirst && <BubbleP text="동화책의 작가는 누구야~?" length={41} />}
+          <S.Header>
+            <S.Home src={btnHome} alt="홈" onClick={onClickHomeBtn} />
+            <S.Logo>책 제목 짓기</S.Logo>
+            {author === "" ? (
+              <S.Check src={btnCheck} alt="확인" onClick={onClickCheck} />
+            ) : (
+              <S.Check
+                src={btnCheckG}
+                alt="확인(활성화)"
+                onClick={onClickCheck}
+              />
+            )}
+          </S.Header>
+          <S.Body>
+            <S.BookContainer>
+              <S.BookShadow src={bookShadow} alt="책 그림자" />
+              <S.BookImg src={books[bookColor]} alt="동화책 종류" />
+              <S.BookTitle>{bookTitle}</S.BookTitle>
+              <S.BookAuthor>
+                <S.BookAuthorInput
+                  onChange={handleInput}
+                  type="name"
+                  placeholder="작가 이름"
+                />
+                <span>지음</span>
+              </S.BookAuthor>
+            </S.BookContainer>
+            <S.ColorContainer>
+              {colors.map((color, index) => (
+                <S.Color
+                  key={index}
+                  onClick={() => onClickColor(index)}
+                  style={{
+                    backgroundColor: `${color}`,
+                    width: index === bookColor ? "5.2rem" : "4.6rem",
+                    height: index === bookColor ? "5.2rem" : "4.6rem",
+                    border:
+                      index === bookColor ? "0.24rem solid #947047a3" : "",
+                  }}
+                />
+              ))}
+            </S.ColorContainer>
+            <S.Ggummi src={ggummi} alt="꾸미" />
+            {rec === false ? (
+              <S.Rec
+                src={btnMic}
+                alt="다음으로(비활성화)"
+                onClick={onClickMic}
+              />
+            ) : (
+              <S.Rec
+                src={btnRecord}
+                alt="다음으로(활성화)"
+                onClick={onClickRec}
+              />
+            )}
+          </S.Body>
+        </>
       )}
-      <S.Header>
-        <S.Home src={btnHome} alt="홈" onClick={onClickHomeBtn} />
-        <S.Logo>책 제목 짓기</S.Logo>
-        {author === "" ? (
-          <S.Check src={btnCheck} alt="확인" onClick={onClickCheck} />
-        ) : (
-          <S.Check src={btnCheckG} alt="확인(활성화)" onClick={onClickCheck} />
-        )}
-      </S.Header>
-      <S.Body>
-        <S.BookContainer>
-          <S.BookShadow src={bookShadow} alt="책 그림자" />
-          <S.BookImg src={books[bookColor]} alt="동화책 종류" />
-          <S.BookTitle>{bookTitle}</S.BookTitle>
-          <S.BookAuthor>
-            <S.BookAuthorInput
-              onChange={handleInput}
-              type="name"
-              placeholder="작가 이름"
-            />
-            <span>지음</span>
-          </S.BookAuthor>
-        </S.BookContainer>
-        <S.ColorContainer>
-          {colors.map((color, index) => (
-            <S.Color
-              key={index}
-              onClick={() => onClickColor(index)}
-              style={{
-                backgroundColor: `${color}`,
-                width: index === bookColor ? "5.2rem" : "4.6rem",
-                height: index === bookColor ? "5.2rem" : "4.6rem",
-                border: index === bookColor ? "0.24rem solid #947047a3" : "",
-              }}
-            />
-          ))}
-        </S.ColorContainer>
-        <S.Ggummi src={ggummi} alt="꾸미" />
-        {rec === false ? (
-          <S.Rec src={btnMic} alt="다음으로(비활성화)" onClick={onClickMic} />
-        ) : (
-          <S.Rec src={btnRecord} alt="다음으로(활성화)" onClick={onClickRec} />
-        )}
-      </S.Body>
     </S.Container>
   );
 };

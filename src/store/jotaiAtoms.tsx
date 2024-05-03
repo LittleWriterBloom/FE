@@ -44,7 +44,7 @@ export const bookIdAtom = atom<string>("");
 export const bookCreateDate = atom<string>("");
 export const bookColorAtom = atom(pinkBook);
 
-export const isAIModeAtom = atom(false);
+export const isSDModeAtom = atom(false);
 
 /*
 export const updateToken = (newToken) => {

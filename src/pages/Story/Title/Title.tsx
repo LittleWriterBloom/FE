@@ -3,10 +3,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 // import { useAtom, useAtomValue } from "jotai";
 import { useAtom } from "jotai";
-import {
-  bookColorAtom,
-  bookTitleAtom,
-} from "../../../store/jotaiAtoms";
+import { bookColorAtom, bookTitleAtom } from "../../../store/jotaiAtoms";
 import { btnMic, btnRecord } from "../../../assets";
 import { BubbleP } from "../../../components/Bubble/BubbleP";
 import { btnHome, btnCheck, btnCheckG, ggummi } from "../../../assets";
@@ -72,9 +69,7 @@ export const Title = () => {
   return (
     <S.Container>
       <S.Bg src={createBG} alt="배경" />
-      {showFirst && (
-        <BubbleP text="동화책의 제목을 지어볼까~?" length={41} />
-      )}
+      {showFirst && <BubbleP text="동화책의 제목을 지어볼까~?" length={41} />}
       <S.Header>
         <S.Home src={btnHome} alt="홈" onClick={onClickHomeBtn} />
         <S.Logo>책 제목 짓기</S.Logo>

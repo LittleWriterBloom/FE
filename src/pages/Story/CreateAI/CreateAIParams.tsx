@@ -5,8 +5,6 @@ import { check, checkG, checkW } from "../../../assets/Story";
 import { btnMic, btnRecord } from "../../../assets";
 import { useEffect, useState } from "react";
 import { useAtom } from "jotai";
-import Lottie from "react-lottie-player";
-import loadAnim from "../../../assets/Lottie/loading.json";
 import {
   accessTokenAtom,
   // bgAtom2,
@@ -40,6 +38,7 @@ import {
   createG,
 } from "../../../assets/Story/Create";
 import apis from "../../../apis/apis";
+import { WritingLoading } from "../../../components/StoryLoading/\bWritingLoading";
 
 interface pageDataTypes {
   userContext: string | null;
@@ -129,7 +128,6 @@ export const CreateAIParams = () => {
     postBookData(pageData);
   };
 
-
   const handleClickDong = () => {
     setClickCount(clickCount + 1);
     if (clickCount >= 3) {
@@ -161,7 +159,11 @@ export const CreateAIParams = () => {
 
     if (act) {
       try {
-        const res = await apis.post(`/books/builder/insight2`, pageData, config);
+        const res = await apis.post(
+          `/books/builder/insight2`,
+          pageData,
+          config
+        );
         console.log(res.data.data[0]);
         if (pageNum === 2) {
           setQuest2(res.data.data[0].bookInsight.generatedQuestions);
@@ -196,20 +198,6 @@ export const CreateAIParams = () => {
     }
   };
 
-  const LoadingComp = () => {
-    return (
-      <S.LoadingContainer>
-        <S.LottieWrapper>
-          <Lottie loop animationData={loadAnim} play />
-        </S.LottieWrapper>
-        <S.LoadingText>
-          그림 그리는 중 ...
-          <br />약 10~15초 정도 걸려요.
-        </S.LoadingText>
-      </S.LoadingContainer>
-    );
-  };
-
   const circles = [...Array(bookLength)].map((_, index) => (
     <S.Circle
       key={index}
@@ -220,7 +208,7 @@ export const CreateAIParams = () => {
   return (
     <S.Container>
       {isLoading ? (
-        <LoadingComp />
+        <WritingLoading />
       ) : (
         <>
           {/* {isModal && (

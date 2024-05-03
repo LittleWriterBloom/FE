@@ -107,7 +107,6 @@ export const BodyContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
   position: absolute;
   z-index: 10;
 `;
@@ -123,7 +122,7 @@ export const StoryInput = styled.input`
   font-size: 1.8rem;
   text-align: center;
   color: #000;
-  margin-top: 7dvh;
+  margin-top: 1rem;
   font-family: "BMJUA";
 `;
 

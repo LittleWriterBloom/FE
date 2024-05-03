@@ -26,9 +26,10 @@ export const Book = styled.img`
 
 export const CreateBg = styled.img`
   position: absolute;
-  width: 74.8vw;
-  height: 89.8dvh;
-  bottom: 2.1dvh;
+  width: 37.5vw;
+  height: 89.7dvh;
+  bottom: 2.2dvh;
+  left: 12.5vw;
   object-fit: cover;
   z-index: 3;
 `;
@@ -82,43 +83,24 @@ export const Body = styled.div`
 `;
 
 export const BodyContainer = styled.div`
-  width: 60vw;
+  width: 64.5vw;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  /* flex-direction: column; */
+  justify-content: flex-end;
   gap: 1rem;
   position: absolute;
   z-index: 10;
 `;
 
-export const StoryInput = styled.input`
-  width: 60vw;
-  height: 5rem;
-  background-color: #ffffff;
-  box-shadow: 0 0.25rem 0.25rem 0 rgba(0, 0, 0, 0.25) inset;
-  border-radius: 10rem;
-  box-sizing: border-box;
-  padding: 0 2rem;
-  font-size: 1.8rem;
-  text-align: center;
-  color: #000;
-  margin-top: 7dvh;
-  font-family: "BMJUA";
-`;
-
 export const StoryCreated = styled.div`
-  width: 60vw;
-  min-height: 5rem;
-  background-color: #ffffff;
-  box-shadow: 0 0.25rem 0.25rem 0 rgba(0, 0, 0, 0.25) inset;
-  border-radius: 10rem;
+  width: 30vw;
+  max-height: 58dvh;
   box-sizing: border-box;
   padding: 1rem 2rem;
-  font-size: 1.8rem;
-  text-align: center;
+  font-size: 1.5rem;
   color: #000;
-  margin-top: 7dvh;
   font-family: "BMJUA";
+  overflow: auto;
 `;
 
 export const Character = styled.img`
@@ -133,6 +115,17 @@ export const Check = styled.img`
   width: 4rem;
   height: auto;
   padding-top: 2rem;
+  cursor: pointer;
+`;
+
+export const CheckL = styled.img`
+  position: absolute;
+  z-index: 11;
+  left: 4vw;
+  width: 4rem;
+  height: auto;
+  padding-top: 2rem;
+  transform: scaleX(-1);
   cursor: pointer;
 `;
 

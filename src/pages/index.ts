@@ -23,4 +23,5 @@ export * from "./Story/Title/Author";
 export * from "./Story/Save/Completion";
 export * from "./Story/Save/Save";
 export * from "./Story/Read/Read";
+export * from "./Story/ReadAI/ReadAI";
 export * from "./MyStories/MyStories";

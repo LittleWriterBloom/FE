@@ -5,8 +5,6 @@ import { check, checkG, checkW } from "../../../assets/Story";
 import { btnMic, btnRecord } from "../../../assets";
 import { useEffect, useState } from "react";
 import { useAtom } from "jotai";
-import Lottie from "react-lottie-player";
-import loadAnim from "../../../assets/Lottie/loading.json";
 import {
   accessTokenAtom,
   bgAtom1,
@@ -32,6 +30,7 @@ import {
   createG,
 } from "../../../assets/Story/Create";
 import apis from "../../../apis/apis";
+import { WritingLoading } from "../../../components/StoryLoading/\bWritingLoading";
 interface BookInitDataTypes {
   characterId: number | null;
   backgroundInfo: string | null;
@@ -40,7 +39,7 @@ interface BookInitDataTypes {
 
 export const CreateAI = () => {
   const navigate = useNavigate();
-  const [bookLength, ] = useAtom(bookLengthAtom);
+  const [bookLength] = useAtom(bookLengthAtom);
   const [story, setStory] = useState("");
   const [nameAtomValue] = useAtom(characterNameAtom);
   const [, setQuest1] = useAtom(questAtom1);
@@ -151,25 +150,17 @@ export const CreateAI = () => {
     }
   };
 
-  const LoadingComp = () => {
-    return (
-      <S.LoadingContainer>
-        <S.LottieWrapper>
-          <Lottie loop animationData={loadAnim} play />
-        </S.LottieWrapper>
-        <S.LoadingText>그림 그리는 중 ...<br />약 10~15초 정도 걸려요.</S.LoadingText>
-      </S.LoadingContainer>
-    );
-  };
-
   const circles = [...Array(bookLength)].map((_, index) => (
-    <S.Circle key={index} style={index === 0 ? { backgroundColor: "#FF90F4" } : {}} />
+    <S.Circle
+      key={index}
+      style={index === 0 ? { backgroundColor: "#FF90F4" } : {}}
+    />
   ));
 
   return (
     <S.Container>
       {isLoading ? (
-        <LoadingComp />
+        <WritingLoading />
       ) : (
         <>
           {isCreated ? (
@@ -196,9 +187,7 @@ export const CreateAI = () => {
           )}
           <S.Bg src={createBG} alt="배경" />
           <S.Book src={createBook} alt="기본 책" />
-          <S.CircleWrapper>
-            {circles}
-          </S.CircleWrapper>
+          <S.CircleWrapper>{circles}</S.CircleWrapper>
           <S.Header>
             <S.Home src={btnHome} alt="홈" onClick={onClickHomeBtn} />
             <S.EndBtn
@@ -224,11 +213,7 @@ export const CreateAI = () => {
               )}
             </S.BodyContainer>
             {isCreated ? (
-              <S.CheckG
-                src={checkW}
-                alt="다음으로"
-                onClick={onClickNext}
-              />
+              <S.CheckG src={checkW} alt="다음으로" onClick={onClickNext} />
             ) : (
               <>
                 {story === "" ? (

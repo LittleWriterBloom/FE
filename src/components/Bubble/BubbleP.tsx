@@ -67,6 +67,6 @@ const BubbleText = styled.p`
   z-index: 52;
   font-size: 2.1rem;
   font-family: "BMJUA";
-  color: #C15794;
+  color: #c15794;
   padding-left: 1rem;
 `;

@@ -85,21 +85,20 @@ export const BtnWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 3rem;
+  gap: 5rem;
   position: absolute;
   z-index: 5;
 `;
 
 export const Btn = styled.div`
-  width: 16rem;
-  height: 18.8rem;
+  width: 20rem;
+  height: 24rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   margin-bottom: 8dvh;
   cursor: pointer;
-  gap: 1rem;
 `;
 
 export const BtnImg = styled.img`
