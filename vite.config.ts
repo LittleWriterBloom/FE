@@ -24,3 +24,5 @@ export default defineConfig({
     },
   },
 });
+
+//git 머지 메인 했는데 왜 안바껴
