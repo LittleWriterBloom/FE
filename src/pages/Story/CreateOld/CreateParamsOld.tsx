@@ -1,20 +1,22 @@
 import * as S from "./style";
 import { useNavigate } from "react-router-dom";
 import { btnHome } from "../../../assets/index";
-import { check, checkG, checkW } from "../../../assets/Story";
+import { check, checkG } from "../../../assets/Story";
 import { btnMic, btnRecord } from "../../../assets";
 import { useEffect, useState } from "react";
-import { useAtom } from "jotai";
+import { useAtom, useAtomValue } from "jotai";
+import Lottie from "react-lottie-player";
+import loadAnim from "../../../assets/Lottie/loading.json";
 import {
   accessTokenAtom,
-  // bgAtom2,
-  // bgAtom3,
-  // bgAtom4,
-  // bgAtom5,
-  // bgAtom6,
-  // bgAtom7,
+  bgAtom2,
+  bgAtom3,
+  bgAtom4,
+  bgAtom5,
+  bgAtom6,
+  bgAtom7,
   bookLengthAtom,
-  // canvasImageDataAtom,
+  canvasImageDataAtom,
   contextAtom2,
   contextAtom3,
   contextAtom4,
@@ -35,10 +37,8 @@ import {
   createBG,
   createBook,
   createBookS,
-  createG,
 } from "../../../assets/Story/Create";
 import apis from "../../../apis/apis";
-import { WritingLoading } from "../../../components/StoryLoading/\bWritingLoading";
 import { DongAnim } from "../../../components/CharacterAnim/DongAnim";
 import { TTS } from "../../../components/TTS/TTS";
 
@@ -47,39 +47,39 @@ interface pageDataTypes {
   characterActionInfo: string;
 }
 
-export const CreateAIParams = () => {
+export const CreateParamsOld = () => {
   const navigate = useNavigate();
   const [pageNum, setPageNum] = useState(2);
   const [bookLength] = useAtom(bookLengthAtom);
   const [act] = useAtom(accessTokenAtom);
-  // const canvasImageData = useAtomValue(canvasImageDataAtom);
+  const canvasImageData = useAtomValue(canvasImageDataAtom);
   const [rec, setRec] = useState(false);
   const [quest1] = useAtom(questAtom1);
   const [story, setStory] = useState("");
 
   const [quest2, setQuest2] = useAtom(questAtom2);
   const [text2, setText2] = useAtom(contextAtom2);
-  // const [bg2, setBg2] = useAtom(bgAtom2);
+  const [bg2, setBg2] = useAtom(bgAtom2);
 
   const [quest3, setQuest3] = useAtom(questAtom3);
   const [text3, setText3] = useAtom(contextAtom3);
-  // const [bg3, setBg3] = useAtom(bgAtom3);
+  const [bg3, setBg3] = useAtom(bgAtom3);
 
   const [quest4, setQuest4] = useAtom(questAtom4);
   const [text4, setText4] = useAtom(contextAtom4);
-  // const [bg4, setBg4] = useAtom(bgAtom4);
+  const [bg4, setBg4] = useAtom(bgAtom4);
 
   const [quest5, setQuest5] = useAtom(questAtom5);
   const [text5, setText5] = useAtom(contextAtom5);
-  // const [bg5, setBg5] = useAtom(bgAtom5);
+  const [bg5, setBg5] = useAtom(bgAtom5);
 
   const [quest6, setQuest6] = useAtom(questAtom6);
   const [text6, setText6] = useAtom(contextAtom6);
-  // const [bg6, setBg6] = useAtom(bgAtom6);
+  const [bg6, setBg6] = useAtom(bgAtom6);
 
   const [, setQuest7] = useAtom(questAtom7);
   const [text7, setText7] = useAtom(contextAtom7);
-  // const [bg7, setBg7] = useAtom(bgAtom7);
+  const [bg7, setBg7] = useAtom(bgAtom7);
 
   const [isCreated, setIsCreated] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -121,13 +121,13 @@ export const CreateAIParams = () => {
   //   setIsModal(false);
   // }
 
-  const onClickCheck = () => {
-    alert("스토리를 입력해주세요.");
-  };
-
   const onClickCreate = () => {
-    setIsLoading(true);
-    postBookData(pageData);
+    if (story === "") {
+      alert("스토리를 입력해주세요.");
+    } else {
+      setIsLoading(true);
+      postBookData(pageData);
+    }
   };
 
   const handleClickDong = () => {
@@ -144,7 +144,7 @@ export const CreateAIParams = () => {
     setIsCreated(false);
     setClickCount(0);
     setPageNum((prevPageNum) => prevPageNum + 1);
-    navigate(`/story/createai/${pageNum + 1}`);
+    navigate(`/story/create/${pageNum + 1}`);
   };
 
   const pageData = {
@@ -161,35 +161,31 @@ export const CreateAIParams = () => {
 
     if (act) {
       try {
-        const res = await apis.post(
-          `/books/builder/insight2`,
-          pageData,
-          config
-        );
+        const res = await apis.post(`/books/builder/insight`, pageData, config);
         console.log(res.data.data[0]);
         if (pageNum === 2) {
           setQuest2(res.data.data[0].bookInsight.generatedQuestions);
-          // setBg2(res.data.data[0].bookInsight.temporaryGeneratedImageUrl);
+          setBg2(res.data.data[0].bookInsight.temporaryGeneratedImageUrl);
           setText2(res.data.data[0].bookInsight.refinedContext);
         } else if (pageNum === 3) {
           setQuest3(res.data.data[0].bookInsight.generatedQuestions);
-          // setBg3(res.data.data[0].bookInsight.temporaryGeneratedImageUrl);
+          setBg3(res.data.data[0].bookInsight.temporaryGeneratedImageUrl);
           setText3(res.data.data[0].bookInsight.refinedContext);
         } else if (pageNum === 4) {
           setQuest4(res.data.data[0].bookInsight.generatedQuestions);
-          // setBg4(res.data.data[0].bookInsight.temporaryGeneratedImageUrl);
+          setBg4(res.data.data[0].bookInsight.temporaryGeneratedImageUrl);
           setText4(res.data.data[0].bookInsight.refinedContext);
         } else if (pageNum === 5) {
           setQuest5(res.data.data[0].bookInsight.generatedQuestions);
-          // setBg5(res.data.data[0].bookInsight.temporaryGeneratedImageUrl);
+          setBg5(res.data.data[0].bookInsight.temporaryGeneratedImageUrl);
           setText5(res.data.data[0].bookInsight.refinedContext);
         } else if (pageNum === 6) {
           setQuest6(res.data.data[0].bookInsight.generatedQuestions);
-          // setBg6(res.data.data[0].bookInsight.temporaryGeneratedImageUrl);
+          setBg6(res.data.data[0].bookInsight.temporaryGeneratedImageUrl);
           setText6(res.data.data[0].bookInsight.refinedContext);
         } else if (pageNum === 7) {
           setQuest7(res.data.data[0].bookInsight.generatedQuestions);
-          // setBg7(res.data.data[0].bookInsight.temporaryGeneratedImageUrl);
+          setBg7(res.data.data[0].bookInsight.temporaryGeneratedImageUrl);
           setText7(res.data.data[0].bookInsight.refinedContext);
         }
         setIsLoading(false);
@@ -200,20 +196,34 @@ export const CreateAIParams = () => {
     }
   };
 
+  const LoadingComp = () => {
+    return (
+      <S.LoadingContainer>
+        <S.LottieWrapper>
+          <Lottie loop animationData={loadAnim} play />
+        </S.LottieWrapper>
+        <S.LoadingText>
+          그림 그리는 중 ...
+          <br />약 10~15초 정도 걸려요.
+        </S.LoadingText>
+      </S.LoadingContainer>
+    );
+  };
+
   const circles = [...Array(bookLength)].map((_, index) => (
     <S.Circle
       key={index}
       style={index === pageNum - 1 ? { backgroundColor: "#FF90F4" } : {}}
     />
   ));
-  
+
   const texts = [text2, text3, text4, text5, text6, text7];
   const quests = [quest1, quest2, quest3, quest4, quest5, quest6];
 
   return (
     <S.Container>
       {isLoading ? (
-        <WritingLoading />
+        <LoadingComp />
       ) : (
         <>
           {/* {isModal && (
@@ -295,7 +305,7 @@ export const CreateAIParams = () => {
           )}
           <S.Bg src={createBG} alt="배경" />
           <S.Book src={createBook} alt="기본 책" />
-          {/* {pageNum === 2 && bg2 && (
+          {pageNum === 2 && bg2 && (
             <S.CreateBg src={bg2} alt="생성된 스토리 배경" />
           )}
           {pageNum === 3 && bg3 && (
@@ -312,7 +322,7 @@ export const CreateAIParams = () => {
           )}
           {pageNum === 7 && bg7 && (
             <S.CreateBg src={bg7} alt="생성된 스토리 배경" />
-          )} */}
+          )}
           <S.BookFrame src={createBookS} alt="책 프레임" />
           <S.CircleWrapper>{circles}</S.CircleWrapper>
           <S.Header>
@@ -342,39 +352,29 @@ export const CreateAIParams = () => {
                   ))}
                 </>
               ) : (
-                <>
-                  <S.StoryInput
-                    onChange={handleInput}
-                    type="name"
-                    placeholder="이야기를 만들어 주세요."
-                  />
-                  <S.Character src={createG} alt="Saved Image" />
-                </>
+                <S.StoryInput
+                  onChange={handleInput}
+                  type="name"
+                  placeholder="이야기를 만들어 주세요."
+                />
+              )}
+              {canvasImageData && (
+                <S.Character src={canvasImageData} alt="Saved Image" />
               )}
             </S.BodyContainer>
             {isCreated ? (
               <S.CheckG
-                src={checkW}
-                alt="다음으로"
+                src={checkG}
+                alt="다음으로(활성화)"
                 onClick={onClickNext}
                 style={pageNum === bookLength ? { opacity: "0" } : {}}
               />
             ) : (
-              <>
-                {story === "" ? (
-                  <S.Check
-                    src={check}
-                    alt="다음으로(비활성화)"
-                    onClick={onClickCheck}
-                  />
-                ) : (
-                  <S.Check
-                    src={checkG}
-                    alt="다음으로(활성화)"
-                    onClick={onClickCreate}
-                  />
-                )}
-              </>
+              <S.Check
+                src={check}
+                alt="다음으로(비활성화)"
+                onClick={onClickCreate}
+              />
             )}
             {!isCreated && (
               <div onClick = {handleClickDong}>

@@ -9,6 +9,7 @@ import textName from './text-name.png';
 import namingBG from './namingBG.png';
 import book from './book.png';
 import paints from './paints.png';
+import bringChar from './bringChar.png';
 
 export {
   btn,
@@ -22,4 +23,5 @@ export {
   namingBG,
   book,
   paints,
+  bringChar,
 };

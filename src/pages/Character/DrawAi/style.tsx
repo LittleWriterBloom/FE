@@ -50,7 +50,7 @@ export const Check = styled.img`
 
 export const DrawAreaContainer = styled.div`
   position: absolute;
-  width: 60vw;
+  width: 68vw;
   height: 100dvh;
   position: absolute;
   z-index: 4;
@@ -61,16 +61,16 @@ export const DrawAreaContainer = styled.div`
 
 export const DrawArea = styled.div`
   position: absolute;
-  width: 58.5vw;
-  height: 78.5dvh;
+  width: 60vw;
+  height: 78dvh;
   position: absolute;
   z-index: 6;
 `;
 
 export const Paper = styled.img`
   position: absolute;
-  width: 60vw;
-  height: 80dvh;
+  width: 70vw;
+  height: 92dvh;
   position: absolute;
   z-index: 5;
   filter: drop-shadow(0px 0.2rem 1rem rgba(212, 186, 119, 0.59));

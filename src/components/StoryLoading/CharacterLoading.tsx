@@ -39,7 +39,9 @@ export const CharacterLoading = () => {
       <S.LottieWrapper>
         <Lottie loop animationData={characterLoading} play />
       </S.LottieWrapper>
-      <S.LoadingText>{textToShow}<S.Cursor>ㅣ</S.Cursor></S.LoadingText>
+      <S.LoadingTextWrapper>
+        <S.LoadingText>{textToShow}<S.Cursor>ㅣ</S.Cursor></S.LoadingText>
+      </S.LoadingTextWrapper>
     </S.LoadingContainer>
   );
 };

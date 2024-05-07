@@ -83,13 +83,22 @@ export const Body = styled.div`
 `;
 
 export const BodyContainer = styled.div`
-  width: 64.5vw;
+  width: 69vw;
+  height: 75dvh;
+  margin-top: 2dvh;
   display: flex;
   /* flex-direction: column; */
-  justify-content: flex-end;
-  gap: 1rem;
+  justify-content: space-between;
   position: absolute;
   z-index: 10;
+`;
+
+export const StoryCreatedContainer = styled.div`
+  width: 34.4vw;
+  height: 75dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const StoryCreated = styled.div`
@@ -103,9 +112,19 @@ export const StoryCreated = styled.div`
   overflow: auto;
 `;
 
+export const CharacterContainer = styled.div`
+  width: 34vw;
+  height: 75dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
 export const Character = styled.img`
-  width: 40vw;
-  height: auto;
+  max-width: 30vw;
+  height: 22rem;
+  object-fit: cover;
+  overflow: hidden;
 `;
 
 export const Check = styled.img`

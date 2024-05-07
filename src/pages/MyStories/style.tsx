@@ -125,25 +125,6 @@ export const MakeBtn = styled.button`
   margin-top: 1.5rem;
   cursor: pointer;
 `;
-export const CharacterContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  cursor: pointer;
-`;
-
-export const CharacterImg = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-`;
-
-export const CharacterName = styled.div`
-  font-size: 2rem;
-  font-family: "BMJUA";
-  object-fit: cover;
-  margin-top: 1rem;
-`;
 
 export const Ggummi = styled.img`
   width: 12rem;
@@ -209,6 +190,14 @@ export const BookBg = styled.img`
   height: 55%;
   object-fit: cover;
   border-radius: 0 0 0.8rem 0.8rem;
+`;
+
+export const CharacterImg = styled.img`
+  width: 100%;
+  height: auto;
+  position: absolute;
+  z-index: 46;
+  bottom: 0;
 `;
 
 /* card style */

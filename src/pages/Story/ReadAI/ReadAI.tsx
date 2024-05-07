@@ -14,6 +14,7 @@ import {
   bgAtom7,
   bookIdAtom,
   bookLengthAtom,
+  canvasImageDataAtom,
   contextAtom1,
   contextAtom2,
   contextAtom3,
@@ -31,7 +32,7 @@ import { TTS } from "../../../components/TTS/TTS";
 export const ReadAI = () => {
   const navigate = useNavigate();
   const [act] = useAtom(accessTokenAtom);
-  // const canvasImageData = useAtomValue(canvasImageDataAtom);
+  const [canvasImageData, ] = useAtom(canvasImageDataAtom);
   const [bookid] = useAtom(bookIdAtom);
   const [bookLength, setBookLength] = useAtom(bookLengthAtom);
 
@@ -97,20 +98,20 @@ export const ReadAI = () => {
         setText1(bookPages[0].context);
         setText2(bookPages[1].context);
         setText3(bookPages[2].context);
-        setBg1(bookPages[0].backgroundImageUrl);
-        setBg2(bookPages[1].backgroundImageUrl);
-        setBg3(bookPages[2].backgroundImageUrl);
+        setBg1(bookPages[0].coloredImageUrl);
+        setBg2(bookPages[1].coloredImageUrl);
+        setBg3(bookPages[2].coloredImageUrl);
         if (bookL >= 5) {
           setText4(bookPages[3].context);
           setText5(bookPages[4].context);
-          setBg4(bookPages[3].backgroundImageUrl);
-          setBg5(bookPages[4].backgroundImageUrl);
+          setBg4(bookPages[3].coloredImageUrl);
+          setBg5(bookPages[4].coloredImageUrl);
         }
         if (bookL === 7) {
           setText6(bookPages[5].context);
           setText7(bookPages[6].context);
-          setBg6(bookPages[5].backgroundImageUrl);
-          setBg7(bookPages[6].backgroundImageUrl);
+          setBg6(bookPages[5].coloredImageUrl);
+          setBg7(bookPages[6].coloredImageUrl);
         }
       } catch (err) {
         console.error(err);
@@ -136,11 +137,16 @@ export const ReadAI = () => {
       </S.Header>
       <S.Body>
         <S.BodyContainer>
+          <S.CharacterContainer>
+            {canvasImageData && (
+              <S.Character src={canvasImageData} alt="Saved Image" />
+            )}
+          </S.CharacterContainer>
           {[text1, text2, text3, text4, text5, text6, text7].map(
             (text, index) =>
               clickCount === index &&
               text && (
-                <>
+                <S.StoryCreatedContainer>
                   <TTS text={text} speaker="ndain" />
                   <S.StoryCreated key={index}>
                     {text.split(".").map((sentence, index, array) => (
@@ -156,12 +162,9 @@ export const ReadAI = () => {
                       </div>
                     ))}
                   </S.StoryCreated>
-                </>
+                </S.StoryCreatedContainer>
               )
           )}
-          {/* {canvasImageData && (
-                <S.Character src={canvasImageData} alt="Saved Image" />
-              )} */}
         </S.BodyContainer>
         {clickCount + 1 === bookLength ? (
           <></>

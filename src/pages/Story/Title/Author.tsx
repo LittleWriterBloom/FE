@@ -5,13 +5,12 @@ import { useNavigate } from "react-router-dom";
 import { useAtom } from "jotai";
 import {
   accessTokenAtom,
+  bgAtom1,
   bookAuthorAtom,
   bookColorAtom,
   bookIdAtom,
   bookTitleAtom,
-  isSDModeAtom,
 } from "../../../store/jotaiAtoms";
-import { btnMic, btnRecord } from "../../../assets";
 import { BubbleP } from "../../../components/Bubble/BubbleP";
 import { btnHome, btnCheck, btnCheckG, ggummi } from "../../../assets";
 import {
@@ -26,6 +25,8 @@ import apis from "../../../apis/apis";
 import { createBG } from "../../../assets/Story/Create";
 import { BookMaking } from "../../../components/StoryLoading/BookMaking";
 import { TTS } from "../../../components/TTS/TTS";
+import { ModalYN } from "../../../components/ModalYN/ModalYN";
+import { SpeechToText } from "../../../components/SpeechToText/SpeechToText";
 
 interface bookDataTypes {
   title: string | null;
@@ -38,16 +39,29 @@ export const Author = () => {
   const [act] = useAtom(accessTokenAtom);
   const [author, setAuthor] = useState("");
   const [bookTitle] = useAtom(bookTitleAtom);
+  const [, setBookBg1] = useAtom(bgAtom1);
   const [, setBookAuthor] = useAtom(bookAuthorAtom);
   const [, setBookId] = useAtom(bookIdAtom);
-  const [isSDAtom] = useAtom(isSDModeAtom);
 
-  const [rec, setRec] = useState(false);
   const [bookColor, setBookColor] = useState(0);
   const [bookColAtom, setBookColAtom] = useAtom(bookColorAtom);
 
   const [showFirst, setShowFirst] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isModal, setIsModal] = useState(false);
+  const [listening, setListening] = useState(false);
+
+  const startListening = () => {
+    setListening(true);
+  };
+
+  const stopListening = () => {
+    setListening(false);
+  };
+
+  const handleSpeechResult = (result: string) => {
+    setAuthor(result); // 입력된 음성 결과로 이름 업데이트
+  };
 
   useEffect(() => {
     const index = books.findIndex((book) => book === bookColAtom);
@@ -78,21 +92,12 @@ export const Author = () => {
       },
     };
 
-    if (act && !isSDAtom) {
+    if (act) {
       try {
         const res = await apis.post(`/books/builder/save`, bookData, config);
         console.log(res.data.data[0]);
         setBookId(res.data.data[0].book.id);
-        navigate("/story/completion");
-      } catch (err) {
-        console.error(err);
-      }
-    }
-    if (act && isSDAtom) {
-      try {
-        const res = await apis.post(`/books/builder/save2`, bookData, config);
-        console.log(res.data.data[0]);
-        setBookId(res.data.data[0].book.id);
+        setBookBg1(res.data.data[0].book.pages[0].coloredImageUrl);
         navigate("/story/completion");
       } catch (err) {
         console.error(err);
@@ -109,7 +114,11 @@ export const Author = () => {
   };
 
   const onClickHomeBtn = () => {
-    navigate("/");
+    setIsModal(true);
+  };
+
+  const closeModal = () => {
+    setIsModal(false);
   };
 
   const onClickCheck = () => {
@@ -118,20 +127,9 @@ export const Author = () => {
     } else {
       setBookAuthor(author);
       setBookColAtom(books[bookColor]);
-      if (isSDAtom) {
-        setIsLoading(true);
-        saveBookData(bookData);
-      } else {
-        saveBookData(bookData);
-      }
+      setIsLoading(true);
+      saveBookData(bookData);
     }
-  };
-
-  const onClickMic = () => {
-    setRec(true);
-  };
-  const onClickRec = () => {
-    setRec(false);
   };
 
   return (
@@ -140,6 +138,13 @@ export const Author = () => {
         <BookMaking />
       ) : (
         <>
+          <SpeechToText
+            listening={listening}
+            startListening={startListening}
+            stopListening={stopListening}
+            onSpeechResult={handleSpeechResult}
+          />
+          {isModal && <ModalYN isOpen={true} closeModal={closeModal} />}
           <S.Bg src={createBG} alt="배경" />
           {showFirst && (
             <>
@@ -170,6 +175,7 @@ export const Author = () => {
                   onChange={handleInput}
                   type="name"
                   placeholder="작가 이름"
+                  value={author}
                 />
                 <span>지음</span>
               </S.BookAuthor>
@@ -190,19 +196,6 @@ export const Author = () => {
               ))}
             </S.ColorContainer>
             <S.Ggummi src={ggummi} alt="꾸미" />
-            {rec === false ? (
-              <S.Rec
-                src={btnMic}
-                alt="다음으로(비활성화)"
-                onClick={onClickMic}
-              />
-            ) : (
-              <S.Rec
-                src={btnRecord}
-                alt="다음으로(활성화)"
-                onClick={onClickRec}
-              />
-            )}
           </S.Body>
         </>
       )}

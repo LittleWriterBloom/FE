@@ -2,25 +2,37 @@ import * as S from "./style";
 import { useNavigate } from "react-router-dom";
 import { btnHome, btnCheck, btnCheckG } from "../../../assets/index";
 import { stageBG, textBG } from "../../../assets/Story";
-import { btnMic, btnRecord } from "../../../assets";
 import { useEffect, useState } from "react";
 import { useAtom, useAtomValue } from "jotai";
 import { bookBGInit, canvasImageDataAtom } from "../../../store/jotaiAtoms";
 import { BubbleG } from "../../../components/Bubble/BubbleG";
 import { DongAnim } from "../../../components/CharacterAnim/DongAnim";
 import { TTS } from "../../../components/TTS/TTS";
+import { SpeechToText } from "../../../components/SpeechToText/SpeechToText";
 
 export const Stage = () => {
   const navigate = useNavigate();
   const [bg, setBg] = useState("");
   const [, setBgInit] = useAtom(bookBGInit);
   const canvasImageData = useAtomValue(canvasImageDataAtom);
-  const [rec, setRec] = useState(false);
   const [showFirst, setShowFirst] = useState(false);
   const [showSecond, setShowSecond] = useState(false);
   const [showThird, setShowThird] = useState(false);
   const [showFourth, setShowFourth] = useState(false);
   const [showFifth, setShowFifth] = useState(false);
+  const [listening, setListening] = useState(false);
+
+  const startListening = () => {
+    setListening(true);
+  };
+
+  const stopListening = () => {
+    setListening(false);
+  };
+
+  const handleSpeechResult = (result: string) => {
+    setBg(result); // 입력된 음성 결과로 이름 업데이트
+  };
 
   useEffect(() => {
     setTimeout(() => {
@@ -56,15 +68,14 @@ export const Stage = () => {
     }
   };
 
-  const onClickMic = () => {
-    setRec(true);
-  };
-  const onClickRec = () => {
-    setRec(false);
-  };
-
   return (
     <S.Container>
+      <SpeechToText
+        listening={listening}
+        startListening={startListening}
+        stopListening={stopListening}
+        onSpeechResult={handleSpeechResult}
+      />
       <DongAnim talkCount={5} />
       {showFirst && (
         <>
@@ -118,16 +129,12 @@ export const Stage = () => {
             onChange={handleInput}
             type="name"
             placeholder="이야기 배경"
+            value={bg}
           />
           {canvasImageData && (
             <S.Character src={canvasImageData} alt="Saved Image" />
           )}
         </S.BGContainer>
-        {rec === false ? (
-          <S.Rec src={btnMic} alt="음성인식(비활성화)" onClick={onClickMic} />
-        ) : (
-          <S.Rec src={btnRecord} alt="인식중(활성화)" onClick={onClickRec} />
-        )}
       </S.Body>
     </S.Container>
   );

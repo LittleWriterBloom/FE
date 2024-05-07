@@ -106,7 +106,7 @@ export const BodyContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  gap: 1rem;
   position: absolute;
   z-index: 10;
 `;
@@ -122,32 +122,28 @@ export const StoryInput = styled.input`
   font-size: 1.8rem;
   text-align: center;
   color: #000;
-  margin-top: 1rem;
+  margin-top: 7dvh;
   font-family: "BMJUA";
 `;
 
 export const StoryCreated = styled.div`
   width: 60vw;
-  height: 25rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  min-height: 5rem;
   background-color: #ffffff;
   box-shadow: 0 0.25rem 0.25rem 0 rgba(0, 0, 0, 0.25) inset;
-  border-radius: 3rem;
+  border-radius: 10rem;
   box-sizing: border-box;
-  padding: 3rem;
-  font-size: 1.6rem;
+  padding: 1rem 2rem;
+  font-size: 1.8rem;
   text-align: center;
   color: #000;
+  margin-top: 7dvh;
   font-family: "BMJUA";
-  overflow-y: scroll;
 `;
 
 export const Character = styled.img`
-  width: 30vw;
+  width: 40vw;
   height: auto;
-  margin: 6rem auto;
 `;
 
 export const Check = styled.img`

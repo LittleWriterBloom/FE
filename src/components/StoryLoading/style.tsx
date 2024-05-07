@@ -18,6 +18,11 @@ export const LottieWrapper = styled.div`
   height: auto;
 `;
 
+export const LoadingTextWrapper = styled.div`
+  width: auto;
+  height: 5rem;
+`;
+
 export const LoadingText = styled.p`
   font-family: "BMJUA";
   font-size: 2rem;

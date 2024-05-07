@@ -11,15 +11,10 @@ import {
   characterPersonalityAtom,
 } from "../../../store/jotaiAtoms";
 import { BubbleP } from "../../../components/Bubble/BubbleP";
-import {
-  btnCheck,
-  btnCheckG,
-  btnHome,
-  btnMic,
-  btnRecord,
-} from "../../../assets";
+import { btnCheck, btnCheckG, btnHome } from "../../../assets";
 import { GgummiAnim } from "../../../components/CharacterAnim/GgummiAnim";
 import { TTS } from "../../../components/TTS/TTS";
+import { SpeechToText } from "../../../components/SpeechToText/SpeechToText";
 
 export const Personality = () => {
   const navigate = useNavigate();
@@ -31,7 +26,19 @@ export const Personality = () => {
   const [showFirst, setShowFirst] = useState(false);
   const [showSecond, setShowSecond] = useState(false);
   const [showThird, setShowThird] = useState(false);
-  const [rec, setRec] = useState(false);
+  const [listening, setListening] = useState(false);
+
+  const startListening = () => {
+    setListening(true);
+  };
+
+  const stopListening = () => {
+    setListening(false);
+  };
+
+  const handleSpeechResult = (result: string) => {
+    setPersonality(result); // 입력된 음성 결과로 이름 업데이트
+  };
 
   useEffect(() => {
     setTimeout(() => {
@@ -62,15 +69,14 @@ export const Personality = () => {
     }
   };
 
-  const onClickMic = () => {
-    setRec(true);
-  };
-  const onClickRec = () => {
-    setRec(false);
-  };
-
   return (
     <S.Container>
+      <SpeechToText
+        listening={listening}
+        startListening={startListening}
+        stopListening={stopListening}
+        onSpeechResult={handleSpeechResult}
+      />
       <GgummiAnim talkCount={3} />
       <S.Bg src={namingBG} alt="배경이미지" />
       {showFirst && (
@@ -87,7 +93,10 @@ export const Personality = () => {
       )}
       {showThird && (
         <>
-          <TTS text="활발해? 소심해? 무서움이 많아? 어떤 친구일까~?" speaker="nmeow" />
+          <TTS
+            text="활발해? 소심해? 무서움이 많아? 어떤 친구일까~?"
+            speaker="nmeow"
+          />
           <BubbleP
             text="활발해? 소심해? 무서움이 많아? 어떤 친구일까~?"
             length={47}
@@ -110,6 +119,7 @@ export const Personality = () => {
             onChange={handleInput}
             type="name"
             placeholder="캐릭터 성격"
+            value={personality}
           />
         </S.NameContainer>
         <S.CharacterImage>
@@ -121,11 +131,6 @@ export const Personality = () => {
         </S.CharacterImage>
         <S.BottomBox />
         <S.BottomPaints src={paints} alt="페인트" />
-        {rec === false ? (
-          <S.Rec src={btnMic} alt="다음으로(비활성화)" onClick={onClickMic} />
-        ) : (
-          <S.Rec src={btnRecord} alt="다음으로(활성화)" onClick={onClickRec} />
-        )}
       </S.Body>
     </S.Container>
   );

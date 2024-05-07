@@ -7,6 +7,7 @@ import {
   accessTokenAtom,
   aiImageDataAtom,
   characterDescriptAtom,
+  originImageDataAtom,
 } from "../../../store/jotaiAtoms";
 import { btnHome, btnCheck, btnCheckG } from "../../../assets";
 import {
@@ -48,7 +49,7 @@ export const DrawAi = () => {
   const canvasRef = useRef(null);
   const [canvas, setCanvas] = useState<fabric.Canvas | null>();
   const [isCanvasEmpty, setIsCanvasEmpty] = useState<boolean>(true); // 캔버스가 비어있는지 여부 상태 추가
-  const [canvasImg, setCanvasImg] = useState("");
+  const [originImg, setOriginImg] = useAtom(originImageDataAtom);
   const [aiImg, setAiImg] = useAtom(aiImageDataAtom);
   const [isPalette, setIsPalette] = useState(true);
   const [brushColor, setBrushColor] = useState<string>("black");
@@ -82,7 +83,18 @@ export const DrawAi = () => {
   }, []);
 
   useEffect(() => {
-    if (canvas) {
+    if (canvas) {// 배경을 하얀색으로 설정하는 사각형 생성
+      const rect = new fabric.Rect({
+        left: 0,
+        top: 0,
+        width: canvas.width,
+        height: canvas.height,
+        fill: "white",
+        selectable: false, // 선택 불가능하도록 설정
+      });
+
+      canvas.add(rect); // 캔버스에 사각형 추가
+
       canvas.isDrawingMode = true;
       canvas.freeDrawingBrush.width = 10;
       canvas.freeDrawingBrush.color = brushColor;
@@ -104,7 +116,7 @@ export const DrawAi = () => {
         quality: 1, // 이미지 품질 (0 ~ 1)
       });
 
-      setCanvasImg(imageData.split(",")[1]);
+      setOriginImg(imageData.split(",")[1]);
       setClickCheck(true);
       /*
 			// 이미지 데이터를 사용하여 이미지 파일 생성
@@ -184,7 +196,7 @@ export const DrawAi = () => {
   const characterData = {
     prompt: descript,
     imageType: "BASE_64",
-    base64Image: canvasImg,
+    base64Image: originImg,
   };
   console.log(characterData);
 
@@ -199,7 +211,7 @@ export const DrawAi = () => {
       try {
         const res = await apis.post("/character/ai", characterData, config);
         console.log(res.data);
-        setCanvasImg(res.data.data[0].originUrl);
+        setOriginImg(res.data.data[0].originUrl);
         setAiImg(res.data.data[0].aiGeneratedImageUrl);
         setIsLoading(true);
         setIsCompareAi(true);
@@ -213,7 +225,7 @@ export const DrawAi = () => {
     return (
       <>
         {isCompareAi ? (
-          <CompareAi canvasImg={canvasImg} aiImg={aiImg} />
+          <CompareAi canvasImg={originImg} aiImg={aiImg} />
         ) : (
           <CharacterLoading />
         )}

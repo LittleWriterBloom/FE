@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 // import { useAtom, useAtomValue } from "jotai";
 import { useAtom } from "jotai";
 import { bookColorAtom, bookTitleAtom } from "../../../store/jotaiAtoms";
-import { btnMic, btnRecord } from "../../../assets";
 import { BubbleP } from "../../../components/Bubble/BubbleP";
 import { btnHome, btnCheck, btnCheckG, ggummi } from "../../../assets";
 import {
@@ -17,17 +16,32 @@ import {
 } from "../../../assets/Story/Title";
 import { createBG } from "../../../assets/Story/Create";
 import { TTS } from "../../../components/TTS/TTS";
+import { ModalYN } from "../../../components/ModalYN/ModalYN";
+import { SpeechToText } from "../../../components/SpeechToText/SpeechToText";
 
 export const Title = () => {
   const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [, setBookTitle] = useAtom(bookTitleAtom);
 
-  const [rec, setRec] = useState(false);
   const [bookColor, setBookColor] = useState(0);
   const [, setBookColAtom] = useAtom(bookColorAtom);
 
   const [showFirst, setShowFirst] = useState(false);
+  const [isModal, setIsModal] = useState(false);
+  const [listening, setListening] = useState(false);
+
+  const startListening = () => {
+    setListening(true);
+  };
+
+  const stopListening = () => {
+    setListening(false);
+  };
+
+  const handleSpeechResult = (result: string) => {
+    setTitle(result); // 입력된 음성 결과로 이름 업데이트
+  };
 
   useEffect(() => {
     setTimeout(() => {
@@ -47,7 +61,11 @@ export const Title = () => {
   };
 
   const onClickHomeBtn = () => {
-    navigate("/");
+    setIsModal(true);
+  };
+
+  const closeModal = () => {
+    setIsModal(false);
   };
 
   const onClickCheck = () => {
@@ -60,15 +78,15 @@ export const Title = () => {
     }
   };
 
-  const onClickMic = () => {
-    setRec(true);
-  };
-  const onClickRec = () => {
-    setRec(false);
-  };
-
   return (
     <S.Container>
+      <SpeechToText
+        listening={listening}
+        startListening={startListening}
+        stopListening={stopListening}
+        onSpeechResult={handleSpeechResult}
+      />
+      {isModal && <ModalYN isOpen={true} closeModal={closeModal} />}
       <S.Bg src={createBG} alt="배경" />
       {showFirst && (
         <>
@@ -93,6 +111,7 @@ export const Title = () => {
             onChange={handleInput}
             type="name"
             placeholder="동화의 제목을 지어주세요."
+            value={title}
           />
         </S.BookContainer>
         <S.ColorContainer>
@@ -110,11 +129,6 @@ export const Title = () => {
           ))}
         </S.ColorContainer>
         <S.Ggummi src={ggummi} alt="꾸미" />
-        {rec === false ? (
-          <S.Rec src={btnMic} alt="다음으로(비활성화)" onClick={onClickMic} />
-        ) : (
-          <S.Rec src={btnRecord} alt="다음으로(활성화)" onClick={onClickRec} />
-        )}
       </S.Body>
     </S.Container>
   );

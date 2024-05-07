@@ -9,12 +9,12 @@ import {
   canvasImageDataAtom,
   characterNameAtom,
 } from "../../../store/jotaiAtoms";
-import { btnMic, btnRecord } from "../../../assets";
 import { BubbleP } from "../../../components/Bubble/BubbleP";
 import { namingBG } from "../../../assets/Character";
 import { btnHome, btnCheck, btnCheckG } from "../../../assets";
 import { GgummiAnimClap } from "../../../components/CharacterAnim/GgummiAnimClap";
 import { TTS } from "../../../components/TTS/TTS";
+import { SpeechToText } from "../../../components/SpeechToText/SpeechToText";
 
 export const Naming = () => {
   const navigate = useNavigate();
@@ -22,10 +22,18 @@ export const Naming = () => {
   const [, setNameAtom] = useAtom(characterNameAtom);
   const [canvasImageData] = useAtom(canvasImageDataAtom);
   const [aiImg] = useAtom(aiImageDataAtom);
-  const [rec, setRec] = useState(false);
   const [showFirst, setShowFirst] = useState(false);
   const [showSecond, setShowSecond] = useState(false);
   const [showThird, setShowThird] = useState(false);
+  const [listening, setListening] = useState(false);
+
+  const startListening = () => {
+    setListening(true);
+  };
+
+  const stopListening = () => {
+    setListening(false);
+  };
 
   useEffect(() => {
     setTimeout(() => {
@@ -56,20 +64,23 @@ export const Naming = () => {
     }
   };
 
-  const onClickMic = () => {
-    setRec(true);
-  };
-  const onClickRec = () => {
-    setRec(false);
+  const handleSpeechResult = (result: string) => {
+    setName(result); // 입력된 음성 결과로 이름 업데이트
   };
 
   return (
     <S.Container>
+      <SpeechToText
+        listening={listening}
+        startListening={startListening}
+        stopListening={stopListening}
+        onSpeechResult={handleSpeechResult}
+      />
       <GgummiAnimClap talkCount={1} />
       <S.Bg src={namingBG} alt="배경이미지" />
       {showFirst && (
         <>
-          <TTS text="우와~ 정말 잘 그렸다~!!" speaker="nmeow"/>
+          <TTS text="우와~ 정말 잘 그렸다~!!" speaker="nmeow" />
           <BubbleP text="우와~ 정말 잘 그렸다!" length={24} />
         </>
       )}
@@ -101,6 +112,7 @@ export const Naming = () => {
             onChange={handleInput}
             type="name"
             placeholder="캐릭터 이름"
+            value={name}
           />
         </S.NameContainer>
         <S.CharacterImage>
@@ -112,11 +124,6 @@ export const Naming = () => {
         </S.CharacterImage>
         <S.BottomBox />
         <S.BottomPaints src={paints} alt="페인트" />
-        {rec === false ? (
-          <S.Rec src={btnMic} alt="다음으로(비활성화)" onClick={onClickMic} />
-        ) : (
-          <S.Rec src={btnRecord} alt="다음으로(활성화)" onClick={onClickRec} />
-        )}
       </S.Body>
     </S.Container>
   );

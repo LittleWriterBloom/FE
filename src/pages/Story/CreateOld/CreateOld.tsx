@@ -1,22 +1,21 @@
 import * as S from "./style";
 import { useNavigate } from "react-router-dom";
 import { btnHome } from "../../../assets/index";
-import { check, checkG, checkW } from "../../../assets/Story";
+import { check, checkG } from "../../../assets/Story";
 import { btnMic, btnRecord } from "../../../assets";
 import { useEffect, useState } from "react";
-import { useAtom } from "jotai";
+import { useAtom, useAtomValue } from "jotai";
+import Lottie from "react-lottie-player";
+import loadAnim from "../../../assets/Lottie/loading.json";
 import {
   accessTokenAtom,
   bgAtom1,
   bgAtom2,
   bgAtom3,
-  bgAtom4,
-  bgAtom5,
-  bgAtom6,
-  bgAtom7,
   bookBGInit,
   bookIdAtom,
   bookLengthAtom,
+  canvasImageDataAtom,
   characterIdAtom,
   characterNameAtom,
   contextAtom1,
@@ -27,10 +26,9 @@ import {
   btnEnd,
   createBG,
   createBook,
-  createG,
+  createBookS,
 } from "../../../assets/Story/Create";
 import apis from "../../../apis/apis";
-import { WritingLoading } from "../../../components/StoryLoading/\bWritingLoading";
 import { DongAnim } from "../../../components/CharacterAnim/DongAnim";
 import { TTS } from "../../../components/TTS/TTS";
 interface BookInitDataTypes {
@@ -39,25 +37,21 @@ interface BookInitDataTypes {
   firstContext: string | null;
 }
 
-export const CreateAI = () => {
+export const CreateOld = () => {
   const navigate = useNavigate();
   const [bookLength] = useAtom(bookLengthAtom);
   const [story, setStory] = useState("");
   const [nameAtomValue] = useAtom(characterNameAtom);
   const [, setQuest1] = useAtom(questAtom1);
-  // const canvasImageData = useAtomValue(canvasImageDataAtom);
+  const canvasImageData = useAtomValue(canvasImageDataAtom);
   const [rec, setRec] = useState(false);
   const [text1, setText1] = useAtom(contextAtom1);
   const [act] = useAtom(accessTokenAtom);
   const [charId] = useAtom(characterIdAtom);
   const [bgInit] = useAtom(bookBGInit);
-  const [, setBg1] = useAtom(bgAtom1);
+  const [bg1, setBg1] = useAtom(bgAtom1);
   const [, setBg2] = useAtom(bgAtom2);
   const [, setBg3] = useAtom(bgAtom3);
-  const [, setBg4] = useAtom(bgAtom4);
-  const [, setBg5] = useAtom(bgAtom5);
-  const [, setBg6] = useAtom(bgAtom6);
-  const [, setBg7] = useAtom(bgAtom7);
   const [, setBookId] = useAtom(bookIdAtom);
   const [isCreated, setIsCreated] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -70,10 +64,6 @@ export const CreateAI = () => {
     setBg1("");
     setBg2("");
     setBg3("");
-    setBg4("");
-    setBg5("");
-    setBg6("");
-    setBg7("");
     setTimeout(() => {
       setShowFirst(true);
       setTimeout(() => {
@@ -106,13 +96,13 @@ export const CreateAI = () => {
     setRec(false);
   };
 
-  const onClickCheck = () => {
-    alert("스토리를 입력해주세요.");
-  };
-
   const onClickCreate = () => {
-    setIsLoading(true);
-    postBookInit(bookInitData);
+    if (story === "") {
+      alert("스토리를 입력해주세요.");
+    } else {
+      setIsLoading(true);
+      postBookInit(bookInitData);
+    }
   };
 
   const onClickDong = () => {
@@ -123,7 +113,7 @@ export const CreateAI = () => {
   };
 
   const onClickNext = () => {
-    navigate("/story/createai/2");
+    navigate("/story/create/2");
   };
 
   const postBookInit = async (bookInitData: BookInitDataTypes) => {
@@ -136,11 +126,12 @@ export const CreateAI = () => {
     if (act) {
       try {
         const res = await apis.post(
-          "/books/builder/init2",
+          "/books/builder/init",
           bookInitData,
           config
         );
         console.log(res.data);
+        setBookId(res.data.data[0].bookId);
         setBg1(res.data.data[0].bookInsight.temporaryGeneratedImageUrl);
         setText1(res.data.data[0].bookInsight.refinedContext);
         setQuest1(res.data.data[0].bookInsight.generatedQuestions);
@@ -150,6 +141,20 @@ export const CreateAI = () => {
         console.error(err);
       }
     }
+  };
+
+  const LoadingComp = () => {
+    return (
+      <S.LoadingContainer>
+        <S.LottieWrapper>
+          <Lottie loop animationData={loadAnim} play />
+        </S.LottieWrapper>
+        <S.LoadingText>
+          그림 그리는 중 ...
+          <br />약 10~15초 정도 걸려요.
+        </S.LoadingText>
+      </S.LoadingContainer>
+    );
   };
 
   const circles = [...Array(bookLength)].map((_, index) => (
@@ -162,7 +167,7 @@ export const CreateAI = () => {
   return (
     <S.Container>
       {isLoading ? (
-        <WritingLoading />
+        <LoadingComp />
       ) : (
         <>
           {isCreated ? (
@@ -198,6 +203,8 @@ export const CreateAI = () => {
           )}
           <S.Bg src={createBG} alt="배경" />
           <S.Book src={createBook} alt="기본 책" />
+          {bg1 && <S.CreateBg src={bg1} alt="생성된 스토리 배경" />}
+          <S.BookFrame src={createBookS} alt="책 프레임" />
           <S.CircleWrapper>{circles}</S.CircleWrapper>
           <S.Header>
             <S.Home src={btnHome} alt="홈" onClick={onClickHomeBtn} />
@@ -216,37 +223,31 @@ export const CreateAI = () => {
                   <S.StoryCreated>{text1}</S.StoryCreated>
                 </>
               ) : (
-                <>
-                  <S.StoryInput
-                    onChange={handleInput}
-                    type="name"
-                    placeholder="동화의 첫 문장을 지어주세요."
-                  />
-                  <S.Character src={createG} alt="Saved Image" />
-                </>
+                <S.StoryInput
+                  onChange={handleInput}
+                  type="name"
+                  placeholder="동화의 첫 문장을 지어주세요."
+                />
+              )}
+              {canvasImageData && (
+                <S.Character src={canvasImageData} alt="Saved Image" />
               )}
             </S.BodyContainer>
             {isCreated ? (
-              <S.CheckG src={checkW} alt="다음으로" onClick={onClickNext} />
+              <S.CheckG
+                src={checkG}
+                alt="다음으로(활성화)"
+                onClick={onClickNext}
+              />
             ) : (
-              <>
-                {story === "" ? (
-                  <S.Check
-                    src={check}
-                    alt="다음으로(비활성화)"
-                    onClick={onClickCheck}
-                  />
-                ) : (
-                  <S.Check
-                    src={checkG}
-                    alt="다음으로(활성화)"
-                    onClick={onClickCreate}
-                  />
-                )}
-              </>
+              <S.Check
+                src={check}
+                alt="다음으로(비활성화)"
+                onClick={onClickCreate}
+              />
             )}
             {!isCreated && (
-              <div onClick = {onClickDong}>
+              <div onClick={onClickDong}>
                 <DongAnim talkCount={1} />
               </div>
             )}
