@@ -5,6 +5,7 @@ export const accessTokenAtom = atom(localStorage.getItem('accessToken') || '');
 
 export const canvasImageDataAtom = atom<string>("");
 export const aiImageDataAtom = atom<string>("");
+export const originImageDataAtom = atom<string>("");
 export const characterDescriptAtom = atom<string>("");
 export const characterNameAtom = atom<string>("");
 export const characterPersonalityAtom = atom<string>("");
@@ -43,8 +44,6 @@ export const bookAuthorAtom = atom<string>("");
 export const bookIdAtom = atom<string>("");
 export const bookCreateDate = atom<string>("");
 export const bookColorAtom = atom(pinkBook);
-
-export const isSDModeAtom = atom(false);
 
 /*
 export const updateToken = (newToken) => {

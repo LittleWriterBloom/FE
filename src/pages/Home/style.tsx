@@ -12,13 +12,13 @@ export const Header = styled.div`
   width: 100%;
   height: 12dvh;
   display: flex;
+  top: 0;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding-top: 3dvh;
+  margin-top: 3dvh;
   position: absolute;
-  z-index: 10;
-  top: 0;
+  z-index: 5;
 `;
 
 export const Profile = styled.img`

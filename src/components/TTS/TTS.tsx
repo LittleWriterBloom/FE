@@ -27,6 +27,7 @@ export const TTS: React.FC<TTSProps> = ({ text, speaker }) => {
           volume: 0,
           speed: 0,
           pitch: 0,
+          alpha: 0,
           format: "mp3",
         },
         {

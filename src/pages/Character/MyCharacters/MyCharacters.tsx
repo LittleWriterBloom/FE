@@ -8,20 +8,19 @@ import {
   characterIdAtom,
   characterNameAtom,
   characterPersonalityAtom,
-  isSDModeAtom,
 } from "../../../store/jotaiAtoms";
 import {
   bg,
   boardBG,
-  btnAI,
   btnMakeChar,
   btnStoryMake,
   cardBG,
   memoBlue,
   title,
 } from "../../../assets/Character/MyCharacters";
-import { btnHome, btnCheck, ggummi2, btnBack } from "../../../assets";
+import { btnHome, ggummi2, btnBack } from "../../../assets";
 import apis from "../../../apis/apis";
+import { bring } from "../../../assets/Character";
 
 interface Character {
   id: number;
@@ -40,7 +39,6 @@ export const MyCharacters = () => {
   const [, setCharName] = useAtom(characterNameAtom);
   const [, setCharFeat] = useAtom(characterPersonalityAtom);
   const [, setCharId] = useAtom(characterIdAtom);
-  const [, setIsSDAtom] = useAtom(isSDModeAtom);
 
   const onClickHomeBtn = () => {
     navigate("/");
@@ -73,18 +71,6 @@ export const MyCharacters = () => {
       setCharName(selectedChar.name || "");
       setCharFeat(selectedChar.personality || "");
       setCharId(selectedChar.id);
-      setIsSDAtom(false);
-    }
-    navigate("/story/stage");
-  };
-
-  const onClickAIStoryBtn = () => {
-    if (selectedChar) {
-      setCharImg(selectedChar.imageUrl || "");
-      setCharName(selectedChar.name || "");
-      setCharFeat(selectedChar.personality || "");
-      setCharId(selectedChar.id);
-      setIsSDAtom(true);
     }
     navigate("/story/stage");
   };
@@ -110,7 +96,11 @@ export const MyCharacters = () => {
         {card === true && (
           <S.ExitBtn src={btnBack} alt="나가기" onClick={onClickBackBtn} />
         )}
-        <S.Check src={btnCheck} alt="확인" />
+        <S.Bring
+          src={bring}
+          alt="캐릭터 불러오기"
+          onClick={onClickCharBtn}
+        />
       </S.Header>
       <S.Ggummi src={ggummi2} alt="꾸미" />
       <S.Logo src={title} alt="홈" />
@@ -164,7 +154,6 @@ export const MyCharacters = () => {
                 <S.CardCharName>{selectedChar?.name}</S.CardCharName>
                 <S.CardCharFeat>{selectedChar?.personality}</S.CardCharFeat>
                 <S.MakeStoryBtn src={btnStoryMake} onClick={onClickStoryBtn} />
-                <S.MakeStoryBtn src={btnAI} onClick={onClickAIStoryBtn} />
               </S.CardDataContainer>
             </S.CardContainer>
           </S.BodyContainerT>

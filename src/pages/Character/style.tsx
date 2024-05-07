@@ -26,7 +26,7 @@ export const BgBottom = styled.img`
 `;
 
 export const Header = styled.div`
-  width: 100%;
+  width: 100%; 
   height: 12dvh;
   display: flex;
   top: 0;

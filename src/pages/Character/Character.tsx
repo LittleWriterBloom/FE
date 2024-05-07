@@ -2,7 +2,7 @@ import * as S from "./style";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { BubbleP } from "../../components/Bubble/BubbleP";
-import { bring, ai, draw } from "../../assets/Character";
+import { bring, ai, bringChar } from "../../assets/Character";
 import { bgCloudB, bgCloudP, btnHome } from "../../assets";
 import { aiImageDataAtom, canvasImageDataAtom } from "../../store/jotaiAtoms";
 import { useAtom } from "jotai";
@@ -36,10 +36,6 @@ export const Character = () => {
     navigate("/");
   };
 
-  const onClickDrawBtn = () => {
-    navigate("/character/draw");
-  };
-
   const onClickDrawAiBtn = () => {
     navigate("/character/drawai");
   };
@@ -50,7 +46,7 @@ export const Character = () => {
 
   return (
     <S.Container>
-      <GgummiAnim talkCount={6}/>
+      <GgummiAnim talkCount={6} />
       {showFirst && (
         <>
           <TTS text="동화를 만드려면 주인공이 있어야겠지?" speaker="nmeow" />
@@ -59,8 +55,14 @@ export const Character = () => {
       )}
       {showSecond && (
         <>
-          <TTS text="만들어 놓은 캐릭터를 불러와도 되구, 직접 캐릭터를 그려봐도 좋아!" speaker="nmeow" />
-          <BubbleP text="만들어 놓은 캐릭터를 불러와도 되구, 직접 캐릭터를 그려봐도 좋아!" length={58} />
+          <TTS
+            text="만들어 놓은 캐릭터를 불러와도 되구, 직접 캐릭터를 그려봐도 좋아!"
+            speaker="nmeow"
+          />
+          <BubbleP
+            text="만들어 놓은 캐릭터를 불러와도 되구, 직접 캐릭터를 그려봐도 좋아!"
+            length={58}
+          />
         </>
       )}
       {showThird && (
@@ -75,15 +77,20 @@ export const Character = () => {
         <S.Home src={btnHome} alt="홈" onClick={onClickHomeBtn} />
         <S.Logo>주인공 만들기</S.Logo>
         <S.Settings src={bring} alt="캐릭터 불러오기" />
-        <S.Bring src={bring} alt="캐릭터 불러오기" onClick={onClickBringBtn} />
+        <S.Bring
+          src={bring}
+          alt="캐릭터 불러오기"
+          onClick={onClickBringBtn}
+          style={{ opacity: "0" }}
+        />
       </S.Header>
       <S.Body>
         <S.BtnWrapper>
-          <S.Btn onClick={onClickDrawBtn}>
-            <S.BtnImg src={draw} alt="버튼" />
-          </S.Btn>
           <S.Btn onClick={onClickDrawAiBtn}>
             <S.BtnImg src={ai} alt="버튼" />
+          </S.Btn>
+          <S.Btn onClick={onClickBringBtn}>
+            <S.BtnImg src={bringChar} alt="버튼" />
           </S.Btn>
           {/* <S.Btn>
             <S.BtnImg src={paint} alt="버튼" />

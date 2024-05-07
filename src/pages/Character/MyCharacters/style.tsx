@@ -27,12 +27,14 @@ export const Home = styled.img`
   cursor: pointer;
 `;
 
-export const Check = styled.img`
+export const Bring = styled.img`
   width: auto;
-  height: 75%;
-  margin-right: 5vw;
-  filter: drop-shadow(0 0 1rem rgba(0, 0, 0, 0.17));
-  opacity: 0;
+  height: 160%;
+  position: absolute;
+  z-index: 10;
+  right: 5vw;
+  top: 1.4dvh;
+  cursor: pointer;
 `;
 
 export const Body = styled.div`
@@ -152,11 +154,13 @@ export const CharacterName = styled.div`
 
 export const Ggummi = styled.img`
   width: 20%;
-  height: auto;
+  height: 18rem;
   position: fixed;
-  bottom: 4rem;
+  bottom: 0;
   right: 5%;
   z-index: 6;
+  object-fit: cover;
+  object-position: top;
 `;
 
 export const ModalContainer = styled.div`

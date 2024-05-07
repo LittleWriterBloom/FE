@@ -39,7 +39,9 @@ export const WritingLoading = () => {
       <S.LottieWrapper style={{width: "30vw"}}>
         <Lottie loop animationData={writingLoading} play />
       </S.LottieWrapper>
-      <S.LoadingText>{textToShow}<S.Cursor>ㅣ</S.Cursor></S.LoadingText>
+      <S.LoadingTextWrapper>
+        <S.LoadingText>{textToShow}<S.Cursor>ㅣ</S.Cursor></S.LoadingText>
+      </S.LoadingTextWrapper>
     </S.LoadingContainer>
   );
 };

@@ -27,11 +27,12 @@ import {
 } from "../../assets/Story/Title";
 import apis from "../../apis/apis";
 
+
 interface AllData {
   firstPageImageUrl: string;
   author: string;
   bookColor: number;
-  characterImg: string;
+  character: { imageUrl: string };
   createDate: string;
   bookId: string;
   title: string;
@@ -47,7 +48,7 @@ export const MyStories = () => {
   const [createDate, setCreateDate] = useState("");
   const [bookId, setBookId] = useAtom(bookIdAtom);
   const [bookTitle, setBookTitle] = useAtom(bookTitleAtom);
-  const [, setCharImg] = useAtom(characterImgAtom);
+  const [charImg, setCharImg] = useAtom(characterImgAtom);
   const [bookColor, setBookColor] = useState(pinkBook);
   const [bookFirstImg, setBookFirstImg] = useState("");
 
@@ -90,7 +91,7 @@ export const MyStories = () => {
     setAuthor(selected.author);
     setCreateDate(selected.createDate);
     setBookId(selected.bookId);
-    setCharImg(selected.characterImg);
+    setCharImg(selected.character.imageUrl);
     setBookColor(books[selected.bookColor]);
     setBookTitle(selected.title);
     setCard(true);
@@ -121,6 +122,7 @@ export const MyStories = () => {
             {allData.map((item, index) => (
               <S.BookContainer key={index} onClick={() => onClickBook(index)}>
                 <S.BookImg src={books[item.bookColor]} alt="동화책 종류" />
+                <S.CharacterImg src={item.character.imageUrl} alt="캐릭터 이미지" />
                 <S.BookData>
                   <S.BookTitle>{item.title}</S.BookTitle>
                   <S.BookAuthor>{item.author} 지음</S.BookAuthor>
@@ -138,6 +140,7 @@ export const MyStories = () => {
           <S.CardContainer>
             <S.CardBookContainer>
               <S.BookImg src={bookColor} alt="동화책 종류" />
+              <S.CharacterImg src={charImg} alt="캐릭터 이미지" />
               <S.BookData>
                 <S.BookTitle style={{ fontSize: "1.7rem" }}>
                   {bookTitle}

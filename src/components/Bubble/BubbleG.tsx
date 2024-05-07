@@ -8,7 +8,7 @@ interface BubbleProps {
 
 export const BubbleG: React.FC<BubbleProps> = ({ text, length }) => {
   return (
-    <S.BubbleContainer>
+    <S.BubbleContainer style={{bottom: "22dvh"}}>
       <S.BubbleWrapper style={{ width: `${length}rem` }}>
         <S.BubbleImg
           src={bubbleG}

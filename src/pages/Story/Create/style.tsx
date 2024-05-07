@@ -26,9 +26,10 @@ export const Book = styled.img`
 
 export const CreateBg = styled.img`
   position: absolute;
-  width: 74.8vw;
-  height: 89.8dvh;
-  bottom: 2.1dvh;
+  width: 37.5vw;
+  height: 89.7dvh;
+  bottom: 2.2dvh;
+  left: 12.5vw;
   object-fit: cover;
   z-index: 3;
 `;
@@ -102,11 +103,22 @@ export const Body = styled.div`
 `;
 
 export const BodyContainer = styled.div`
-  width: 60vw;
+  width: 69vw;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
+  justify-content: center;
+  position: absolute;
+  z-index: 10;
+`;
+
+export const StoryContainer = styled.div`
+  width: 69vw;
+  height: 75dvh;
+  margin-top: 2dvh;
+  display: flex;
+  /* flex-direction: column; */
+  justify-content: space-between;
   position: absolute;
   z-index: 10;
 `;
@@ -122,28 +134,51 @@ export const StoryInput = styled.input`
   font-size: 1.8rem;
   text-align: center;
   color: #000;
-  margin-top: 7dvh;
+  margin-top: 1rem;
   font-family: "BMJUA";
+`;
+
+export const StoryCreatedContainer = styled.div`
+  width: 34.4vw;
+  height: 75dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const StoryCreated = styled.div`
-  width: 60vw;
-  min-height: 5rem;
-  background-color: #ffffff;
-  box-shadow: 0 0.25rem 0.25rem 0 rgba(0, 0, 0, 0.25) inset;
-  border-radius: 10rem;
+  width: 30vw;
+  max-height: 58dvh;
   box-sizing: border-box;
   padding: 1rem 2rem;
-  font-size: 1.8rem;
-  text-align: center;
+  font-size: 1.5rem;
   color: #000;
-  margin-top: 7dvh;
   font-family: "BMJUA";
+  overflow: auto;
+`;
+
+export const CharacterContainer = styled.div`
+  width: 34vw;
+  height: 75dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
 `;
 
 export const Character = styled.img`
-  width: 40vw;
+  max-width: 30vw;
+  height: 22rem;
+  object-fit: cover;
+  overflow: hidden;
+  position: absolute;
+  bottom: 1rem;
+`;
+
+export const CreateG = styled.img`
+  width: 30vw;
   height: auto;
+  margin: 6rem auto;
 `;
 
 export const Check = styled.img`

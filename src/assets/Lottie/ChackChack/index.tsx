@@ -4,7 +4,6 @@ import chaeckTalk from './chaeckTalk.json';
 import chaeckRight from './chaeckRight.json';
 import chaeckFront from './chaeckFront.json';
 import chaeckJoy from './chaeckJoy.json';
-import voice from './voice recognition.json'
 
 export {
   chaeckBase,
@@ -13,5 +12,4 @@ export {
   chaeckRight,
   chaeckFront,
   chaeckJoy,
-  voice,
 };

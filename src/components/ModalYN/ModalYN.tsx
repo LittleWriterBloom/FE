@@ -1,17 +1,12 @@
 import styled, { keyframes } from "styled-components";
 import { dongEnd, modalBtnNo, modalBtnYes } from "../../assets";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export const ModalYN = () => {
-  const [isOpen, setIsOpen] = useState(true);
+export const ModalYN = ({ isOpen, closeModal }: { isOpen: boolean, closeModal: () => void }) => {
   const navigate = useNavigate();
 
-  const closeModal = () => {
-    setIsOpen(false);
-  };
-
   const naviToHome = () => {
+    closeModal();
     navigate("/home");
   };
 
@@ -50,7 +45,7 @@ const ModalContainer = styled.div`
   width: 100vw;
   height: 100dvh;
   position: absolute;
-  z-index: 100;
+  z-index: 500;
   left: 0;
   top: 0;
   display: flex;

@@ -11,6 +11,7 @@ import {
   accessTokenAtom,
   aiImageDataAtom,
   characterDescriptAtom,
+  originImageDataAtom,
 } from "../../../store/jotaiAtoms";
 import Lottie from "react-lottie-player";
 import characterCompletion from "../../../assets/Lottie/characterCompletion.json";
@@ -21,6 +22,7 @@ export const Complete = () => {
   const navigate = useNavigate();
   const [canvasImageData] = useAtom(canvasImageDataAtom);
   const [aiImg] = useAtom(aiImageDataAtom);
+  const [originImg, ] = useAtom(originImageDataAtom);
   const [descript] = useAtom(characterDescriptAtom);
   const [characterName] = useAtom(characterNameAtom);
   const [characterPersonality] = useAtom(characterPersonalityAtom);
@@ -28,8 +30,8 @@ export const Complete = () => {
 
   useEffect(() => {
     setTimeout(() => {
-      postCharacterData(characterData, characterAIData);
-    }, 500);
+      postCharacterData(characterData);
+    }, 2000);
   }, []);
 
   interface CharacterData {
@@ -42,21 +44,13 @@ export const Complete = () => {
     name: characterName,
     personality: characterPersonality,
     description: descript,
-    imageType: "BASE_64",
-    base64Image: canvasImageData?.split(",")[1],
-  };
-
-  const characterAIData = {
-    name: characterName,
-    personality: characterPersonality,
-    description: descript,
     imageType: "URL",
     imageUrl: aiImg,
+    originImageUrl: originImg
   };
 
   const postCharacterData = async (
     characterData: CharacterData,
-    characterAIData: CharacterData
   ) => {
     const config = {
       headers: {
@@ -64,18 +58,9 @@ export const Complete = () => {
       },
     };
 
-    if (act && aiImg === "") {
+    if (act) {
       try {
         const res = await apis.post("/character", characterData, config);
-        console.log(res.data);
-        navigate("/character/mycharacters");
-      } catch (err) {
-        console.error(err);
-      }
-    }
-    if (act && canvasImageData === "") {
-      try {
-        const res = await apis.post("/character", characterAIData, config);
         console.log(res.data);
         navigate("/character/mycharacters");
       } catch (err) {
@@ -89,7 +74,6 @@ export const Complete = () => {
   };
 
   console.log(characterData);
-  console.log(characterAIData);
   return (
     <S.Container>
       <S.Bg src={completeBg} alt="배경" />

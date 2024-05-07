@@ -4,7 +4,7 @@ import { bgCloudB, bgCloudP, btnHome } from "../../assets/index";
 import { useEffect, useState } from "react";
 import { storyFive, storySeven, storyThree } from "../../assets/Story";
 import { useAtom } from "jotai";
-import { bookLengthAtom, isSDModeAtom } from "../../store/jotaiAtoms";
+import { bookLengthAtom } from "../../store/jotaiAtoms";
 import { ChaeckAnim } from "../../components/CharacterAnim/ChaeckAnim";
 import { BubbleY } from "../../components/Bubble/BubbleY";
 import { TTS } from "../../components/TTS/TTS";
@@ -14,7 +14,6 @@ export const Story = () => {
   const [showFirst, setShowFirst] = useState(false);
   const [showSecond, setShowSecond] = useState(false);
   const [, setBookLength] = useAtom(bookLengthAtom);
-  const [isSDAtom] = useAtom(isSDModeAtom);
 
   useEffect(() => {
     setTimeout(() => {
@@ -30,33 +29,18 @@ export const Story = () => {
   };
 
   const onClickThree = () => {
-    if (isSDAtom) {
-      setBookLength(3);
-      navigate("/story/createai");
-    } else {
-      setBookLength(3);
-      navigate("/story/create");
-    }
+    setBookLength(3);
+    navigate("/story/create");
   };
 
   const onClickFive = () => {
-    if (isSDAtom) {
-      setBookLength(5);
-      navigate("/story/createai");
-    } else {
-      setBookLength(5);
-      navigate("/story/create");
-    }
+    setBookLength(5);
+    navigate("/story/create");
   };
 
   const onClickSeven = () => {
-    if (isSDAtom) {
-      setBookLength(7);
-      navigate("/story/createai");
-    } else {
-      setBookLength(7);
-      navigate("/story/create");
-    }
+    setBookLength(7);
+    navigate("/story/create");
   };
 
   return (

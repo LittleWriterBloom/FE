@@ -38,10 +38,12 @@ export const BookMaking = () => {
       <S.LottieWrapper style={{display: "flex", justifyContent: "center"}}>
         <img src={bookMaking} />
       </S.LottieWrapper>
-      <S.LoadingText>
-        {textToShow}
-        <S.Cursor>ㅣ</S.Cursor>
-      </S.LoadingText>
+      <S.LoadingTextWrapper>
+        <S.LoadingText>
+          {textToShow}
+          <S.Cursor>ㅣ</S.Cursor>
+        </S.LoadingText>
+      </S.LoadingTextWrapper>
     </S.LoadingContainer>
   );
 };
