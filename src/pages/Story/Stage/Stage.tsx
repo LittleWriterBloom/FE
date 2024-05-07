@@ -8,7 +8,7 @@ import { bookBGInit, canvasImageDataAtom } from "../../../store/jotaiAtoms";
 import { BubbleG } from "../../../components/Bubble/BubbleG";
 import { DongAnim } from "../../../components/CharacterAnim/DongAnim";
 import { TTS } from "../../../components/TTS/TTS";
-import { STT } from "../../../components/STT/STT";
+import { SpeechToText } from "../../../components/SpeechToText/SpeechToText";
 
 export const Stage = () => {
   const navigate = useNavigate();
@@ -70,7 +70,7 @@ export const Stage = () => {
 
   return (
     <S.Container>
-      <STT
+      <SpeechToText
         listening={listening}
         startListening={startListening}
         stopListening={stopListening}

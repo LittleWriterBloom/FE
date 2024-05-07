@@ -17,7 +17,7 @@ import {
 import { createBG } from "../../../assets/Story/Create";
 import { TTS } from "../../../components/TTS/TTS";
 import { ModalYN } from "../../../components/ModalYN/ModalYN";
-import { STT } from "../../../components/STT/STT";
+import { SpeechToText } from "../../../components/SpeechToText/SpeechToText";
 
 export const Title = () => {
   const navigate = useNavigate();
@@ -80,7 +80,7 @@ export const Title = () => {
 
   return (
     <S.Container>
-      <STT
+      <SpeechToText
         listening={listening}
         startListening={startListening}
         stopListening={stopListening}

@@ -14,7 +14,7 @@ import { namingBG } from "../../../assets/Character";
 import { btnHome, btnCheck, btnCheckG } from "../../../assets";
 import { GgummiAnimClap } from "../../../components/CharacterAnim/GgummiAnimClap";
 import { TTS } from "../../../components/TTS/TTS";
-import { STT } from "../../../components/STT/STT";
+import { SpeechToText } from "../../../components/SpeechToText/SpeechToText";
 
 export const Naming = () => {
   const navigate = useNavigate();
@@ -70,7 +70,7 @@ export const Naming = () => {
 
   return (
     <S.Container>
-      <STT
+      <SpeechToText
         listening={listening}
         startListening={startListening}
         stopListening={stopListening}

@@ -41,7 +41,7 @@ import { WritingLoading } from "../../../components/StoryLoading/\bWritingLoadin
 import { DongAnim } from "../../../components/CharacterAnim/DongAnim";
 import { TTS } from "../../../components/TTS/TTS";
 import { ModalYN } from "../../../components/ModalYN/ModalYN";
-import { STT } from "../../../components/STT/STT";
+import { SpeechToText } from "../../../components/SpeechToText/SpeechToText";
 
 interface pageDataTypes {
   userContext: string | null;
@@ -232,7 +232,7 @@ export const CreateParams = () => {
         <WritingLoading />
       ) : (
         <>
-          <STT
+          <SpeechToText
             listening={listening}
             startListening={startListening}
             stopListening={stopListening}

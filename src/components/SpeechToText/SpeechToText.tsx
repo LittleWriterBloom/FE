@@ -12,7 +12,7 @@ interface STTProps {
   onSpeechResult: (result: string) => void;
 }
 
-export const STT: React.FC<STTProps> = ({ listening, startListening, stopListening, onSpeechResult }) => {
+export const SpeechToText: React.FC<STTProps> = ({ listening, startListening, stopListening, onSpeechResult }) => {
   const [rec, setRec] = useState(false);
   const [speech, setSpeech] = useState<string>("");
 

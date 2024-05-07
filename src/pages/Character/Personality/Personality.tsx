@@ -11,14 +11,10 @@ import {
   characterPersonalityAtom,
 } from "../../../store/jotaiAtoms";
 import { BubbleP } from "../../../components/Bubble/BubbleP";
-import {
-  btnCheck,
-  btnCheckG,
-  btnHome,
-} from "../../../assets";
+import { btnCheck, btnCheckG, btnHome } from "../../../assets";
 import { GgummiAnim } from "../../../components/CharacterAnim/GgummiAnim";
 import { TTS } from "../../../components/TTS/TTS";
-import { STT } from "../../../components/STT/STT";
+import { SpeechToText } from "../../../components/SpeechToText/SpeechToText";
 
 export const Personality = () => {
   const navigate = useNavigate();
@@ -75,7 +71,7 @@ export const Personality = () => {
 
   return (
     <S.Container>
-      <STT
+      <SpeechToText
         listening={listening}
         startListening={startListening}
         stopListening={stopListening}
@@ -97,7 +93,10 @@ export const Personality = () => {
       )}
       {showThird && (
         <>
-          <TTS text="활발해? 소심해? 무서움이 많아? 어떤 친구일까~?" speaker="nmeow" />
+          <TTS
+            text="활발해? 소심해? 무서움이 많아? 어떤 친구일까~?"
+            speaker="nmeow"
+          />
           <BubbleP
             text="활발해? 소심해? 무서움이 많아? 어떤 친구일까~?"
             length={47}

@@ -26,7 +26,7 @@ import { createBG } from "../../../assets/Story/Create";
 import { BookMaking } from "../../../components/StoryLoading/BookMaking";
 import { TTS } from "../../../components/TTS/TTS";
 import { ModalYN } from "../../../components/ModalYN/ModalYN";
-import { STT } from "../../../components/STT/STT";
+import { SpeechToText } from "../../../components/SpeechToText/SpeechToText";
 
 interface bookDataTypes {
   title: string | null;
@@ -138,7 +138,7 @@ export const Author = () => {
         <BookMaking />
       ) : (
         <>
-          <STT
+          <SpeechToText
             listening={listening}
             startListening={startListening}
             stopListening={stopListening}
