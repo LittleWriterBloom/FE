@@ -118,6 +118,7 @@ export const CharacterContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
 `;
 
 export const Character = styled.img`
@@ -125,6 +126,8 @@ export const Character = styled.img`
   height: 22rem;
   object-fit: cover;
   overflow: hidden;
+  position: absolute;
+  bottom: 1rem;
 `;
 
 export const Check = styled.img`

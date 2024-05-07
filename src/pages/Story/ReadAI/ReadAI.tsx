@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { useAtom } from "jotai";
 import {
   accessTokenAtom,
+  aiImageDataAtom,
   bgAtom1,
   bgAtom2,
   bgAtom3,
@@ -14,7 +15,6 @@ import {
   bgAtom7,
   bookIdAtom,
   bookLengthAtom,
-  canvasImageDataAtom,
   contextAtom1,
   contextAtom2,
   contextAtom3,
@@ -32,7 +32,7 @@ import { TTS } from "../../../components/TTS/TTS";
 export const ReadAI = () => {
   const navigate = useNavigate();
   const [act] = useAtom(accessTokenAtom);
-  const [canvasImageData, ] = useAtom(canvasImageDataAtom);
+  const [aiImageData, setAiImageData] = useAtom(aiImageDataAtom);
   const [bookid] = useAtom(bookIdAtom);
   const [bookLength, setBookLength] = useAtom(bookLengthAtom);
 
@@ -52,11 +52,15 @@ export const ReadAI = () => {
   const [bg7, setBg7] = useAtom(bgAtom7);
 
   const [clickCount, setClickCount] = useState(0);
+  const [showFirst, setShowFirst] = useState(false);
 
   console.log(bookid);
   
   useEffect(() => {
     getBookTotalData();
+    setTimeout(() => {
+      setShowFirst(true);
+    }, 200);
   });
 
   const onClickHomeBtn = () => {
@@ -95,6 +99,7 @@ export const ReadAI = () => {
         const bookPages = res.data.data[0].book.pages;
         const bookL = bookPages.length;
         setBookLength(bookL);
+        setAiImageData(res.data.data[0].character.imageUrl);
         setText1(bookPages[0].context);
         setText2(bookPages[1].context);
         setText3(bookPages[2].context);
@@ -138,8 +143,8 @@ export const ReadAI = () => {
       <S.Body>
         <S.BodyContainer>
           <S.CharacterContainer>
-            {canvasImageData && (
-              <S.Character src={canvasImageData} alt="Saved Image" />
+            {aiImageData && (
+              <S.Character src={aiImageData} alt="Saved Image" />
             )}
           </S.CharacterContainer>
           {[text1, text2, text3, text4, text5, text6, text7].map(
@@ -147,7 +152,6 @@ export const ReadAI = () => {
               clickCount === index &&
               text && (
                 <S.StoryCreatedContainer>
-                  <TTS text={text} speaker="ndain" />
                   <S.StoryCreated key={index}>
                     {text.split(".").map((sentence, index, array) => (
                       <div key={index}>
@@ -162,6 +166,7 @@ export const ReadAI = () => {
                       </div>
                     ))}
                   </S.StoryCreated>
+                  {showFirst && <TTS text={text} speaker="ndain" />}
                 </S.StoryCreatedContainer>
               )
           )}
