@@ -45,7 +45,7 @@ export const MyCharacters = () => {
   };
 
   const onClickCharBtn = () => {
-    navigate("/character");
+    navigate("/character/draw");
   };
 
   const getCharactersData = async () => {

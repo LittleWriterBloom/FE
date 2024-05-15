@@ -97,6 +97,13 @@ export const StoryMakeBtn = styled.img`
   z-index: 4;
   bottom: 10%;
   cursor: pointer;
+  &:hover,
+  &:active {
+    width: 19vw;
+    height: auto;
+    bottom: 9%;
+    margin: auto 40.5vw;
+  }
 `;
 
 // Slick

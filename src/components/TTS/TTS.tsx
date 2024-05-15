@@ -7,20 +7,30 @@ interface TTSProps {
   text: string; // text props의 타입을 string으로 지정
 }
 
+const clovaApiUrl = import.meta.env.VITE_CLOVA_VOICE_API_URL;
 const clovaApiKeyId = import.meta.env.VITE_CLOVA_VOICE_API_KEY_ID;
 const clovaApiKey = import.meta.env.VITE_CLOVA_VOICE_API_KEY;
 
 export const TTS: React.FC<TTSProps> = ({ text, speaker }) => {
   const [audioUrl, setAudioUrl] = useState("");
+  const [apiURL, setApiURL] = useState("");
 
   useEffect(() => {
     handleSpeak();
   }, []);
 
+  useEffect(() => {
+    if (process.env.NODE_ENV === 'development') {
+      setApiURL("/api/tts-premium/v1/tts")
+    } else {
+      setApiURL(`${clovaApiUrl}/tts-premium/v1/tts`)
+    }
+  }, []);
+
   const handleSpeak = async () => {
     try {
       const response = await axios.post(
-        "/api/tts-premium/v1/tts",
+        apiURL,
         {
           speaker: speaker,
           text: text,

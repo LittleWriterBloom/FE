@@ -45,8 +45,8 @@ function App() {
         <Route path='/guide-second' element={<GuideSecond />} />
         <Route path='/guide-third' element={<GuideThird />} />
         <Route path='/character' element={<Character />} />
-        <Route path='/character/draw' element={<Draw />} />
-        <Route path='/character/drawai' element={<DrawAi />} />
+        <Route path='/character/draw' element={<DrawAi />} />
+        <Route path='/character/drawai' element={<Draw />} />
         <Route path='/character/naming' element={<Naming />} />
         <Route path='/character/personality' element={<Personality />} />
         <Route path='/character/complete' element={<Complete />} />

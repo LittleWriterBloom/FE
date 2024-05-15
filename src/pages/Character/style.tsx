@@ -81,13 +81,13 @@ export const Body = styled.div`
 
 export const BtnWrapper = styled.div`
   width: 70%;
-  height: auto;
+  height: 29rem;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 5rem;
-  position: absolute;
-  z-index: 5;
+  position: relative;
+  margin-bottom: 8dvh;
 `;
 
 export const Btn = styled.div`
@@ -97,8 +97,13 @@ export const Btn = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-bottom: 8dvh;
+  position: absolute;
+  z-index: 5;
   cursor: pointer;
+  &:hover {
+    width: 24rem;
+    height: 29rem;
+  }
 `;
 
 export const BtnImg = styled.img`
