@@ -7,51 +7,68 @@ interface TTSProps {
   text: string; // text props의 타입을 string으로 지정
 }
 
-const clovaApiUrl = import.meta.env.VITE_CLOVA_VOICE_API_URL;
 const clovaApiKeyId = import.meta.env.VITE_CLOVA_VOICE_API_KEY_ID;
 const clovaApiKey = import.meta.env.VITE_CLOVA_VOICE_API_KEY;
 
 export const TTS: React.FC<TTSProps> = ({ text, speaker }) => {
   const [audioUrl, setAudioUrl] = useState("");
-  const [apiURL, setApiURL] = useState("");
 
   useEffect(() => {
-    handleSpeak();
+    handleSpeak()
   }, []);
 
-  useEffect(() => {
-    if (process.env.NODE_ENV === 'development') {
-      setApiURL("/api/tts-premium/v1/tts")
-    } else {
-      setApiURL(`${clovaApiUrl}/tts-premium/v1/tts`)
-    }
-  }, []);
 
   const handleSpeak = async () => {
     try {
-      const response = await axios.post(
-        apiURL,
-        {
-          speaker: speaker,
-          text: text,
-          volume: 0,
-          speed: 0,
-          pitch: 0,
-          alpha: 0,
-          format: "mp3",
-        },
-        {
-          headers: {
-            "X-NCP-APIGW-API-KEY-ID": clovaApiKeyId,
-            "X-NCP-APIGW-API-KEY": clovaApiKey,
-            "Content-Type": "application/x-www-form-urlencoded",
+      if (process.env.NODE_ENV === 'development') {
+        const response = await axios.post(
+          "/api/tts-premium/v1/tts",
+          {
+            speaker: speaker,
+            text: text,
+            volume: 0,
+            speed: 0,
+            pitch: 0,
+            alpha: 0,
+            format: "mp3",
           },
-          responseType: "blob", // 음성 파일을 Blob 형태로 받아야 합니다.
-        }
-      );
-      console.log(response);
-      const audioUrl = URL.createObjectURL(response.data);
-      setAudioUrl(audioUrl);
+          {
+            headers: {
+              "X-NCP-APIGW-API-KEY-ID": clovaApiKeyId,
+              "X-NCP-APIGW-API-KEY": clovaApiKey,
+              "Content-Type": "application/x-www-form-urlencoded",
+            },
+            responseType: "blob", // 음성 파일을 Blob 형태로 받아야 합니다.
+          }
+        );
+        console.log(response);
+        const audioUrl = URL.createObjectURL(response.data);
+        setAudioUrl(audioUrl);
+      } else {
+        const response = await axios.post(
+          "https://naveropenapi.apigw.ntruss.com/tts-premium/v1/tts",
+          {
+            speaker: speaker,
+            text: text,
+            volume: 0,
+            speed: 0,
+            pitch: 0,
+            alpha: 0,
+            format: "mp3",
+          },
+          {
+            headers: {
+              "X-NCP-APIGW-API-KEY-ID": clovaApiKeyId,
+              "X-NCP-APIGW-API-KEY": clovaApiKey,
+              "Content-Type": "application/x-www-form-urlencoded",
+            },
+            responseType: "blob", // 음성 파일을 Blob 형태로 받아야 합니다.
+          }
+        );
+        console.log(response);
+        const audioUrl = URL.createObjectURL(response.data);
+        setAudioUrl(audioUrl);
+      }
     } catch (error) {
       console.error("Error speaking text:", error);
     }
