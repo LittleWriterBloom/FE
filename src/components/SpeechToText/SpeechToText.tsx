@@ -68,7 +68,7 @@ export const SpeechToText: React.FC<STTProps> = ({ listening, startListening, st
 
 const LoadingContainer = styled.div`
   position: absolute;
-  z-index: 300;
+  z-index: 400;
   width: 10rem;
   height: 10rem;
   display: flex;
@@ -85,10 +85,20 @@ const Rec = styled.button`
   width: 8rem;
   height: 8rem;
   cursor: pointer;
+  &:hover,
+  &:active {
+    width: 9rem;
+    height: 9rem;
+  }
 `;
 
 const RecImg = styled.img`
   width: 5.7rem;
   height: 6.2rem;
   cursor: pointer;
+  &:hover,
+  &:active {
+    width: 6.7rem;
+    height: 7.3rem;
+  }
 `;

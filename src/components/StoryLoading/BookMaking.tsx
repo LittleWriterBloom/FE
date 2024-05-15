@@ -6,7 +6,7 @@ export const BookMaking = () => {
   const [textToShow, setTextToShow] = useState(""); // 보여질 텍스트
   const [fullText] = useState([
     "그림동화책을 만드는 중이에요.",
-    "약 1분 정도 걸려요.",
+    "약 10초 정도 걸려요.",
   ]); // 전체 텍스트
   const [currentIndex, setCurrentIndex] = useState(0); // 현재 인덱스
 

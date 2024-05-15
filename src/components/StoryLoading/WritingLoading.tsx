@@ -7,7 +7,7 @@ export const WritingLoading = () => {
   const [textToShow, setTextToShow] = useState(""); // 보여질 텍스트
   const [fullText, ] = useState([
     "이야기를 만들고 있어요.",
-    "약 10~20초 정도 걸려요.",
+    "약 30~40초 정도 걸려요.",
   ]); // 전체 텍스트
   const [currentIndex, setCurrentIndex] = useState(0); // 현재 인덱스
 

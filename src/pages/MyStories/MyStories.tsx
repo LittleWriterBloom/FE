@@ -48,7 +48,7 @@ export const MyStories = () => {
   const [createDate, setCreateDate] = useState("");
   const [bookId, setBookId] = useAtom(bookIdAtom);
   const [bookTitle, setBookTitle] = useAtom(bookTitleAtom);
-  const [charImg, setCharImg] = useAtom(characterImgAtom);
+  const [, setCharImg] = useAtom(characterImgAtom);
   const [bookColor, setBookColor] = useState(pinkBook);
   const [bookFirstImg, setBookFirstImg] = useState("");
 
@@ -122,7 +122,7 @@ export const MyStories = () => {
             {allData.map((item, index) => (
               <S.BookContainer key={index} onClick={() => onClickBook(index)}>
                 <S.BookImg src={books[item.bookColor]} alt="동화책 종류" />
-                <S.CharacterImg src={item.character.imageUrl} alt="캐릭터 이미지" />
+                {/* <S.CharacterImg src={item.character.imageUrl} alt="캐릭터 이미지" /> */}
                 <S.BookData>
                   <S.BookTitle>{item.title}</S.BookTitle>
                   <S.BookAuthor>{item.author} 지음</S.BookAuthor>
@@ -140,7 +140,7 @@ export const MyStories = () => {
           <S.CardContainer>
             <S.CardBookContainer>
               <S.BookImg src={bookColor} alt="동화책 종류" />
-              <S.CharacterImg src={charImg} alt="캐릭터 이미지" />
+              {/* <S.CharacterImg src={charImg} alt="캐릭터 이미지" /> */}
               <S.BookData>
                 <S.BookTitle style={{ fontSize: "1.7rem" }}>
                   {bookTitle}

@@ -24,7 +24,7 @@ import {
   contextAtom7,
 } from "../../../store/jotaiAtoms";
 import { bookBG, createBG, createBookNew } from "../../../assets/Story/Create";
-import { btnHome, readEnd } from "../../../assets";
+import { btnHome, readEnd, speakerF, speakerT } from "../../../assets";
 // import apis from "../../../apis/apis";
 import apis from "../../../apis/apis";
 import { TTS } from "../../../components/TTS/TTS";
@@ -32,7 +32,7 @@ import { TTS } from "../../../components/TTS/TTS";
 export const ReadAI = () => {
   const navigate = useNavigate();
   const [act] = useAtom(accessTokenAtom);
-  const [aiImageData, setAiImageData] = useAtom(aiImageDataAtom);
+  const [, setAiImageData] = useAtom(aiImageDataAtom);
   const [bookid] = useAtom(bookIdAtom);
   const [bookLength, setBookLength] = useAtom(bookLengthAtom);
 
@@ -53,9 +53,11 @@ export const ReadAI = () => {
 
   const [clickCount, setClickCount] = useState(0);
   const [showFirst, setShowFirst] = useState(false);
+  const [speakerOn, setSpeakerOn] = useState(true);
+  const [ttsActive, setTTSActive] = useState(true);
 
   console.log(bookid);
-  
+
   useEffect(() => {
     getBookTotalData();
     setTimeout(() => {
@@ -77,6 +79,16 @@ export const ReadAI = () => {
   // const onClickExit = () => {
   //   setIsModal(false);
   // }
+
+  const onClickSpeakerOn = () => {
+    setSpeakerOn(true);
+    setTTSActive(true);
+  };
+
+  const onClickSpeakerOff = () => {
+    setSpeakerOn(false);
+    setTTSActive(false);
+  };
 
   const onClickNext = () => {
     setClickCount(clickCount + 1);
@@ -136,16 +148,23 @@ export const ReadAI = () => {
       <S.BookFrame src={bookBG} alt="책 프레임" />
       <S.Header>
         <S.Home src={btnHome} alt="홈" onClick={onClickHomeBtn} />
-        {clickCount + 1 === bookLength && (
-          <S.EndBtn src={readEnd} alt="확인" onClick={onClickEnd} />
-        )}
+        <S.BtnContainer>
+          {clickCount + 1 === bookLength && (
+            <S.EndBtn src={readEnd} alt="확인" onClick={onClickEnd} />
+          )}
+          {speakerOn ? (
+            <S.SpeakerBtn src={speakerT} alt="스피커(활성화)" onClick={onClickSpeakerOff} />
+          ) : (
+            <S.SpeakerBtn src={speakerF} alt="스피커(활성화)" onClick={onClickSpeakerOn} />
+          )}
+        </S.BtnContainer>
       </S.Header>
       <S.Body>
         <S.BodyContainer>
           <S.CharacterContainer>
-            {aiImageData && (
+            {/* {aiImageData && (
               <S.Character src={aiImageData} alt="Saved Image" />
-            )}
+            )} */}
           </S.CharacterContainer>
           {[text1, text2, text3, text4, text5, text6, text7].map(
             (text, index) =>
@@ -166,7 +185,7 @@ export const ReadAI = () => {
                       </div>
                     ))}
                   </S.StoryCreated>
-                  {showFirst && <TTS text={text} speaker="ndain" />}
+                  {showFirst && ttsActive && <TTS text={text} speaker="ndain" />}
                 </S.StoryCreatedContainer>
               )
           )}

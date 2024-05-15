@@ -26,9 +26,10 @@ export const Book = styled.img`
 
 export const CreateBg = styled.img`
   position: absolute;
-  width: 74.8vw;
-  height: 89.8dvh;
-  bottom: 2.1dvh;
+  width: 37.5vw;
+  height: 89.7dvh;
+  bottom: 2.2dvh;
+  left: 12.5vw;
   object-fit: cover;
   z-index: 3;
 `;
@@ -60,6 +61,12 @@ export const Home = styled.img`
   margin-left: 5vw;
   filter: drop-shadow(0 0 1rem rgba(0, 0, 0, 0.17));
   cursor: pointer;
+  &:hover,
+  &:active {
+    width: auto;
+    height: 85%;
+    margin-left: 4.6vw;
+  }
 `;
 
 export const CircleWrapper = styled.div`
@@ -78,8 +85,8 @@ export const Circle = styled.div`
   width: 1.05rem;
   height: 1.05rem;
   border-radius: 10rem;
-  background-color: #BDBDBD;
-  box-shadow: 0.15rem 0.15rem 0.3rem 0 rgba(0, 0, 0, 0.20) inset;
+  background-color: #bdbdbd;
+  box-shadow: 0.15rem 0.15rem 0.3rem 0 rgba(0, 0, 0, 0.2) inset;
 `;
 
 export const EndBtn = styled.img`
@@ -88,6 +95,12 @@ export const EndBtn = styled.img`
   margin-right: 5vw;
   filter: drop-shadow(0 0 1rem rgba(0, 0, 0, 0.17));
   cursor: pointer;
+  &:hover,
+  &:active {
+    width: auto;
+    height: 85%;
+    margin-right: 4.6vw;
+  }
 `;
 
 export const Body = styled.div`
@@ -102,11 +115,22 @@ export const Body = styled.div`
 `;
 
 export const BodyContainer = styled.div`
-  width: 60vw;
+  width: 69vw;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
+  justify-content: center;
+  position: absolute;
+  z-index: 10;
+`;
+
+export const StoryContainer = styled.div`
+  width: 69vw;
+  height: 75dvh;
+  margin-top: 2dvh;
+  display: flex;
+  /* flex-direction: column; */
+  justify-content: flex-end;
   position: absolute;
   z-index: 10;
 `;
@@ -122,28 +146,51 @@ export const StoryInput = styled.input`
   font-size: 1.8rem;
   text-align: center;
   color: #000;
-  margin-top: 7dvh;
+  margin-top: 1rem;
   font-family: "BMJUA";
+`;
+
+export const StoryCreatedContainer = styled.div`
+  width: 34.4vw;
+  height: 75dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const StoryCreated = styled.div`
-  width: 60vw;
-  min-height: 5rem;
-  background-color: #ffffff;
-  box-shadow: 0 0.25rem 0.25rem 0 rgba(0, 0, 0, 0.25) inset;
-  border-radius: 10rem;
+  width: 30vw;
+  max-height: 58dvh;
   box-sizing: border-box;
   padding: 1rem 2rem;
-  font-size: 1.8rem;
-  text-align: center;
+  font-size: 1.5rem;
   color: #000;
-  margin-top: 7dvh;
   font-family: "BMJUA";
+  overflow: auto;
+`;
+
+export const CharacterContainer = styled.div`
+  width: 34vw;
+  height: 75dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
 `;
 
 export const Character = styled.img`
-  width: 40vw;
+  max-width: 30vw;
+  height: 22rem;
+  object-fit: cover;
+  overflow: hidden;
+  position: absolute;
+  bottom: 1rem;
+`;
+
+export const CreateG = styled.img`
+  width: 30vw;
   height: auto;
+  margin: 6rem auto;
 `;
 
 export const Check = styled.img`
@@ -154,6 +201,12 @@ export const Check = styled.img`
   height: auto;
   padding-top: 2rem;
   cursor: pointer;
+  &:hover,
+  &:active {
+    width: 5rem;
+    height: auto;
+    right: 3.5vw;
+  }
 `;
 
 export const CheckG = styled.img`
@@ -165,6 +218,12 @@ export const CheckG = styled.img`
   padding-top: 2rem;
   filter: drop-shadow(0px 4px 40px rgba(255, 255, 255, 0.8));
   cursor: pointer;
+  &:hover,
+  &:active {
+    width: 5rem;
+    height: auto;
+    right: 3.5vw;
+  }
 `;
 
 export const Dong = styled.img`
@@ -268,4 +327,21 @@ export const ModalBG = styled.img`
 export const ModalText = styled.p`
   font-family: "BMJUA";
   font-size: 1.6rem;
+`;
+
+export const DicBtn = styled.img`
+  position: absolute;
+  z-index: 30;
+  width: 5.5vw;
+  height: auto;
+  bottom: 2rem;
+  right: 3rem;
+  cursor: pointer;
+  &:hover,
+  &:active {
+    width: 7vw;
+    height: auto;
+    bottom: 1.5rem;
+    right: 2.2rem;
+  }
 `;

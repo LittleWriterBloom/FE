@@ -1,11 +1,10 @@
 import * as S from "./style";
 import { useNavigate } from "react-router-dom";
-// import { useAtom, useAtomValue } from "jotai";
 import { btnHome } from "../../../assets";
 import { bgSave, other, reread } from "../../../assets/Story/Save";
-import { useAtom, useAtomValue } from "jotai";
+import { useAtom } from "jotai";
 import {
-  canvasImageDataAtom,
+  // canvasImageDataAtom,
   bgAtom1,
   bookColorAtom,
   bookTitleAtom,
@@ -14,7 +13,7 @@ import {
 
 export const Save = () => {
   const navigate = useNavigate();
-  const canvasImageData = useAtomValue(canvasImageDataAtom);
+  // const [canvasImageData, ] = useAtom(canvasImageDataAtom);
   const [bookColAtom] = useAtom(bookColorAtom);
   const [bg1] = useAtom(bgAtom1);
   const [bookTitle] = useAtom(bookTitleAtom);
@@ -44,9 +43,9 @@ export const Save = () => {
           <S.BookTitle>{bookTitle}</S.BookTitle>
           <S.BookAuthor>{author} 지음</S.BookAuthor>
           {bg1 && <S.BookBg src={bg1} />}
-          {canvasImageData && (
+          {/* {canvasImageData && (
             <S.Character src={canvasImageData} alt="Saved Image" />
-          )}
+          )} */}
         </S.BookContainer>
         <S.BtnContainer>
           <S.Btn src={reread} alt="처음부터 읽기" onClick={onClickRead} />

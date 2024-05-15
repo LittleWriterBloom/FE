@@ -10,6 +10,7 @@ import questModal from './questModal.png';
 import storySeven from './storySeven.png';
 import storyFive from './storyFive.png';
 import storyThree from './storyThree.png';
+import btnDict from './btn-dictionary.png';
 
 export {
   btnActionOff,
@@ -23,5 +24,6 @@ export {
   questModal,
   storySeven,
   storyFive,
-  storyThree
+  storyThree,
+  btnDict,
 };
