@@ -17,7 +17,6 @@ export const TTS: React.FC<TTSProps> = ({ text, speaker }) => {
     handleSpeak()
   }, []);
 
-
   const handleSpeak = async () => {
     try {
       if (process.env.NODE_ENV === 'development') {
@@ -34,8 +33,8 @@ export const TTS: React.FC<TTSProps> = ({ text, speaker }) => {
           },
           {
             headers: {
-              "X-NCP-APIGW-API-KEY-ID": clovaApiKeyId,
-              "X-NCP-APIGW-API-KEY": clovaApiKey,
+              "X-NCP-APIGW-API-KEY-ID": `${clovaApiKeyId}`,
+              "X-NCP-APIGW-API-KEY": `${clovaApiKey}`,
               "Content-Type": "application/x-www-form-urlencoded",
             },
             responseType: "blob", // 음성 파일을 Blob 형태로 받아야 합니다.
