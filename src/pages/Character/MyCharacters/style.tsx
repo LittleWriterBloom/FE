@@ -35,6 +35,9 @@ export const Bring = styled.img`
   right: 5vw;
   top: 1.4dvh;
   cursor: pointer;
+  &:hover {
+    height: 190%;
+  }
 `;
 
 export const Body = styled.div`
@@ -265,6 +268,10 @@ export const MakeStoryBtn = styled.img`
   width: 15rem;
   height: auto;
   cursor: pointer;
+  &:hover {
+    width: 17rem;
+    margin-bottom: -1rem;
+  }
 `;
 
 export const ExitBtn = styled.img`

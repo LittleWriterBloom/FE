@@ -37,7 +37,7 @@ export const Character = () => {
   };
 
   const onClickDrawAiBtn = () => {
-    navigate("/character/drawai");
+    navigate("/character/draw");
   };
 
   const onClickBringBtn = () => {
@@ -86,10 +86,10 @@ export const Character = () => {
       </S.Header>
       <S.Body>
         <S.BtnWrapper>
-          <S.Btn onClick={onClickDrawAiBtn}>
+          <S.Btn onClick={onClickDrawAiBtn} style={{marginRight: "27rem"}}>
             <S.BtnImg src={ai} alt="버튼" />
           </S.Btn>
-          <S.Btn onClick={onClickBringBtn}>
+          <S.Btn onClick={onClickBringBtn} style={{marginLeft: "27rem"}}>
             <S.BtnImg src={bringChar} alt="버튼" />
           </S.Btn>
           {/* <S.Btn>
