@@ -15,15 +15,14 @@ dotenv.config();
 export default defineConfig({
   plugins: [react()],
   server: {
-    proxy: {
+    proxy: process.env.NODE_ENV === 'development' ? {
       '/api': {
         target: process.env.VITE_CLOVA_VOICE_API_URL, // 프록시할 대상 URL
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ''), // 요청 경로 재작성
       },
-    },
+    } : undefined, // 배포 환경에서는 프록시 사용X
   },
 });
 
-// 제발 바뀌라구
-// 바껴
+// 배포환경 프록시 제거, 프록시 조건부 설정
