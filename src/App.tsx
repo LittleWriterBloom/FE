@@ -9,7 +9,6 @@ import {
   Complete, 
   Story,
   Logout,
-  CreateParams,
   MyCharacters,
   Personality,
   GuideFirst,
@@ -20,13 +19,12 @@ import {
   Completion,
   MyStories,
   Read,
-  Create,
   Title,
   Author,
   DrawAi,
   ReadAI,
-  CreateOld,
-  CreateParamsOld,
+  CreateF,
+  CreateParamsF,
 } from './pages';
 import { Canvas } from './pages/Character/Draw/Canvas';
 import { Test } from './pages/Test/Test';
@@ -55,10 +53,10 @@ function App() {
         <Route path='/character/mycharacters' element={<MyCharacters />} />
         <Route path='/story' element={<Story />} />
         <Route path='/story/stage' element={<Stage />} />
-        <Route path='/story/createold' element={<CreateOld />} />
-        <Route path='/story/createold/:pageId' element={<CreateParamsOld />} />
-        <Route path='/story/create' element={<Create />} />
-        <Route path='/story/create/:pageId' element={<CreateParams />} />
+        {/* <Route path='/story/createold' element={<CreateOld />} />
+        <Route path='/story/createold/:pageId' element={<CreateParamsOld />} /> */}
+        <Route path='/story/create' element={<CreateF />} />
+        <Route path='/story/create/:pageId' element={<CreateParamsF />} />
         <Route path='/story/title' element={<Title />} />
         <Route path='/story/author' element={<Author />} />
         <Route path='/story/save' element={<Save />} />

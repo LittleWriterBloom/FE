@@ -1,12 +1,9 @@
 import * as S from "./style";
 import { useNavigate } from "react-router-dom";
 import { btnHome } from "../../../assets/index";
-import { check, checkG } from "../../../assets/Story";
-import { btnMic, btnRecord } from "../../../assets";
+import { btnDict, check, checkG, checkW } from "../../../assets/Story";
 import { useEffect, useState } from "react";
-import { useAtom, useAtomValue } from "jotai";
-import Lottie from "react-lottie-player";
-import loadAnim from "../../../assets/Lottie/loading.json";
+import { useAtom } from "jotai";
 import {
   accessTokenAtom,
   bgAtom2,
@@ -16,7 +13,6 @@ import {
   bgAtom6,
   bgAtom7,
   bookLengthAtom,
-  canvasImageDataAtom,
   contextAtom2,
   contextAtom3,
   contextAtom4,
@@ -33,27 +29,30 @@ import {
 } from "../../../store/jotaiAtoms";
 import { BubbleG } from "../../../components/Bubble/BubbleG";
 import {
+  bookBG,
   btnEnd,
   createBG,
   createBook,
-  createBookS,
+  createG,
 } from "../../../assets/Story/Create";
 import apis from "../../../apis/apis";
 import { DongAnim } from "../../../components/CharacterAnim/DongAnim";
 import { TTS } from "../../../components/TTS/TTS";
+import { WritingLoading } from "../../../components/StoryLoading/\bWritingLoading";
+import { ModalYN } from "../../../components/ModalYN/ModalYN";
+import { SpeechToText } from "../../../components/SpeechToText/SpeechToText";
+import { Dictionary } from "../../../components/Dictionary/Dictionary";
 
 interface pageDataTypes {
   userContext: string | null;
   characterActionInfo: string;
 }
 
-export const CreateParamsOld = () => {
+export const CreateParamsF = () => {
   const navigate = useNavigate();
   const [pageNum, setPageNum] = useState(2);
   const [bookLength] = useAtom(bookLengthAtom);
   const [act] = useAtom(accessTokenAtom);
-  const canvasImageData = useAtomValue(canvasImageDataAtom);
-  const [rec, setRec] = useState(false);
   const [quest1] = useAtom(questAtom1);
   const [story, setStory] = useState("");
 
@@ -85,14 +84,33 @@ export const CreateParamsOld = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const [showFirst, setShowFirst] = useState(false);
+  const [showSecond, setShowSecond] = useState(false);
 
   const [clickCount, setClickCount] = useState(0);
   const [isClicked, setIsClicked] = useState(false);
+  const [isModal, setIsModal] = useState(false);
+  const [isDict, setIsDict] = useState(false);
+  const [listening, setListening] = useState(false);
+
+  const startListening = () => {
+    setListening(true);
+  };
+
+  const stopListening = () => {
+    setListening(false);
+  };
+
+  const handleSpeechResult = (result: string) => {
+    setStory(result); // 입력된 음성 결과로 이름 업데이트
+  };
 
   useEffect(() => {
     setTimeout(() => {
       setShowFirst(true);
-    }, 500);
+      setTimeout(() => {
+        setShowSecond(true);
+      }, 5000);
+    }, 1500);
   }, []);
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -100,34 +118,32 @@ export const CreateParamsOld = () => {
   };
 
   const onClickHomeBtn = () => {
-    navigate("/");
+    setIsModal(true);
   };
+
+  const closeModal = () => {
+    setIsModal(false);
+  };
+
+  const dictOpen = () => {
+    setIsDict(true);
+  };
+
+  const dictClose = () => {
+    setIsDict(false);
+  };
+
   const onClickEnd = () => {
     navigate("/story/title");
   };
 
-  const onClickMic = () => {
-    setRec(true);
+  const onClickCheck = () => {
+    alert("스토리를 입력해주세요.");
   };
-  const onClickRec = () => {
-    setRec(false);
-  };
-
-  // const onClickDong = () => {
-  //   setIsModal(true);
-  // }
-
-  // const onClickExit = () => {
-  //   setIsModal(false);
-  // }
 
   const onClickCreate = () => {
-    if (story === "") {
-      alert("스토리를 입력해주세요.");
-    } else {
-      setIsLoading(true);
-      postBookData(pageData);
-    }
+    setIsLoading(true);
+    postBookData(pageData);
   };
 
   const handleClickDong = () => {
@@ -142,6 +158,7 @@ export const CreateParamsOld = () => {
 
   const onClickNext = () => {
     setIsCreated(false);
+    setStory("");
     setClickCount(0);
     setPageNum((prevPageNum) => prevPageNum + 1);
     navigate(`/story/create/${pageNum + 1}`);
@@ -161,31 +178,35 @@ export const CreateParamsOld = () => {
 
     if (act) {
       try {
-        const res = await apis.post(`/books/builder/insight`, pageData, config);
+        const res = await apis.post(
+          `/books/builder/dalle-insight`,
+          pageData,
+          config
+        );
         console.log(res.data.data[0]);
         if (pageNum === 2) {
           setQuest2(res.data.data[0].bookInsight.generatedQuestions);
-          setBg2(res.data.data[0].bookInsight.temporaryGeneratedImageUrl);
+          setBg2(res.data.data[0].bookInsight.imageUrl);
           setText2(res.data.data[0].bookInsight.refinedContext);
         } else if (pageNum === 3) {
           setQuest3(res.data.data[0].bookInsight.generatedQuestions);
-          setBg3(res.data.data[0].bookInsight.temporaryGeneratedImageUrl);
+          setBg3(res.data.data[0].bookInsight.imageUrl);
           setText3(res.data.data[0].bookInsight.refinedContext);
         } else if (pageNum === 4) {
           setQuest4(res.data.data[0].bookInsight.generatedQuestions);
-          setBg4(res.data.data[0].bookInsight.temporaryGeneratedImageUrl);
+          setBg4(res.data.data[0].bookInsight.imageUrl);
           setText4(res.data.data[0].bookInsight.refinedContext);
         } else if (pageNum === 5) {
           setQuest5(res.data.data[0].bookInsight.generatedQuestions);
-          setBg5(res.data.data[0].bookInsight.temporaryGeneratedImageUrl);
+          setBg5(res.data.data[0].bookInsight.imageUrl);
           setText5(res.data.data[0].bookInsight.refinedContext);
         } else if (pageNum === 6) {
           setQuest6(res.data.data[0].bookInsight.generatedQuestions);
-          setBg6(res.data.data[0].bookInsight.temporaryGeneratedImageUrl);
+          setBg6(res.data.data[0].bookInsight.imageUrl);
           setText6(res.data.data[0].bookInsight.refinedContext);
         } else if (pageNum === 7) {
           setQuest7(res.data.data[0].bookInsight.generatedQuestions);
-          setBg7(res.data.data[0].bookInsight.temporaryGeneratedImageUrl);
+          setBg7(res.data.data[0].bookInsight.imageUrl);
           setText7(res.data.data[0].bookInsight.refinedContext);
         }
         setIsLoading(false);
@@ -194,20 +215,6 @@ export const CreateParamsOld = () => {
         console.error(err);
       }
     }
-  };
-
-  const LoadingComp = () => {
-    return (
-      <S.LoadingContainer>
-        <S.LottieWrapper>
-          <Lottie loop animationData={loadAnim} play />
-        </S.LottieWrapper>
-        <S.LoadingText>
-          그림 그리는 중 ...
-          <br />약 10~15초 정도 걸려요.
-        </S.LoadingText>
-      </S.LoadingContainer>
-    );
   };
 
   const circles = [...Array(bookLength)].map((_, index) => (
@@ -223,22 +230,16 @@ export const CreateParamsOld = () => {
   return (
     <S.Container>
       {isLoading ? (
-        <LoadingComp />
+        <WritingLoading />
       ) : (
         <>
-          {/* {isModal && (
-            <S.ModalContainer>
-              <S.ModalBox>
-                <S.ModalBG src={questModal} alt="모달 배경" />
-                <S.ModalWrapper>
-                  <S.ModalExitBtn src={btnX} alt="모달 나가기" onClick={onClickExit}/>
-                  <S.ModalText>{quest2[0]}</S.ModalText>
-                  <S.ModalText>{quest2[1]}</S.ModalText>
-                  <S.ModalText>{quest2[2]}</S.ModalText>
-                </S.ModalWrapper>
-              </S.ModalBox>
-            </S.ModalContainer>
-          )} */}
+          <SpeechToText
+            listening={listening}
+            startListening={startListening}
+            stopListening={stopListening}
+            onSpeechResult={handleSpeechResult}
+          />
+          {isModal && <ModalYN isOpen={true} closeModal={closeModal} />}
           {isCreated ? (
             <>
               {isClicked && (
@@ -250,7 +251,7 @@ export const CreateParamsOld = () => {
               {showFirst && (
                 <BubbleG text="도움이 필요하다면 날 클릭해줘~!" length={31} />
               )}
-              {clickCount === 1 && (
+              {showSecond && (
                 <>
                   {/* <DongAnimHelp talkCount={1} /> */}
                   {[2, 3, 4, 5, 6].map((page, index) => (
@@ -265,7 +266,7 @@ export const CreateParamsOld = () => {
                   ))}
                 </>
               )}
-              {clickCount === 2 && (
+              {clickCount === 1 && (
                 <>
                   {/* <DongAnimHelp talkCount={1} /> */}
                   {[2, 3, 4, 5, 6].map((page, index) => (
@@ -280,7 +281,7 @@ export const CreateParamsOld = () => {
                   ))}
                 </>
               )}
-              {clickCount === 3 && (
+              {clickCount === 2 && (
                 <>
                   {/* <DongAnimHelp talkCount={1} /> */}
                   {[2, 3, 4, 5, 6].map((page, index) => (
@@ -306,24 +307,41 @@ export const CreateParamsOld = () => {
           <S.Bg src={createBG} alt="배경" />
           <S.Book src={createBook} alt="기본 책" />
           {pageNum === 2 && bg2 && (
-            <S.CreateBg src={bg2} alt="생성된 스토리 배경" />
+            <>
+              <S.CreateBg src={bg2} alt="생성된 스토리 배경" />
+              <S.BookFrame src={bookBG} alt="책 프레임" />
+            </>
           )}
           {pageNum === 3 && bg3 && (
-            <S.CreateBg src={bg3} alt="생성된 스토리 배경" />
+            <>
+              <S.CreateBg src={bg3} alt="생성된 스토리 배경" />
+              <S.BookFrame src={bookBG} alt="책 프레임" />
+            </>
           )}
           {pageNum === 4 && bg4 && (
-            <S.CreateBg src={bg4} alt="생성된 스토리 배경" />
+            <>
+              <S.CreateBg src={bg4} alt="생성된 스토리 배경" />
+              <S.BookFrame src={bookBG} alt="책 프레임" />
+            </>
           )}
           {pageNum === 5 && bg5 && (
-            <S.CreateBg src={bg5} alt="생성된 스토리 배경" />
+            <>
+              <S.CreateBg src={bg5} alt="생성된 스토리 배경" />
+              <S.BookFrame src={bookBG} alt="책 프레임" />
+            </>
           )}
           {pageNum === 6 && bg6 && (
-            <S.CreateBg src={bg6} alt="생성된 스토리 배경" />
+            <>
+              <S.CreateBg src={bg6} alt="생성된 스토리 배경" />
+              <S.BookFrame src={bookBG} alt="책 프레임" />
+            </>
           )}
           {pageNum === 7 && bg7 && (
-            <S.CreateBg src={bg7} alt="생성된 스토리 배경" />
+            <>
+              <S.CreateBg src={bg7} alt="생성된 스토리 배경" />
+              <S.BookFrame src={bookBG} alt="책 프레임" />
+            </>
           )}
-          <S.BookFrame src={createBookS} alt="책 프레임" />
           <S.CircleWrapper>{circles}</S.CircleWrapper>
           <S.Header>
             <S.Home src={btnHome} alt="홈" onClick={onClickHomeBtn} />
@@ -339,64 +357,86 @@ export const CreateParamsOld = () => {
           <S.Body>
             <S.BodyContainer>
               {isCreated ? (
-                <>
-                  {[2, 3, 4, 5, 6, 7].map((page, index) => (
-                    <div key={index}>
-                      {pageNum === page && (
-                        <>
-                          <TTS text={texts[page - 2]} speaker="ndain" />
-                          <S.StoryCreated>{texts[page - 2]}</S.StoryCreated>
-                        </>
-                      )}
-                    </div>
-                  ))}
-                </>
+                <S.StoryContainer>
+                  <S.StoryCreatedContainer>
+                    {[2, 3, 4, 5, 6, 7].map((page, index) => (
+                      <div key={index}>
+                        {pageNum === page && (
+                          <>
+                            <TTS text={texts[page - 2]} speaker="ndain" />
+                            <S.StoryCreated>
+                              {texts[page - 2]
+                                .split(".")
+                                .map((sentence, index, array) => (
+                                  <div key={index}>
+                                    {sentence.trim()}
+                                    {index < array.length - 1 && "."}
+                                    {index < array.length - 2 && (
+                                      <>
+                                        <br style={{ fontSize: "0.1rem" }} />
+                                        <div
+                                          style={{
+                                            width: "1rem",
+                                            height: "1rem",
+                                          }}
+                                        />
+                                      </>
+                                    )}
+                                  </div>
+                                ))}
+                            </S.StoryCreated>
+                          </>
+                        )}
+                      </div>
+                    ))}
+                  </S.StoryCreatedContainer>
+                </S.StoryContainer>
               ) : (
-                <S.StoryInput
-                  onChange={handleInput}
-                  type="name"
-                  placeholder="이야기를 만들어 주세요."
-                />
-              )}
-              {canvasImageData && (
-                <S.Character src={canvasImageData} alt="Saved Image" />
+                <>
+                  <S.StoryInput
+                    onChange={handleInput}
+                    type="name"
+                    placeholder="이야기를 만들어 주세요."
+                    value={story}
+                  />
+                  <S.CreateG src={createG} alt="Saved Image" />
+                </>
               )}
             </S.BodyContainer>
             {isCreated ? (
               <S.CheckG
-                src={checkG}
-                alt="다음으로(활성화)"
+                src={checkW}
+                alt="다음으로"
                 onClick={onClickNext}
                 style={pageNum === bookLength ? { opacity: "0" } : {}}
               />
             ) : (
-              <S.Check
-                src={check}
-                alt="다음으로(비활성화)"
-                onClick={onClickCreate}
-              />
+              <>
+                {story === "" ? (
+                  <S.Check
+                    src={check}
+                    alt="다음으로(비활성화)"
+                    onClick={onClickCheck}
+                  />
+                ) : (
+                  <S.Check
+                    src={checkG}
+                    alt="다음으로(활성화)"
+                    onClick={onClickCreate}
+                  />
+                )}
+              </>
             )}
             {!isCreated && (
-              <div onClick = {handleClickDong}>
+              <div onClick={handleClickDong}>
                 <DongAnim talkCount={1} />
               </div>
-            )}
-            {rec === false ? (
-              <S.Rec
-                src={btnMic}
-                alt="음성인식(비활성화)"
-                onClick={onClickMic}
-              />
-            ) : (
-              <S.Rec
-                src={btnRecord}
-                alt="인식중(활성화)"
-                onClick={onClickRec}
-              />
             )}
           </S.Body>
         </>
       )}
+      <S.DicBtn src={btnDict} alt="사전" onClick={dictOpen} />
+      {isDict && <Dictionary isOpen={true} closeModal={dictClose} context={story} />}
     </S.Container>
   );
 };

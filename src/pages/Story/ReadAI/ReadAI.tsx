@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { useAtom } from "jotai";
 import {
   accessTokenAtom,
+  aiImageDataAtom,
   bgAtom1,
   bgAtom2,
   bgAtom3,
@@ -14,7 +15,6 @@ import {
   bgAtom7,
   bookIdAtom,
   bookLengthAtom,
-  canvasImageDataAtom,
   contextAtom1,
   contextAtom2,
   contextAtom3,
@@ -24,7 +24,7 @@ import {
   contextAtom7,
 } from "../../../store/jotaiAtoms";
 import { bookBG, createBG, createBookNew } from "../../../assets/Story/Create";
-import { btnHome, readEnd } from "../../../assets";
+import { btnHome, readEnd, speakerF, speakerT } from "../../../assets";
 // import apis from "../../../apis/apis";
 import apis from "../../../apis/apis";
 import { TTS } from "../../../components/TTS/TTS";
@@ -32,7 +32,7 @@ import { TTS } from "../../../components/TTS/TTS";
 export const ReadAI = () => {
   const navigate = useNavigate();
   const [act] = useAtom(accessTokenAtom);
-  const [canvasImageData, ] = useAtom(canvasImageDataAtom);
+  const [, setAiImageData] = useAtom(aiImageDataAtom);
   const [bookid] = useAtom(bookIdAtom);
   const [bookLength, setBookLength] = useAtom(bookLengthAtom);
 
@@ -52,11 +52,17 @@ export const ReadAI = () => {
   const [bg7, setBg7] = useAtom(bgAtom7);
 
   const [clickCount, setClickCount] = useState(0);
+  const [showFirst, setShowFirst] = useState(false);
+  const [speakerOn, setSpeakerOn] = useState(true);
+  const [ttsActive, setTTSActive] = useState(true);
 
   console.log(bookid);
-  
+
   useEffect(() => {
     getBookTotalData();
+    setTimeout(() => {
+      setShowFirst(true);
+    }, 200);
   });
 
   const onClickHomeBtn = () => {
@@ -73,6 +79,16 @@ export const ReadAI = () => {
   // const onClickExit = () => {
   //   setIsModal(false);
   // }
+
+  const onClickSpeakerOn = () => {
+    setSpeakerOn(true);
+    setTTSActive(true);
+  };
+
+  const onClickSpeakerOff = () => {
+    setSpeakerOn(false);
+    setTTSActive(false);
+  };
 
   const onClickNext = () => {
     setClickCount(clickCount + 1);
@@ -95,6 +111,7 @@ export const ReadAI = () => {
         const bookPages = res.data.data[0].book.pages;
         const bookL = bookPages.length;
         setBookLength(bookL);
+        setAiImageData(res.data.data[0].character.imageUrl);
         setText1(bookPages[0].context);
         setText2(bookPages[1].context);
         setText3(bookPages[2].context);
@@ -131,23 +148,29 @@ export const ReadAI = () => {
       <S.BookFrame src={bookBG} alt="책 프레임" />
       <S.Header>
         <S.Home src={btnHome} alt="홈" onClick={onClickHomeBtn} />
-        {clickCount + 1 === bookLength && (
-          <S.EndBtn src={readEnd} alt="확인" onClick={onClickEnd} />
-        )}
+        <S.BtnContainer>
+          {clickCount + 1 === bookLength && (
+            <S.EndBtn src={readEnd} alt="확인" onClick={onClickEnd} />
+          )}
+          {speakerOn ? (
+            <S.SpeakerBtn src={speakerT} alt="스피커(활성화)" onClick={onClickSpeakerOff} />
+          ) : (
+            <S.SpeakerBtn src={speakerF} alt="스피커(활성화)" onClick={onClickSpeakerOn} />
+          )}
+        </S.BtnContainer>
       </S.Header>
       <S.Body>
         <S.BodyContainer>
           <S.CharacterContainer>
-            {canvasImageData && (
-              <S.Character src={canvasImageData} alt="Saved Image" />
-            )}
+            {/* {aiImageData && (
+              <S.Character src={aiImageData} alt="Saved Image" />
+            )} */}
           </S.CharacterContainer>
           {[text1, text2, text3, text4, text5, text6, text7].map(
             (text, index) =>
               clickCount === index &&
               text && (
                 <S.StoryCreatedContainer>
-                  <TTS text={text} speaker="ndain" />
                   <S.StoryCreated key={index}>
                     {text.split(".").map((sentence, index, array) => (
                       <div key={index}>
@@ -162,6 +185,7 @@ export const ReadAI = () => {
                       </div>
                     ))}
                   </S.StoryCreated>
+                  {showFirst && ttsActive && <TTS text={text} speaker="ndain" />}
                 </S.StoryCreatedContainer>
               )
           )}

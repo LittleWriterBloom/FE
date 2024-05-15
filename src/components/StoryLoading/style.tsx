@@ -3,7 +3,7 @@ import styled, { keyframes } from "styled-components";
 // LoadingComp
 export const LoadingContainer = styled.div`
   position: absolute;
-  z-index: 20;
+  z-index: 500;
   width: 100vw;
   height: 100dvh;
   display: flex;

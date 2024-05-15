@@ -94,7 +94,7 @@ export const Author = () => {
 
     if (act) {
       try {
-        const res = await apis.post(`/books/builder/save`, bookData, config);
+        const res = await apis.post(`/books/builder/dalle-save`, bookData, config);
         console.log(res.data.data[0]);
         setBookId(res.data.data[0].book.id);
         setBookBg1(res.data.data[0].book.pages[0].coloredImageUrl);

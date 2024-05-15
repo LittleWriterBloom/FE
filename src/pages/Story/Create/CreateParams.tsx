@@ -53,7 +53,7 @@ export const CreateParams = () => {
   const [pageNum, setPageNum] = useState(2);
   const [bookLength] = useAtom(bookLengthAtom);
   const [act] = useAtom(accessTokenAtom);
-  const [canvasImageData, ] = useAtom(canvasImageDataAtom);
+  const [canvasImageData] = useAtom(canvasImageDataAtom);
   const [quest1] = useAtom(questAtom1);
   const [story, setStory] = useState("");
 
@@ -129,14 +129,6 @@ export const CreateParams = () => {
     navigate("/story/title");
   };
 
-  // const onClickDong = () => {
-  //   setIsModal(true);
-  // }
-
-  // const onClickExit = () => {
-  //   setIsModal(false);
-  // }
-
   const onClickCheck = () => {
     alert("스토리를 입력해주세요.");
   };
@@ -177,11 +169,7 @@ export const CreateParams = () => {
 
     if (act) {
       try {
-        const res = await apis.post(
-          `/books/builder/insight`,
-          pageData,
-          config
-        );
+        const res = await apis.post(`/books/builder/insight`, pageData, config);
         console.log(res.data.data[0]);
         if (pageNum === 2) {
           setQuest2(res.data.data[0].bookInsight.generatedQuestions);
@@ -222,7 +210,7 @@ export const CreateParams = () => {
       style={index === pageNum - 1 ? { backgroundColor: "#FF90F4" } : {}}
     />
   ));
-  
+
   const texts = [text2, text3, text4, text5, text6, text7];
   const quests = [quest1, quest2, quest3, quest4, quest5, quest6];
 
@@ -369,18 +357,25 @@ export const CreateParams = () => {
                           <>
                             <TTS text={texts[page - 2]} speaker="ndain" />
                             <S.StoryCreated>
-                              {texts[page - 2].split(".").map((sentence, index, array) => (
-                                <div key={index}>
-                                  {sentence.trim()}
-                                  {index < array.length - 1 && "."}
-                                  {index < array.length - 2 && (
-                                    <>
-                                      <br style={{ fontSize: "0.1rem" }} />
-                                      <div style={{ width: "1rem", height: "1rem" }} />
-                                    </>
-                                  )}
-                                </div>
-                              ))}
+                              {texts[page - 2]
+                                .split(".")
+                                .map((sentence, index, array) => (
+                                  <div key={index}>
+                                    {sentence.trim()}
+                                    {index < array.length - 1 && "."}
+                                    {index < array.length - 2 && (
+                                      <>
+                                        <br style={{ fontSize: "0.1rem" }} />
+                                        <div
+                                          style={{
+                                            width: "1rem",
+                                            height: "1rem",
+                                          }}
+                                        />
+                                      </>
+                                    )}
+                                  </div>
+                                ))}
                             </S.StoryCreated>
                           </>
                         )}
@@ -425,7 +420,7 @@ export const CreateParams = () => {
               </>
             )}
             {!isCreated && (
-              <div onClick = {handleClickDong}>
+              <div onClick={handleClickDong}>
                 <DongAnim talkCount={1} />
               </div>
             )}

@@ -23,6 +23,8 @@ import arrow from "./compareAi-arrow.png";
 import compareAi from "./compareAi.png";
 import btnBack from "./btn-back.png";
 import bookMaking from "./bookMaking-anim.gif";
+import speakerT from "./speakerOn.png";
+import speakerF from "./speakerOff.png";
 
 export {
   ggummi,
@@ -50,4 +52,6 @@ export {
   compareAi,
   btnBack,
   bookMaking,
+  speakerT,
+  speakerF,
 };

@@ -16,7 +16,6 @@ const GlobalStyleComponent = createGlobalStyle`
     padding: 0;
     margin: 0;
     -ms-overflow-style: none;
-    scrollbar-width: none; 
   }
   html {
     font-family: "BMUJA", 'SUIT', sans-serif;

@@ -1,10 +1,9 @@
 import { styled } from "styled-components";
 import { useNavigate } from "react-router-dom";
-// import { useAtom, useAtomValue } from "jotai";
 import { btnHome } from "../../../assets";
-import { useAtom, useAtomValue } from "jotai";
+import { useAtom } from "jotai";
 import {
-  canvasImageDataAtom,
+  // canvasImageDataAtom,
   bookColorAtom,
   bookTitleAtom,
   bgAtom1,
@@ -17,7 +16,7 @@ import { useEffect } from "react";
 
 export const Completion = () => {
   const navigate = useNavigate();
-  const canvasImageData = useAtomValue(canvasImageDataAtom);
+  // const [canvasImageData, ] = useAtom(canvasImageDataAtom);
   const [bookColAtom] = useAtom(bookColorAtom);
   const [bookBg1] = useAtom(bgAtom1);
   const [bookTitle] = useAtom(bookTitleAtom);
@@ -50,9 +49,9 @@ export const Completion = () => {
           <BookTitle>{bookTitle}</BookTitle>
           <BookAuthor>{author} 지음</BookAuthor>
           {bookBg1 && <BookBg src={bookBg1} />}
-          {canvasImageData && (
+          {/* {canvasImageData && (
             <Character src={canvasImageData} alt="Saved Image" />
-          )}
+          )} */}
         </BookContainer>
         <BookShadow src={bookShadow} alt="책" />
       </Body>
@@ -165,10 +164,10 @@ const BookBg = styled.img`
   border-radius: 0 0 1rem 1rem;
 `;
 
-const Character = styled.img`
-  width: 30vw;
-  height: auto;
-  position: absolute;
-  z-index: 26;
-  bottom: 0;
-`;
+// const Character = styled.img`
+//   width: 30vw;
+//   height: auto;
+//   position: absolute;
+//   z-index: 26;
+//   bottom: 0;
+// `;

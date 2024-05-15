@@ -63,11 +63,28 @@ export const Home = styled.img`
   cursor: pointer;
 `;
 
+export const BtnContainer = styled.div`
+  width: auto;
+  height: 12dvh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 3dvh;
+`;
+
 export const EndBtn = styled.img`
   width: auto;
   height: 75%;
-  margin-right: 5vw;
+  margin-right: 1rem;
   filter: drop-shadow(0 0 1rem rgba(0, 0, 0, 0.17));
+  cursor: pointer;
+`;
+
+export const SpeakerBtn = styled.img`
+  width: auto;
+  height: 90%;
+  margin-right: 5vw;
   cursor: pointer;
 `;
 
@@ -118,6 +135,7 @@ export const CharacterContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
 `;
 
 export const Character = styled.img`
@@ -125,6 +143,8 @@ export const Character = styled.img`
   height: 22rem;
   object-fit: cover;
   overflow: hidden;
+  position: absolute;
+  bottom: 1rem;
 `;
 
 export const Check = styled.img`
