@@ -135,6 +135,27 @@ export const Ggummi = styled.img`
   z-index: 6;
 `;
 
+export const PageWrapper = styled.div`
+  width: 50vw;
+  height: 4rem;
+  position: absolute;
+  z-index: 7;
+  bottom: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+`;
+
+export const PageNum = styled.span`
+  font-family: "BMJUA";
+  font-size: 2rem;
+  width: 3rem;
+  height: 3rem;
+  text-align: center;
+  cursor: pointer;
+`;
+
 /* book style */
 export const BookContainer = styled.div`
   width: 16rem;

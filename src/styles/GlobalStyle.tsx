@@ -27,7 +27,16 @@ const GlobalStyleComponent = createGlobalStyle`
     // height: 100dvh;
     overflow-x: hidden;
     /* 미디어 쿼리에 따른 폰트 크기 설정 */
-    @media (max-width: 400px) {
+    @media (max-width: 100px) {
+      font-size: 3px;
+    }
+    @media (min-width: 100px) and (max-width: 200px) {
+      font-size: 5px;
+    }
+    @media (min-width: 200px) and (max-width: 300px) {
+      font-size: 7px;
+    }
+    @media (min-width: 300px) and (max-width: 400px) {
       font-size: 9px;
     }
     @media (min-width: 401px) and (max-width: 480px) {

@@ -25,6 +25,8 @@ import {
   ReadAI,
   CreateF,
   CreateParamsF,
+  Descript,
+  CompareAi,
 } from './pages';
 import { Canvas } from './pages/Character/Draw/Canvas';
 import { Test } from './pages/Test/Test';
@@ -47,6 +49,8 @@ function App() {
         <Route path='/character' element={<Character />} />
         <Route path='/character/draw' element={<DrawAi />} />
         <Route path='/character/drawai' element={<Draw />} />
+        <Route path='/character/descript' element={<Descript />} />
+        <Route path='/character/compareai' element={<CompareAi />} />
         <Route path='/character/naming' element={<Naming />} />
         <Route path='/character/personality' element={<Personality />} />
         <Route path='/character/complete' element={<Complete />} />

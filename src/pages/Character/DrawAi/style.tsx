@@ -196,3 +196,92 @@ export const CharacterDataInput = styled.input`
   z-index: 10;
   top: 3rem;
 `;
+
+// Descript
+
+export const DescriptContainer = styled.div`
+  width: 100%;
+  height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+`;
+
+export const DescriptBG = styled.img`
+  width: 100%;
+  height: 100dvh;
+  position: absolute;
+  z-index: 1;
+`;
+
+export const DescriptContentsWrapper = styled.div`
+  width: 74%;
+  height: 35rem;
+  margin-top: 3rem;
+  position: absolute;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  background-color: rgba(200, 200, 200, 0.5);
+`;
+
+export const DescriptImgWrapper = styled.div`
+  width: 50%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(205, 182, 83, 0.5);
+`;
+
+export const DescriptImg = styled.img`
+  width: 100%;
+  height: 90%;
+  object-fit: cover;
+`;
+
+export const DescriptTextContainer = styled.div`
+  width: 45%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const DescriptTitle = styled.img`
+  width: 100%;
+  height: auto;
+  margin-bottom: 2rem;
+`;
+
+export const DescriptTextWrapper = styled.div`
+  width: 100%;
+  height: 15rem;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const DescriptTextBG = styled.img`
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 3;
+`;
+
+export const DescriptTextInput = styled.input`
+  width: 85%;
+  height: 85%;
+  font-size: 2rem;
+  font-family: "BMJUA";
+  overflow-y: auto;
+  position: absolute;
+  z-index: 4;
+  text-align: top;
+  &:focus {
+    outline: none;
+  }
+`;

@@ -27,7 +27,6 @@ import {
 } from "../../assets/Story/Title";
 import apis from "../../apis/apis";
 
-
 interface AllData {
   firstPageImageUrl: string;
   author: string;
@@ -51,6 +50,9 @@ export const MyStories = () => {
   const [, setCharImg] = useAtom(characterImgAtom);
   const [bookColor, setBookColor] = useState(pinkBook);
   const [bookFirstImg, setBookFirstImg] = useState("");
+  const [pageNum, setPageNum] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
+  const [currPage, setCurrPage] = useState(1);
 
   const books = [pinkBook, orangeBook, yellowBook, greenBook, blueBook];
 
@@ -66,9 +68,13 @@ export const MyStories = () => {
             Authorization: `Bearer ${act}`,
           },
         };
-        const res = await apis.get("/books/board/my", config);
-        console.log(res.data);
-        setAllData(res.data.data);
+        const res = await apis.get(
+          `/books/board/my?page=${pageNum}&size=9`,
+          config
+        );
+        console.log(res.data.data[0]);
+        setAllData(res.data.data[0].books);
+        setTotalPages(res.data.data[0].pageInfo.totalPages);
       } catch (err) {
         console.error(err);
       }
@@ -83,6 +89,10 @@ export const MyStories = () => {
     setBookId("");
     getAllBooks();
   }, [act]);
+
+  useEffect(() => {
+    getAllBooks();
+  }, [pageNum]);
 
   const onClickBook = (index: number) => {
     const selected = allData[index];
@@ -102,6 +112,16 @@ export const MyStories = () => {
     setBookId("");
     setCard(false);
     setSelectedBook(null);
+  };
+
+  const pageNumbers = Array.from(
+    { length: totalPages },
+    (_, index) => index + 1
+  );
+
+  const onClickPage = (page: number) => {
+    setCurrPage(page);
+    setPageNum(page - 1);
   };
 
   return (
@@ -132,6 +152,21 @@ export const MyStories = () => {
             ))}
           </S.BodyContainer>
           <S.Ggummi src={bookChaek} alt="꾸미" />
+          <S.PageWrapper>
+            {pageNumbers.map((pageNumber) => (
+              <>
+                <S.PageNum
+                  key={pageNumber}
+                  style={{
+                    color: pageNumber === currPage ? "#53944D" : "#91CA6B",
+                  }}
+                  onClick={() => onClickPage(pageNumber)}
+                >
+                  {pageNumber}
+                </S.PageNum>
+              </>
+            ))}
+          </S.PageWrapper>
         </S.Body>
       ) : (
         <S.BodyContainerT>
