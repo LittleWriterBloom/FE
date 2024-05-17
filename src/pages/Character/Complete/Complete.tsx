@@ -5,7 +5,6 @@ import { completeBg } from "../../../assets/Character";
 import { btnHome } from "../../../assets";
 import { useAtom } from "jotai";
 import {
-  canvasImageDataAtom,
   characterNameAtom,
   characterPersonalityAtom,
   accessTokenAtom,
@@ -20,7 +19,6 @@ import apis from "../../../apis/apis";
 
 export const Complete = () => {
   const navigate = useNavigate();
-  const [canvasImageData] = useAtom(canvasImageDataAtom);
   const [aiImg] = useAtom(aiImageDataAtom);
   const [originImg, ] = useAtom(originImageDataAtom);
   const [descript] = useAtom(characterDescriptAtom);
