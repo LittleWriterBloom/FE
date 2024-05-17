@@ -44,7 +44,7 @@ export const DrawAi = () => {
   const canvasContainerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef(null);
   const [canvas, setCanvas] = useState<fabric.Canvas | null>();
-  const [isCanvasEmpty, setIsCanvasEmpty] = useState<boolean>(true); // 캔버스가 비어있는지 여부 상태 추가
+  const [isCanvasEmpty, setIsCanvasEmpty] = useState<boolean>(true);
   const [, setCanvasImg] = useAtom(canvasImageDataAtom);
   const [, setOriginImg] = useAtom(originImageDataAtom);
   const [, setAiImg] = useAtom(aiImageDataAtom);
@@ -52,8 +52,7 @@ export const DrawAi = () => {
   const [brushColor, setBrushColor] = useState<string>("black");
   const [, setDescript] = useAtom(characterDescriptAtom);
   const [brushWidth, setBrushWidth] = useState<number>(10);
-  // DrawAi 컴포넌트 내에 새로운 상태 추가
-  // const [isEraserActive, setIsEraserActive] = useState<boolean>(false);
+  const [isEraserActive, setIsEraserActive] = useState<boolean>(false); // 지우개 모드 상태 추가
 
   useEffect(() => {
     setAiImg("");
@@ -64,14 +63,12 @@ export const DrawAi = () => {
     const canvasElement = canvasRef.current;
 
     if (canvasContainer && canvasElement) {
-      // 캔버스 생성
       const newCanvas = new fabric.Canvas(canvasElement, {
         width: canvasContainer.offsetWidth,
         height: canvasContainer.offsetHeight,
       });
       setCanvas(newCanvas);
 
-      // 언마운트 시 캔버스 정리
       return () => {
         newCanvas.dispose();
       };
@@ -80,11 +77,8 @@ export const DrawAi = () => {
 
   useEffect(() => {
     if (canvas) {
-      // 기존에 그려진 그림들을 복사하여 보존
       const objects = canvas.getObjects().map(obj => obj);
-      // 기존에 있던 모든 오브젝트 제거
       canvas.clear();
-      // 배경을 다시 추가
       const rect = new fabric.Rect({
         left: 0,
         top: 0,
@@ -94,42 +88,27 @@ export const DrawAi = () => {
         selectable: false,
       });
       canvas.add(rect);
-      // 새로운 brush 설정
       canvas.isDrawingMode = true;
-      canvas.freeDrawingBrush.width = 10;
-      canvas.freeDrawingBrush.color = brushColor;
+      canvas.freeDrawingBrush.width = brushWidth;
+      canvas.freeDrawingBrush.color = isEraserActive ? "white" : brushColor; // 지우개 모드에 따른 색상 설정
       canvas.renderAll();
-      // 이전에 그려진 그림들을 다시 추가
       objects.forEach(obj => canvas.add(obj));
-
-      // 캔버스 이벤트 리스너 등록
       canvas.on("path:created", () => {
         setIsCanvasEmpty(canvas.isEmpty());
       });
     }
-  }, [canvas, brushColor]);
+  }, [canvas, brushColor, brushWidth, isEraserActive]);
 
-  // 이미지 저장 함수
   const saveAsImage = () => {
     if (canvas) {
-      // 캔버스의 이미지 데이터 가져오기
       const imageData = canvas.toDataURL({
-        format: "png", // 이미지 포맷 지정 (png, jpeg 등)
-        quality: 1, // 이미지 품질 (0 ~ 1)
+        format: "png",
+        quality: 1,
       });
 
       setCanvasImg(imageData);
       setOriginImg(imageData.split(",")[1]);
       navigate("/character/descript");
-      /*
-			// 이미지 데이터를 사용하여 이미지 파일 생성
-			const link = document.createElement("a");
-			link.href = imageData;
-			link.download = "canvas_image.png"; // 다운로드할 이미지 파일 이름 지정
-			document.body.appendChild(link);
-			link.click();
-			document.body.removeChild(link);
-      */
     } else {
       alert("캐릭터를 그려주세요.");
     }
@@ -202,23 +181,29 @@ export const DrawAi = () => {
 
   const onColorClick01 = (index: number) => {
     const colosrS = color01[index];
-    console.log(colosrS);
     setBrushColor(colosrS);
+    setIsEraserActive(false); // 색상을 선택하면 지우개 모드를 비활성화
   };
 
   const onColorClick02 = (index: number) => {
     const colosrS = color02[index];
-    console.log(colosrS);
     setBrushColor(colosrS);
+    setIsEraserActive(false); // 색상을 선택하면 지우개 모드를 비활성화
   };
 
-  // 브러쉬 굵기를 조절하는 함수
   const handleBrushWidthChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newWidth = parseInt(event.target.value);
-    setBrushWidth(newWidth); // 상태 업데이트
+    setBrushWidth(newWidth);
     if (canvas) {
-      canvas.freeDrawingBrush.width = newWidth; // 브러쉬 굵기 변경
-      canvas.renderAll(); // 캔버스 다시 렌더링
+      canvas.freeDrawingBrush.width = newWidth;
+      canvas.renderAll();
+    }
+  };
+
+  const handleEraserClick = () => {
+    setIsEraserActive(true); // 지우개 모드 활성화
+    if (canvas) {
+      canvas.freeDrawingBrush.color = "white";
     }
   };
 
@@ -298,7 +283,12 @@ export const DrawAi = () => {
           <S.PenCaseImg src={penCase} alt="penCase" />
           <S.PenWrapper>
             {penType.map((type, index) => (
-              <S.PenType key={index} src={type} alt={type} />
+              <S.PenType
+                key={index}
+                src={type}
+                alt={type}
+                onClick={type === eraser ? handleEraserClick : undefined} // 지우개 아이콘 클릭 시 지우개 모드로 전환
+              />
             ))}
           </S.PenWrapper>
         </S.PenCase>
