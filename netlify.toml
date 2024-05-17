@@ -1,3 +1,15 @@
+[[headers]]
+  # TypeScript 모듈에 대한 MIME 타입 설정
+  for = "*.ts"
+  [headers.values]
+    Content-Type = "application/javascript"
+
+[[headers]]
+  # TypeScript JSX 모듈에 대한 MIME 타입 설정
+  for = "*.tsx"
+  [headers.values]
+    Content-Type = "application/javascript"
+    
 [build]
   command = "yarn build"
   publish = "dist"
