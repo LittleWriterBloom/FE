@@ -20,6 +20,9 @@ import {
   originImageDataAtom,
 } from "../../../store/jotaiAtoms";
 import apis from "../../../apis/apis";
+import { BubbleP } from "../../../components/Bubble/BubbleP";
+import { GgummiAnim } from "../../../components/CharacterAnim/GgummiAnim";
+import { TTS } from "../../../components/TTS/TTS";
 
 export const Descript = () => {
   const navigate = useNavigate();
@@ -31,6 +34,7 @@ export const Descript = () => {
 
   const [showFirst, setShowFirst] = useState(false);
   const [showSecond, setShowSecond] = useState(false);
+  const [showThird, setShowThird] = useState(false);
 
   const [isLoading, setIsLoading] = useState(false);
   const [listening, setListening] = useState(false);
@@ -56,7 +60,10 @@ export const Descript = () => {
       setShowFirst(true);
       setTimeout(() => {
         setShowSecond(true);
-      }, 2000);
+        setTimeout(() => {
+          setShowThird(true);
+        }, 3000);
+      }, 3500);
     }, 500);
   }, []);
 
@@ -108,6 +115,31 @@ export const Descript = () => {
         <CharacterLoading />
       ) : (
         <>
+          <GgummiAnim talkCount={6} />
+          {showFirst && (
+            <>
+              <TTS text="이제 이 친구에 대해 설명해줄래?" speaker="nmeow" />
+              <BubbleP text="이제 이 친구에 대해 설명해줄래?" length={31} />
+            </>
+          )}
+          {showSecond && (
+            <>
+              <TTS
+                text="고양이인가? 곰? 아니면 모자를 쓴 남자 아이?"
+                speaker="nmeow"
+              />
+              <BubbleP
+                text="고양이인가? 곰? 아니면 모자를 쓴 남자 아이?"
+                length={42}
+              />
+            </>
+          )}
+          {showThird && (
+            <>
+              <TTS text="자세하게 알려줄수록 내가 그림을 그리는데 도움이 돼!" speaker="nmeow" />
+              <BubbleP text="자세하게 알려줄수록 내가 그림을 그리는데 도움이 돼!" length={47} />
+            </>
+          )}
           <S.Header>
             <S.Home src={btnHome} alt="홈" onClick={onClickHomeBtn} />
             {descript == "" ? (
