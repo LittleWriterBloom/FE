@@ -80,23 +80,27 @@ export const DrawAi = () => {
 
   useEffect(() => {
     if (canvas) {
-      // 배경을 하얀색으로 설정하는 사각형 생성
+      // 기존에 그려진 그림들을 복사하여 보존
+      const objects = canvas.getObjects().map(obj => obj);
+      // 기존에 있던 모든 오브젝트 제거
+      canvas.clear();
+      // 배경을 다시 추가
       const rect = new fabric.Rect({
         left: 0,
         top: 0,
         width: canvas.width,
         height: canvas.height,
         fill: "white",
-        selectable: false, // 선택 불가능하도록 설정
+        selectable: false,
       });
-
-      canvas.add(rect); // 캔버스에 사각형 추가
-
+      canvas.add(rect);
+      // 새로운 brush 설정
       canvas.isDrawingMode = true;
       canvas.freeDrawingBrush.width = 10;
       canvas.freeDrawingBrush.color = brushColor;
-      canvas.freeDrawingBrush.width = 10;
       canvas.renderAll();
+      // 이전에 그려진 그림들을 다시 추가
+      objects.forEach(obj => canvas.add(obj));
 
       // 캔버스 이벤트 리스너 등록
       canvas.on("path:created", () => {
