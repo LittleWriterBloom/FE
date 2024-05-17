@@ -57,6 +57,7 @@ export const DrawAreaContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 `;
 
 export const DrawArea = styled.div`
@@ -74,6 +75,39 @@ export const Paper = styled.img`
   position: absolute;
   z-index: 5;
   filter: drop-shadow(0px 0.2rem 1rem rgba(212, 186, 119, 0.59));
+`;
+
+export const BrushControlBarWrapper = styled.div`
+  width: 13rem;
+  height: 3rem;
+  position: absolute;
+  z-index: 8;
+  right: -3rem;
+  border-radius: 10rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #FFDE2E;
+  transform: rotate(90deg);
+`;
+
+export const BrushControlBar = styled.input`
+  width: 10rem;
+  height: 0.75rem;
+  -webkit-appearance: none;
+  appearance: none;
+  background: #DDC12E;
+  cursor: pointer;
+  border-radius: 10rem;
+  &::-webkit-slider-thumb{
+    -webkit-appearance: none; /* Override default look */
+    appearance: none;
+    width: 2rem;
+    height: 2rem;
+    background: white;
+    border-radius: 6rem;
+    filter: drop-shadow(0.17rem 0 0.17rem rgba(0, 0, 0, 0.2));
+  }
 `;
 
 export const Body = styled.div`
