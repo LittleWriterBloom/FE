@@ -185,12 +185,14 @@ export const Create = () => {
         <WritingLoading />
       ) : (
         <>
-          <SpeechToText
-            listening={listening}
-            startListening={startListening}
-            stopListening={stopListening}
-            onSpeechResult={handleSpeechResult}
-          />
+          {!isCreated && (
+            <SpeechToText
+              listening={listening}
+              startListening={startListening}
+              stopListening={stopListening}
+              onSpeechResult={handleSpeechResult}
+            />
+          )}
           {isModal && <ModalYN isOpen={true} closeModal={closeModal} />}
           {isCreated ? (
             <>

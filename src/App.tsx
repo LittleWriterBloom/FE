@@ -67,6 +67,7 @@ function App() {
         <Route path='/story/completion' element={<Completion />} />
         <Route path='/story/read' element={<Read />} />
         <Route path='/story/readai' element={<ReadAI />} />
+        <Route path='/story/readai/:uuid' element={<ReadAI />} />
         <Route path='/mystories' element={<MyStories />} />
         <Route path='/test' element={<Test />} />
         <Route path='/test02' element={<Test02 />} />

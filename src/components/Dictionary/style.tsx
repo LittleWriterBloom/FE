@@ -55,8 +55,8 @@ export const ModalSearch = styled.div`
   position: absolute;
   z-index: 2;
   width: 65%;
-  height: 6rem;
-  bottom: 12dvh;
+  height: 5rem;
+  bottom: 10dvh;
   display: flex;
   align-items: center;
 `;
@@ -94,12 +94,12 @@ export const ModalBubble = styled.div`
   position: absolute;
   z-index: 2;
   width: 65%;
-  height: 45%;
+  height: 52%;
   font-size: 2rem;
   font-family: "BMJUA";
   color: #816225;
   right: 4rem;
-  margin-bottom: 2.5rem;
+  margin-top: 2dvh;
 `;
 
 export const ModalBubbleBg = styled.img`
@@ -126,15 +126,14 @@ export const ModalBubbleContent = styled.div`
 export const ModalBubbleQuest = styled.p`
   width: 100%;
   overflow-x: auto;
-  font-size: 2.8rem;
+  font-size: 2.5rem;
   margin-bottom: 0.5rem;
-  background-color: red;
   display: flex;
   align-items: center;
 `;
 
 export const SpeakerBtn = styled.img`
-  width: 3.3rem;
+  width: 2.8rem;
   height: auto;
   margin-left: 1rem;
   margin-right: 5vw;
@@ -144,7 +143,7 @@ export const SpeakerBtn = styled.img`
 export const ModalBubbleTextBox = styled.div`
   font-size: 3rem;
   width: 100%;
-  height: 11rem;
+  height: 68%;
   border-radius: 0.7rem;
   background: #F2F2E9;
   box-shadow: 0.2rem 0.2rem 0.4rem 0px rgba(224, 224, 204, 0.50) inset;
@@ -156,7 +155,6 @@ export const ModalBubbleTextBox = styled.div`
 export const ModalBubbleText = styled.p`
   font-size: 2rem;
   width: 90%;
-  height: 9rem;
+  height: 85%;
   overflow-y: auto;
 `;
-
