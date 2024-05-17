@@ -30,13 +30,13 @@ export const TTS: React.FC<TTSProps> = ({ text, speaker }) => {
         {
           headers: {
             Authorization: `Bearer ${act}`,
-          }
+          },
+          responseType: "blob",
         }
       );
-      console.log(response.data);
-      // const blob = new Blob([response.data.data[0].mp3Binary], { type: "audio/mpeg" });
-      // const url = URL.createObjectURL(blob);
-      setAudioUrl(response.data);
+      console.log(response);
+      const audioUrl = URL.createObjectURL(response.data);
+      setAudioUrl(audioUrl);
     } catch (error) {
       console.error("Error speaking text:", error);
     }
@@ -46,6 +46,7 @@ export const TTS: React.FC<TTSProps> = ({ text, speaker }) => {
     <div>
       {audioUrl && (
         <audio
+          src={audioUrl}
           controls
           autoPlay
           style={{ opacity: "0", position: "absolute", zIndex: "1" }}

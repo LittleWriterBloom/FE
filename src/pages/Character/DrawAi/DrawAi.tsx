@@ -51,6 +51,9 @@ export const DrawAi = () => {
   const [isPalette, setIsPalette] = useState(true);
   const [brushColor, setBrushColor] = useState<string>("black");
   const [, setDescript] = useAtom(characterDescriptAtom);
+  const [brushWidth, setBrushWidth] = useState<number>(10);
+  // DrawAi 컴포넌트 내에 새로운 상태 추가
+  // const [isEraserActive, setIsEraserActive] = useState<boolean>(false);
 
   useEffect(() => {
     setAiImg("");
@@ -92,6 +95,7 @@ export const DrawAi = () => {
       canvas.isDrawingMode = true;
       canvas.freeDrawingBrush.width = 10;
       canvas.freeDrawingBrush.color = brushColor;
+      canvas.freeDrawingBrush.width = 10;
       canvas.renderAll();
 
       // 캔버스 이벤트 리스너 등록
@@ -153,6 +157,32 @@ export const DrawAi = () => {
     grey,
   ];
 
+  const color01 = [
+    "#FF1515",
+    "#FFAD0E",
+    "#ECFF15",
+    "#5BFF0E",
+    "#00C72C",
+    "#15D5FF",
+    "#3870FF",
+    "#B43AFF",
+    "#FF5BBD",
+    "#B77A32",
+  ];
+
+  const color02 = [
+    "#FF5BBD",
+    "#B77A32",
+    "#393939",
+    "#F9F9F9",
+    "#FFEAA1",
+    "#0EFFA8",
+    "#FF8F77",
+    "#FFACD9",
+    "#E69FFF",
+    "#B9B9B9",
+  ];
+
   const penType = [pencilBase, brushBase, crayonBase, eraser];
 
   const onClickHomeBtn = () => {
@@ -166,10 +196,26 @@ export const DrawAi = () => {
     setIsPalette(true);
   };
 
-  const onColorClick = (color: string) => {
-    const colosrS = color.split("/")[5].split(".")[0];
+  const onColorClick01 = (index: number) => {
+    const colosrS = color01[index];
     console.log(colosrS);
     setBrushColor(colosrS);
+  };
+
+  const onColorClick02 = (index: number) => {
+    const colosrS = color02[index];
+    console.log(colosrS);
+    setBrushColor(colosrS);
+  };
+
+  // 브러쉬 굵기를 조절하는 함수
+  const handleBrushWidthChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newWidth = parseInt(event.target.value);
+    setBrushWidth(newWidth); // 상태 업데이트
+    if (canvas) {
+      canvas.freeDrawingBrush.width = newWidth; // 브러쉬 굵기 변경
+      canvas.renderAll(); // 캔버스 다시 렌더링
+    }
   };
 
   return (
@@ -192,6 +238,15 @@ export const DrawAi = () => {
         <S.DrawArea ref={canvasContainerRef}>
           <canvas ref={canvasRef} />
         </S.DrawArea>
+        <S.BrushControlBarWrapper>
+          <S.BrushControlBar
+            type="range"
+            min="1"
+            max="50"
+            value={brushWidth}
+            onChange={handleBrushWidthChange}
+          />
+        </S.BrushControlBarWrapper>
       </S.DrawAreaContainer>
       <S.Body>
         <S.ColorPalette>
@@ -204,7 +259,7 @@ export const DrawAi = () => {
                     key={index}
                     src={color}
                     alt={color}
-                    onClick={() => onColorClick(color)}
+                    onClick={() => onColorClick01(index)}
                   />
                 ))}
               </S.ColorWrapper>
@@ -228,7 +283,7 @@ export const DrawAi = () => {
                     key={index}
                     src={color}
                     alt={color}
-                    onClick={() => onColorClick(color)}
+                    onClick={() => onColorClick02(index)}
                   />
                 ))}
               </S.ColorWrapper>
