@@ -15,6 +15,9 @@ dotenv.config();
 export default defineConfig({
   plugins: [react()],
   base: './', // 이 설정을 추가하여 상대 경로로 빌드된 파일들의 경로를 맞춤
+  build: {
+    outDir: 'dist', // 빌드 디렉토리 설정
+  },
   server: {
     proxy: process.env.NODE_ENV === 'development' ? {
       '/api': {
