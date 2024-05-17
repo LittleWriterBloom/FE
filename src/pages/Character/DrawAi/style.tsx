@@ -1,9 +1,4 @@
-import { DetailedHTMLProps, ImgHTMLAttributes } from 'react';
 import { styled } from "styled-components";
-
-interface MenuProps extends DetailedHTMLProps<ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement> {
-  isPalette?: boolean;
-}
 
 export const Container = styled.div`
   width: 100%;
@@ -167,11 +162,10 @@ export const Color = styled.img`
   cursor: pointer;
 `;
 
-export const PaletteBtn = styled.img<MenuProps>`
+export const PaletteBtn = styled.img`
   width: 4.5rem;
   height: auto;
   cursor: pointer;
-  ${({ isPalette }) => isPalette && 'transform: rotate(180deg);'};
 `;
 
 export const PenCase = styled.div`
@@ -182,7 +176,6 @@ export const PenCase = styled.div`
   align-items: center;
   position: relative;
   margin-left: 2vw;
-  overflow: hidden;
 `;
 
 export const PenCaseImg = styled.img`
@@ -201,8 +194,7 @@ export const PenWrapper = styled.div`
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-  gap: 2rem;
-  overflow: hidden;
+  gap: 4rem;
   position: absolute;
   z-index: 2;
   margin-left: 13vw;

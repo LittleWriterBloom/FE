@@ -29,7 +29,7 @@ import { btnHome, readEnd, speakerF, speakerT } from "../../../assets";
 import apis from "../../../apis/apis";
 import { TTS } from "../../../components/TTS/TTS";
 
-export const ReadAI = () => {
+export const ReadQR = () => {
   const navigate = useNavigate();
   const [act] = useAtom(accessTokenAtom);
   const [, setAiImageData] = useAtom(aiImageDataAtom);

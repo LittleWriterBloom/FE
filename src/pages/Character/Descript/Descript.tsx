@@ -62,8 +62,8 @@ export const Descript = () => {
         setShowSecond(true);
         setTimeout(() => {
           setShowThird(true);
-        }, 3000);
-      }, 3500);
+        }, 4900);
+      }, 2500);
     }, 500);
   }, []);
 
@@ -118,8 +118,8 @@ export const Descript = () => {
           <GgummiAnim talkCount={6} />
           {showFirst && (
             <>
-              <TTS text="이제 이 친구에 대해 설명해줄래?" speaker="nmeow" />
-              <BubbleP text="이제 이 친구에 대해 설명해줄래?" length={31} />
+              <TTS text="어떤 캐릭터를 그린거야?" speaker="nmeow" />
+              <BubbleP text="어떤 캐릭터를 그린거야?" length={25} />
             </>
           )}
           {showSecond && (
