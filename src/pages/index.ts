@@ -26,4 +26,5 @@ export * from "./Story/Save/Completion";
 export * from "./Story/Save/Save";
 export * from "./Story/Read/Read";
 export * from "./Story/ReadAI/ReadAI";
+export * from "./Story/ReadQR/ReadQR";
 export * from "./MyStories/MyStories";
