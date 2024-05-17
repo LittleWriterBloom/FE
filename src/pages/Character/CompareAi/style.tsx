@@ -5,7 +5,8 @@ export const Container = styled.div`
   height: 100dvh;
   display: flex;
   flex-direction: column;
-  background-color: #FFFBD5;
+  background-color: #F5F0C2;
+  overflow: hidden;
 `;
 
 export const Header = styled.div`
@@ -17,7 +18,7 @@ export const Header = styled.div`
   justify-content: space-between;
   margin-top: 3dvh;
   position: absolute;
-  z-index: 2;
+  z-index: 3;
   top: 0;
 `;
 
@@ -37,7 +38,7 @@ export const Body = styled.div`
   align-items: center;
   justify-content: center;
   position: absolute;
-  z-index: 1;
+  z-index: 2;
   gap: 2.5rem;
 `;
 
@@ -55,7 +56,26 @@ export const CharactersContainer = styled.div`
   justify-content: center;
   gap: 2.5rem;
   border-radius: 2.5rem;
-  background-color: #FFF;
+  position: relative;
+`;
+
+export const CharactersContainerBG = styled.img`
+  width: 70vw;
+  height: 55dvh;
+  position: absolute;
+  z-index: 2;
+`;
+
+export const CharactersWrapper = styled.div`
+  width: 70vw;
+  height: 55dvh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 2.5rem;
+  position: absolute;
+  z-index: 3;
 `;
 
 export const ContinueBtn = styled.img`
@@ -97,13 +117,14 @@ export const Arrow = styled.img`
   height: auto;
 `;
 
-export const Brush = styled.img`
+export const BrushWrapper = styled.div`
   width: 25rem;
   height: auto;
   position: absolute;
-  top: 0;
-  right: 0;
+  top: -11rem;
+  right: -1rem;
   z-index: 6;
+  transform: rotate(200deg);
 `;
 
 export const Ggummi = styled.img`
@@ -114,4 +135,10 @@ export const Ggummi = styled.img`
   left: 5%;
   z-index: 6;
 `;
- 
+
+export const LottieWrapper = styled.div`
+  width: 100vw;
+  height: 100dvh;
+  position: absolute;
+  z-index: 1;
+`;

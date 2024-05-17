@@ -39,6 +39,9 @@ export const MyCharacters = () => {
   const [, setCharName] = useAtom(characterNameAtom);
   const [, setCharFeat] = useAtom(characterPersonalityAtom);
   const [, setCharId] = useAtom(characterIdAtom);
+  const [pageNum, setPageNum] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
+  const [currPage, setCurrPage] = useState(1);
 
   const onClickHomeBtn = () => {
     navigate("/");
@@ -56,9 +59,10 @@ export const MyCharacters = () => {
             Authorization: `Bearer ${act}`,
           },
         };
-        const res = await apis.get("/character", config);
-        console.log(res.data);
-        setCharactersData(res.data.data);
+        const res = await apis.get(`/character?page=${pageNum}&size=9`, config);
+        console.log(res.data.data[0]);
+        setCharactersData(res.data.data[0].characters);
+        setTotalPages(res.data.data[0].pageInfo.totalPages);
       } catch (err) {
         console.error(err);
       }
@@ -79,6 +83,10 @@ export const MyCharacters = () => {
     getCharactersData();
   }, [act]);
 
+  useEffect(() => {
+    getCharactersData();
+  }, [pageNum]);
+
   const onClickCharacter = (index: number) => {
     const selected = charactersData[index];
     setSelectedChar(selected);
@@ -89,6 +97,16 @@ export const MyCharacters = () => {
     setCard(false);
   };
 
+  const pageNumbers = Array.from(
+    { length: totalPages },
+    (_, index) => index + 1
+  );
+
+  const onClickPage = (page: number) => {
+    setCurrPage(page);
+    setPageNum(page - 1);
+  };
+
   return (
     <S.Container>
       <S.Header>
@@ -96,11 +114,7 @@ export const MyCharacters = () => {
         {card === true && (
           <S.ExitBtn src={btnBack} alt="나가기" onClick={onClickBackBtn} />
         )}
-        <S.Bring
-          src={bring}
-          alt="캐릭터 불러오기"
-          onClick={onClickCharBtn}
-        />
+        <S.Bring src={bring} alt="캐릭터 불러오기" onClick={onClickCharBtn} />
       </S.Header>
       <S.Ggummi src={ggummi2} alt="꾸미" />
       <S.Logo src={title} alt="홈" />
@@ -137,6 +151,21 @@ export const MyCharacters = () => {
                   </S.CharacterContainer>
                 ))}
               </S.BodyContainer>
+              <S.PageWrapper>
+                {pageNumbers.map((pageNumber) => (
+                  <>
+                    <S.PageNum
+                      key={pageNumber}
+                      style={{
+                        color: pageNumber === currPage ? "#947A48" : "#C9B782",
+                      }}
+                      onClick={() => onClickPage(pageNumber)}
+                    >
+                      {pageNumber}
+                    </S.PageNum>
+                  </>
+                ))}
+              </S.PageWrapper>
             </S.Body>
           )}
         </>

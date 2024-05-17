@@ -4,8 +4,8 @@ import { fabric } from "fabric";
 import { useEffect, useRef, useState } from "react";
 import { useAtom } from "jotai";
 import {
-  accessTokenAtom,
   aiImageDataAtom,
+  canvasImageDataAtom,
   characterDescriptAtom,
   originImageDataAtom,
 } from "../../../store/jotaiAtoms";
@@ -37,11 +37,7 @@ import {
   lightPurple,
   grey,
   paper,
-  aiCircleBtn,
 } from "../../../assets/Character/Draw";
-import apis from "../../../apis/apis";
-import { CompareAi } from "./CompareAi/CompareAi";
-import { CharacterLoading } from "../../../components/StoryLoading/CharacterLoading";
 
 export const DrawAi = () => {
   const navigate = useNavigate();
@@ -49,19 +45,16 @@ export const DrawAi = () => {
   const canvasRef = useRef(null);
   const [canvas, setCanvas] = useState<fabric.Canvas | null>();
   const [isCanvasEmpty, setIsCanvasEmpty] = useState<boolean>(true); // 캔버스가 비어있는지 여부 상태 추가
-  const [originImg, setOriginImg] = useAtom(originImageDataAtom);
-  const [aiImg, setAiImg] = useAtom(aiImageDataAtom);
+  const [, setCanvasImg] = useAtom(canvasImageDataAtom);
+  const [, setOriginImg] = useAtom(originImageDataAtom);
+  const [, setAiImg] = useAtom(aiImageDataAtom);
   const [isPalette, setIsPalette] = useState(true);
   const [brushColor, setBrushColor] = useState<string>("black");
-  const [descript, setDescript] = useAtom(characterDescriptAtom);
-  const [act] = useAtom(accessTokenAtom);
-  const [clickCheck, setClickCheck] = useState(false);
-
-  const [isLoading, setIsLoading] = useState(false);
-  const [isCompareAi, setIsCompareAi] = useState(false);
+  const [, setDescript] = useAtom(characterDescriptAtom);
 
   useEffect(() => {
     setAiImg("");
+    setOriginImg("");
     setDescript("");
 
     const canvasContainer = canvasContainerRef.current;
@@ -83,7 +76,8 @@ export const DrawAi = () => {
   }, []);
 
   useEffect(() => {
-    if (canvas) {// 배경을 하얀색으로 설정하는 사각형 생성
+    if (canvas) {
+      // 배경을 하얀색으로 설정하는 사각형 생성
       const rect = new fabric.Rect({
         left: 0,
         top: 0,
@@ -109,15 +103,16 @@ export const DrawAi = () => {
 
   // 이미지 저장 함수
   const saveAsImage = () => {
-    if (canvas && isCanvasEmpty === false && descript !== "") {
+    if (canvas) {
       // 캔버스의 이미지 데이터 가져오기
       const imageData = canvas.toDataURL({
         format: "png", // 이미지 포맷 지정 (png, jpeg 등)
         quality: 1, // 이미지 품질 (0 ~ 1)
       });
 
+      setCanvasImg(imageData);
       setOriginImg(imageData.split(",")[1]);
-      setClickCheck(true);
+      navigate("/character/descript");
       /*
 			// 이미지 데이터를 사용하여 이미지 파일 생성
 			const link = document.createElement("a");
@@ -127,16 +122,9 @@ export const DrawAi = () => {
 			link.click();
 			document.body.removeChild(link);
       */
-    } else if (canvas && isCanvasEmpty === false && descript === "") {
-      alert("어떤 캐릭터인지 설명해주세요.");
     } else {
       alert("캐릭터를 그려주세요.");
     }
-  };
-
-  const changeToAi = () => {
-    setIsLoading(true);
-    postCharacterData(characterData);
   };
 
   const palette01 = [
@@ -167,7 +155,7 @@ export const DrawAi = () => {
 
   const penType = [pencilBase, brushBase, crayonBase, eraser];
 
-  const onClickMakeBtn = () => {
+  const onClickHomeBtn = () => {
     navigate("/");
   };
 
@@ -184,148 +172,78 @@ export const DrawAi = () => {
     setBrushColor(colosrS);
   };
 
-  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setDescript(e.target.value);
-  };
-
-  interface CharacterData {
-    prompt: string | null;
-    base64Image: string | null;
-  }
-
-  const characterData = {
-    prompt: descript,
-    imageType: "BASE_64",
-    base64Image: originImg,
-  };
-  console.log(characterData);
-
-  const postCharacterData = async (characterData: CharacterData) => {
-    const config = {
-      headers: {
-        Authorization: `Bearer ${act}`,
-      },
-    };
-
-    if (act) {
-      try {
-        const res = await apis.post("/character/ai", characterData, config);
-        console.log(res.data);
-        setOriginImg(res.data.data[0].originUrl);
-        setAiImg(res.data.data[0].aiGeneratedImageUrl);
-        setIsLoading(true);
-        setIsCompareAi(true);
-      } catch (err) {
-        console.error(err);
-      }
-    }
-  };
-
-  const LoadingComp = () => {
-    return (
-      <>
-        {isCompareAi ? (
-          <CompareAi canvasImg={originImg} aiImg={aiImg} />
-        ) : (
-          <CharacterLoading />
-        )}
-      </>
-    );
-  };
-
   return (
     <S.Container>
-      {isLoading ? (
-        <LoadingComp />
-      ) : (
-        <>
-          <S.Header>
-            <S.Home src={btnHome} alt="홈" onClick={onClickMakeBtn} />
-            <S.Logo>주인공 만들기</S.Logo>
-            {isCanvasEmpty || descript === "" ? (
-              <S.Check src={btnCheck} alt="확인" onClick={saveAsImage} />
-            ) : (
-              <>
-                {clickCheck ? (
-                  <S.Check
-                    src={aiCircleBtn}
-                    alt="확인(활성화)"
-                    onClick={changeToAi}
-                  />
-                ) : (
-                  <S.Check
-                    src={btnCheckG}
-                    alt="확인(활성화)"
-                    onClick={saveAsImage}
-                  />
-                )}
-              </>
-            )}
-          </S.Header>
-          <S.DrawAreaContainer>
-            <S.Paper src={paper} alt="종이" />
-            <S.DrawArea ref={canvasContainerRef}>
-              <canvas ref={canvasRef} />
-            </S.DrawArea>
-          </S.DrawAreaContainer>
-          <S.Body>
-            <S.ColorPalette>
-              <S.PaletteBG src={palette} alt="palette" />
-              {isPalette === true ? (
-                <S.PaletteContents>
-                  <S.ColorWrapper>
-                    {palette01.map((color, index) => (
-                      <S.Color
-                        key={index}
-                        src={color}
-                        alt={color}
-                        onClick={() => onColorClick(color)}
-                      />
-                    ))}
-                  </S.ColorWrapper>
-                  <S.PaletteBtn
-                    src={btnPalette}
-                    alt="다음 팔레트"
-                    onClick={onClcickPalette}
-                  />
-                </S.PaletteContents>
-              ) : (
-                <S.PaletteContents>
-                  <S.PaletteBtn
-                    src={btnPalette}
-                    alt=" 팔레트"
-                    onClick={onClcickPaletteT}
-                    isPalette
-                  />
-                  <S.ColorWrapper>
-                    {palette02.map((color, index) => (
-                      <S.Color
-                        key={index}
-                        src={color}
-                        alt={color}
-                        onClick={() => onColorClick(color)}
-                      />
-                    ))}
-                  </S.ColorWrapper>
-                </S.PaletteContents>
-              )}
-            </S.ColorPalette>
-            <S.PenCase>
-              <S.PenCaseImg src={penCase} alt="penCase" />
-              <S.PenWrapper>
-                {penType.map((type, index) => (
-                  <S.PenType key={index} src={type} alt={type} />
-                ))}
-              </S.PenWrapper>
-            </S.PenCase>
-          </S.Body>
-          <S.CharacterDataInput
-            onChange={handleInput}
-            type="name"
-            placeholder="어떤 캐릭터인지 설명해주세요."
+      <S.Header>
+        <S.Home src={btnHome} alt="홈" onClick={onClickHomeBtn} />
+        <S.Logo>주인공 만들기</S.Logo>
+        {isCanvasEmpty ? (
+          <S.Check src={btnCheck} alt="확인" onClick={saveAsImage} />
+        ) : (
+          <S.Check
+            src={btnCheckG}
+            alt="확인(활성화)"
+            onClick={saveAsImage}
           />
-        </>
-      )}
+        )}
+      </S.Header>
+      <S.DrawAreaContainer>
+        <S.Paper src={paper} alt="종이" />
+        <S.DrawArea ref={canvasContainerRef}>
+          <canvas ref={canvasRef} />
+        </S.DrawArea>
+      </S.DrawAreaContainer>
+      <S.Body>
+        <S.ColorPalette>
+          <S.PaletteBG src={palette} alt="palette" />
+          {isPalette === true ? (
+            <S.PaletteContents>
+              <S.ColorWrapper>
+                {palette01.map((color, index) => (
+                  <S.Color
+                    key={index}
+                    src={color}
+                    alt={color}
+                    onClick={() => onColorClick(color)}
+                  />
+                ))}
+              </S.ColorWrapper>
+              <S.PaletteBtn
+                src={btnPalette}
+                alt="다음 팔레트"
+                onClick={onClcickPalette}
+              />
+            </S.PaletteContents>
+          ) : (
+            <S.PaletteContents>
+              <S.PaletteBtn
+                src={btnPalette}
+                alt=" 팔레트"
+                onClick={onClcickPaletteT}
+                isPalette
+              />
+              <S.ColorWrapper>
+                {palette02.map((color, index) => (
+                  <S.Color
+                    key={index}
+                    src={color}
+                    alt={color}
+                    onClick={() => onColorClick(color)}
+                  />
+                ))}
+              </S.ColorWrapper>
+            </S.PaletteContents>
+          )}
+        </S.ColorPalette>
+        <S.PenCase>
+          <S.PenCaseImg src={penCase} alt="penCase" />
+          <S.PenWrapper>
+            {penType.map((type, index) => (
+              <S.PenType key={index} src={type} alt={type} />
+            ))}
+          </S.PenWrapper>
+        </S.PenCase>
+      </S.Body>
     </S.Container>
   );
 };

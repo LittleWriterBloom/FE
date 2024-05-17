@@ -10,6 +10,7 @@ import namingBG from './namingBG.png';
 import book from './book.png';
 import paints from './paints.png';
 import bringChar from './bringChar.png';
+import sketchbook from './sketchbook.png';
 
 export {
   btn,
@@ -24,4 +25,5 @@ export {
   book,
   paints,
   bringChar,
+  sketchbook,
 };

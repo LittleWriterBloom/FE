@@ -4,6 +4,8 @@ export * from "./Guide/GuideSecond";
 export * from "./Guide/GuideThird";
 export * from "./Character/Character";
 export * from "./Character/Draw/Draw";
+export * from "./Character/Descript/Descript";
+export * from "./Character/CompareAi/CompareAi";
 export * from "./Character/DrawAi/DrawAi";
 export * from "./Character/Naming/Naming";
 export * from "./Login/Login";

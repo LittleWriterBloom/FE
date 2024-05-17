@@ -10,7 +10,7 @@ export const LoadingContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: rgba(247, 255, 217, 0.7);
+  background-color: rgba(247, 255, 217);
 `;
 
 export const LottieWrapper = styled.div`
