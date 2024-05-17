@@ -29,4 +29,4 @@ export default defineConfig({
   },
 });
 
-// 배포환경 프록시 제거, 프록시 조건부 설정
+// 배포환경 프록시 제거, 프록시 조건부 설정netlify build
