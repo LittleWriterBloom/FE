@@ -128,7 +128,6 @@ export const ModalBubbleQuest = styled.p`
   overflow-x: auto;
   font-size: 2.8rem;
   margin-bottom: 0.5rem;
-  background-color: red;
   display: flex;
   align-items: center;
 `;
@@ -159,4 +158,3 @@ export const ModalBubbleText = styled.p`
   height: 9rem;
   overflow-y: auto;
 `;
-

@@ -6,7 +6,6 @@ import { easel, namingBG, paints } from "../../../assets/Character";
 import { useAtom } from "jotai";
 import {
   aiImageDataAtom,
-  canvasImageDataAtom,
   characterNameAtom,
   characterPersonalityAtom,
 } from "../../../store/jotaiAtoms";
@@ -20,7 +19,6 @@ export const Personality = () => {
   const navigate = useNavigate();
   const [personality, setPersonality] = useState("");
   const [, setPersonalityAtom] = useAtom(characterPersonalityAtom);
-  const [canvasImageData] = useAtom(canvasImageDataAtom);
   const [aiImg] = useAtom(aiImageDataAtom);
   const [name] = useAtom(characterNameAtom);
   const [showFirst, setShowFirst] = useState(false);
@@ -123,9 +121,9 @@ export const Personality = () => {
           />
         </S.NameContainer>
         <S.CharacterImage>
-          {canvasImageData && (
+          {/* {canvasImageData && (
             <S.Character src={canvasImageData} alt="Saved Image" />
-          )}
+          )} */}
           {aiImg && <S.Character src={aiImg} alt="Saved Image" />}
           <S.Easel src={easel} alt="이젤" />
         </S.CharacterImage>

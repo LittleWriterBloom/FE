@@ -95,9 +95,6 @@ export const Complete = () => {
       <S.Body>
         <S.Personality>{characterPersonality}</S.Personality>
         <S.Name>{characterName}</S.Name>
-        {canvasImageData && (
-          <S.Character src={canvasImageData} alt="Saved Image" />
-        )}
         {aiImg && <S.Character src={aiImg} alt="Saved Image" />}
       </S.Body>
     </S.Container>
