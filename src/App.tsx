@@ -11,9 +11,6 @@ import {
   Logout,
   MyCharacters,
   Personality,
-  GuideFirst,
-  GuideSecond,
-  GuideThird,
   Stage,
   Save,
   Completion,
@@ -44,9 +41,6 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path='/logout' element={<Logout />} />
         <Route path='/join' element={<Join />} />
-        <Route path='/guide-first' element={<GuideFirst />} />
-        <Route path='/guide-second' element={<GuideSecond />} />
-        <Route path='/guide-third' element={<GuideThird />} />
         <Route path='/character' element={<Character />} />
         <Route path='/character/draw' element={<DrawAi />} />
         <Route path='/character/drawai' element={<Draw />} />
