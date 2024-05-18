@@ -184,6 +184,15 @@ export const ReadQR = () => {
     setSpeakerOn(false);
     setTTSActive(false);
   };
+  
+  const handleDownloadClick = () => {
+    const canvas = document.querySelector('canvas');
+    const url = canvas ? canvas.toDataURL('image/png') : '';
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `http://littlewriter.netlify.app/#/story/readai/${uuid}`;
+    link.click();
+  };
 
   return (
     <S.Container>
@@ -237,6 +246,7 @@ export const ReadQR = () => {
               <QRCode
                 value={`http://littlewriter.netlify.app/#/story/readai/${uuid}`}
                 style={{ width: "100%", height: "auto" }}
+                onClick={handleDownloadClick}
               />
             </S.QRContainer>
           ) : (

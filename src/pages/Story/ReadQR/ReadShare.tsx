@@ -12,7 +12,7 @@ import {
   greenBook,
   blueBook,
 } from "../../../assets/Story/Title";
-import { btnReadQR } from "../../../assets";
+import { btnReadShare } from "../../../assets";
 import Card from "./Card";
 import qrText from "../../../assets/qrText.png";
 
@@ -59,24 +59,34 @@ const Carousel: React.FC<CarouselProps> = ({ children, resetTextOpen }) => {
 
   return (
     <S.StyledCarousel>
-      {active > 0 && <button className="nav left" onClick={prev}><S.CheckL src={checkW} alt="다음으로(비활성화)" /></button>}
+      {active > 0 && (
+        <button className="nav left" onClick={prev}>
+          <S.CheckL src={checkW} alt="다음으로(비활성화)" />
+        </button>
+      )}
       {React.Children.map(children, (child, i) => (
         <div
           className="card-container"
-          style={{
-            "--active": i === active ? 1 : 0,
-            "--offset": (active - i) / 3,
-            "--direction": Math.sign(active - i),
-            "--abs-offset": Math.abs(active - i) / 3,
-            pointerEvents: active === i ? "auto" : "none",
-            opacity: Math.abs(active - i) >= MAX_VISIBILITY ? "0" : "1",
-            display: Math.abs(active - i) > MAX_VISIBILITY ? "none" : "block",
-          } as React.CSSProperties}
+          style={
+            {
+              "--active": i === active ? 1 : 0,
+              "--offset": (active - i) / 3,
+              "--direction": Math.sign(active - i),
+              "--abs-offset": Math.abs(active - i) / 3,
+              pointerEvents: active === i ? "auto" : "none",
+              opacity: Math.abs(active - i) >= MAX_VISIBILITY ? "0" : "1",
+              display: Math.abs(active - i) > MAX_VISIBILITY ? "none" : "block",
+            } as React.CSSProperties
+          }
         >
           {child}
         </div>
       ))}
-      {active < count - 1 && <button className="nav right" onClick={next}><S.Check src={checkW} alt="다음으로(비활성화)" /></button>}
+      {active < count - 1 && (
+        <button className="nav right" onClick={next}>
+          <S.Check src={checkW} alt="다음으로(비활성화)" />
+        </button>
+      )}
     </S.StyledCarousel>
   );
 };
@@ -88,7 +98,6 @@ export const ReadShare = () => {
   const [bookData, setBookData] = useState<BookData | null>(null);
   const [bookColor, setBookColor] = useState(pinkBook);
   const [isBookOpen, setIsBookOpen] = useState(false);
-  const [isBookClick, setIsBookClick] = useState(false);
   const [bgArray, setBgArray] = useState<string[]>([]);
   const [contextArray, setContextArray] = useState<string[]>([]);
   const [textOpenIndices, setTextOpenIndices] = useState<number[]>([]);
@@ -123,10 +132,6 @@ export const ReadShare = () => {
     );
   };
 
-  const onClickBook = () => {
-    setIsBookClick((prevState) => !prevState);
-  };
-
   const onClickReadBtn = () => {
     setIsBookOpen(true);
   };
@@ -155,35 +160,25 @@ export const ReadShare = () => {
       ) : (
         <S.Body>
           <S.Logo src={logo} alt="로고" />
-          {isBookClick ? (
-            <S.QRContainer onClick={onClickBook}>
-              <QRCode
-                value={`http://littlewriter.netlify.app/#/story/readai/${uuid}`}
-                style={{ width: "100%", height: "auto" }}
-              />
-            </S.QRContainer>
-          ) : (
-            <S.BookContainer onClick={onClickBook}>
-              <S.BookImg src={bookColor} alt="동화책 종류" />
-              {bookData && (
-                <S.BookData>
-                  <S.BookTitle style={{ fontSize: "1.7rem" }}>
-                    {bookData.title}
-                  </S.BookTitle>
-                  <S.BookAuthor>{bookData.author} 지음</S.BookAuthor>
-                  <S.BookBg
-                    src={bookData.pages[0].coloredImageUrl}
-                    alt="책 메인 이미지"
-                  />
-                </S.BookData>
-              )}
-            </S.BookContainer>
-          )}
-          <S.ReadBtn
-            src={btnReadQR}
-            alt="내가 만든 동화 보기"
-            onClick={onClickReadBtn}
-          />
+          <S.BookContainer>
+            <S.BookImg src={bookColor} alt="동화책 종류" />
+            {bookData && (
+              <S.BookData>
+                <S.BookTitle style={{ fontSize: "1.7rem" }}>
+                  {bookData.title}
+                </S.BookTitle>
+                <S.BookAuthor>{bookData.author} 지음</S.BookAuthor>
+                <S.BookBg
+                  src={bookData.pages[0].coloredImageUrl}
+                  alt="책 메인 이미지"
+                />
+              </S.BookData>
+            )}
+          </S.BookContainer>
+          <S.ReadBtnWrapper onClick={onClickReadBtn}>
+            <S.ReadBtn src={btnReadShare} alt="내가 만든 동화 보기" />
+            <S.ReadBtnText>{bookData?.author}의 동화 읽기 </S.ReadBtnText>
+          </S.ReadBtnWrapper>
         </S.Body>
       )}
     </S.Container>

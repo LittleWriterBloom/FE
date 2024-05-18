@@ -26,6 +26,7 @@ import bookMaking from "./bookMaking-anim.gif";
 import speakerT from "./speakerOn.png";
 import speakerF from "./speakerOff.png";
 import btnReadQR from "./btn-readQR.png";
+import btnReadShare from "./btn-readShare.png";
 
 export {
   ggummi,
@@ -56,4 +57,5 @@ export {
   speakerT,
   speakerF,
   btnReadQR,
+  btnReadShare,
 };
