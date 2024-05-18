@@ -1,4 +1,6 @@
 import { styled } from "styled-components";
+import bgTree from "../../../assets/bgTree.png";
+// import bgCloud from "../../../assets/bgCloud.png";
 
 export const Container = styled.div`
   width: 100%;
@@ -150,20 +152,16 @@ export const Character = styled.img`
 export const Check = styled.img`
   position: absolute;
   z-index: 11;
-  right: 4vw;
   width: 4rem;
   height: auto;
-  padding-top: 2rem;
   cursor: pointer;
 `;
 
 export const CheckL = styled.img`
   position: absolute;
   z-index: 11;
-  left: 4vw;
   width: 4rem;
   height: auto;
-  padding-top: 2rem;
   transform: scaleX(-1);
   cursor: pointer;
 `;
@@ -225,58 +223,127 @@ export const LoadingText = styled.p`
   margin-bottom: 2rem;
 `;
 
-// Modal
+// 캐러우셀
 
-export const ModalContainer = styled.div`
-  position: absolute;
-  z-index: 21;
+export const StyledApp = styled.div`
   width: 100vw;
-  height: 100dvh;
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgba(60, 60, 60, 0.8);
+  overflow: hidden;
+  /* background-color: #9CE6FF; */
+  background-image: url(${bgTree});
+  font-family: "BMJUA";
 `;
 
-export const ModalBox = styled.div`
+export const StyledCarousel = styled.div`
   position: relative;
-  width: 55vw;
-  height: 40.2vw;
-  margin-top: 3rem;
+  width: 28rem;
+  height: 40rem;
+  perspective: 500px;
+  transform-style: preserve-3d;
+
+  .card-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform: 
+      rotateY(calc(var(--offset) * 50deg)) 
+      scaleY(calc(1 + var(--abs-offset) * -0.4))
+      translateZ(calc(var(--abs-offset) * -30rem))
+      translateX(calc(var(--direction) * -5rem));
+    filter: blur(calc(var(--abs-offset) * 1rem));
+    transition: all 0.3s ease-out;
+  }
+
+  .nav {
+    color: white;
+    font-size: 5rem;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 50%;
+    z-index: 2;
+    cursor: pointer;
+    user-select: none;
+    background: unset;
+    border: unset;
+
+    &.left {
+      transform: translateX(-100%) translateY(-50%);
+    }
+
+    &.right {
+      right: 0;
+      transform: translateX(100%) translateY(-50%);
+    }
+  }
 `;
 
-export const ModalWrapper = styled.div`
-  position: absolute;
-  z-index: 23;
-  width: 100%;
-  height: 100%;
+export const StyledCard = styled.div`
+  width: 28rem;
+  height: 40rem;
   box-sizing: border-box;
-  padding: 8.5rem 4rem 4rem 4rem;
+  background-color: hsl(60deg, 40%, calc(100% - var(--abs-offset) * 50%));
+  border-radius: 1rem;
+  color: #9ca3af;
+  text-align: justify;
+  transition: all 0.3s ease-out;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  p {
+    width: 85%;
+    height: auto;
+    font-size: 2rem;
+    color: #1f2937;
+  }
+
+  img {
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    border-radius: 1rem;
+    object-fit: cover;
+  }
+
+  img, p {
+    transition: all 0.3s ease-out;
+    opacity: var(--active);
+  }
+`;
+
+export const CardContext = styled.div`
+  position: absolute;
+  z-index: 3;
+  width: 28rem;
+  height: 40rem;
   display: flex;
   flex-direction: column;
+  gap: 2rem;
+  background-color: #ffffff;
+  border-radius: 1rem;
+  overflow-y: auto;
+  box-sizing: border-box;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+`;
+
+export const CardDiv = styled.div`
+  height: auto;
+  display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+  border-radius: 1rem;
 `;
 
-export const ModalExitBtn = styled.img`
-  position: absolute;
-  z-index: 24;
-  width: 4rem;
-  height: 4rem;
-  top: 2rem;
-  right: -1rem;
-  filter: drop-shadow(0 0 0.6rem rgba(0, 0, 0, 0.17));
-  cursor: pointer;
-`;
-
-export const ModalBG = styled.img`
-  position: absolute;
-  z-index: 22;
-  width: 100%;
-  height: 100%;
-`;
-
-export const ModalText = styled.p`
-  font-family: "BMJUA";
-  font-size: 1.6rem;
+export const QRContainer = styled.div`
+  width: 12rem;
+  height: 12rem;
+  margin: 0;
 `;

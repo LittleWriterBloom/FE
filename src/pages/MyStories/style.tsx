@@ -260,6 +260,14 @@ export const CardBookContainer = styled.div`
   position: relative;
 `;
 
+export const QRContainer = styled.div`
+  width: 20rem;
+  height: 25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
 export const CardDataContainer = styled.div`
   width: 40%;
   height: 13rem;
