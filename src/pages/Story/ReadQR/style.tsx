@@ -311,10 +311,38 @@ export const BookBg = styled.img`
   border-radius: 1rem;
 `;
 
-export const ReadBtn = styled.img`
+export const ReadBtnWrapper = styled.div`
   width: 20rem;
   height: auto;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+`;
+
+export const ReadBtn = styled.img`
+  width: 20rem;
+  height: auto;
+`;
+
+export const ReadShareBtn = styled.img`
+  position: absolute;
+  z-index: 30;
+  width: 20rem;
+  height: auto;
+`;
+
+export const ReadBtnText = styled.p`
+  width: 18rem;
+  position: absolute;
+  z-index: 31;
+  font-family: "BMJUA";
+  font-size: 1.8rem;
+  color: #7F7C2F;
+  text-align: center;
+  margin-bottom: 1.2rem;
+  padding: 1.2rem;
 `;
 
 export const Logo = styled.img`
