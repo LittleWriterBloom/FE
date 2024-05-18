@@ -25,6 +25,7 @@ import {
   Descript,
   CompareAi,
   ReadQR,
+  ReadShare,
 } from './pages';
 import { Canvas } from './pages/Character/Draw/Canvas';
 import { Test } from './pages/Test/Test';
@@ -63,6 +64,7 @@ function App() {
         <Route path='/story/read' element={<Read />} />
         <Route path='/story/readai' element={<ReadAI />} />
         <Route path='/story/readai/:uuid' element={<ReadQR />} />
+        <Route path='/story/read/:uuid' element={<ReadShare />} />
         <Route path='/mystories' element={<MyStories />} />
         <Route path='/test' element={<Test />} />
         <Route path='/test02' element={<Test02 />} />

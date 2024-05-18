@@ -184,7 +184,7 @@ export const MyStories = () => {
               {isClicked ? (
                 <S.QRContainer>
                   <QRCode
-                    value={`http://littlewriter.netlify.app/#/readai/${bookId}`}
+                    value={`http://littlewriter.netlify.app/#/story/readai/${bookId}`}
                     style={{ width: "70%", height: "auto" }}
                   />
                 </S.QRContainer>

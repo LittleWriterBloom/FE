@@ -84,7 +84,6 @@ export const CreateParamsF = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const [showFirst, setShowFirst] = useState(false);
-  const [showSecond, setShowSecond] = useState(false);
 
   const [clickCount, setClickCount] = useState(0);
   const [isClicked, setIsClicked] = useState(false);
@@ -107,10 +106,7 @@ export const CreateParamsF = () => {
   useEffect(() => {
     setTimeout(() => {
       setShowFirst(true);
-      setTimeout(() => {
-        setShowSecond(true);
-      }, 5000);
-    }, 1500);
+    }, 1000);
   }, []);
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -249,9 +245,6 @@ export const CreateParamsF = () => {
           ) : (
             <>
               {showFirst && (
-                <BubbleG text="도움이 필요하다면 날 클릭해줘~!" length={31} />
-              )}
-              {showSecond && (
                 <>
                   {/* <DongAnimHelp talkCount={1} /> */}
                   {[2, 3, 4, 5, 6].map((page, index) => (
