@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import { checkW } from "../../../assets/Story";
 import React, { useEffect, useState } from "react";
 import apis from "../../../apis/apis";
-import QRCode from "qrcode.react";
 import logo from "../../../assets/logo.png";
 import {
   pinkBook,
