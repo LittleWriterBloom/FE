@@ -162,6 +162,7 @@ const BookBg = styled.img`
   z-index: 26;
   bottom: 0;
   border-radius: 0 0 1rem 1rem;
+  object-fit: cover;
 `;
 
 // const Character = styled.img`

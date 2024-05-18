@@ -12,13 +12,9 @@ import {
   greenBook,
   blueBook,
 } from "../../../assets/Story/Title";
-import { btnReadQR, speakerF, speakerT } from "../../../assets";
+import { btnReadQR } from "../../../assets";
 import Card from "./Card";
 import qrText from "../../../assets/qrText.png";
-import btnShare from "../../../assets/btn-share.png";
-import copy from "copy-to-clipboard";
-import { ModalCopy } from "../../../components/ModalYN/ModalCopy";
-import { TTS } from "../../../components/TTS/TTS";
 
 interface Page {
   coloredImageUrl: string;
@@ -39,21 +35,15 @@ const MAX_VISIBILITY = 3;
 interface CarouselProps {
   children: React.ReactNode;
   resetTextOpen: () => void;
-  setActiveIndex: (activeIndex: number) => void;
 }
 
-const Carousel: React.FC<CarouselProps> = ({
-  children,
-  resetTextOpen,
-  setActiveIndex,
-}) => {
+const Carousel: React.FC<CarouselProps> = ({ children, resetTextOpen }) => {
   const [active, setActive] = useState(0);
   const count = React.Children.count(children);
 
   const next = () => {
     setActive((i) => {
       const newIndex = i < count - 1 ? i + 1 : i;
-      setActiveIndex(i + 1);
       resetTextOpen();
       return newIndex;
     });
@@ -62,7 +52,6 @@ const Carousel: React.FC<CarouselProps> = ({
   const prev = () => {
     setActive((i) => {
       const newIndex = i > 0 ? i - 1 : i;
-      setActiveIndex(i - 1);
       resetTextOpen();
       return newIndex;
     });
@@ -70,68 +59,45 @@ const Carousel: React.FC<CarouselProps> = ({
 
   return (
     <S.StyledCarousel>
-      {active > 0 && (
-        <button className="nav left" onClick={prev}>
-          <S.CheckL src={checkW} alt="다음으로(비활성화)" />
-        </button>
-      )}
+      {active > 0 && <button className="nav left" onClick={prev}><S.CheckL src={checkW} alt="다음으로(비활성화)" /></button>}
       {React.Children.map(children, (child, i) => (
         <div
           className="card-container"
-          style={
-            {
-              "--active": i === active ? 1 : 0,
-              "--offset": (active - i) / 3,
-              "--direction": Math.sign(active - i),
-              "--abs-offset": Math.abs(active - i) / 3,
-              pointerEvents: active === i ? "auto" : "none",
-              opacity: Math.abs(active - i) >= MAX_VISIBILITY ? "0" : "1",
-              display: Math.abs(active - i) > MAX_VISIBILITY ? "none" : "block",
-            } as React.CSSProperties
-          }
+          style={{
+            "--active": i === active ? 1 : 0,
+            "--offset": (active - i) / 3,
+            "--direction": Math.sign(active - i),
+            "--abs-offset": Math.abs(active - i) / 3,
+            pointerEvents: active === i ? "auto" : "none",
+            opacity: Math.abs(active - i) >= MAX_VISIBILITY ? "0" : "1",
+            display: Math.abs(active - i) > MAX_VISIBILITY ? "none" : "block",
+          } as React.CSSProperties}
         >
           {child}
         </div>
       ))}
-      {active < count - 1 && (
-        <button className="nav right" onClick={next}>
-          <S.Check src={checkW} alt="다음으로(비활성화)" />
-        </button>
-      )}
+      {active < count - 1 && <button className="nav right" onClick={next}><S.Check src={checkW} alt="다음으로(비활성화)" /></button>}
     </S.StyledCarousel>
   );
 };
 
 /* 메인 컴포넌트 */
 
-export const ReadQR = () => {
+export const ReadShare = () => {
   const { uuid } = useParams<{ uuid: string }>();
   const [bookData, setBookData] = useState<BookData | null>(null);
   const [bookColor, setBookColor] = useState(pinkBook);
-
   const [isBookOpen, setIsBookOpen] = useState(false);
   const [isBookClick, setIsBookClick] = useState(false);
-
   const [bgArray, setBgArray] = useState<string[]>([]);
   const [contextArray, setContextArray] = useState<string[]>([]);
   const [textOpenIndices, setTextOpenIndices] = useState<number[]>([]);
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  const [isModal, setIsModal] = useState(false);
-  const [speakerOn, setSpeakerOn] = useState(true);
-  const [ttsActive, setTTSActive] = useState(true);
 
   const books = [pinkBook, orangeBook, yellowBook, greenBook, blueBook];
 
   useEffect(() => {
     getBookTotalData();
   }, []);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setIsModal(false);
-    }, 2000);
-  }, [isModal]);
 
   const getBookTotalData = async () => {
     try {
@@ -169,65 +135,22 @@ export const ReadQR = () => {
     setTextOpenIndices([]);
   };
 
-  const onClickShare = () => {
-    const copyUrl = `http://littlewriter.netlify.app/#/story/read/${uuid}`;
-    copy(copyUrl);
-    setIsModal(true);
-  };
-
-  const onClickSpeakerOn = () => {
-    setSpeakerOn(true);
-    setTTSActive(true);
-  };
-
-  const onClickSpeakerOff = () => {
-    setSpeakerOn(false);
-    setTTSActive(false);
-  };
-
   return (
     <S.Container>
       {isBookOpen ? (
         <S.StyledApp>
-          {speakerOn ? (
-            <S.SpeakerBtn
-              src={speakerT}
-              alt="스피커(활성화)"
-              onClick={onClickSpeakerOff}
-            />
-          ) : (
-            <S.SpeakerBtn
-              src={speakerF}
-              alt="스피커(활성화)"
-              onClick={onClickSpeakerOn}
-            />
-          )}
           <S.BookText src={qrText} alt="그림카드를 터치해서 이야기를 읽어요" />
-          <Carousel
-            resetTextOpen={resetTextOpen}
-            setActiveIndex={setActiveIndex}
-          >
+          <Carousel resetTextOpen={resetTextOpen}>
             {bgArray.map((bg, i) => (
-              <>
-                <Card
-                  key={i}
-                  content={contextArray[i]}
-                  image={bg}
-                  isTextOpen={textOpenIndices.includes(i)}
-                  onClickCard={() => onClickCard(i)}
-                />
-                {activeIndex === i && ttsActive && (
-                  <TTS key={`tts-${i}`} text={contextArray[i]} speaker="ndain" />
-                )}
-              </>
+              <Card
+                key={i}
+                content={contextArray[i]}
+                image={bg}
+                isTextOpen={textOpenIndices.includes(i)}
+                onClickCard={() => onClickCard(i)}
+              />
             ))}
           </Carousel>
-          <S.BtnShare
-            src={btnShare}
-            alt="내 동화책 공유하기"
-            onClick={onClickShare}
-          />
-          {isModal && <ModalCopy isOpen={true} />}
         </S.StyledApp>
       ) : (
         <S.Body>

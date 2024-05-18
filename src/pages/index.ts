@@ -24,4 +24,5 @@ export * from "./Story/Save/Save.tsx";
 export * from "./Story/Read/Read.tsx";
 export * from "./Story/ReadAI/ReadAI.tsx";
 export * from "./Story/ReadQR/ReadQR.tsx";
+export * from "./Story/ReadQR/ReadShare.tsx";
 export * from "./MyStories/MyStories.tsx";
