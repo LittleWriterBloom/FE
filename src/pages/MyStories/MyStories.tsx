@@ -26,6 +26,7 @@ import {
   blueBook,
 } from "../../assets/Story/Title";
 import apis from "../../apis/apis";
+import QRCode from "qrcode.react";
 
 interface AllData {
   firstPageImageUrl: string;
@@ -53,6 +54,7 @@ export const MyStories = () => {
   const [pageNum, setPageNum] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
   const [currPage, setCurrPage] = useState(1);
+  const [isClicked, setIsClicked] = useState(false);
 
   const books = [pinkBook, orangeBook, yellowBook, greenBook, blueBook];
 
@@ -82,7 +84,7 @@ export const MyStories = () => {
   };
 
   const onClickStoryBtn = () => {
-    navigate("/story/readai");
+    navigate(`/story/readai`);
   };
 
   useEffect(() => {
@@ -124,6 +126,10 @@ export const MyStories = () => {
     setPageNum(page - 1);
   };
 
+  const onClickBookCard = () => {
+    setIsClicked((prevState) => !prevState);
+  };
+
   return (
     <S.Container>
       <S.Header>
@@ -140,7 +146,10 @@ export const MyStories = () => {
           <S.BodyContainer>
             <S.BodyBG src={bodyBG} alt="배경" />
             {allData.map((item, index) => (
-              <S.BookContainer key={index} onClick={() => onClickBook(index)}>
+              <S.BookContainer
+                key={item.bookId}
+                onClick={() => onClickBook(index)}
+              >
                 <S.BookImg src={books[item.bookColor]} alt="동화책 종류" />
                 {/* <S.CharacterImg src={item.character.imageUrl} alt="캐릭터 이미지" /> */}
                 <S.BookData>
@@ -154,17 +163,15 @@ export const MyStories = () => {
           <S.Ggummi src={bookChaek} alt="꾸미" />
           <S.PageWrapper>
             {pageNumbers.map((pageNumber) => (
-              <>
-                <S.PageNum
-                  key={pageNumber}
-                  style={{
-                    color: pageNumber === currPage ? "#53944D" : "#91CA6B",
-                  }}
-                  onClick={() => onClickPage(pageNumber)}
-                >
-                  {pageNumber}
-                </S.PageNum>
-              </>
+              <S.PageNum
+                key={pageNumber}
+                style={{
+                  color: pageNumber === currPage ? "#53944D" : "#91CA6B",
+                }}
+                onClick={() => onClickPage(pageNumber)}
+              >
+                {pageNumber}
+              </S.PageNum>
             ))}
           </S.PageWrapper>
         </S.Body>
@@ -173,16 +180,27 @@ export const MyStories = () => {
           <S.BgT src={bgTangled} alt="배경" />
           <S.CardBG src={cardBG} alt="책 배경" />
           <S.CardContainer>
-            <S.CardBookContainer>
-              <S.BookImg src={bookColor} alt="동화책 종류" />
-              {/* <S.CharacterImg src={charImg} alt="캐릭터 이미지" /> */}
-              <S.BookData>
-                <S.BookTitle style={{ fontSize: "1.7rem" }}>
-                  {bookTitle}
-                </S.BookTitle>
-                <S.BookAuthor>{author} 지음</S.BookAuthor>
-                <S.BookBg src={bookFirstImg} alt="책 메인 이미지" />
-              </S.BookData>
+            <S.CardBookContainer onClick={onClickBookCard}>
+              {isClicked ? (
+                <S.QRContainer>
+                  <QRCode
+                    value={`http://littlewriter.netlify.app/#/readai/${bookId}`}
+                    style={{ width: "70%", height: "auto" }}
+                  />
+                </S.QRContainer>
+              ) : (
+                <>
+                  <S.BookImg src={bookColor} alt="동화책 종류" />
+                  {/* <S.CharacterImg src={charImg} alt="캐릭터 이미지" /> */}
+                  <S.BookData>
+                    <S.BookTitle style={{ fontSize: "1.7rem" }}>
+                      {bookTitle}
+                    </S.BookTitle>
+                    <S.BookAuthor>{author} 지음</S.BookAuthor>
+                    <S.BookBg src={bookFirstImg} alt="책 메인 이미지" />
+                  </S.BookData>
+                </>
+              )}
             </S.CardBookContainer>
             <S.CardDataContainer>
               <S.MakeStoryBtn
