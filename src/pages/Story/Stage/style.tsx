@@ -5,7 +5,7 @@ export const Container = styled.div`
   height: 100dvh;
   display: flex;
   flex-direction: column;
-  background-color: #caf2ff;
+  background-color: #FFFCB2;
 `;
 
 export const Bg = styled.img`
@@ -13,6 +13,23 @@ export const Bg = styled.img`
   z-index: 1;
   width: 100vw;
   height: 100dvh;
+  object-fit: cover;
+`;
+
+export const LottieBG = styled.div`
+  position: absolute;
+  z-index: 2;
+  width: 100vw;
+  height: 100dvh;
+  object-fit: cover;
+`;
+
+export const BgBottom = styled.img`
+  position: absolute;
+  z-index: 3;
+  width: 100vw;
+  height: 20dvh;
+  bottom: 0;
   object-fit: cover;
 `;
 
@@ -25,7 +42,7 @@ export const Header = styled.div`
   justify-content: space-between;
   margin-top: 3dvh;
   position: absolute;
-  z-index: 6;
+  z-index: 10;
 `;
 
 export const Home = styled.img`
@@ -51,7 +68,7 @@ export const Body = styled.div`
   justify-content: center;
   align-items: center;
   position: absolute;
-  z-index: 5;
+  z-index: 9;
   bottom: 0;
 `;
 
@@ -83,23 +100,4 @@ export const BGInput = styled.input`
 export const Character = styled.img`
   width: 40vw;
   height: auto;
-`;
-
-export const Dong = styled.img`
-  width: 20%;
-  height: auto;
-  position: absolute;
-  bottom: 0;
-  left: 5%;
-  z-index: 6;
-`;
-
-export const Rec = styled.img`
-  position: absolute;
-  z-index: 3;
-  bottom: 5dvh;
-  width: 5.5rem;
-  height: auto;
-  padding-top: 2rem;
-  cursor: pointer;
 `;

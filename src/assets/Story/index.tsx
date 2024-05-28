@@ -11,6 +11,7 @@ import storySeven from './storySeven.png';
 import storyFive from './storyFive.png';
 import storyThree from './storyThree.png';
 import btnDict from './btn-dictionary.png';
+import stageBottom from "./stageBottom.png";
 
 export {
   btnActionOff,
@@ -26,4 +27,5 @@ export {
   storyFive,
   storyThree,
   btnDict,
+  stageBottom,
 };
