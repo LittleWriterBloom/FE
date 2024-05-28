@@ -1,7 +1,7 @@
 import * as S from "./style";
 import { useNavigate } from "react-router-dom";
 import { btnHome, btnCheck, btnCheckG } from "../../../assets/index";
-import { stageBG, textBG } from "../../../assets/Story";
+import { stageBG, stageBottom, textBG } from "../../../assets/Story";
 import { useEffect, useState } from "react";
 import { useAtom, useAtomValue } from "jotai";
 import { bookBGInit, canvasImageDataAtom } from "../../../store/jotaiAtoms";
@@ -9,6 +9,9 @@ import { BubbleG } from "../../../components/Bubble/BubbleG";
 import { DongAnim } from "../../../components/CharacterAnim/DongAnim";
 import { TTS } from "../../../components/TTS/TTS";
 import { SpeechToText } from "../../../components/SpeechToText/SpeechToText";
+import Lottie from "react-lottie-player";
+import curtain from "../../../assets/Lottie/Curtain.json";
+import curtainShadow from "../../../assets/Lottie/curtain_shadow.json";
 
 export const Stage = () => {
   const navigate = useNavigate();
@@ -114,6 +117,21 @@ export const Stage = () => {
         </>
       )}
       <S.Bg src={stageBG} alt="배경" />
+      <S.LottieBG>
+        <Lottie
+          loop={false}
+          animationData={curtainShadow}
+          play
+          style={{ position: "absolute", zIndex: "2", width: "100vw" }}
+        />
+        <S.BgBottom src={stageBottom} alt="바닥" style={{ zIndex: "3" }} />
+        <Lottie
+          loop={false}
+          animationData={curtain}
+          play
+          style={{ position: "absolute", zIndex: "14", width: "100vw" }}
+        />
+      </S.LottieBG>
       <S.Header>
         <S.Home src={btnHome} alt="홈" onClick={onClickHomeBtn} />
         {bg === "" ? (
